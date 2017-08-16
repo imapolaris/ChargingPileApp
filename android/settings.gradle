@@ -1,0 +1,3 @@
+rootProject.name = 'ChargingPileApp'
+
+include ':app'
