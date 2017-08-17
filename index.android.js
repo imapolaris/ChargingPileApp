@@ -11,6 +11,8 @@ import {
   Text,
   View
 } from 'react-native';
+import ScanButton from "./CustomComponents/ScanButton/index";
+import UserAgreement from "./CustomComponents/UserAgreement/index";
 
 export default class ChargingPileApp extends Component {
   render() {
@@ -50,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ChargingPileApp', () => ChargingPileApp);
+AppRegistry.registerComponent('ChargingPileApp', () => UserAgreement);
