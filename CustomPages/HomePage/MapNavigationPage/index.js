@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
-import {View, Image, ScrollView} from 'react-native';
+import {View, ScrollView, Image} from 'react-native';
 
 import styles from './styles';
 
-class CPAMapPage extends Component{
+class CPAMapNavigationPage extends Component{
 
     render() {
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.container}>
                     <Image style={[styles.content, {resizeMode:'contain', width:undefined}]}
-                           source={require('../../../Resources/Images/map.bmp')}
+                           source={require('../../../Resources/Images/nav.bmp')}
                     />
                 </View>
             </ScrollView>
@@ -18,4 +18,4 @@ class CPAMapPage extends Component{
     }
 }
 
-export default CPAMapPage;
+export default CPAMapNavigationPage;

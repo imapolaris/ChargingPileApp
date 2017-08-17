@@ -6,26 +6,10 @@ import CPAMapPage from "../../../CustomPages/HomePage/MapPage/index";
 import CPAListPage from "../../../CustomPages/HomePage/ListPage/index";
 
 import styles from './styles';
-
-// navigator button.
-class NavButton extends Component{
-    _onPress = () => {
-        alert('nav');
-    };
-
-    render() {
-        return (
-            <View style={styles.navContainer}>
-                <TouchableOpacity>
-                    <Text onPress={this.props.onPress || this._onPress}
-                          style={styles.navButton}>
-                        {this.props.label || 'Nav' }
-                    </Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
-}
+import CPALocationPage from "../../../CustomPages/HomePage/LocationPage/index";
+import NavButton from '../../NavButton/index';
+import CPADetailsPage from "../../../CustomPages/HomePage/DetailsPage/index";
+import CPAMapNavigationPage from "../../../CustomPages/HomePage/MapNavigationPage/index";
 
 const CPAHomeStackNavigator = StackNavigator(
     {
@@ -37,13 +21,13 @@ const CPAHomeStackNavigator = StackNavigator(
                     headerLeft: (
                         <View>
                             <NavButton label="北京" onPress={() => {
-                                alert('location in 北京!!!');
+                                navigation.navigate('Location');
                             }} />
                         </View>
                     ),
                     headerRight: (
                         <NavButton label="列表" onPress={() => {
-                            console.log(navigation);
+                            //console.log(navigation);
                             navigation.navigate('List');
                         }} />
                     ),
@@ -68,7 +52,40 @@ const CPAHomeStackNavigator = StackNavigator(
                     },
                 });
             }
-        }
+        },
+        Location:{
+            screen: CPALocationPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '选择城市',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            },
+        },
+        Details:{
+            screen: CPADetailsPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '充电站详情',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            }
+        },
+        MapNav:{
+            screen: CPAMapNavigationPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '导航',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            }
+        },
     },
     {
 
