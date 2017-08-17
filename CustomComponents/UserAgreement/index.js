@@ -3,7 +3,7 @@ import {View, Text, ScrollView} from 'react-native';
 
 import styles from './styles';
 
-class UserAgreement extends Component{
+class CPAUserAgreement extends Component{
     // 构造
     constructor(props) {
         super(props);
@@ -46,4 +46,4 @@ class UserAgreement extends Component{
     }
 }
 
-export default UserAgreement;
+export default CPAUserAgreement;

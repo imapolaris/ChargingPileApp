@@ -4,7 +4,7 @@ import {TouchableOpacity, Text, View} from 'react-native';
 import styles from './styles';
 import themes from '../../CommonStyles/styles';
 
-class ScanButton extends Component{
+class CPAScanButton extends Component{
     // 构造
     constructor(props) {
         super(props);
@@ -35,4 +35,4 @@ class ScanButton extends Component{
     }
 }
 
-export default ScanButton;
+export default CPAScanButton;
