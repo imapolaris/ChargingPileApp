@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 
 import styles from './styles';
+import CPAHomeStackNavigator from '../../CustomComponents/Navigators/CPAStackNavigator/index.home'
 
 class CPAHomePage extends Component{
     // 构造
@@ -13,11 +14,7 @@ class CPAHomePage extends Component{
 
     render() {
         return (
-            <View>
-                <Text>
-                    Hello, here is Home Page!!!
-                </Text>
-            </View>
+            <CPAHomeStackNavigator />
         );
     }
 }

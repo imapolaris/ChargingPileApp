@@ -47,4 +47,6 @@ const CPATabNavigator = TabNavigator(
     }
 );
 
-export default CPATabNavigator;
+const App = CPATabNavigator;
+
+export default App;

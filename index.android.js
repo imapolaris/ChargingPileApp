@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import ScanButton from "./CustomComponents/ScanButton/index";
 import UserAgreement from "./CustomComponents/UserAgreement/index";
-import CPATabNavigator from "./CustomComponents/Navigators/CPATabNavigator/index";
+import App from "./CustomComponents/Navigators/CPATabNavigator/index";
 
 export default class ChargingPileApp extends Component {
   render() {
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ChargingPileApp', () => CPATabNavigator);
+AppRegistry.registerComponent('ChargingPileApp', () => App);
