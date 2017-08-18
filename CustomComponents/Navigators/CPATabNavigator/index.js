@@ -6,6 +6,7 @@ import HomePage from "../../../CustomPages/HomePage/index";
 import MePage from "../../../CustomPages/MePage/index";
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import CPAScanPage from "../../../CustomPages/ScanPage/index";
 
 const CPATabNavigator = TabNavigator(
     {
@@ -20,6 +21,17 @@ const CPATabNavigator = TabNavigator(
                 },
             }
         },
+        /*Scan:{
+            screen: CPAScanPage,
+            navigationOptions: {
+                title: '扫一扫',
+                tabBarIcon:({tintColor}) => {
+                    return (
+                        <Icon name="camera" size={16} color={tintColor} />
+                    );
+                },
+            }
+        },*/
         Me: {
             screen: MePage,
             navigationOptions:{
