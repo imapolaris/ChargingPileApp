@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import ScanButton from "./CustomComponents/ScanButton/index";
 import UserAgreement from "./CustomComponents/UserAgreement/index";
-import App from "./CustomComponents/Navigators/CPATabNavigator/index";
+import App from "./CustomComponents/Navigators/CPAStackNavigator/index";
 
 export default class ChargingPileApp extends Component {
   render() {

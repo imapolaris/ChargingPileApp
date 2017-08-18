@@ -1,20 +1,25 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Image, ScrollView} from 'react-native';
 
 import styles from './styles';
-import CPAHomeStackNavigator from '../../CustomComponents/Navigators/CPAStackNavigator/index.home'
+import NavButton from "../../CustomComponents/NavButton/index";
+import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";
 
 class CPAHomePage extends Component{
-    // 构造
-    constructor(props) {
-        super(props);
-        // 初始状态
-        this.state = {};
-    }
-
     render() {
+
         return (
-            <CPAHomeStackNavigator />
+            <View style={styles.container}>
+
+
+                <ScrollView style={styles.container}>
+                    <View style={styles.container}>
+                        <Image style={[styles.content, {resizeMode:'contain', width:undefined}]}
+                               source={require('../../Resources/Images/map.bmp')}
+                        />
+                    </View>
+                </ScrollView>
+            </View>
         );
     }
 }

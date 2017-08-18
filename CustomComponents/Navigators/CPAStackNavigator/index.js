@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
-import {View, TouchableOpacity, Button, Text} from 'react-native';
+import {View} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-import CPAMapPage from "../../../CustomPages/HomePage/MapPage/index";
-import CPAListPage from "../../../CustomPages/HomePage/ListPage/index";
+import CPAListPage from "../../../CustomPages/ListPage/index";
 
 import styles from './styles';
-import CPALocationPage from "../../../CustomPages/HomePage/LocationPage/index";
+import CPALocationPage from "../../../CustomPages/LocationPage/index";
 import NavButton from '../../NavButton/index';
-import CPADetailsPage from "../../../CustomPages/HomePage/DetailsPage/index";
-import CPAMapNavigationPage from "../../../CustomPages/HomePage/MapNavigationPage/index";
+import CPADetailsPage from "../../../CustomPages/DetailsPage/index";
+import CPAMapNavigationPage from "../../../CustomPages/MapNavigationPage/index";
+import CPATabScreen from "../CPATabNavigator/index";
 
-const CPAHomeStackNavigator = StackNavigator(
+const CPAStackNavigator = StackNavigator(
     {
-        Map:{
-            screen: CPAMapPage,
+        Home:{
+            screen: CPATabScreen,
             navigationOptions: ({navigation}) => {
                 return ({
                     headerTitle: "地图",
@@ -34,6 +34,7 @@ const CPAHomeStackNavigator = StackNavigator(
                     headerTitleStyle: {
                         alignSelf: 'center',
                     },
+                    header: null,
                 });
             }
         },
@@ -92,4 +93,14 @@ const CPAHomeStackNavigator = StackNavigator(
     }
 );
 
-export default CPAHomeStackNavigator;
+class App extends Component{
+    render() {
+        return (
+            <View style={styles.container}>
+                <CPAStackNavigator/>
+            </View>
+        );
+    }
+}
+
+export default App;

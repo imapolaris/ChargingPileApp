@@ -10,7 +10,7 @@ class CPAMapNavigationPage extends Component{
             <ScrollView style={styles.container}>
                 <View style={styles.container}>
                     <Image style={[styles.content, {resizeMode:'contain', width:undefined}]}
-                           source={require('../../../Resources/Images/nav.bmp')}
+                           source={require('../../Resources/Images/nav.bmp')}
                     />
                 </View>
             </ScrollView>

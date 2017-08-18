@@ -6,7 +6,7 @@ import HomePage from "../../../CustomPages/HomePage/index";
 import MePage from "../../../CustomPages/MePage/index";
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import CPAScanPage from "../../../CustomPages/ScanPage/index";
+import DefinedTitleBar from "../../DefinedTitleBar/index";
 
 const CPATabNavigator = TabNavigator(
     {
@@ -19,7 +19,7 @@ const CPATabNavigator = TabNavigator(
                         <Icon name="home" size={16} color={tintColor} />
                     );
                 },
-            }
+            },
         },
         /*Scan:{
             screen: CPAScanPage,
@@ -34,14 +34,14 @@ const CPATabNavigator = TabNavigator(
         },*/
         Me: {
             screen: MePage,
-            navigationOptions:{
+            navigationOptions: {
                 title: '我',
                 tabBarIcon: ({tintColor}) => {
                     return (
-                        <Icon name="user" size={16} color={tintColor} />
+                        <Icon name="user" size={16} color={tintColor}/>
                     );
                 },
-            }
+            },
         },
     },
     {
@@ -55,10 +55,28 @@ const CPATabNavigator = TabNavigator(
             tabStyle:{
                 flexDirection:'row',
             }
-        }
+        },
     }
 );
 
-const App = CPATabNavigator;
+class CPATabScreen extends Component{
+    render() {
+        const {navigate} = this.props.navigation;
 
-export default App;
+        return (
+            <View style={{flex:1}}>
+                {
+
+                    <DefinedTitleBar ToLocation={() => {navigate('Location')}}
+								  ToList={() => {
+									  navigate('List')
+								  }} />
+                }
+
+                <CPATabNavigator style={{flex:1}} />
+            </View>
+        );
+    }
+}
+
+export default CPATabScreen;
