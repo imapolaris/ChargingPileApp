@@ -10,6 +10,7 @@ import NavButton from '../../NavButton/index';
 import CPADetailsPage from "../../../CustomPages/DetailsPage/index";
 import CPAMapNavigationPage from "../../../CustomPages/MapNavigationPage/index";
 import CPATabScreen from "../CPATabNavigator/index";
+import CPAPersonalDataPage from "../../../CustomPages/PersonalDataPage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -87,6 +88,17 @@ const CPAStackNavigator = StackNavigator(
                 });
             }
         },
+        PersonalData: {
+            screen: CPAPersonalDataPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '个人资料',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            }
+        }
     },
     {
 

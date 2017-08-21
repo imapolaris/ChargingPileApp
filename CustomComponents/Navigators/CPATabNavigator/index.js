@@ -38,7 +38,7 @@ const CPATabNavigator = TabNavigator(
                 title: '我',
                 tabBarIcon: ({tintColor}) => {
                     return (
-                        <Icon name="user" size={16} color={tintColor}/>
+                        <Icon name="people" size={16} color={tintColor}/>
                     );
                 },
             },
@@ -59,19 +59,22 @@ const CPATabNavigator = TabNavigator(
     }
 );
 
+import {Button} from 'react-native';
+
 class CPATabScreen extends Component{
     render() {
         const {navigate} = this.props.navigation;
 
         return (
             <View style={{flex:1}}>
-                {
+                {/*{
 
                     <DefinedTitleBar ToLocation={() => {navigate('Location')}}
 								  ToList={() => {
 									  navigate('List')
 								  }} />
-                }
+                }*/}
+                {/*<Button title="Test" onPress={() => navigate('PersonalData')} />*/}
 
                 <CPATabNavigator style={{flex:1}} />
             </View>
