@@ -17,5 +17,6 @@ import App from "./CustomComponents/Navigators/CPAStackNavigator/index";
 import CPAPersonalDataPage from "./CustomPages/PersonalDataPage/index";
 import CPAChangePwdPage from "./CustomPages/ChangePwdPage/index";
 import CPAWalletPage from "./CustomPages/WalletPage/index";
+import CPAActionPayPage from "./CustomPages/ActionPayPage/index";
 
-AppRegistry.registerComponent('ChargingPileApp', () => CPAWalletPage);
+AppRegistry.registerComponent('ChargingPileApp', () => CPAActionPayPage);
