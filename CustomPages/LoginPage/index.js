@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
-import {View, Text, TextInput, ToastAndroid} from 'react-native';
+import {
+    View,
+    Text,
+    TextInput,
+    ToastAndroid,
+    TouchableOpacity,
+} from 'react-native';
 
 import styles from './styles';
 import {Button, Avatar} from 'react-native-elements';
@@ -49,12 +55,14 @@ class CPALoginPage extends Component{
                             onPress={this._onPress}
                     />
 
-                    <Text textDecorationLine="underline"
-                          style={styles.text}
-                          onPress={this._forgotPwd}
-                    >
-                        忘记密码?
-                    </Text>
+                    <TouchableOpacity>
+                        <Text textDecorationLine="underline"
+                              style={styles.text}
+                              onPress={this._forgotPwd}
+                        >
+                            忘记密码?
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
