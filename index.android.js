@@ -18,5 +18,6 @@ import CPAPersonalDataPage from "./CustomPages/PersonalDataPage/index";
 import CPAChangePwdPage from "./CustomPages/ChangePwdPage/index";
 import CPAWalletPage from "./CustomPages/WalletPage/index";
 import CPAActionPayPage from "./CustomPages/ActionPayPage/index";
+import CPALoginPage from "./CustomPages/LoginPage/index";
 
-AppRegistry.registerComponent('ChargingPileApp', () => CPAActionPayPage);
+AppRegistry.registerComponent('ChargingPileApp', () => CPALoginPage);
