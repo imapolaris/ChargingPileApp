@@ -12,6 +12,8 @@ import {
   View
 } from 'react-native';
 
+import App from "./CustomComponents/Navigators/CPAStackNavigator/index";
+
 export default class ChargingPileApp extends Component {
   render() {
     return (
@@ -50,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ChargingPileApp', () => ChargingPileApp);
+AppRegistry.registerComponent('ChargingPileApp', () => App);
