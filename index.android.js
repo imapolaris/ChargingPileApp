@@ -15,5 +15,6 @@ import ScanButton from "./CustomComponents/ScanButton/index";
 import UserAgreement from "./CustomComponents/UserAgreement/index";
 import App from "./CustomComponents/Navigators/CPAStackNavigator/index";
 import CPAPersonalDataPage from "./CustomPages/PersonalDataPage/index";
+import CPAChangePwdPage from "./CustomPages/ChangePwdPage/index";
 
-AppRegistry.registerComponent('ChargingPileApp', () => CPAPersonalDataPage);
+AppRegistry.registerComponent('ChargingPileApp', () => CPAChangePwdPage);
