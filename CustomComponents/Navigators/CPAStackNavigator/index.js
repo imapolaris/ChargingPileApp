@@ -34,7 +34,7 @@ const CPAStackNavigator = StackNavigator(
                     headerTitleStyle: {
                         alignSelf: 'center',
                     },
-                    header: null,
+                    /*header: null,*/
                 });
             }
         },

@@ -65,13 +65,13 @@ class CPATabScreen extends Component{
 
         return (
             <View style={{flex:1}}>
-                {
+                {/*{
 
                     <DefinedTitleBar ToLocation={() => {navigate('Location')}}
 								  ToList={() => {
 									  navigate('List')
 								  }} />
-                }
+                }*/}
 
                 <CPATabNavigator style={{flex:1}} />
             </View>
