@@ -57,7 +57,6 @@ class CPAPersonalDataPage extends Component{
                                 <ListItem key={i}
                                           title={item.title}
                                           leftIcon={item.icon}
-                                          hideChevron={false}
                                           onPress={() => item.callback && item.callback()}
                                 />
                             ))
