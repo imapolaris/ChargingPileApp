@@ -20,6 +20,8 @@ import CPAChangePwdPage from "../../../CustomPages/ChangePwdPage/index";
 import CPASettingPage from "../../../CustomPages/SettingPage/index";
 import CPAUserAgreement from "../../UserAgreement/index";
 import CPAAboutUsPage from "../../../CustomPages/AboutUsPage/index";
+import CPALoginPage from "../../../CustomPages/LoginPage/index";
+import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -37,7 +39,6 @@ const CPAStackNavigator = StackNavigator(
                     ),
                     headerRight: (
                         <NavButton label="列表" onPress={() => {
-                            //console.log(navigation);
                             navigation.navigate('List');
                         }} />
                     ),
@@ -164,7 +165,38 @@ const CPAStackNavigator = StackNavigator(
                     title: '关于我们'
                 });
             },
-        }
+        },
+        Login: {
+            screen: CPALoginPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '登录',
+                    headerRight:(
+                        <NavButton label="快速注册"
+                                   onPress={() => {
+                                       navigation.navigate('Register', {registerOrReset: 'register'});
+                                   }}
+                        />
+                    ),
+                });
+            },
+        },
+        Register: {
+            screen: CPARegisterOrResetPwdPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '注册',
+                });
+            },
+        },
+        Reset: {
+            screen: CPARegisterOrResetPwdPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '重置密码',
+                });
+            },
+        },
     },
     {
         navigationOptions: {

@@ -16,12 +16,18 @@ class CPALoginPage extends Component{
         ToastAndroid.show('登录失败！',
             ToastAndroid.SHORT,
             ToastAndroid.BOTTOM);
+
+        const {goBack} = this.props.navigation;
+        goBack && goBack();
     };
 
     _forgotPwd = () => {
         ToastAndroid.show('忘记密码，好开心，😫！',
             ToastAndroid.SHORT,
             ToastAndroid.BOTTOM);
+
+        const {navigate} = this.props.navigation;
+        navigate && navigate('Reset', {registerOrReset: 'reset'});
     };
 
     render() {

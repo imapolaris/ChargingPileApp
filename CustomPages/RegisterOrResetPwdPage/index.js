@@ -20,18 +20,32 @@ class CPARegisterOrResetPwdPage extends Component {
     };
 
     _showUserAgreement = () => {
-        alert('展示用户协议！')
+        const {navigate} = this.props.navigation;
+        navigate && navigate('UserAgreement');
     };
 
     _registerOrReset = () => {
-        if (this.props.registerOrReset === 'register'){
-            alert('注册成功！');
+        const {params} = this.props.navigation.state;
+
+        if (params.registerOrReset === 'register'){
+            ToastAndroid.show('注册成功！',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
         } else {
-            alert('重置成功！');
+            ToastAndroid.show('重置成功！',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
         }
+
+        const {goBack} = this.props.navigation;
+        goBack && goBack();
     };
 
     render() {
+        const {params} = this.props.navigation.state;
+
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
@@ -49,19 +63,19 @@ class CPARegisterOrResetPwdPage extends Component {
                                 buttonStyle={styles.vcodeButton}
                         />
                     </View>
-                    <TextInput placeholder={this.props.registerOrReset === 'register' ? '输入密码' : '输入新密码'}
+                    <TextInput placeholder={params.registerOrReset === 'register' ? '输入密码' : '输入新密码'}
                                placeholderTextColor={GPlaceholderTextColor}
                                style={styles.textInput}
                     />
                 </View>
 
                 <View style={styles.buttonContainer}>
-                    <Button title={this.props.registerOrReset === 'register' ? "注册" : '确定'}
+                    <Button title={params.registerOrReset === 'register' ? "注册" : '确定'}
                             buttonStyle={styles.button}
                             onPress={this._registerOrReset}
                     />
                     {
-                        this.props.registerOrReset === 'register' ?
+                        params.registerOrReset === 'register' ?
                             <TouchableOpacity>
                                 <Text style={styles.text}>
                                     注册即代表同意

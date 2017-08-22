@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, ScrollView, Image, Text} from 'react-native';
+import {View, ScrollView, Image, Text, TouchableOpacity} from 'react-native';
 
 import styles from './styles';
 import {List, ListItem, Avatar} from 'react-native-elements';
@@ -9,31 +9,38 @@ class CPAMePage extends Component{
     constructor(props) {
         super(props);
         // 初始状态
-        this.state = {};
+        this.state = {
+            logined: false,
+        };
     }
 
     // 个人资料
-    _personalData = (nav) => {
+    _personalData = () => {
+        const {nav} = this.props.screenProps;
         nav && nav('PersonalData');
     };
 
     // 钱包
-    _wallet = (nav) => {
+    _wallet = () => {
+        const {nav} = this.props.screenProps;
         nav && nav('Wallet');
     };
 
     // 充电记录
-    _chargingRecords = (nav) => {
+    _chargingRecords = () => {
+        const {nav} = this.props.screenProps;
         nav && nav('ChargingRecords');
     };
 
     // 我的预约
-    _mySubscribe = (nav) => {
+    _mySubscribe = () => {
+        const {nav} = this.props.screenProps;
         nav && nav('MySubscribe');
     };
 
     // 设置
-    _setting = (nav) => {
+    _setting = () => {
+        const {nav} = this.props.screenProps;
         nav && nav('Setting');
     };
 
@@ -41,6 +48,26 @@ class CPAMePage extends Component{
     _changeAvatar = () => {
         alert('avatar');
     };
+
+    // 登录
+    _login = () => {
+        if (!this.state.logined){
+            const {nav} = this.props.screenProps;
+            nav && nav('Login');
+        }
+
+        // for test.
+        /*this.setState({
+            logined: true
+        });*/
+    };
+
+    // 注册
+    /*_register = () => {
+        if (!this.state.logined){
+
+        }
+    };*/
 
     render() {
         const list = [
@@ -74,8 +101,6 @@ class CPAMePage extends Component{
             }
         ]
 
-        const {nav} = this.props.screenProps;
-
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
@@ -89,9 +114,22 @@ class CPAMePage extends Component{
                                     icon={{name: 'user', type: 'simple-line-icon', color:'yellow'}}
                             />
 
-                            <Text style={styles.text}>
-                                {this.props.nickname || 'alex'}
-                            </Text>
+                            {
+                                this.state.logined ?
+                                    <Text style={styles.text}
+                                    >
+                                        {this.props.nickname || 'alex'}
+                                    </Text>
+                                    :
+                                    <TouchableOpacity>
+                                        <Text style={[styles.text, styles.login]}
+                                              onPress={this._login}
+                                              textDecorationLine='underline'
+                                        >
+                                            登录
+                                        </Text>
+                                    </TouchableOpacity>
+                            }
                         </View>
                     </Image>
                 </View>
@@ -103,7 +141,7 @@ class CPAMePage extends Component{
                                     <ListItem key={i}
                                               title={item.title}
                                               leftIcon={item.icon}
-                                              onPress={() => item.callback && item.callback(nav)}
+                                              onPress={() => item.callback && item.callback()}
                                     />
                                 ))
                             }
@@ -115,7 +153,7 @@ class CPAMePage extends Component{
                                     <ListItem key={i}
                                               title={item.title}
                                               leftIcon={item.icon}
-                                              onPress={() => item.callback && item.callback(nav)}
+                                              onPress={() => item.callback && item.callback()}
                                     />
                                 ))
                             }

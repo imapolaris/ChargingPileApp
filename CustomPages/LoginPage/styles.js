@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     infoContainer:{
-        flex: 7,
         flexDirection: 'column',
         justifyContent: 'flex-start',
     },
@@ -22,10 +21,10 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     buttonContainer:{
-        flex: 3,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        padding: 30,
     },
     button:{
         width: 200,

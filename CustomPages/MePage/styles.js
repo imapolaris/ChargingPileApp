@@ -30,7 +30,11 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 16,
         margin: 5,
-        color: '#777777',
+        color: '#FFFFFF',
+        backgroundColor: 'transparent',
+    },
+    login: {
+        color: '#FFFFFF',
     }
 });
 

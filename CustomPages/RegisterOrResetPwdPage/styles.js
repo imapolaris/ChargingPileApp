@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     infoContainer: {
-        flex: 7,
     },
     vcodeContainer:{
         flexDirection: 'row',
@@ -26,9 +25,9 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     buttonContainer: {
-        flex: 3,
         justifyContent: 'center',
         alignItems: 'center',
+        padding: 30,
     },
     button: {
         width: 200,
