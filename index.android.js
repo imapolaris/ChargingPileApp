@@ -24,5 +24,6 @@ import CPAAboutUsPage from "./CustomPages/AboutUsPage/index";
 import CPAMySubscribePage from "./CustomPages/MySubscribePage/index";
 import CPACharingRecordsPage from "./CustomPages/ChargingRecordsPage/index";
 import CPAPayRecordsPage from "./CustomPages/PayRecordsPage/index";
+import CPASettingPage from "./CustomPages/SettingPage/index";
 
 AppRegistry.registerComponent('ChargingPileApp', () => App);

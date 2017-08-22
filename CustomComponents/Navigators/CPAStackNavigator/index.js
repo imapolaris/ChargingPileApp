@@ -17,6 +17,9 @@ import CPAMySubscribePage from "../../../CustomPages/MySubscribePage/index";
 import CPAPayRecordsPage from "../../../CustomPages/PayRecordsPage/index";
 import CPAActionPayPage from "../../../CustomPages/ActionPayPage/index";
 import CPAChangePwdPage from "../../../CustomPages/ChangePwdPage/index";
+import CPASettingPage from "../../../CustomPages/SettingPage/index";
+import CPAUserAgreement from "../../UserAgreement/index";
+import CPAAboutUsPage from "../../../CustomPages/AboutUsPage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -141,9 +144,17 @@ const CPAStackNavigator = StackNavigator(
                 });
             }
         },
-        /*Setting: {
-            screen: CPA
-        }*/
+        Setting: {
+            screen: CPASettingPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '设置',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            }
+        },
         ChangePwd:{
             screen: CPAChangePwdPage,
             navigationOptions: ({navigation}) => {
@@ -171,6 +182,28 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '充值',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            }
+        },
+        UserAgreement: {
+            screen: CPAUserAgreement,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '用户协议',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            }
+        },
+        AboutUs: {
+            screen: CPAAboutUsPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '关于我们',
                     headerTitleStyle: {
                         alignSelf: 'center',
                     }
