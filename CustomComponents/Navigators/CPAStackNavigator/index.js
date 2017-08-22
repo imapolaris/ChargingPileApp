@@ -41,9 +41,6 @@ const CPAStackNavigator = StackNavigator(
                             navigation.navigate('List');
                         }} />
                     ),
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    },
                     header: null,
                     /*header:
                         navigation.state.params && navigation.state.params.headerVisible ?
@@ -61,9 +58,6 @@ const CPAStackNavigator = StackNavigator(
                             navigation.goBack();
                         }} />
                     ),
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    },
                 });
             }
         },
@@ -72,9 +66,6 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '选择城市',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
                 });
             },
         },
@@ -83,9 +74,6 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '充电站详情',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
                 });
             }
         },
@@ -94,9 +82,6 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '导航',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
                 });
             }
         },
@@ -105,9 +90,6 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '个人资料',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
                 });
             }
         },
@@ -116,9 +98,6 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '钱包',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
                 });
             }
         },
@@ -127,9 +106,6 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '充电记录',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
                 });
             }
         },
@@ -138,9 +114,6 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '我的预约',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
                 });
             }
         },
@@ -149,9 +122,6 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '设置',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
                 });
             }
         },
@@ -160,9 +130,6 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '修改密码',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
                 });
             }
         },
@@ -171,9 +138,6 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '充值记录',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
                 });
             }
         },
@@ -182,9 +146,6 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '充值',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
                 });
             }
         },
@@ -193,9 +154,6 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '用户协议',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
                 });
             }
         },
@@ -203,16 +161,18 @@ const CPAStackNavigator = StackNavigator(
             screen: CPAAboutUsPage,
             navigationOptions: ({navigation}) => {
                 return ({
-                    title: '关于我们',
-                    headerTitleStyle: {
-                        alignSelf: 'center',
-                    }
+                    title: '关于我们'
                 });
-            }
+            },
         }
     },
     {
-        mode: 'modal',
+        navigationOptions: {
+            gesturesEnabled: true,
+            headerTitleStyle: {
+                alignSelf: 'center',
+            }
+        },
     }
 );
 
