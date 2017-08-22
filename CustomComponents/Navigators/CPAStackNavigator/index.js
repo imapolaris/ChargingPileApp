@@ -14,6 +14,9 @@ import CPAPersonalDataPage from "../../../CustomPages/PersonalDataPage/index";
 import CPAWalletPage from "../../../CustomPages/WalletPage/index";
 import CPACharingRecordsPage from "../../../CustomPages/ChargingRecordsPage/index";
 import CPAMySubscribePage from "../../../CustomPages/MySubscribePage/index";
+import CPAPayRecordsPage from "../../../CustomPages/PayRecordsPage/index";
+import CPAActionPayPage from "../../../CustomPages/ActionPayPage/index";
+import CPAChangePwdPage from "../../../CustomPages/ChangePwdPage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -141,6 +144,39 @@ const CPAStackNavigator = StackNavigator(
         /*Setting: {
             screen: CPA
         }*/
+        ChangePwd:{
+            screen: CPAChangePwdPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '修改密码',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            }
+        },
+        PayRecords: {
+            screen: CPAPayRecordsPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '充值记录',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            }
+        },
+        ActionPay: {
+            screen: CPAActionPayPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '充值',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            }
+        }
     },
     {
         mode: 'modal',

@@ -109,7 +109,7 @@ class CPAMePage extends Component{
                             }
                         </List>
 
-                        <List>
+                        <List style={styles.settings}>
                             {
                                 settings.map((item, i) => (
                                     <ListItem key={i}

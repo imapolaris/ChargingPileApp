@@ -20,6 +20,13 @@ const styles = StyleSheet.create({
     list:{
         paddingTop:0
     },
+    settings:{
+        justifyContent: 'flex-start',
+        marginBottom: 10,
+        borderTopWidth: 0.5,
+        borderTopColor: '#BBBBBB',
+        marginTop: 30,
+    },
     text: {
         fontSize: 16,
         margin: 5,

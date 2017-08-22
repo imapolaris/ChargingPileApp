@@ -7,12 +7,14 @@ import {List, ListItem} from 'react-native-elements';
 class CPAWalletPage extends Component{
     // 查看充值记录
     _payRecords = () => {
-        alert('查看充值记录');
+        const {navigate} = this.props.navigation;
+        navigate && navigate('PayRecords');
     };
 
     // 充值
     _actionPay = () => {
-        alert('pay');
+        const {navigate} = this.props.navigation;
+        navigate && navigate('ActionPay');
     };
 
     render() {

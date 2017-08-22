@@ -24,7 +24,8 @@ class CPAPersonalDataPage extends Component{
     };
 
     _onChangePwd = () => {
-        alert('pwd');
+        const {navigate} = this.props.navigation;
+        navigate && navigate('ChangePwd');
     };
 
     render() {
