@@ -14,32 +14,27 @@ class CPAMePage extends Component{
 
     // 个人资料
     _personalData = (nav) => {
-        console.log(nav);
         nav && nav('PersonalData');
     };
 
     // 钱包
     _wallet = (nav) => {
-        console.log(nav);
-        nav && nav('PersonalData');
+        nav && nav('Wallet');
     };
 
     // 充电记录
     _chargingRecords = (nav) => {
-        console.log(nav);
-        nav && nav('PersonalData');
+        nav && nav('ChargingRecords');
     };
 
     // 我的预约
     _mySubscribe = (nav) => {
-        console.log(nav);
-        nav && nav('PersonalData');
+        nav && nav('MySubscribe');
     };
 
     // 设置
     _setting = (nav) => {
-        console.log(nav);
-        nav && nav('PersonalData');
+        nav && nav('Setting');
     };
 
     // 更换头像
@@ -67,7 +62,7 @@ class CPAMePage extends Component{
             {
                 title: '我的预约',
                 icon: {name:'pin', type:'simple-line-icon'},
-                callback: this._mySubscribe(),
+                callback: this._mySubscribe,
             },
         ];
 
@@ -79,7 +74,7 @@ class CPAMePage extends Component{
             }
         ]
 
-        const {navigate} = this.props.navigation;
+        const {nav} = this.props.screenProps;
 
         return (
             <View style={styles.container}>
@@ -108,7 +103,7 @@ class CPAMePage extends Component{
                                     <ListItem key={i}
                                               title={item.title}
                                               leftIcon={item.icon}
-                                              onPress={() => item.callback && item.callback(navigate)}
+                                              onPress={() => item.callback && item.callback(nav)}
                                     />
                                 ))
                             }
@@ -120,7 +115,7 @@ class CPAMePage extends Component{
                                     <ListItem key={i}
                                               title={item.title}
                                               leftIcon={item.icon}
-                                              onPress={() => item.callback && item.callback(navigate)}
+                                              onPress={() => item.callback && item.callback(nav)}
                                     />
                                 ))
                             }

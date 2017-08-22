@@ -1,6 +1,5 @@
 import {StyleSheet, Platform} from 'react-native';
 
-
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
@@ -20,15 +19,26 @@ const styles = StyleSheet.create({
     appBar: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems:'center',
     },
-    title:{
+    search:{
+        flex: 1,
+        backgroundColor:'transparent',
+    },
+    searchInput:{
+
+    },
+    leftButton:{
+        alignItems:'flex-start',
+        marginLeft: 10,
+        marginRight: 10,
         justifyContent: 'center',
-        alignItems: 'center',
-        fontWeight: 'bold',
-        fontSize: 20,
-    }
+    },
+    rightButton:{
+        alignItems: 'flex-end',
+        marginLeft: 10,
+        marginRight: 10,
+        justifyContent: 'center',
+    },
 });
 
 export default styles;

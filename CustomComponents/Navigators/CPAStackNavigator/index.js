@@ -11,6 +11,9 @@ import CPADetailsPage from "../../../CustomPages/DetailsPage/index";
 import CPAMapNavigationPage from "../../../CustomPages/MapNavigationPage/index";
 import CPATabScreen from "../CPATabNavigator/index";
 import CPAPersonalDataPage from "../../../CustomPages/PersonalDataPage/index";
+import CPAWalletPage from "../../../CustomPages/WalletPage/index";
+import CPACharingRecordsPage from "../../../CustomPages/ChargingRecordsPage/index";
+import CPAMySubscribePage from "../../../CustomPages/MySubscribePage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -36,6 +39,9 @@ const CPAStackNavigator = StackNavigator(
                         alignSelf: 'center',
                     },
                     header: null,
+                    /*header:
+                        navigation.state.params && navigation.state.params.headerVisible ?
+                        undefined : null,*/
                 });
             }
         },
@@ -98,10 +104,46 @@ const CPAStackNavigator = StackNavigator(
                     }
                 });
             }
-        }
+        },
+        Wallet: {
+            screen: CPAWalletPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '钱包',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            }
+        },
+        ChargingRecords: {
+            screen: CPACharingRecordsPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '充电记录',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            }
+        },
+        MySubscribe: {
+            screen: CPAMySubscribePage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '我的预约',
+                    headerTitleStyle: {
+                        alignSelf: 'center',
+                    }
+                });
+            }
+        },
+        /*Setting: {
+            screen: CPA
+        }*/
     },
     {
-
+        mode: 'modal',
     }
 );
 

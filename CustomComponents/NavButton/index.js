@@ -11,14 +11,12 @@ class NavButton extends Component{
 
     render() {
         return (
-            <View style={styles.navContainer}>
-                <TouchableOpacity>
-                    <Text onPress={this.props.onPress || this._onPress}
-                          style={styles.navButton}>
-                        {this.props.label || 'Nav' }
-                    </Text>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={[styles.navButton, this.props.style]}>
+                <Text onPress={this.props.onPress || this._onPress}
+                      style={styles.text}>
+                    {this.props.label || 'Nav' }
+                </Text>
+            </TouchableOpacity>
         );
     }
 }

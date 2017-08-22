@@ -25,4 +25,4 @@ import CPAMySubscribePage from "./CustomPages/MySubscribePage/index";
 import CPACharingRecordsPage from "./CustomPages/ChargingRecordsPage/index";
 import CPAPayRecordsPage from "./CustomPages/PayRecordsPage/index";
 
-AppRegistry.registerComponent('ChargingPileApp', () => CPAPayRecordsPage);
+AppRegistry.registerComponent('ChargingPileApp', () => App);

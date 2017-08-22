@@ -76,7 +76,9 @@ class CPATabScreen extends Component{
                 }*/}
                 {/*<Button title="Test" onPress={() => navigate('PersonalData')} />*/}
 
-                <CPATabNavigator style={{flex:1}} />
+                <CPATabNavigator style={{flex:1}}
+                                 screenProps={{nav: navigate}}
+                />
             </View>
         );
     }

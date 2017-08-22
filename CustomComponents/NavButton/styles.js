@@ -1,14 +1,10 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-    navContainer:{
-        flex: 1,
-        paddingLeft: 10,
-        paddingRight: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     navButton:{
+        marginRight: 10,
+    },
+    text: {
         fontSize: 14,
     },
 });
