@@ -33,13 +33,13 @@ class CPASettingPage extends Component{
             {
                 key:1,
                 title:'用户协议',
-                icon:{name:'', type:'simple-line-icon'},
+                icon:{name:'doc', type:'simple-line-icon'},
                 callback:this._userAgreement,
             },
             {
                 key:2,
                 title:'关于我们',
-                icon:{name:'', type:'simple-line-icon'},
+                icon:{name:'emotsmile', type:'simple-line-icon'},
                 callback:this._aboutUs,
             },
         ];
@@ -51,7 +51,7 @@ class CPASettingPage extends Component{
                         list.map((item, i) => (
                             <ListItem key={item.key}
                                       title={item.title}
-                                      icon={item.icon}
+                                      /*leftIcon={item.icon}*/
                                       onPress={() => item.callback && item.callback()}
                             />
                         ))
