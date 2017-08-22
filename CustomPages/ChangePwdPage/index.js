@@ -19,6 +19,9 @@ class CPAChangePwdPage extends Component{
         ToastAndroid.show('修改成功！',
             ToastAndroid.SHORT,
             ToastAndroid.CENTER);
+
+        const {goBack} = this.props.navigation;
+        goBack && goBack();
     };
 
     render() {

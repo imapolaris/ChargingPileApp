@@ -25,6 +25,9 @@ class CPAActionPayPage extends Component{
                 ToastAndroid.SHORT,
                 ToastAndroid.BOTTOM
         );
+
+        const {goBack} = this.props.navigation;
+        goBack && goBack();
     };
 
     render() {

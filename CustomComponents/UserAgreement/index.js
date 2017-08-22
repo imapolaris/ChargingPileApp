@@ -30,11 +30,11 @@ class CPAUserAgreement extends Component{
         return (
             <ScrollView style={styles.scrollview}>
                 <View style={styles.container}>
-                    <View style={styles.titleContainer}>
+                    {/*<View style={styles.titleContainer}>
                         <Text style={styles.title}>
                             {this.props.title || '用户协议'}
                         </Text>
-                    </View>
+                    </View>*/}
                     <View style={styles.contentContainer}>
                         <Text style={styles.content}>
                             {this.props.content || content}

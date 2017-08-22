@@ -17,10 +17,12 @@ class CPAPersonalDataPage extends Component{
     };
 
     _onPress = () => {
-        //alert('alert');
-        ToastAndroid.showWithGravity('修改成功',
+        ToastAndroid.show('修改成功',
             ToastAndroid.SHORT,
-            ToastAndroid.CENTER);
+            ToastAndroid.BOTTOM);
+
+        const {goBack} = this.props.navigation;
+        goBack && goBack();
     };
 
     _onChangePwd = () => {
