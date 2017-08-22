@@ -23,6 +23,14 @@ class CPARegisterOrResetPwdPage extends Component {
         alert('展示用户协议！')
     };
 
+    _registerOrReset = () => {
+        if (this.props.registerOrReset === 'register'){
+            alert('注册成功！');
+        } else {
+            alert('重置成功！');
+        }
+    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -41,26 +49,31 @@ class CPARegisterOrResetPwdPage extends Component {
                                 buttonStyle={styles.vcodeButton}
                         />
                     </View>
-                    <TextInput placeholder='输入密码'
+                    <TextInput placeholder={this.props.registerOrReset === 'register' ? '输入密码' : '输入新密码'}
                                placeholderTextColor={GPlaceholderTextColor}
                                style={styles.textInput}
                     />
                 </View>
 
                 <View style={styles.buttonContainer}>
-                    <Button title="注册"
+                    <Button title={this.props.registerOrReset === 'register' ? "注册" : '确定'}
                             buttonStyle={styles.button}
+                            onPress={this._registerOrReset}
                     />
-                    <TouchableOpacity>
-                        <Text style={styles.text}>
-                            注册即代表同意
-                            <Text style={styles.userAgreement}
-                                  onPress={this._showUserAgreement}
-                            >
-                                用户协议
-                            </Text>
-                        </Text>
-                    </TouchableOpacity>
+                    {
+                        this.props.registerOrReset === 'register' ?
+                            <TouchableOpacity>
+                                <Text style={styles.text}>
+                                    注册即代表同意
+                                    <Text style={styles.userAgreement}
+                                          onPress={this._showUserAgreement}
+                                    >
+                                        用户协议
+                                    </Text>
+                                </Text>
+                            </TouchableOpacity>
+                            : null
+                    }
                 </View>
             </View>
         );
