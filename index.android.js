@@ -23,5 +23,6 @@ import CPARegisterOrResetPwdPage from "./CustomPages/RegisterOrResetPwdPage/inde
 import CPAAboutUsPage from "./CustomPages/AboutUsPage/index";
 import CPAMySubscribePage from "./CustomPages/MySubscribePage/index";
 import CPACharingRecordsPage from "./CustomPages/ChargingRecordsPage/index";
+import CPAPayRecordsPage from "./CustomPages/PayRecordsPage/index";
 
-AppRegistry.registerComponent('ChargingPileApp', () => CPACharingRecordsPage);
+AppRegistry.registerComponent('ChargingPileApp', () => CPAPayRecordsPage);
