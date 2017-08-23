@@ -208,7 +208,14 @@ const CPAStackNavigator = StackNavigator(
         WaitingCharging: {
             screen: CPAWaitingChargingPage,
             navigationOptions: {
-                title: '正在充电'
+                title: '正在充电',
+                //header: null,
+            }
+        },
+        FinishedCharging:{
+            screen: CPAWaitingChargingPage,
+            navigationOptions: {
+                title: '完成充电'
             }
         },
     },

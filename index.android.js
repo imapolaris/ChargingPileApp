@@ -22,8 +22,9 @@ import CPALoginPage from "./CustomPages/LoginPage/index";
 import CPARegisterOrResetPwdPage from "./CustomPages/RegisterOrResetPwdPage/index";
 import CPAAboutUsPage from "./CustomPages/AboutUsPage/index";
 import CPAMySubscribePage from "./CustomPages/MySubscribePage/index";
-import CPACharingRecordsPage from "./CustomPages/ChargingRecordsPage/index";
+import CPAChargingRecordsPage from "./CustomPages/ChargingRecordsPage/index";
 import CPAPayRecordsPage from "./CustomPages/PayRecordsPage/index";
 import CPASettingPage from "./CustomPages/SettingPage/index";
+import CPAWaitingChargingPage from "./CustomPages/WaitingChargingPage/index";
 
 AppRegistry.registerComponent('ChargingPileApp', () => App);

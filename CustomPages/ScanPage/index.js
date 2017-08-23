@@ -41,7 +41,7 @@ class CPAScanPage extends Component{
     // 完成输入序列号，并确认
     _onInputFinishedPress = () => {
         const {navigate} = this.props.navigation;
-        navigate && navigate('WaitingCharging');
+        navigate && navigate('WaitingCharging', {waitingOrFinished: 'waiting'});
     };
 
     render() {
