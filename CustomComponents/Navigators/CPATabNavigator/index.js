@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
 
+import styles from './styles';
+
 import {TabNavigator} from 'react-navigation';
 import HomePage from "../../../CustomPages/HomePage/index";
 import MePage from "../../../CustomPages/MePage/index";
+import ScanPage from "../../../CustomPages/ScanPage/index";
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import DefinedTitleBar from "../../DefinedTitleBar/index";
 
 const CPATabNavigator = TabNavigator(
     {
@@ -22,7 +24,7 @@ const CPATabNavigator = TabNavigator(
             },
         },
         /*Scan:{
-            screen: CPAScanPage,
+            screen: ScanPage,
             navigationOptions: {
                 title: '扫一扫',
                 tabBarIcon:({tintColor}) => {
@@ -59,24 +61,14 @@ const CPATabNavigator = TabNavigator(
     }
 );
 
-import {Button} from 'react-native';
 
 class CPATabScreen extends Component{
     render() {
         const {navigate} = this.props.navigation;
 
         return (
-            <View style={{flex:1}}>
-                {/*{
-
-                    <DefinedTitleBar ToLocation={() => {navigate('Location')}}
-								  ToList={() => {
-									  navigate('List')
-								  }} />
-                }*/}
-                {/*<Button title="Test" onPress={() => navigate('PersonalData')} />*/}
-
-                <CPATabNavigator style={{flex:1}}
+            <View style={styles.container}>
+                <CPATabNavigator style={styles.navigator}
                                  screenProps={{nav: navigate}}
                 />
             </View>
