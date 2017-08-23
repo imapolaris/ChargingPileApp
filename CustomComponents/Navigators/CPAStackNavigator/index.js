@@ -22,6 +22,8 @@ import CPAUserAgreement from "../../UserAgreement/index";
 import CPAAboutUsPage from "../../../CustomPages/AboutUsPage/index";
 import CPALoginPage from "../../../CustomPages/LoginPage/index";
 import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPage/index";
+import CPAScanPage from "../../../CustomPages/ScanPage/index";
+import CPAWaitingChargingPage from "../../../CustomPages/WaitingChargingPage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -196,6 +198,18 @@ const CPAStackNavigator = StackNavigator(
                     title: '重置密码',
                 });
             },
+        },
+        Scan: {
+            screen: CPAScanPage,
+            navigationOptions: {
+                title: '充电'
+            }
+        },
+        WaitingCharging: {
+            screen: CPAWaitingChargingPage,
+            navigationOptions: {
+                title: '正在充电'
+            }
         },
     },
     {

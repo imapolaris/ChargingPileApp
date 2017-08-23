@@ -35,12 +35,13 @@ class CPAScanPage extends Component{
 
     // 打开/关闭闪光灯
     _onLightPress = () => {
-        
+
     };
 
     // 完成输入序列号，并确认
     _onInputFinishedPress = () => {
-
+        const {navigate} = this.props.navigation;
+        navigate && navigate('WaitingCharging');
     };
 
     render() {

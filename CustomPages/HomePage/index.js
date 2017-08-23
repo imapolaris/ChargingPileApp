@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {View, Image, ScrollView, Button} from 'react-native';
 
 import styles from './styles';
-import NavButton from "../../CustomComponents/NavButton/index";
 import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class CPAHomePage extends Component{
     _toLocation = () => {
@@ -16,19 +17,31 @@ class CPAHomePage extends Component{
         nav && nav('List');
     };
 
-    render() {
-        const {navigate} = this.props.navigation;
+    // 扫一扫
+    _onStartChargingPress = () => {
+        const {nav} = this.props.screenProps;
+        nav && nav('Scan');
+    };
 
+    render() {
         return (
             <View style={styles.container}>
                 <DefinedTitleBar ToLocation={this._toLocation} ToList={this._toList} />
-                <ScrollView style={styles.container}>
-                    <View style={styles.container}>
-                        <Image style={[styles.content, {resizeMode:'contain', width:undefined}]}
-                               source={require('../../Resources/Images/map.bmp')}
-                        />
-                    </View>
-                </ScrollView>
+
+                <View style={styles.container}>
+                    <Image style={[styles.content, {resizeMode:'contain', width:undefined}]}
+                           source={require('../../Resources/Images/map.bmp')}
+                    />
+
+                    <ActionButton buttonColor='#3498db'
+                                  onPress={this._onStartChargingPress}
+                                  icon={<Icon name="md-qr-scanner" style={styles.actionButtonIcon} />}
+                                  position="center"
+                                  offsetX={0}
+                                  offsetY={20}
+                                  buttonText="扫码充电"
+                    />
+                </View>
             </View>
         );
     }

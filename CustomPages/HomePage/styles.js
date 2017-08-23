@@ -7,6 +7,11 @@ const styles = StyleSheet.create({
     content:{
         //flex: 1,
     },
+    actionButtonIcon: {
+        fontSize: 20,
+        height: 22,
+        color: 'white',
+    },
 });
 
 export default styles;
