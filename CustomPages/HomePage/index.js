@@ -33,7 +33,7 @@ class CPAHomePage extends Component{
                            source={require('../../Resources/Images/map.bmp')}
                     />
 
-                    <ActionButton buttonColor='#3498db'
+                    <ActionButton buttonColor='rgba(231,76,60,1)'
                                   onPress={this._onStartChargingPress}
                                   icon={<Icon name="md-qr-scanner" style={styles.actionButtonIcon} />}
                                   position="center"
