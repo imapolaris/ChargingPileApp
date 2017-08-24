@@ -4,20 +4,23 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
+        padding: 30,
     },
-    infoContainer: {
+    timeContainer: {
         flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    contentContainer: {
-        flex: 1,
+    time: {
+        fontSize: 32,
     },
     actionContainer: {
+        flex: 1,
         padding: 30,
-        alignItems: 'center',
     },
     button: {
         width: 150,
-    }
+    },
 });
 
 export default styles;
