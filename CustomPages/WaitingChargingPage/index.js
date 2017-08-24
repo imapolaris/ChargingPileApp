@@ -39,8 +39,8 @@ class CPAWaitingChargingPage extends Component{
             const {navigate} = this.props.navigation;
             navigate && navigate('FinishedCharging', {waitingOrFinished: 'finished'});
         } else if (params.waitingOrFinished === 'finished') {
-            const {goBack} = this.props.navigation;
-            goBack && goBack();
+            const {nav} = this.props.screenProps;
+            nav && nav.goBack(null);
         }
     };
 

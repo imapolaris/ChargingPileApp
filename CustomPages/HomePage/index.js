@@ -20,7 +20,7 @@ class CPAHomePage extends Component{
     // 扫一扫
     _onStartChargingPress = () => {
         const {nav} = this.props.screenProps;
-        nav && nav('Scan');
+        nav && nav('Scan', {headerVisible: true});
     };
 
     render() {

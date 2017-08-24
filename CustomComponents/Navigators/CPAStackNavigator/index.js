@@ -12,7 +12,7 @@ import CPAMapNavigationPage from "../../../CustomPages/MapNavigationPage/index";
 import CPATabScreen from "../CPATabNavigator/index";
 import CPAPersonalDataPage from "../../../CustomPages/PersonalDataPage/index";
 import CPAWalletPage from "../../../CustomPages/WalletPage/index";
-import CPACharingRecordsPage from "../../../CustomPages/ChargingRecordsPage/index";
+import CPAChargingRecordsPage from "../../../CustomPages/ChargingRecordsPage/index";
 import CPAMySubscribePage from "../../../CustomPages/MySubscribePage/index";
 import CPAPayRecordsPage from "../../../CustomPages/PayRecordsPage/index";
 import CPAActionPayPage from "../../../CustomPages/ActionPayPage/index";
@@ -22,8 +22,7 @@ import CPAUserAgreement from "../../UserAgreement/index";
 import CPAAboutUsPage from "../../../CustomPages/AboutUsPage/index";
 import CPALoginPage from "../../../CustomPages/LoginPage/index";
 import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPage/index";
-import CPAScanPage from "../../../CustomPages/ScanPage/index";
-import CPAWaitingChargingPage from "../../../CustomPages/WaitingChargingPage/index";
+import CPAScanScreen from "../../../CustomPages/ScanPage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -105,7 +104,7 @@ const CPAStackNavigator = StackNavigator(
             }
         },
         ChargingRecords: {
-            screen: CPACharingRecordsPage,
+            screen: CPAChargingRecordsPage,
             navigationOptions: ({navigation}) => {
                 return ({
                     title: '充电记录',
@@ -200,22 +199,9 @@ const CPAStackNavigator = StackNavigator(
             },
         },
         Scan: {
-            screen: CPAScanPage,
+            screen: CPAScanScreen,
             navigationOptions: {
                 title: '充电'
-            }
-        },
-        WaitingCharging: {
-            screen: CPAWaitingChargingPage,
-            navigationOptions: {
-                title: '正在充电',
-                //header: null,
-            }
-        },
-        FinishedCharging:{
-            screen: CPAWaitingChargingPage,
-            navigationOptions: {
-                title: '完成充电'
             }
         },
     },

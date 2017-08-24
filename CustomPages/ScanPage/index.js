@@ -4,6 +4,8 @@ import {View, Text, Image, TextInput} from 'react-native';
 import styles from './styles';
 import {Button, Icon} from 'react-native-elements';
 import {GPlaceholderTextColor} from "../../CommonStyles/colors";
+import {StackNavigator} from 'react-navigation';
+import CPAWaitingChargingPage from "../WaitingChargingPage/index";
 
 class CPAScanPage extends Component{
     // 构造
@@ -40,6 +42,9 @@ class CPAScanPage extends Component{
 
     // 完成输入序列号，并确认
     _onInputFinishedPress = () => {
+        const {nav} = this.props.screenProps;
+        nav && nav.setParams({headerVisible: false});
+
         const {navigate} = this.props.navigation;
         navigate && navigate('WaitingCharging', {waitingOrFinished: 'waiting'});
     };
@@ -115,4 +120,54 @@ class CPAScanPage extends Component{
     }
 }
 
-export default CPAScanPage;
+const CPAStackNavigator = StackNavigator(
+    {
+        Scan: {
+            screen: CPAScanPage,
+            navigationOptions: {
+                title: '充电',
+            }
+        },
+        WaitingCharging: {
+            screen: CPAWaitingChargingPage,
+            navigationOptions: {
+                title: '正在充电',
+            }
+        },
+        FinishedCharging:{
+            screen: CPAWaitingChargingPage,
+            navigationOptions: {
+                title: '完成充电',
+            }
+        },
+    },
+    {
+        navigationOptions: {
+            gesturesEnabled: true,
+            headerTitleStyle: {
+                alignSelf: 'center',
+            },
+            header: null,
+        },
+    }
+);
+
+class CPAScanScreen extends Component{
+    static navigationOptions = ({navigation}) => {
+        return ({
+            header: navigation.state.params
+            && navigation.state.params.headerVisible ?
+                undefined : null,
+        });
+    };
+
+    render() {
+        return (
+            <View style={{flex: 1}}>
+                <CPAStackNavigator screenProps={{nav: this.props.navigation}} />
+            </View>
+        )
+    }
+}
+
+export default CPAScanScreen;
