@@ -4,6 +4,7 @@ import {View, FlatList, Text, ScrollView} from 'react-native';
 import styles from './styles';
 import {TabNavigator} from 'react-navigation';
 import {Button} from 'react-native-elements';
+import ElectricPileListItem from "../../CustomComponents/ElectricPileListItem/index";
 
 class CPADetailsPage extends Component{
     render() {
@@ -53,13 +54,57 @@ class CPAElectricPileInfoPage extends Component{
         nav && nav('Subscribe');
     };
 
+    _renderItem = ({item}) => {
+        return (
+            <ElectricPileListItem title={item.title}
+                                  status={item.status}
+                                  serialNumber={item.sn}
+                                  pileType={item.pt}
+                                  unitPrice={item.up}
+            />
+        );
+    };
+
     render() {
+        const data = [
+            {
+                key: 1,
+                title: '1#充电桩',
+                status: '在线',
+                sn: '100023',
+                pt: '交流式',
+                up: '1.00元/度',
+            },
+            {
+                key: 2,
+                title: '2#充电桩',
+                status: '在线',
+                sn: '100024',
+                pt: '交流式',
+                up: '1.00元/度',
+            },
+            {
+                key: 3,
+                title: '3#充电桩',
+                status: '在线',
+                sn: '100025',
+                pt: '直流式',
+                up: '1.00元/度',
+            },
+            {
+                key: 4,
+                title: '4#充电桩',
+                status: '在线',
+                sn: '100026',
+                pt: '交流式',
+                up: '1.00元/度',
+            },
+        ];
+
         return (
             <View style={styles.infoContainer}>
                 <ScrollView style={styles.contentContainer}>
-                    <Text>
-                        电桩信息
-                    </Text>
+                    <FlatList data={data} renderItem={this._renderItem} />
                 </ScrollView>
 
                 <View style={styles.actionContainer}>

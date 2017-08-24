@@ -2,15 +2,8 @@ import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 
 import styles from './styles';
-import {Button, Divider} from 'react-native-elements';
-
-class CPADivider extends Component{
-    render() {
-        return (
-            <Divider style={styles.divider} />
-        );
-    }
-}
+import {Button} from 'react-native-elements';
+import DividerLine from "../../CustomComponents/DividerLine/index";
 
 class CPARecord extends Component{
     render() {
@@ -53,20 +46,20 @@ class CPAWaitingChargingPage extends Component{
                     params.waitingOrFinished === 'waiting' ?
                         <View style={styles.upperContainer}>
                             <CPARecord name="充电电量：" val="10.23" unit="度" />
-                            <CPADivider />
+                            <DividerLine />
                             <CPARecord name="充电时间：" val="0.5" unit="小时" />
-                            <CPADivider />
+                            <DividerLine />
                             <CPARecord name="花费：" val="20.0" unit="元" />
-                            <CPADivider />
+                            <DividerLine />
                         </View>
                         :
                         <View style={styles.upperContainer}>
                             <CPARecord name="充电电量：" val="10.23" unit="度" />
-                            <CPADivider />
+                            <DividerLine />
                             <CPARecord name="充电用时：" val="0.5" unit="小时" />
-                            <CPADivider />
+                            <DividerLine />
                             <CPARecord name="共花费：" val="20.0" unit="元" />
-                            <CPADivider />
+                            <DividerLine />
                         </View>
                 }
 

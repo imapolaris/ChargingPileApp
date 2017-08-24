@@ -2,27 +2,20 @@ import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 
 import styles from './styles';
-import {Button, Divider} from 'react-native-elements';
-
-class CPADivider extends Component{
-    render() {
-        return (
-            <Divider style={[styles.divider, this.props.style]} />
-        );
-    }
-}
+import {Button} from 'react-native-elements';
+import DividerLine from "../DividerLine/index";
 
 class StationListItem extends Component{
     render() {
         return (
             <View style={styles.container}>
-                <CPADivider style={{backgroundColor: '#419b3a'}} />
+                <DividerLine />
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>
                         {this.props.title}
                     </Text>
                 </View>
-                <CPADivider />
+                <DividerLine style={styles.divider} />
                 <View style={styles.infoContainer}>
                     <Text style={styles.info}>
                         空闲电桩：{this.props.numbers}
@@ -31,7 +24,7 @@ class StationListItem extends Component{
                         {this.props.address}
                     </Text>
                 </View>
-                <CPADivider />
+                <DividerLine style={styles.divider} />
 
                 <View style={styles.actionContainer}>
                     <View style={styles.leftContainer}>

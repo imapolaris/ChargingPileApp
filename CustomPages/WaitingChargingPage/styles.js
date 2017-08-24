@@ -11,6 +11,8 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         flexDirection: 'row',
+        paddingTop: 15,
+        paddingBottom: 5,
     },
     lowerContainer: {
         padding: 30,
@@ -26,13 +28,6 @@ const styles = StyleSheet.create({
     button: {
         width: 150,
     },
-    divider: {
-        marginTop: 2,
-        marginBottom: 15,
-        /*marginLeft: 15,
-        marginRight: 15,*/
-        backgroundColor: '#419b3a',
-    }
 });
 
 export default styles;
