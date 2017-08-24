@@ -7,9 +7,11 @@ import {Button} from 'react-native-elements';
 
 class CPADetailsPage extends Component{
     render() {
+        const {navigate} = this.props.navigation;
+
         return (
             <View style={styles.container}>
-                <StationNavigator />
+                <StationNavigator screenProps={{nav: navigate}} />
             </View>
         );
     }
@@ -19,8 +21,8 @@ class CPADetailsPage extends Component{
 class CPABasicInfoPage extends Component{
     // 导航
     _mapNavigation = () => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate('MapNav');
+        const {nav} = this.props.screenProps;
+        nav && nav('MapNav');
     };
 
     render() {
@@ -47,8 +49,8 @@ class CPABasicInfoPage extends Component{
 class CPAElectricPileInfoPage extends Component{
     // 导航
     _subscribeCharging = () => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate('MapNav');
+        const {nav} = this.props.screenProps;
+        nav && nav('Subscribe');
     };
 
     render() {

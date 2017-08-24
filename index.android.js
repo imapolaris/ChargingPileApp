@@ -28,4 +28,4 @@ import CPASettingPage from "./CustomPages/SettingPage/index";
 import CPAWaitingChargingPage from "./CustomPages/WaitingChargingPage/index";
 import CPAWaitingSubscribePage from "./CustomPages/WaitingSubscribePage/index";
 
-AppRegistry.registerComponent('ChargingPileApp', () => CPAWaitingSubscribePage);
+AppRegistry.registerComponent('ChargingPileApp', () => App);

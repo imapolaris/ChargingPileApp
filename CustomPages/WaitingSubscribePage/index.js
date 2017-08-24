@@ -19,7 +19,7 @@ class CPAWaitingSubscribePage extends Component{
     }
 
     componentDidMount() {
-        this.state.countdown = 1 * 60; // 计时时间15分钟
+        this.state.countdown = 15 * 60; // 计时时间15分钟
         this._startTimer();
     }
 
