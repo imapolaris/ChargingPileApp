@@ -19,7 +19,7 @@ class CPAWaitingSubscribePage extends Component{
     }
 
     componentDidMount() {
-        this.state.countdown = 15 * 60; // 计时时间15分钟
+        this.state.countdown = 1 * 60; // 计时时间15分钟
         this._startTimer();
     }
 
@@ -52,17 +52,19 @@ class CPAWaitingSubscribePage extends Component{
     };
 
     _formatTime = (time) => {
-        if (time <= 0)
-            return '已结束';
-
         let showtime = '';
-        let day = parseInt(time / 24 / 3600);
-        if (day > 0)
-            showtime += `${day} 天 `;
-        let hour = parseInt(time / 3600);
-        if (hour > 0)
-            showtime += `${hour} 时 `;
-        showtime += `${parseInt((time % 3600) / 60)} 分 ${time % 60} 秒`;
+
+        if (time <= 0)
+            showtime = '已结束';
+        else {
+            let day = parseInt(time / 24 / 3600);
+            if (day > 0)
+                showtime += `${day} 天 `;
+            let hour = parseInt(time / 3600);
+            if (hour > 0)
+                showtime += `${hour} 时 `;
+            showtime += `${parseInt((time % 3600) / 60)} 分 ${time % 60} 秒`;
+        }
 
         this.setState({
             showtime: showtime
