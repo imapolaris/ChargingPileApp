@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -47,6 +46,7 @@
 		D3451685FF164E47A4D1AC32 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6348BB19379A4961AEECA944 /* Octicons.ttf */; };
 		E26526C393A64A6C8422DE30 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4C9EE432B084BE8ABB418AF /* SimpleLineIcons.ttf */; };
 		E5C4A967D91E4171B107EAA7 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4E0E4DF663C47989E7BCF00 /* MaterialIcons.ttf */; };
+		63F9DE70793D4401A8F8CEB8 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B09B1470944B7483C69DB9 /* libRNImagePicker.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,6 +313,8 @@
 		BC9743A7A1784657830B2920 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		C4C9EE432B084BE8ABB418AF /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		D4E0E4DF663C47989E7BCF00 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		833BCADBEFDC4A2486A2B686 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImagePicker.xcodeproj"; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		B9B09B1470944B7483C69DB9 /* libRNImagePicker.a */ = {isa = PBXFileReference; name = "libRNImagePicker.a"; path = "libRNImagePicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +342,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				61E9371752884CD7BB41A5A9 /* libRNVectorIcons.a in Frameworks */,
+				63F9DE70793D4401A8F8CEB8 /* libRNImagePicker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +522,7 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				0E7DE10A671A47238E0D2B31 /* RNVectorIcons.xcodeproj */,
+				833BCADBEFDC4A2486A2B686 /* RNImagePicker.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1110,12 +1114,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 				INFOPLIST_FILE = ChargingPileAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1136,12 +1142,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 				INFOPLIST_FILE = ChargingPileAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1163,6 +1171,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 				INFOPLIST_FILE = ChargingPileApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1185,6 +1194,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 				INFOPLIST_FILE = ChargingPileApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1213,11 +1223,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 				INFOPLIST_FILE = "ChargingPileApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1247,11 +1259,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 				INFOPLIST_FILE = "ChargingPileApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1282,6 +1296,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.ChargingPileApp-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1306,6 +1321,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.ChargingPileApp-tvOSTests";
