@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -38,6 +39,7 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		61E9371752884CD7BB41A5A9 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54E30D95EA7D4C9AA93B34DA /* libRNVectorIcons.a */; };
 		63F9DE70793D4401A8F8CEB8 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B09B1470944B7483C69DB9 /* libRNImagePicker.a */; };
+		7624E3881F546E38006E551B /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7624E3781F546AE3006E551B /* libRNImagePicker.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A6905B6CD69249F791F18379 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57ACF8E0C4FE487D8A7E203E /* EvilIcons.ttf */; };
 		AE13271EC46346FA870C2DF4 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E1754018F854707BB8B7CA2 /* FontAwesome.ttf */; };
@@ -329,6 +331,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7624E3881F546E38006E551B /* libRNImagePicker.a in Frameworks */,
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
