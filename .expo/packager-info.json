@@ -1,0 +1,8 @@
+{
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://rr-9jc.alexsuen.chargingpileapp.exp.direct",
+  "packagerNgrokUrl": "https://packager.rr-9jc.alexsuen.chargingpileapp.exp.direct",
+  "ngrokPid": 4604,
+  "packagerPort": 19001,
+  "packagerPid": 19888
+}

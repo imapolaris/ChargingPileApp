@@ -29,4 +29,4 @@ import CPAWaitingChargingPage from "./CustomPages/WaitingChargingPage/index";
 import CPAWaitingSubscribePage from "./CustomPages/WaitingSubscribePage/index";
 import AvatarPicker from "./CustomComponents/AvatarPicker/index";
 
-AppRegistry.registerComponent('ChargingPileApp', () => AvatarPicker);
+AppRegistry.registerComponent('ChargingPileApp', () => App);
