@@ -12,6 +12,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- for react-native-qrcode-scanner -->
+    <!-- add by alex, on 082917 -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
 
     <uses-sdk
         android:minSdkVersion="16"
