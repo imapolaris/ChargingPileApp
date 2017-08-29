@@ -3,6 +3,20 @@ package com.chargingpileapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.yunpeng.alipay.AlipayPackage;
+import com.theweflex.react.WeChatPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
+import com.yunpeng.alipay.AlipayPackage;
+import com.theweflex.react.WeChatPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
+import com.yunpeng.alipay.AlipayPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
@@ -28,6 +42,20 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new AlipayPackage(),
+            new WeChatPackage(),
+            new VectorIconsPackage(),
+            new ImagePickerPackage(),
+            new RCTCameraPackage(),
+            new AlipayPackage(),
+            new WeChatPackage(),
+            new VectorIconsPackage(),
+            new ImagePickerPackage(),
+            new RCTCameraPackage(),
+            new AlipayPackage(),
+            new VectorIconsPackage(),
+            new ImagePickerPackage(),
+            new RCTCameraPackage(),
             new VectorIconsPackage(),
             new ImagePickerPackage(),
             new RCTCameraPackage(),
