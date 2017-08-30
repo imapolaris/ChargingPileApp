@@ -144,6 +144,9 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-wechat')
+    compile project(':react-native-yunpeng-alipay')
+    compile project(':react-native-camera')
     compile project(':react-native-image-picker')
     compile project(':react-native-vector-icons')
     compile fileTree(dir: "libs", include: ["*.jar"])

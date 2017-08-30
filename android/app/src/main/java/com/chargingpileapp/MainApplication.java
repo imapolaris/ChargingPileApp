@@ -8,20 +8,6 @@ import com.theweflex.react.WeChatPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
-import com.yunpeng.alipay.AlipayPackage;
-import com.theweflex.react.WeChatPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.imagepicker.ImagePickerPackage;
-import com.lwansbrough.RCTCamera.RCTCameraPackage;
-import com.yunpeng.alipay.AlipayPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.imagepicker.ImagePickerPackage;
-import com.lwansbrough.RCTCamera.RCTCameraPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.imagepicker.ImagePickerPackage;
-import com.lwansbrough.RCTCamera.RCTCameraPackage;
-import com.imagepicker.ImagePickerPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -46,21 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
             new WeChatPackage(),
             new VectorIconsPackage(),
             new ImagePickerPackage(),
-            new RCTCameraPackage(),
-            new AlipayPackage(),
-            new WeChatPackage(),
-            new VectorIconsPackage(),
-            new ImagePickerPackage(),
-            new RCTCameraPackage(),
-            new AlipayPackage(),
-            new VectorIconsPackage(),
-            new ImagePickerPackage(),
-            new RCTCameraPackage(),
-            new VectorIconsPackage(),
-            new ImagePickerPackage(),
-            new RCTCameraPackage(),
-            new ImagePickerPackage(),
-            new VectorIconsPackage()
+            new RCTCameraPackage()
       );
     }
   };
