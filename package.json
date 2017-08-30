@@ -16,6 +16,7 @@
 		"react-native-qrcode-scanner": "0.0.17",
 		"react-native-vector-icons": "^4.3.0",
 		"react-native-wechat": "^1.9.9",
+		"react-native-yunpeng-alipay": "^2.0.0",
 		"react-navigation": "^1.0.0-beta.11"
 	},
 	"devDependencies": {
