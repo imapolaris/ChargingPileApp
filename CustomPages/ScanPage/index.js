@@ -7,6 +7,8 @@ import {GPlaceholderTextColor} from "../../CommonStyles/colors";
 import {StackNavigator} from 'react-navigation';
 import CPAWaitingChargingPage from "../WaitingChargingPage/index";
 
+import QRCodeScanner from 'react-native-qrcode-scanner';
+
 class CPAScanPage extends Component{
     // 构造
     constructor(props) {
@@ -35,9 +37,19 @@ class CPAScanPage extends Component{
         }
     };
 
+    // 扫描成功
+    _onScanSuccess = (e) => {
+        try{
+            alert(e.data);
+        } catch (e){
+            alert('An error occurred', e.message);
+        }
+    };
+
     // 打开/关闭闪光灯
     _onLightPress = () => {
-
+        let torchMode = this._scanner && this._scanner._switchTorch();
+        //alert(torchMode);
     };
 
     // 完成输入序列号，并确认
@@ -71,9 +83,16 @@ class CPAScanPage extends Component{
                     {
                         this.state.scanOrInput === 'scan' ?
                             <View style={styles.scanContainer}>
-                                <Image source={require('../../Resources/Images/scancode.png')}
+                                {/*<Image source={require('../../Resources/Images/scancode.png')}
                                        style={styles.scan}
                                        resizeMode='contain'
+                                />*/}
+                                <QRCodeScanner  ref={(self) => this._scanner = self}
+                                                style={styles.scan}
+                                                onRead={this._onScanSuccess}
+                                                reactivate={true}
+                                                reactivateTimeout={30000}
+                                                showMarker={false}
                                 />
                                 <Icon reverse
                                       raised

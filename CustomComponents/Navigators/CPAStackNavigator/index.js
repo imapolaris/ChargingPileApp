@@ -214,6 +214,7 @@ const CPAStackNavigator = StackNavigator(
     },
     {
         navigationOptions: {
+            mode: 'card',
             gesturesEnabled: true,
             headerTitleStyle: {
                 alignSelf: 'center',
