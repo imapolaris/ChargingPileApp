@@ -55,11 +55,6 @@ class CPAMePage extends Component{
             const {nav} = this.props.screenProps;
             nav && nav('Login');
         }
-
-        // for test.
-        /*this.setState({
-            logined: true
-        });*/
     };
 
     // 注册

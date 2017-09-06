@@ -19,15 +19,18 @@ const styles = StyleSheet.create({
     lowerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 30,
+        paddingTop: 15,
+        paddingLeft: 25,
+        paddingRight: 25,
+        paddingBottom: 20,
     },
     text: {
         color: '#00FF00',
-        fontSize: 12,
+        fontSize: 14,
     },
     textContainer:{
-        marginTop: 30,
-        marginBottom: 10,
+        marginTop: 15,
+        marginBottom: 15,
         alignItems: 'center',
     },
     leftContainer: {
@@ -40,20 +43,22 @@ const styles = StyleSheet.create({
         width: 100,
     },
     okButton: {
-        width: 150,
+        width: 200,
     },
     scan: {
-        margin: 30,
+
     },
     textInput:{
         borderWidth: 0.5,
         borderColor: '#C3C3C3',
     },
     textInputContainer:{
-        margin: 30,
+        marginLeft: 30,
+        marginRight: 30,
     },
     buttonContainer:{
         alignItems: 'center',
+        marginTop: 30,
     }
 });
 

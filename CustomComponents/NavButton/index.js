@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {View, TouchableOpacity, Button, Text} from 'react-native';
+import {TouchableOpacity, Text} from 'react-native';
 
 import styles from './styles';
 
 // navigator button.
 class NavButton extends Component{
     _onPress = () => {
-        alert('nav');
+        alert('undeveloped yet...');
     };
 
     render() {

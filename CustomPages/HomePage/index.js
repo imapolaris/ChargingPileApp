@@ -6,7 +6,7 @@ import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-/*import {MapView} from 'react-native-baidu-map';*/
+import {MapView} from 'react-native-baidu-map';
 
 class CPAHomePage extends Component{
     _toLocation = () => {
@@ -31,11 +31,7 @@ class CPAHomePage extends Component{
                 <DefinedTitleBar ToLocation={this._toLocation} ToList={this._toList} />
 
                 <View style={styles.container}>
-                    {/*<Image style={[styles.content, {resizeMode:'contain', width:undefined}]}
-                           source={require('../../Resources/Images/map.bmp')}
-                    />*/}
-
-
+                    <MapView />
 
                     <ActionButton buttonColor='rgba(231,76,60,1)'
                                   onPress={this._onStartChargingPress}

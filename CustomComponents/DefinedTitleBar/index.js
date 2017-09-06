@@ -25,19 +25,20 @@ class DefinedTitleBar extends Component{
                                onPress={() => {
                         this.props.ToLocation();
                     }} />
-                    <SearchBar containerStyle={styles.search}
+                    <SearchBar ref={self => this._search = self}
+                               containerStyle={styles.search}
                                inputStyle={styles.searchInput}
                                lightTheme
                                round
                                onChangeText={()=>{}}
-                               placeholder='Search...' />
+                               placeholder='搜索...'
+                               clearIcon={{color:'#86939e', name: 'clear'}}
+                    />
                     <NavButton label='列表'
                                style={styles.rightButton}
                                onPress={() => {
                         this.props.ToList();
                     }} />
-
-                    {/*{this.props.mapOrList === 'map' ? "列表" : '地图'}*/}
                 </View>
             </Animated.View>
         );

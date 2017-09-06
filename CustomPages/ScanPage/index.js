@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, Image, TextInput} from 'react-native';
+import {View, Text, TextInput, Keyboard} from 'react-native';
 
 import styles from './styles';
 import {Button, Icon} from 'react-native-elements';
@@ -54,6 +54,9 @@ class CPAScanPage extends Component{
 
     // 完成输入序列号，并确认
     _onInputFinishedPress = () => {
+        // 如果键盘打开，隐藏键盘
+        Keyboard.dismiss();
+
         const {nav} = this.props.screenProps;
         nav && nav.setParams({headerVisible: false});
 
@@ -84,16 +87,16 @@ class CPAScanPage extends Component{
                         this.state.scanOrInput === 'scan' ?
                             <View style={styles.scanContainer}>
                                 <QRCodeScanner  ref={(self) => this._scanner = self}
-                                                style={styles.scan}
+                                                cameraStyle={styles.scan}
                                                 onRead={this._onScanSuccess}
                                                 reactivate={true}
                                                 reactivateTimeout={30000}
-                                                showMarker={false}
+                                                showMarker={true}
                                 />
                                 <Icon reverse
                                       raised
                                       name="highlight"
-                                      size={16}
+                                      size={20}
                                       color="#517fa4"
                                       onPress={this._onLightPress}
                                 />

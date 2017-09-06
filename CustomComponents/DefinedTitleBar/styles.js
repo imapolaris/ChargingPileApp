@@ -1,5 +1,7 @@
 import {StyleSheet, Platform} from 'react-native';
 
+import {NavButtonMarginN, NavButtonMarginW} from '../../CommonStyles/styles';
+
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
@@ -29,14 +31,14 @@ const styles = StyleSheet.create({
     },
     leftButton:{
         alignItems:'flex-start',
-        marginLeft: 10,
-        marginRight: 10,
+        marginLeft: NavButtonMarginW,
+        marginRight: NavButtonMarginN,
         justifyContent: 'center',
     },
     rightButton:{
         alignItems: 'flex-end',
-        marginLeft: 10,
-        marginRight: 10,
+        marginLeft: NavButtonMarginN,
+        marginRight: NavButtonMarginW,
         justifyContent: 'center',
     },
 });

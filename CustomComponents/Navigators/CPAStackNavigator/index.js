@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, ToastAndroid, BackHandler} from 'react-native';
 
-import {StackNavigator} from 'react-navigation';
+import {StackNavigator, NavigationActions} from 'react-navigation';
 import CPAListPage from "../../../CustomPages/ListPage/index";
 
 import styles from './styles';
@@ -25,6 +25,9 @@ import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPa
 import CPAScanScreen from "../../../CustomPages/ScanPage/index";
 import CPAWaitingSubscribePage from "../../../CustomPages/WaitingSubscribePage/index";
 
+import {NavButtonMarginW, NavButtonMarginN} from '../../../CommonStyles/styles';
+import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
+
 const CPAStackNavigator = StackNavigator(
     {
         Home:{
@@ -45,9 +48,6 @@ const CPAStackNavigator = StackNavigator(
                         }} />
                     ),
                     header: null,
-                    /*header:
-                        navigation.state.params && navigation.state.params.headerVisible ?
-                        undefined : null,*/
                 });
             }
         },
@@ -59,7 +59,7 @@ const CPAStackNavigator = StackNavigator(
                     headerRight: (
                         <NavButton label="地图" onPress={() => {
                             navigation.goBack();
-                        }} />
+                        }} style={{marginRight:NavButtonMarginW, marginLeft:NavButtonMarginN}} />
                     ),
                 });
             }
@@ -214,23 +214,63 @@ const CPAStackNavigator = StackNavigator(
     },
     {
         navigationOptions: {
-            mode: 'card',
             gesturesEnabled: true,
             headerTitleStyle: {
                 alignSelf: 'center',
             }
         },
+        transitionConfig: () => ({
+            screenInterpolator: CardStackStyleInterpolator.forHorizontal,
+        })
     }
 );
 
+let lastBackPressed = 0;
+
 class App extends Component{
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this._onBackAndroid);
+    }
+
+    _onBackAndroid = () => {
+        /*let now = new Date().getTime();
+        if(now - lastBackPressed < 2500) {
+            return false;
+        }
+        lastBackPressed = now;
+        ToastAndroid.show('再点击一次退出应用',ToastAndroid.SHORT);
+        return true;*/
+    };
+
     render() {
         return (
             <View style={styles.container}>
-                <CPAStackNavigator/>
+                <CPAStackNavigator />
             </View>
         );
     }
 }
+
+
+/*const defaultStateAction = CPAStackNavigator.router.getStateForAction;
+CPAStackNavigator.router.getStateForAction = (action, state) => {
+    if(state && action.type === NavigationActions.BACK && state.routes.length === 1) {
+        if (lastBackPressed + 2000 < Date.now()) {
+            ToastAndroid.show('再点击一次退出应用',ToastAndroid.SHORT);
+            lastBackPressed = Date.now();
+            const routes = [...state.routes];
+            return {
+                ...state,
+                ...state.routes,
+                index: routes.length - 1,
+            };
+        }
+    }
+    return defaultStateAction(action,state);
+};*/
 
 export default App;
