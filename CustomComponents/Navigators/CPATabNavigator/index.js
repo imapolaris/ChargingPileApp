@@ -36,7 +36,7 @@ const CPATabNavigator = TabNavigator(
         Me: {
             screen: MePage,
             navigationOptions: {
-                title: '我',
+                title: '我的',
                 tabBarIcon: ({tintColor}) => {
                     return (
                         <Icon name="people" size={16} color={tintColor}/>

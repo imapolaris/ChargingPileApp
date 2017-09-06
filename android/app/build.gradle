@@ -152,6 +152,7 @@ dependencies {
     compile project(':react-native-wechat')
     compile project(':react-native-camera')
     compile project(':react-native-yunpeng-alipay')
+    compile project(':react-native-baidu-map')
 }
 
 // Run this once to be able to run the application with BUCK

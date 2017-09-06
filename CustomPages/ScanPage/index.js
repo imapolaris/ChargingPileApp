@@ -83,10 +83,6 @@ class CPAScanPage extends Component{
                     {
                         this.state.scanOrInput === 'scan' ?
                             <View style={styles.scanContainer}>
-                                {/*<Image source={require('../../Resources/Images/scancode.png')}
-                                       style={styles.scan}
-                                       resizeMode='contain'
-                                />*/}
                                 <QRCodeScanner  ref={(self) => this._scanner = self}
                                                 style={styles.scan}
                                                 onRead={this._onScanSuccess}
