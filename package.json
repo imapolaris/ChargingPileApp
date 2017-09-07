@@ -18,13 +18,16 @@
 		"react-native-vector-icons": "^4.3.0",
 		"react-native-wechat": "^1.9.9",
 		"react-native-yunpeng-alipay": "^2.0.0",
-		"react-navigation": "^1.0.0-beta.11"
+		"react-navigation": "^1.0.0-beta.11",
+		"react-redux": "^5.0.6",
+		"redux": "^3.7.2"
 	},
 	"devDependencies": {
 		"babel-jest": "20.0.3",
 		"babel-preset-react-native": "2.1.0",
 		"jest": "20.0.4",
-		"react-test-renderer": "16.0.0-alpha.12"
+		"react-test-renderer": "16.0.0-alpha.12",
+		"redux-devtools": "^3.4.0"
 	},
 	"jest": {
 		"preset": "react-native"

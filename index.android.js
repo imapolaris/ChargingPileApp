@@ -7,13 +7,9 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View
 } from 'react-native';
 import ScanButton from "./CustomComponents/ScanButton/index";
 import UserAgreement from "./CustomComponents/UserAgreement/index";
-import App from "./CustomComponents/Navigators/CPAStackNavigator/index";
 import CPAPersonalDataPage from "./CustomPages/PersonalDataPage/index";
 import CPAChangePwdPage from "./CustomPages/ChangePwdPage/index";
 import CPAWalletPage from "./CustomPages/WalletPage/index";
@@ -28,5 +24,6 @@ import CPASettingPage from "./CustomPages/SettingPage/index";
 import CPAWaitingChargingPage from "./CustomPages/WaitingChargingPage/index";
 import CPAWaitingSubscribePage from "./CustomPages/WaitingSubscribePage/index";
 import AvatarPicker from "./CustomComponents/AvatarPicker/index";
+import App from "./app";
 
 AppRegistry.registerComponent('ChargingPileApp', () => App);

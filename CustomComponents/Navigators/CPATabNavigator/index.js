@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-
 import styles from './styles';
-
 import {TabNavigator} from 'react-navigation';
 import HomePage from "../../../CustomPages/HomePage/index";
 import MePage from "../../../CustomPages/MePage/index";
-
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
 
 const CPATabNavigator = TabNavigator(
     {

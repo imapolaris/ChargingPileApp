@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {View, ToastAndroid, BackHandler} from 'react-native';
+import {View} from 'react-native';
 
 import {StackNavigator, NavigationActions} from 'react-navigation';
 import CPAListPage from "../../../CustomPages/ListPage/index";
-
 import styles from './styles';
 import CPALocationPage from "../../../CustomPages/LocationPage/index";
 import NavButton from '../../NavButton/index';
@@ -24,7 +23,6 @@ import CPALoginPage from "../../../CustomPages/LoginPage/index";
 import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPage/index";
 import CPAScanScreen from "../../../CustomPages/ScanPage/index";
 import CPAWaitingSubscribePage from "../../../CustomPages/WaitingSubscribePage/index";
-
 import {NavButtonMarginW, NavButtonMarginN} from '../../../CommonStyles/styles';
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
 
@@ -225,37 +223,6 @@ const CPAStackNavigator = StackNavigator(
     }
 );
 
-let lastBackPressed = 0;
-
-class App extends Component{
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
-    }
-
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', this._onBackAndroid);
-    }
-
-    _onBackAndroid = () => {
-        /*let now = new Date().getTime();
-        if(now - lastBackPressed < 2500) {
-            return false;
-        }
-        lastBackPressed = now;
-        ToastAndroid.show('再点击一次退出应用',ToastAndroid.SHORT);
-        return true;*/
-    };
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <CPAStackNavigator />
-            </View>
-        );
-    }
-}
-
-
 /*const defaultStateAction = CPAStackNavigator.router.getStateForAction;
 CPAStackNavigator.router.getStateForAction = (action, state) => {
     if(state && action.type === NavigationActions.BACK && state.routes.length === 1) {
@@ -273,4 +240,4 @@ CPAStackNavigator.router.getStateForAction = (action, state) => {
     return defaultStateAction(action,state);
 };*/
 
-export default App;
+export default CPAStackNavigator;
