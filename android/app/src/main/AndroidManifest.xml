@@ -35,7 +35,7 @@
       android:icon="@mipmap/ic_launcher"
       android:theme="@style/AppTheme">
         <meta-data android:name="com.baidu.lbsapi.API_KEY"
-                   android:value="3Hk70Z0e6N3hDRQZwuLFAlgLqB5B4ak7" />
+                   android:value="pxmwS9W63QOaXje7Svm127FMIBG34u5A" />
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"

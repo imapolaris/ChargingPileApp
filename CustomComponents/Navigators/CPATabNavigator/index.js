@@ -45,7 +45,7 @@ const CPATabNavigator = TabNavigator(
     },
     {
         tabBarPosition: 'bottom',
-        swipeEnabled: true,
+        swipeEnabled: false,
         animationEnabled: true,
 
         tabBarOptions:{

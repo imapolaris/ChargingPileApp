@@ -6,9 +6,40 @@ import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {MapView} from 'react-native-baidu-map';
+import {
+    MapView,
+    MapTypes,
+} from 'react-native-baidu-map';
 
 class CPAHomePage extends Component{
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            mayType: MapTypes.NORMAL,
+            zoom: 15,
+            center: {
+                longitude: 116.2499720000,
+                latitude: 40.0885740000
+            },
+            trafficEnabled: false,
+            baiduHeatMapEnabled: false,
+            markers: [
+                {
+                    longitude: 116.2499720000,
+                    latitude: 40.0885740000,
+                    title: "北京市海淀区永丰产业基地加速器一区充电站"
+                }
+            ],
+            marker: {
+                longitude: 116.2499720000,
+                latitude: 40.0885740000,
+                title: "北京市海淀区永丰产业基地加速器一区充电站"
+            }
+        };
+    }
+
     _toLocation = () => {
         const {nav} = this.props.screenProps;
         nav && nav('Location');
@@ -31,7 +62,23 @@ class CPAHomePage extends Component{
                 <DefinedTitleBar ToLocation={this._toLocation} ToList={this._toList} />
 
                 <View style={styles.container}>
-                    <MapView />
+                    <MapView
+                        trafficEnabled={this.state.trafficEnabled}
+                        baiduHeatMapEnabled={this.state.baiduHeatMapEnabled}
+                        zoom={this.state.zoom}
+                        mapType={this.state.mapType}
+                        center={this.state.center}
+                        marker={this.state.marker}
+                        markers={this.state.markers}
+                        style={styles.map}
+                        onMarkerClick={(e) => {
+                            /*console.warn(JSON.stringify(e));*/
+                            alert(JSON.stringify(e));
+                        }}
+                        onMapClick={(e) => {
+                        }}
+                    >
+                    </MapView>
 
                     <ActionButton buttonColor='rgba(231,76,60,1)'
                                   onPress={this._onStartChargingPress}
