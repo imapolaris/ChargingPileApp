@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {NavButtonMarginN, NavButtonMarginW} from '../../CommonStyles/styles';
+import {NavButtonMarginN, NavButtonMarginW} from '../../Common/styles';
 
 const styles = StyleSheet.create({
     navButton:{

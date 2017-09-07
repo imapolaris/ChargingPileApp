@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {TextInput} from 'react-native';
+import {TextInput, View, Alert, Button} from 'react-native';
 import styles from './styles';
-import colors from '../../CommonStyles/colors';
+import colors from '../../Common/colors';
 
 export class ScTextInput extends Component{
     render() {

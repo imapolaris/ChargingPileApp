@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {TouchableOpacity, Text, View} from 'react-native';
 
 import styles from './styles';
-import themes from '../../CommonStyles/styles';
+import themes from '../../Common/styles';
 
 class CPAScanButton extends Component{
     // 构造

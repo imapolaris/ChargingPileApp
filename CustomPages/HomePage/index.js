@@ -11,6 +11,7 @@ import {
     MapTypes,
     Geolocation
 } from 'react-native-baidu-map';
+import {prompt2} from "../../Common/functions";
 
 class CPAHomePage extends Component{
     // 构造
@@ -30,14 +31,11 @@ class CPAHomePage extends Component{
                 {
                     longitude: 116.2499720000,
                     latitude: 40.0885740000,
-                    title: "北京市海淀区永丰产业基地加速器一区充电站"
+                    title: '加速器一区充电站',
+                    address: '北京市海淀区永丰产业基地加速器一区充电站',
+                    id: 1,
                 }
             ],
-            marker: {
-                longitude: 116.2499720000,
-                latitude: 40.0885740000,
-                title: "北京市海淀区永丰产业基地加速器一区充电站"
-            }
         };
     }
 
@@ -80,6 +78,20 @@ class CPAHomePage extends Component{
         nav && nav('Scan', {headerVisible: true});
     };
 
+    // 显示电站基本信息
+    _showStationBasicInfo = (e) => {
+        alert(JSON.stringify(e));
+        prompt2(e.title, e.address, '详情', '导航',
+            ()=>{
+                const {nav} = this.props.screenProps;
+                nav && nav('Details');
+            },
+            ()=>{
+                const {nav} = this.props.screenProps;
+                nav && nav('MapNav');
+            });
+    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -97,10 +109,7 @@ class CPAHomePage extends Component{
                         marker={this.state.marker}
                         markers={this.state.markers}
                         style={styles.map}
-                        onMarkerClick={(e) => {
-                            /*console.warn(JSON.stringify(e));*/
-                            alert(JSON.stringify(e));
-                        }}
+                        onMarkerClick={(e) => {this._showStationBasicInfo(e)}}
                         onMapClick={(e) => {
                         }}
                     >

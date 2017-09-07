@@ -3,7 +3,7 @@ import {View, Text, TextInput, ToastAndroid, TouchableOpacity} from 'react-nativ
 
 import styles from './styles';
 import {Button, Avatar} from 'react-native-elements';
-import {GPlaceholderTextColor} from "../../CommonStyles/colors";
+import {GPlaceholderTextColor} from "../../Common/colors";
 import {ScTextInput} from "../../CustomComponents/SimpleCustomComponent/index";
 
 class CPARegisterOrResetPwdPage extends Component {

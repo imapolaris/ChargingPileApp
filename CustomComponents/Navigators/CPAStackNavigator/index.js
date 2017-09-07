@@ -23,7 +23,7 @@ import CPALoginPage from "../../../CustomPages/LoginPage/index";
 import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPage/index";
 import CPAScanScreen from "../../../CustomPages/ScanPage/index";
 import CPAWaitingSubscribePage from "../../../CustomPages/WaitingSubscribePage/index";
-import {NavButtonMarginW, NavButtonMarginN} from '../../../CommonStyles/styles';
+import {NavButtonMarginW, NavButtonMarginN} from '../../../Common/styles';
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
 
 const CPAStackNavigator = StackNavigator(

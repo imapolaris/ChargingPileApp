@@ -3,7 +3,7 @@ import {View, Text, TextInput, Keyboard} from 'react-native';
 
 import styles from './styles';
 import {Button, Icon} from 'react-native-elements';
-import {GPlaceholderTextColor} from "../../CommonStyles/colors";
+import {GPlaceholderTextColor} from "../../Common/colors";
 import {StackNavigator} from 'react-navigation';
 import CPAWaitingChargingPage from "../WaitingChargingPage/index";
 
