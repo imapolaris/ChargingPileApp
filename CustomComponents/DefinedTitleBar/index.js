@@ -5,14 +5,16 @@ import styles from './styles';
 import NavButton from "../NavButton/index";
 import {SearchBar} from 'react-native-elements';
 
+let inputSearchText = '';
+
 class DefinedTitleBar extends Component{
-    // 构造
-    constructor(props) {
-        super(props);
-        // 初始状态
-        this.state = {
-        };
-    }
+    _toSearch = () => {
+        if ((inputSearchText || '').length <= 0)
+            return;
+
+        this.props.search &&
+        this.props.search(inputSearchText);
+    };
 
     render() {
         const {style} = this.props;
@@ -22,23 +24,20 @@ class DefinedTitleBar extends Component{
                 <View style={styles.appBar}>
                     <NavButton label="北京"
                                style={styles.leftButton}
-                               onPress={() => {
-                        this.props.ToLocation();
-                    }} />
+                               onPress={()=>this.props.toLocation && this.props.toLocation()} />
                     <SearchBar ref={self => this._search = self}
                                containerStyle={styles.search}
                                inputStyle={styles.searchInput}
                                lightTheme
                                round
-                               onChangeText={()=>{}}
+                               onChangeText={(e)=>inputSearchText=e}
                                placeholder='搜索...'
                                clearIcon={{color:'#86939e', name: 'clear'}}
+                               onSubmitEditing={this._toSearch}
                     />
                     <NavButton label='列表'
                                style={styles.rightButton}
-                               onPress={() => {
-                        this.props.ToList();
-                    }} />
+                               onPress={()=>this.props.toList && this.props.ToList()} />
                 </View>
             </Animated.View>
         );

@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {
     MapView,
     MapTypes,
+    Geolocation
 } from 'react-native-baidu-map';
 
 class CPAHomePage extends Component{
@@ -50,6 +51,29 @@ class CPAHomePage extends Component{
         nav && nav('List');
     };
 
+    _search = (text) => {
+        Geolocation.geocode(text, text)
+            .then(location=>{
+                if (location.longitude === null || location.longitude === undefined
+                    || location.latitude === null || location.latitude === undefined)
+                {
+                    alert('请输入正确、合法的地名！');
+                    return;
+                }
+
+                this.setState({
+                    ...this.state,
+                    center: {
+                        longitude: location.longitude,
+                        latitude: location.latitude
+                    }
+                })
+            })
+            .catch(error=>{
+                console.log(`cannot analyse the address, error: ${error}`);
+            });
+    };
+
     // 扫一扫
     _onStartChargingPress = () => {
         const {nav} = this.props.screenProps;
@@ -59,7 +83,9 @@ class CPAHomePage extends Component{
     render() {
         return (
             <View style={styles.container}>
-                <DefinedTitleBar ToLocation={this._toLocation} ToList={this._toList} />
+                <DefinedTitleBar toLocation={this._toLocation}
+                                 toList={this._toList}
+                                 search={this._search} />
 
                 <View style={styles.container}>
                     <MapView
