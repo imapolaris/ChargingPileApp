@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {View, ScrollView, Image, Text, TouchableOpacity} from 'react-native';
-
 import styles from './styles';
 import {List, ListItem, Avatar} from 'react-native-elements';
+import {showAvatarPicker} from '../../CustomComponents/AvatarPicker/index';
+
 
 class CPAMePage extends Component{
     // 构造
@@ -46,7 +47,31 @@ class CPAMePage extends Component{
 
     // 更换头像
     _changeAvatar = () => {
-        alert('avatar');
+        showAvatarPicker((response) => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            }
+            else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            }
+            else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            }
+            else {
+                let source = { uri: response.uri };
+
+                // You can also display the image using data:
+                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+                this.setState({
+                    avatarSource: source
+                });
+
+                return source;
+            }
+        });
     };
 
     // 登录
@@ -58,11 +83,12 @@ class CPAMePage extends Component{
     };
 
     // 注册
-    /*_register = () => {
+    _register = () => {
         if (!this.state.logined){
-
+            const {nav} = this.props.screenProps;
+            nav && nav('Register', {registerOrReset: 'register'});
         }
-    };*/
+    };
 
     render() {
         const list = [
@@ -94,36 +120,48 @@ class CPAMePage extends Component{
                 icon: {name:'settings', type:'simple-line-icon'},
                 callback: this._setting,
             }
-        ]
+        ];
 
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
-                    <Image style={styles.backgroundImage}
-                        source={require('../../Resources/Images/homebk.png')}>
+                    <Image  ref={self=>this._avatar=self}
+                            style={styles.backgroundImage}
+                            source={require('../../Resources/Images/homebk.png')}>
                         <View style={{alignItems:'center'}}>
-                            <Avatar large
+                            <Avatar width={100} height={100}
                                     rounded
                                     onPress={this._changeAvatar}
                                     activeOpacity={0.7}
-                                    icon={{name: 'user', type: 'simple-line-icon', color:'yellow'}}
+                                    /*icon={{name: 'user', type: 'simple-line-icon', color:'yellow'}}*/
+                                    source={this.state.avatarSource}
                             />
 
                             {
                                 this.state.logined ?
-                                    <Text style={styles.text}
-                                    >
-                                        {this.props.nickname || 'alex'}
-                                    </Text>
-                                    :
-                                    <TouchableOpacity>
-                                        <Text style={[styles.text, styles.login]}
-                                              onPress={this._login}
-                                              textDecorationLine='underline'
-                                        >
-                                            登录
+                                    <View style={{marginTop:10}}>
+                                        <Text style={styles.text}>
+                                            {this.props.nickname || 'alex'}
                                         </Text>
-                                    </TouchableOpacity>
+                                    </View>
+                                    :
+                                    <View style={{flexDirection:'row', marginTop:10,}}>
+                                        <TouchableOpacity>
+                                            <Text style={[styles.text, styles.login]}
+                                                  onPress={this._login}
+                                                  textDecorationLine='underline'>
+                                                登录
+                                            </Text>
+                                        </TouchableOpacity>
+                                        <Text> / </Text>
+                                        <TouchableOpacity>
+                                            <Text style={[styles.text, styles.register]}
+                                                  onPress={this._register}
+                                                  textDecorationLine='underline'>
+                                                注册
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </View>
                             }
                         </View>
                     </Image>

@@ -37,7 +37,7 @@ class DefinedTitleBar extends Component{
                     />
                     <NavButton label='列表'
                                style={styles.rightButton}
-                               onPress={()=>this.props.toList && this.props.ToList()} />
+                               onPress={()=>this.props.toList && this.props.toList()} />
                 </View>
             </Animated.View>
         );

@@ -35,15 +35,11 @@ const CPAStackNavigator = StackNavigator(
                     headerTitle: "地图",
                     headerLeft: (
                         <View>
-                            <NavButton label="北京" onPress={() => {
-                                navigation.navigate('Location');
-                            }} />
+                            <NavButton label="北京" onPress={() => {navigation.navigate('Location');}} />
                         </View>
                     ),
                     headerRight: (
-                        <NavButton label="列表" onPress={() => {
-                            navigation.navigate('List');
-                        }} />
+                        <NavButton label="列表" onPress={() => {navigation.navigate('List');}} />
                     ),
                     header: null,
                 });
@@ -55,9 +51,7 @@ const CPAStackNavigator = StackNavigator(
                 return ({
                     title: '列表',
                     headerRight: (
-                        <NavButton label="地图" onPress={() => {
-                            navigation.goBack();
-                        }} style={{marginRight:NavButtonMarginW, marginLeft:NavButtonMarginN}} />
+                        <NavButton label="地图" onPress={() => {navigation.goBack();}} />
                     ),
                 });
             }

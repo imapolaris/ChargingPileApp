@@ -16,7 +16,7 @@ class CPARegisterOrResetPwdPage extends Component {
     }
 
     _getVCode = () => {
-        alert('验证码：336699');
+        ToastAndroid.show('验证码已发送！', ToastAndroid.BOTTOM, ToastAndroid.SHORT);
     };
 
     _showUserAgreement = () => {

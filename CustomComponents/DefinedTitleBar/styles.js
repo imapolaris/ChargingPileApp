@@ -37,8 +37,6 @@ const styles = StyleSheet.create({
     },
     rightButton:{
         alignItems: 'flex-end',
-        marginLeft: NavButtonMarginN,
-        marginRight: NavButtonMarginW,
         justifyContent: 'center',
     },
 });

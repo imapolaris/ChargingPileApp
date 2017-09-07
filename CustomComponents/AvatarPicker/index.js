@@ -1,34 +1,30 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
 
-import styles from './styles';
 import {Avatar} from 'react-native-elements'
 import ImagePicker from 'react-native-image-picker';
 
-class AvatarPicker extends Component{
-    // 构造
-    constructor(props) {
-        super(props);
-        // 初始状态
-        this.state = {
-            avatarSource: null,
-        };
-    }
+export function showAvatarPicker(callback = ()=>{}) {
+    let options = {
+        title: '选择头像',
+        /*customButtons: [
+            {name: 'selectpicture', title: '从手机相册选择'},
+            {name: 'takepicture', title:'拍照...'}
+        ],*/
+        takePhotoButtonTitle: '拍照...',
+        chooseFromLibraryButtonTitle: '从手机相册选择',
+        cancelButtonTitle: '取消',
+        storageOptions: {
+            skipBackup: true,
+            path: 'images',
+        }
+    };
 
-    _showAvatarPicker = () => {
-        let options = {
-            //title: '选择头像',
-            customButton: [
-                {name: 'selectpicture', title: '从手机相册选择'},
-                {name: 'takepicture', title:'拍照'}
-            ],
-            storageOptions: {
-                skipBackup: false,
-                path: '../../Resources/Images',
-            }
-        };
-
-        ImagePicker.showImagePicker(options, (response) => {
+    let doCallback;
+    if (callback !== null && callback !== undefined){
+        doCallback = callback;
+    } else {
+        doCallback = (response) => {
             console.log('Response = ', response);
 
             if (response.didCancel) {
@@ -50,19 +46,32 @@ class AvatarPicker extends Component{
                     avatarSource: source
                 });
             }
-        });
-    };
+        }
+    }
+
+    ImagePicker.showImagePicker(options, doCallback);
+}
+
+class AvatarPickerDemo extends Component{
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            avatarSource: null,
+        };
+    }
 
     render() {
         return (
             <Avatar rounded
                     large
                     source={this.state.avatarSource}
-                    onPress={this._showAvatarPicker}
+                    onPress={() => showAvatarPicker()}
                     activeOpacity={0.7}
             />
         );
     }
 }
 
-export default AvatarPicker;
+export default AvatarPickerDemo;

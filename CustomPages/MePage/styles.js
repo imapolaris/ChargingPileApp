@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     infoContainer:{
-        height: 150,
+        height: 200,
         flexDirection: 'column',
         justifyContent: 'center',
     },
@@ -29,12 +29,14 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
-        margin: 5,
-        color: '#FFFFFF',
         backgroundColor: 'transparent',
+        color: '#FFFFFF',
     },
     login: {
-        color: '#FFFFFF',
+        color: '#397af8',
+    },
+    register:{
+        color: '#397af8',
     }
 });
 
