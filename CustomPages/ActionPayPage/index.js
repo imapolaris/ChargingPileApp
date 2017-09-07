@@ -3,6 +3,7 @@ import {View, Text, TextInput, ToastAndroid} from 'react-native';
 
 import styles from './styles';
 import {Button, CheckBox} from 'react-native-elements';
+import {ScTextInput} from "../../CustomComponents/SimpleCustomComponent/index";
 
 class CPAActionPayPage extends Component{
     // 构造
@@ -34,7 +35,7 @@ class CPAActionPayPage extends Component{
         return (
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
-                    <TextInput style={styles.textInput}
+                    <ScTextInput style={styles.textInput}
                                placeholder='请输入充值金额（最少10元）'
                                placeholderTextColor='#C3C3C3'
                                underlineColorAndroid='transparent'

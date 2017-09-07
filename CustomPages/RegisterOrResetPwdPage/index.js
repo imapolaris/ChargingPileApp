@@ -4,6 +4,7 @@ import {View, Text, TextInput, ToastAndroid, TouchableOpacity} from 'react-nativ
 import styles from './styles';
 import {Button, Avatar} from 'react-native-elements';
 import {GPlaceholderTextColor} from "../../CommonStyles/colors";
+import {ScTextInput} from "../../CustomComponents/SimpleCustomComponent/index";
 
 class CPARegisterOrResetPwdPage extends Component {
     // 构造
@@ -49,12 +50,12 @@ class CPARegisterOrResetPwdPage extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
-                    <TextInput placeholderTextColor={GPlaceholderTextColor}
+                    <ScTextInput placeholderTextColor={GPlaceholderTextColor}
                                placeholder='输入手机号'
                                style={styles.textInput}
                     />
                     <View style={styles.vcodeContainer}>
-                        <TextInput placeholder='输入验证码'
+                        <ScTextInput placeholder='输入验证码'
                                    placeholderTextColor={GPlaceholderTextColor}
                                    style={[styles.textInput, styles.vcodeTextInput]}
                         />
@@ -63,7 +64,7 @@ class CPARegisterOrResetPwdPage extends Component {
                                 buttonStyle={styles.vcodeButton}
                         />
                     </View>
-                    <TextInput placeholder={params.registerOrReset === 'register' ? '输入密码' : '输入新密码'}
+                    <ScTextInput placeholder={params.registerOrReset === 'register' ? '输入密码' : '输入新密码'}
                                placeholderTextColor={GPlaceholderTextColor}
                                style={styles.textInput}
                     />

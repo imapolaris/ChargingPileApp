@@ -12,7 +12,7 @@ class LabelTextInputListItem extends Component{
                 </Text>
 
                 <TextInput style={styles.textInput}
-                           placeholder={this.props.placeholderText}
+                           value={this.props.previousValue}
                            underlineColorAndroid='transparent'
                            secureTextEntry={this.props.isSecure}
                 />

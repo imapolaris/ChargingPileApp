@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Image, ScrollView, Button} from 'react-native';
+import {View} from 'react-native';
 
 import styles from './styles';
 import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";

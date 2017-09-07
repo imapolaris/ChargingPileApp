@@ -11,7 +11,7 @@ class CPAPersonalDataPage extends Component{
     _renderItem = ({item}) => {
         return (
             <LabelTextInputListItem label={item.label}
-                                    placeholderText={item.placeholder}
+                                    previousValue={item.val}
             />
         );
     };
@@ -32,10 +32,10 @@ class CPAPersonalDataPage extends Component{
 
     render() {
         const data = [
-            {key:1, label:'用户名', placeholder:'孙辉'},
-            {key:2, label:'昵称', placeholder:'alex'},
-            {key:3, label:'性别', placeholder:'男'},
-            {key:4, label:'联系电话', placeholder:'13000000000'},
+            {key:1, label:'用户名', val:'孙辉'},
+            {key:2, label:'昵称', val:'alex'},
+            {key:3, label:'性别', val:'男'},
+            {key:4, label:'联系电话', val:'13000000000'},
         ];
 
         const list = [

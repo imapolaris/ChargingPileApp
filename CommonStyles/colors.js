@@ -1,10 +1,7 @@
-import {StyleSheet} from 'react-native';
-
-const colors = StyleSheet.create({
-    overall:{
-        backgroundColor: '#1abc9c',
-    },
-});
+export default {
+    overall:'#1abc9c',
+    theme1:'#397af8',
+}
 
 /*
 * G -- Global

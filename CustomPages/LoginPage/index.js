@@ -10,6 +10,7 @@ import {
 import styles from './styles';
 import {Button, Avatar} from 'react-native-elements';
 import {GPlaceholderTextColor} from "../../CommonStyles/colors";
+import {ScTextInput} from "../../CustomComponents/SimpleCustomComponent/index";
 
 class CPALoginPage extends Component{
     _onPress = () => {
@@ -42,12 +43,12 @@ class CPALoginPage extends Component{
                         />
                     </View>
 
-                    <TextInput placeholderTextColor={GPlaceholderTextColor}
+                    <ScTextInput placeholderTextColor={GPlaceholderTextColor}
                                placeholder='用户名'
                                style={styles.textInput}
                                underlineColorAndroid='transparent'
                     />
-                    <TextInput placeholder='密码'
+                    <ScTextInput placeholder='密码'
                                placeholderTextColor={GPlaceholderTextColor}
                                secureTextEntry={true}
                                style={styles.textInput}

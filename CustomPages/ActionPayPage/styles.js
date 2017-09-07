@@ -13,8 +13,6 @@ const styles = StyleSheet.create({
     },
     textInput:{
         flex: 1,
-        borderWidth: 1,
-        borderColor: '#D3D3D3',
     },
     text:{
         marginLeft: 5,
@@ -32,6 +30,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: '#C3C3C3',
         marginTop: 5,
+        borderRadius: 25,
     },
     checkbox: {
         flex: 1,
