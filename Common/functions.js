@@ -1,4 +1,5 @@
-import {Alert} from 'react-native';
+import {Alert, ToastAndroid} from 'react-native';
+import * as webApi from './webApi';
 
 
 /*
@@ -34,4 +35,32 @@ export function prompt2(title='',
             {text: btn2Title, onPress: ()=>callback2()},
         ],
         {cancelable:canCancel});
+}
+
+
+/*
+ * send message, eg. verify code.
+ */
+export function sendMessage(phoneNumbers){
+    let url = webApi.urls.messages+phoneNumbers;
+    return fetch(url, {
+        method: 'GEt',
+        timeout: 3000,
+        contentLength: 0,
+    })
+        .then(response=>response.json())
+        .catch(error=>{
+            console.log(error);
+        })
+}
+
+/*
+ * function ToastAndroid.show(...) wrapper.
+ */
+export function ToastAndroidBS(message) {
+    ToastAndroid.show(message, ToastAndroid.BOTTOM, ToastAndroid.SHORT);
+}
+
+export function ToastAndroidBL() {
+    ToastAndroid.show(message, ToastAndroid.BOTTOM, ToastAndroid.LONG);
 }

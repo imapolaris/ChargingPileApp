@@ -5,6 +5,7 @@ import styles from './styles';
 import {Button, Avatar} from 'react-native-elements';
 import {GPlaceholderTextColor} from "../../Common/colors";
 import {ScTextInput} from "../../CustomComponents/SimpleCustomComponent/index";
+import {sendMessage, ToastAndroidBS} from "../../Common/functions";
 
 class CPARegisterOrResetPwdPage extends Component {
     // 构造
@@ -17,7 +18,18 @@ class CPARegisterOrResetPwdPage extends Component {
     }
 
     _getVCode = () => {
-        ToastAndroid.show('验证码已发送！', ToastAndroid.BOTTOM, ToastAndroid.SHORT);
+        // 先验证手机号码是否合法
+        let correct = true;
+        if (correct){
+            let phoneNumber = this._phoneNumber.state.value || '13269734774';
+            alert(phoneNumber);
+            sendMessage(phoneNumber);
+
+            ToastAndroidBS('验证码已发送！');
+        }
+        else {
+            ToastAndroidBS('请检查手机号码是否正确...');
+        }
     };
 
     _showUserAgreement = () => {
@@ -29,15 +41,9 @@ class CPARegisterOrResetPwdPage extends Component {
         const {params} = this.props.navigation.state;
 
         if (params.registerOrReset === 'register'){
-            ToastAndroid.show('注册成功！',
-                ToastAndroid.SHORT,
-                ToastAndroid.BOTTOM
-            );
+            ToastAndroidBS('注册成功！');
         } else {
-            ToastAndroid.show('重置成功！',
-                ToastAndroid.SHORT,
-                ToastAndroid.BOTTOM
-            );
+            ToastAndroidBS('重置成功！');
         }
 
         const {goBack} = this.props.navigation;
@@ -50,9 +56,10 @@ class CPARegisterOrResetPwdPage extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
-                    <ScTextInput placeholderTextColor={GPlaceholderTextColor}
-                               placeholder='输入手机号'
-                               style={styles.textInput}
+                    <ScTextInput ref={self=>this._phoneNumber=self}
+                                placeholderTextColor={GPlaceholderTextColor}
+                                placeholder='输入手机号'
+                                style={styles.textInput}
                     />
                     <View style={styles.vcodeContainer}>
                         <ScTextInput placeholder='输入验证码'

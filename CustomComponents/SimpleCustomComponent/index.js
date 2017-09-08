@@ -1,12 +1,22 @@
 import React, {Component} from 'react';
-import {TextInput, View, Alert, Button} from 'react-native';
+import {TextInput} from 'react-native';
 import styles from './styles';
 import colors from '../../Common/colors';
 
 export class ScTextInput extends Component{
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            value: ''
+        };
+    }
+
     render() {
         return (
-            <TextInput placeholder={this.props.placeholder}
+            <TextInput value={this.state.value}
+                       placeholder={this.props.placeholder}
                        placeholderTextColor={this.props.placeholderTextColor}
                        secureTextEntry={this.props.secureTextEntry}
                        style={[styles.textInput, this.props.style]}
