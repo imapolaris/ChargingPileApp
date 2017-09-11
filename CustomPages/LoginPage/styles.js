@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {screenWidth} from "../../Common/styles";
 
 const styles = StyleSheet.create({
     container: {
@@ -27,10 +28,10 @@ const styles = StyleSheet.create({
         padding: 30,
     },
     button:{
-        width: 200,
+        width: screenWidth-30,
     },
     text:{
-        marginTop: 5,
+        marginTop: 15,
         color: '#00FFFF',
     },
 });

@@ -11,7 +11,7 @@ import {
     MapTypes,
     Geolocation
 } from 'react-native-baidu-map';
-import {prompt2} from "../../Common/functions";
+import {gotoNavigation, mapApp, prompt2, whichMapApp} from "../../Common/functions";
 
 class CPAHomePage extends Component{
     // 构造
@@ -80,15 +80,26 @@ class CPAHomePage extends Component{
 
     // 显示电站基本信息
     _showStationBasicInfo = (e) => {
-        alert(JSON.stringify(e));
+        //alert(JSON.stringify(e));
         prompt2(e.title, e.address, '详情', '导航',
             ()=>{
                 const {nav} = this.props.screenProps;
                 nav && nav('Details');
             },
             ()=>{
-                const {nav} = this.props.screenProps;
-                nav && nav('MapNav');
+                /*const {nav} = this.props.screenProps;
+                nav && nav('MapNav');*/
+
+                whichMapApp((theMap)=>{
+                    if (theMap !== 'cp:cancel') {
+                        gotoNavigation(theMap,
+                            {"longitude":116.388236, "latitude": 40.106099},
+                            e.position,
+                            (succeed, msg)=>{
+                                alert(msg);
+                            });
+                    }
+                });
             });
     };
 
