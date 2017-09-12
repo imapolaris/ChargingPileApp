@@ -4,6 +4,7 @@ import {View} from 'react-native';
 import {StackNavigator, NavigationActions} from 'react-navigation';
 import CPAListPage from "../../../CustomPages/ListPage/index";
 import styles from './styles';
+import colors from '../../../Common/colors';
 import CPALocationPage from "../../../CustomPages/LocationPage/index";
 import NavButton from '../../NavButton/index';
 import CPADetailsPage from "../../../CustomPages/DetailsPage/index";
@@ -23,7 +24,6 @@ import CPALoginPage from "../../../CustomPages/LoginPage/index";
 import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPage/index";
 import CPAScanScreen from "../../../CustomPages/ScanPage/index";
 import CPAWaitingSubscribePage from "../../../CustomPages/WaitingSubscribePage/index";
-import {NavButtonMarginW, NavButtonMarginN} from '../../../Common/styles';
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
 
 const CPAStackNavigator = StackNavigator(
@@ -209,6 +209,8 @@ const CPAStackNavigator = StackNavigator(
             gesturesEnabled: true,
             headerTitleStyle: {
                 alignSelf: 'center',
+                color: colors.grey5,
+                fontSize: 18,
             }
         },
         transitionConfig: () => ({

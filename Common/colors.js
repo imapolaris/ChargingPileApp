@@ -1,6 +1,6 @@
 export default {
     overall:'#1abc9c',
-    theme1:'#397af8',
+    theme1:'#4da0ff',
     primary: '#9E9E9E',
     primary1: '#4d86f7',
     primary2: '#6296f9',

@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {NavButtonMarginN, NavButtonMarginW} from '../../Common/styles';
+import colors from '../../Common/colors';
 
 const styles = StyleSheet.create({
     navButton:{
@@ -8,6 +9,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
+        color: colors.white,
     },
 });
 

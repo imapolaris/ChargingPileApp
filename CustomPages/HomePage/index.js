@@ -11,7 +11,7 @@ import {
     MapTypes,
     Geolocation
 } from 'react-native-baidu-map';
-import {gotoNavigation, mapApp, prompt2, whichMapApp} from "../../Common/functions";
+import {gotoNavigation, mapApp} from "../../Common/functions";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index";
 import {AlertStationBriefInfo} from "../../CustomComponents/AlertStationBriefInfo/index";
 

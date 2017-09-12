@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, ScrollView, Image, Text, TouchableOpacity} from 'react-native';
+import {View, ScrollView, ImageBackground, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {List, ListItem, Avatar} from 'react-native-elements';
 import {selectFromLibrary, showAvatarPicker, takePicture} from '../../CustomComponents/AvatarPicker/index';
@@ -141,7 +141,7 @@ class CPAMePage extends Component{
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
-                    <Image  ref={self=>this._avatar=self}
+                    <ImageBackground  ref={self=>this._avatar=self}
                             style={styles.backgroundImage}
                             source={require('../../Resources/Images/homebk.png')}>
                         <View style={{alignItems:'center'}}>
@@ -180,7 +180,7 @@ class CPAMePage extends Component{
                                     </View>
                             }
                         </View>
-                    </Image>
+                    </ImageBackground>
                 </View>
                 <ScrollView>
                     <View>

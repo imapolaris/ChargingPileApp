@@ -166,7 +166,7 @@ class CPAScanPage extends Component{
                 <View style={[styles.lowerContainer,
                     this.state.scanOrInput === 'scan' ? {backgroundColor: "#000000"} : {opacity: 1, backgroundColor: "transparent"}]}>
                     <View style={styles.leftContainer}>
-                        <Button title="扫码"
+                        <Button title="扫码充电"
                             onPress={this._onScanButtonPress}
                             buttonStyle={[styles.button, this.state.scanOrInput === 'scan' ? {backgroundColor: colors.primary} : {}]} />
                     </View>

@@ -5,6 +5,7 @@ import {TabNavigator} from 'react-navigation';
 import HomePage from "../../../CustomPages/HomePage/index";
 import MePage from "../../../CustomPages/MePage/index";
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import colors from '../../../Common/colors';
 
 
 const CPATabNavigator = TabNavigator(
@@ -53,7 +54,8 @@ const CPATabNavigator = TabNavigator(
             showIcon:true,
             tabStyle:{
                 flexDirection:'row',
-            }
+                backgroundColor: colors.theme1,
+            },
         },
     }
 );
