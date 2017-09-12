@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, TextInput, Keyboard} from 'react-native';
+import {View, Text, Keyboard, Dimensions} from 'react-native';
 
 import styles from './styles';
 import {Button, Icon} from 'react-native-elements';
@@ -7,8 +7,11 @@ import {GPlaceholderTextColor} from "../../Common/colors";
 import {StackNavigator} from 'react-navigation';
 import CPAWaitingChargingPage from "../WaitingChargingPage/index";
 
-import QRCodeScanner from 'react-native-qrcode-scanner';
+//import QRCodeScanner from 'react-native-qrcode-scanner';
 import {ScTextInput} from "../../CustomComponents/SimpleCustomComponent/index";
+import Camera from 'react-native-camera';
+import colors from '../../Common/colors';
+
 
 class CPAScanPage extends Component{
     // 构造
@@ -17,6 +20,7 @@ class CPAScanPage extends Component{
         // 初始状态
         this.state = {
             scanOrInput: 'scan',
+            torchMode: Camera.constants.TorchMode.off,
         };
     }
 
@@ -24,6 +28,7 @@ class CPAScanPage extends Component{
     _onScanButtonPress = () => {
         if (this.state.scanOrInput === 'input'){
             this.setState({
+                ...this.state,
                 scanOrInput: 'scan'
             });
         }
@@ -33,6 +38,7 @@ class CPAScanPage extends Component{
     _onInputSerialNumberButtonPress = () => {
         if (this.state.scanOrInput === 'scan'){
             this.setState({
+                ...this.state,
                 scanOrInput: 'input'
             });
         }
@@ -41,6 +47,9 @@ class CPAScanPage extends Component{
     // 扫描成功
     _onScanSuccess = (e) => {
         try{
+            // 如果手电筒打开，关闭手电筒
+            this._switchTorch(true);
+
             alert(e.data);
         } catch (e){
             alert('An error occurred', e.message);
@@ -49,8 +58,30 @@ class CPAScanPage extends Component{
 
     // 打开/关闭闪光灯
     _onLightPress = () => {
-        let torchMode = this._scanner && this._scanner._switchTorch();
-        //alert(torchMode);
+        let torchMode =  this._switchTorch();
+    };
+
+    /*switch torch, add by alex, on 090517*/
+    /*
+     * close: 关闭手电筒，不打开
+     */
+    _switchTorch = (close) => {
+        if (this.state.torchMode === Camera.constants.TorchMode.on){
+            this.setState({
+                ...this.state,
+                torchMode: Camera.constants.TorchMode.off
+            })
+        }
+        else {
+            if (!close) {
+                this.setState({
+                    ...this.state,
+                    torchMode: Camera.constants.TorchMode.on
+                })
+            }
+        }
+
+        return this.state.torchMode.toString();
     };
 
     // 完成输入序列号，并确认
@@ -66,73 +97,84 @@ class CPAScanPage extends Component{
     };
 
     render() {
+        const scanView = (
+            <View style={styles.container}>
+                <Camera ref={self=()=>this._scanner=self}
+                        torchMode={this.state.torchMode}
+                        style={[styles.camera, this.props.cameraStyle]}
+                        onBarCodeRead={this._onScanSuccess.bind(this)}
+                        aspect={Camera.constants.Aspect.fill}>
+                    <View style={styles.rectangleContainer}>
+
+                        <View style={styles.fillArea} >
+                            <View style={styles.textContainer}>
+                                <Text style={styles.text}>
+                                    将二维码放入扫描框内，即可自动扫描！
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={styles.middleContainer}>
+                            <View style={styles.fillArea} />
+                            <View style={styles.rectangle} />
+                            <View style={styles.fillArea} />
+                        </View>
+                        <View style={[styles.fillArea, styles.scanContainer]}>
+                            <Icon reverse
+                                  raised
+                                  name="highlight"
+                                  size={20}
+                                  color="#517fa4"
+                                  onPress={this._onLightPress}
+                            />
+                        </View>
+                    </View>
+                </Camera>
+            </View>
+        );
+
+        const inputView = (
+            <View style={styles.container}>
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>
+                        请输入充电桩编号，然后点击按钮！
+                    </Text>
+                </View>
+                <View style={styles.upperContainer}>
+                    <View style={styles.inputContainer}>
+                        <View style={styles.textInputContainer}>
+                            <ScTextInput underlineColorAndroid='transparent'
+                                         placeholder='请输入充电桩编号'
+                                         placeholderTextColor={GPlaceholderTextColor}
+                                         style={styles.textInput}
+                                         keyboardType='numeric'
+                            />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Button title="确定"
+                                    buttonStyle={styles.okButton}
+                                    onPress={this._onInputFinishedPress}
+                            />
+                        </View>
+                    </View>
+                </View>
+            </View>
+        );
+
         return (
             <View style={styles.container}>
-                {
-                    this.state.scanOrInput === 'scan' ?
-                        <View style={styles.textContainer}>
-                            <Text style={styles.text}>
-                                将二维码放入扫描框内，即可自动扫描！
-                            </Text>
-                        </View>
-                        :
-                        <View style={styles.textContainer}>
-                            <Text style={styles.text}>
-                                请输入充电桩编号，然后点击按钮！
-                            </Text>
-                        </View>
-                }
-
-                <View style={styles.upperContainer}>
-                    {
-                        this.state.scanOrInput === 'scan' ?
-                            <View style={styles.scanContainer}>
-                                <QRCodeScanner  ref={(self) => this._scanner = self}
-                                                cameraStyle={styles.scan}
-                                                onRead={this._onScanSuccess}
-                                                reactivate={true}
-                                                reactivateTimeout={30000}
-                                                showMarker={true}
-                                />
-                                <Icon reverse
-                                      raised
-                                      name="highlight"
-                                      size={20}
-                                      color="#517fa4"
-                                      onPress={this._onLightPress}
-                                />
-                            </View>
-                            :
-                            <View style={styles.inputContainer}>
-                                <View style={styles.textInputContainer}>
-                                    <ScTextInput underlineColorAndroid='transparent'
-                                               placeholder='请输入充电桩编号'
-                                               placeholderTextColor={GPlaceholderTextColor}
-                                               style={styles.textInput}
-                                                 keyboardType='numeric'
-                                    />
-                                </View>
-                                <View style={styles.buttonContainer}>
-                                    <Button title="确定"
-                                            buttonStyle={styles.okButton}
-                                            onPress={this._onInputFinishedPress}
-                                    />
-                                </View>
-                            </View>
-                    }
-                </View>
-
-                <View style={styles.lowerContainer}>
+                {this.state.scanOrInput === 'scan' ? scanView : inputView}
+                <View style={[styles.lowerContainer,
+                    this.state.scanOrInput === 'scan' ? {backgroundColor: "#000000"} : {opacity: 1, backgroundColor: "transparent"}]}>
                     <View style={styles.leftContainer}>
                         <Button title="扫码"
-                                onPress={this._onScanButtonPress}
-                                style={styles.button} />
+                            onPress={this._onScanButtonPress}
+                            buttonStyle={[styles.button, this.state.scanOrInput === 'scan' ? {backgroundColor: colors.primary} : {}]} />
                     </View>
 
                     <View style={styles.rightContainer}>
                         <Button title="输入编号"
                                 onPress={this._onInputSerialNumberButtonPress}
-                                style={styles.button} />
+                                buttonStyle={[styles.button, this.state.scanOrInput === 'scan' ? {} : {backgroundColor: colors.primary}]} />
                     </View>
                 </View>
             </View>
