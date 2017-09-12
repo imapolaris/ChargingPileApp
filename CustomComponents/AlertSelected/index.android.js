@@ -56,7 +56,6 @@ export class AlertSelected extends Component {
 
                 <TouchableOpacity style={{flex: 1}} onPress={this._out}/>
                 <View style={styles.contentContainer}>
-
                     <View style={styles.content}>
                         <View style={styles.tipTitleView}>
                             <Text style={styles.tipTitleText}>{this.state.title}</Text>
@@ -92,7 +91,7 @@ export class AlertSelected extends Component {
     };
 
     //取消
-    cancel = (event) => {
+    _cancel = () => {
         this._out();
     };
 
@@ -102,8 +101,7 @@ export class AlertSelected extends Component {
         this.callback && this.callback(i);
     };
 
-    /**
-     * 弹出控件，最多支持3个选项(包括取消)
+    /*
      * title: 标题
      * entityList：选择项数据  数组
      * tipTextColor: 字体颜色
@@ -114,20 +112,11 @@ export class AlertSelected extends Component {
         this.callback = callback;
 
         if (entityList && entityList.length > 0) {
-            let len = entityList.length;
-            if (len === 1) {
-                this.setState({
-                    title: title,
-                    show: true,
-                    tipTextColor: tipTextColor,
-                }, this._in);
-            } else if (len === 2) {
-                this.setState({
-                    title: title,
-                    show: true,
-                    tipTextColor: tipTextColor,
-                }, this._in);
-            }
+            this.setState({
+                title: title,
+                show: true,
+                tipTextColor: tipTextColor,
+            });
         }
     }
 }

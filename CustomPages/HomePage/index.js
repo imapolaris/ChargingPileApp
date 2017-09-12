@@ -13,6 +13,7 @@ import {
 } from 'react-native-baidu-map';
 import {gotoNavigation, mapApp, prompt2, whichMapApp} from "../../Common/functions";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index";
+import {AlertStationBriefInfo} from "../../CustomComponents/AlertStationBriefInfo/index";
 
 const selectedArr = [{key:1, title:"百度地图"}, {key:2, title:"高德地图"}];
 let position = null;
@@ -85,19 +86,26 @@ class CPAHomePage extends Component{
 
     // 显示电站基本信息
     _showStationBasicInfo = (e) => {
-        //alert(JSON.stringify(e));
-        prompt2(e.title, e.address, '详情', '导航',
-            ()=>{
-                const {nav} = this.props.screenProps;
-                nav && nav('Details');
-            },
-            ()=>{
-                /*const {nav} = this.props.screenProps;
-                nav && nav('MapNav');*/
+        this._station.show(e.title,
+            '1/2',
+            '北京市海淀区永丰产业基地加速器一区',
+            (i)=>{
+                switch (i)
+                {
+                    case 0:
+                        const {nav} = this.props.screenProps;
+                        nav && nav('Details');
+                        break;
+                    case 1:
+                        /*const {nav} = this.props.screenProps;
+                        nav && nav('MapNav');*/
 
-               position = e.position;
-
-               this.showAlertSelected();
+                        position = e.position;
+                        this.showAlertSelected();
+                        break;
+                    default:
+                        break;
+                }
             });
     };
 
@@ -161,12 +169,9 @@ class CPAHomePage extends Component{
                     />
                 </View>
 
-                {/*<Button title="show" onPress={()=>{this.setState({...this.state, hide:false})}} />
-                <Modal animationType={'slide'} style={{backgroundColor:'red'}} visible={!this.state.hide} onRequestClose={()=>{}}>
-                    <View>
-                        <Button title="hidden" onPress={()=>{this.setState({...this.state, hide:true})}}/>
-                    </View>
-                </Modal>*/}
+                <AlertStationBriefInfo ref={self=>{
+                    this._station = self;
+                }}/>
 
                 <AlertSelected ref={(dialog)=>{
                     this._dialog = dialog;
