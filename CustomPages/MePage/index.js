@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import {View, ScrollView, Image, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {List, ListItem, Avatar} from 'react-native-elements';
-import {showAvatarPicker} from '../../CustomComponents/AvatarPicker/index';
+import {selectFromLibrary, showAvatarPicker, takePicture} from '../../CustomComponents/AvatarPicker/index';
+import {AlertSelected} from "../../CustomComponents/AlertSelected/index.android";
 
-
+const selectArr = [{key: 0, title:'拍照...'}, {key: 1, title: '从手机相册选择'}];
 class CPAMePage extends Component{
     // 构造
     constructor(props) {
@@ -47,32 +48,47 @@ class CPAMePage extends Component{
 
     // 更换头像
     _changeAvatar = () => {
-        showAvatarPicker((response) => {
-            console.log('Response = ', response);
-
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
+        this._selector.show('选择头像',
+            selectArr,
+            '#333333',
+            (i)=>{
+                switch (i){
+                    case 0:
+                        takePicture(this.selectAvatarResponse);
+                        break;
+                    case 1:
+                        selectFromLibrary(this.selectAvatarResponse);
+                        break;
+                    default:
+                        break;
+                }
             }
-            else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            }
-            else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
-            }
-            else {
-                let source = { uri: response.uri };
-
-                // You can also display the image using data:
-                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-                this.setState({
-                    avatarSource: source
-                });
-
-                return source;
-            }
-        });
+        );
     };
+
+    selectAvatarResponse = (response) => {
+        console.log('Response = ', response);
+
+        if (response.didCancel) {
+            console.log('User cancelled image picker');
+        }
+        else if (response.error) {
+            console.log('ImagePicker Error: ', response.error);
+        }
+        else if (response.customButton) {
+            console.log('User tapped custom button: ', response.customButton);
+        }
+        else {
+            let source = { uri: response.uri };
+
+            // You can also display the image using data:
+            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+            this.setState({
+                avatarSource: source
+            });
+        }
+    }
 
     // 登录
     _login = () => {
@@ -193,6 +209,8 @@ class CPAMePage extends Component{
                         </List>
                     </View>
                 </ScrollView>
+
+                <AlertSelected ref={self=>this._selector=self} />
             </View>
         );
     }

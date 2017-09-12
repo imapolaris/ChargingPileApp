@@ -37,19 +37,6 @@ export function prompt2(title='',
 }
 
 /*
- * 选择导航地图
- */
-export function whichMapApp(callback) {
-    Alert.alert('', '',
-        [
-            {text:'百度地图', onPress: ()=>{callback(mapApp.bdMap)}},
-            {text:'高德地图', onPress: ()=>{callback(mapApp.gdMap)}},
-            {text:'取消', onPress: ()=>{callback('cp:cancel')}}
-        ],
-        {cancelable:true});
-}
-
-/*
  * 调用地图APP（百度、高德等）进行导航
  */
 export const mapApp = {bdMap: 'bdMap', gdMap:'gdMap'};
