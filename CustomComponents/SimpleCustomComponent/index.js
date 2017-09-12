@@ -11,7 +11,8 @@ export class ScTextInput extends Component{
                        secureTextEntry={this.props.secureTextEntry}
                        style={[styles.textInput, this.props.style]}
                        underlineColorAndroid={this.props.underlineColorAndroid}
-                       selectionColor={colors.theme1} />
+                       selectionColor={colors.theme1}
+                       keyboardType={this.props.keyboardType} />
         );
     }
 }

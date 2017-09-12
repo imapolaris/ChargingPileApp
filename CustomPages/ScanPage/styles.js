@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
         borderColor: '#C3C3C3',
     },
     textInputContainer:{
-        marginLeft: 30,
-        marginRight: 30,
+        marginLeft: 15,
+        marginRight: 15,
     },
     buttonContainer:{
         alignItems: 'center',

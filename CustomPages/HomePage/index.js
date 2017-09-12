@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, Button, Modal} from 'react-native';
 
 import styles from './styles';
 import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";
@@ -12,6 +12,10 @@ import {
     Geolocation
 } from 'react-native-baidu-map';
 import {gotoNavigation, mapApp, prompt2, whichMapApp} from "../../Common/functions";
+import {AlertSelected} from "../../CustomComponents/AlertSelected/index";
+
+const selectedArr = [{key:1, title:"百度地图"}, {key:2, title:"高德地图"}];
+let position = null;
 
 class CPAHomePage extends Component{
     // 构造
@@ -36,6 +40,7 @@ class CPAHomePage extends Component{
                     id: 1,
                 }
             ],
+            hide: true,
         };
     }
 
@@ -90,18 +95,38 @@ class CPAHomePage extends Component{
                 /*const {nav} = this.props.screenProps;
                 nav && nav('MapNav');*/
 
-                whichMapApp((theMap)=>{
-                    if (theMap !== 'cp:cancel') {
-                        gotoNavigation(theMap,
-                            {"longitude":116.388236, "latitude": 40.106099},
-                            e.position,
-                            (succeed, msg)=>{
-                                alert(msg);
-                            });
-                    }
-                });
+               position = e.position;
+
+               this.showAlertSelected();
             });
     };
+
+    showAlertSelected(){
+        this._dialog.show("请选择导航地图", selectedArr, '#333333', this.callbackSelected);
+    }
+    // 回调
+    callbackSelected(i){
+        let theMap = 'cp:cancel';
+        switch (i) {
+            case 0:
+                theMap = mapApp.bdMap;
+                break;
+            case 1:
+                theMap = mapApp.gdMap;
+                break;
+            default:
+                break;
+        }
+
+        if (theMap !== 'cp:cancel') {
+            gotoNavigation(theMap,
+                {"longitude":116.388236, "latitude": 40.106099},
+                position,
+                (succeed, msg)=>{
+                    alert(msg);
+                });
+        }
+    }
 
     render() {
         return (
@@ -135,6 +160,17 @@ class CPAHomePage extends Component{
                                   buttonText="扫码充电"
                     />
                 </View>
+
+                {/*<Button title="show" onPress={()=>{this.setState({...this.state, hide:false})}} />
+                <Modal animationType={'slide'} style={{backgroundColor:'red'}} visible={!this.state.hide} onRequestClose={()=>{}}>
+                    <View>
+                        <Button title="hidden" onPress={()=>{this.setState({...this.state, hide:true})}}/>
+                    </View>
+                </Modal>*/}
+
+                <AlertSelected ref={(dialog)=>{
+                    this._dialog = dialog;
+                }} />
             </View>
         );
     }

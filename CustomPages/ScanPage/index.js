@@ -8,6 +8,7 @@ import {StackNavigator} from 'react-navigation';
 import CPAWaitingChargingPage from "../WaitingChargingPage/index";
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import {ScTextInput} from "../../CustomComponents/SimpleCustomComponent/index";
 
 class CPAScanPage extends Component{
     // 构造
@@ -104,10 +105,11 @@ class CPAScanPage extends Component{
                             :
                             <View style={styles.inputContainer}>
                                 <View style={styles.textInputContainer}>
-                                    <TextInput underlineColorAndroid='transparent'
+                                    <ScTextInput underlineColorAndroid='transparent'
                                                placeholder='请输入充电桩编号'
                                                placeholderTextColor={GPlaceholderTextColor}
                                                style={styles.textInput}
+                                                 keyboardType='numeric'
                                     />
                                 </View>
                                 <View style={styles.buttonContainer}>
