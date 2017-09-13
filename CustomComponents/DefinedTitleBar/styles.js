@@ -1,6 +1,7 @@
 import {StyleSheet, Platform} from 'react-native';
 
 import {NavButtonMarginN, NavButtonMarginW} from '../../Common/styles';
+import colors from '../../Common/colors';
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
@@ -21,18 +22,18 @@ const styles = StyleSheet.create({
     appBar: {
         flex: 1,
         flexDirection: 'row',
+        backgroundColor: colors.theme1,
     },
     search:{
         flex: 1,
         backgroundColor:'transparent',
     },
     searchInput:{
-
+        backgroundColor: colors.white,
     },
     leftButton:{
         alignItems:'flex-start',
-        marginLeft: NavButtonMarginW,
-        marginRight: NavButtonMarginN,
+        marginRight: 0,
         justifyContent: 'center',
     },
     rightButton:{

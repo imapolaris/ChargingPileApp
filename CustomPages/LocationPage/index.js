@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 
+import styles from './styles';
+import List from "./List";
+
 class CPALocationPage extends Component{
 
     render() {
         return (
-            <View>
-                <Text>
-                    Here is Location Page!!!
-                </Text>
+            <View style={styles.container}>
+                <List/>
             </View>
         );
     }

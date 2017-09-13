@@ -4,6 +4,7 @@ import {View, Text, TextInput, ToastAndroid} from 'react-native';
 import styles from './styles';
 import {Button, CheckBox} from 'react-native-elements';
 import {ScTextInput} from "../../CustomComponents/SimpleCustomComponent/index";
+import Alipay from 'react-native-yunpeng-alipay';
 
 class CPAActionPayPage extends Component{
     // 构造
@@ -11,17 +12,38 @@ class CPAActionPayPage extends Component{
         super(props);
         // 初始状态
         this.state = {
-            checked: true,
+            wxChecked: true,
+            zfbChecked: false,
         };
     }
 
-    _onPress = () => {
-        this.setState(previousState => {
-            return {checked: !previousState.checked};
-        })
+    _onWxPress = () => {
+        let checked = !this.state.wxChecked;
+        this.setState({
+            wxChecked: checked,
+            zfbChecked: !checked,
+        });
+    };
+
+    _onZfbPress = () => {
+        let checked = !this.state.zfbChecked;
+        this.setState({
+            wxChecked: !checked,
+            zfbChecked: checked,
+        });
     };
 
     _onSubmit = () => {
+        /*Alipay.pay('signed pay info string')
+            .then(data=>{
+                console.log(data);
+                alert(data);
+            })
+            .catch(error=>{
+                console.error(error);
+                alert(error);
+            });*/
+
         ToastAndroid.show('充值成功！',
                 ToastAndroid.SHORT,
                 ToastAndroid.BOTTOM
@@ -39,6 +61,7 @@ class CPAActionPayPage extends Component{
                                placeholder='请输入充值金额（最少10元）'
                                placeholderTextColor='#C3C3C3'
                                underlineColorAndroid='transparent'
+                                 keyboardType='numeric'
                     />
                     <Text style={styles.text}>
                         元
@@ -54,13 +77,13 @@ class CPAActionPayPage extends Component{
                         <CheckBox style={styles.checkbox}
                                   center
                                   title="微信"
-                                  checked={this.state.checked}
-                                  onPress={this._onPress}
+                                  checked={this.state.wxChecked}
+                                  onPress={this._onWxPress}
                         />
                         <CheckBox style={styles.checkbox}
                                   title="支付宝"
-                                  checked={!this.state.checked}
-                                  onPress={this._onPress}
+                                  checked={this.state.zfbChecked}
+                                  onPress={this._onZfbPress}
                         />
                     </View>
                 </View>

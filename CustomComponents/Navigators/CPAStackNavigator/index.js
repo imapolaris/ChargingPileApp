@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 
 import {StackNavigator, NavigationActions} from 'react-navigation';
-import CPAListPage from "../../../CustomPages/ListPage/index";
 import styles from './styles';
+import colors from '../../../Common/colors';
 import CPALocationPage from "../../../CustomPages/LocationPage/index";
 import NavButton from '../../NavButton/index';
 import CPADetailsPage from "../../../CustomPages/DetailsPage/index";
@@ -23,141 +23,92 @@ import CPALoginPage from "../../../CustomPages/LoginPage/index";
 import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPage/index";
 import CPAScanScreen from "../../../CustomPages/ScanPage/index";
 import CPAWaitingSubscribePage from "../../../CustomPages/WaitingSubscribePage/index";
-import {NavButtonMarginW, NavButtonMarginN} from '../../../Common/styles';
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
 
 const CPAStackNavigator = StackNavigator(
     {
         Home:{
             screen: CPATabScreen,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    headerTitle: "地图",
-                    headerLeft: (
-                        <View>
-                            <NavButton label="北京" onPress={() => {navigation.navigate('Location');}} />
-                        </View>
-                    ),
-                    headerRight: (
-                        <NavButton label="列表" onPress={() => {navigation.navigate('List');}} />
-                    ),
-                    header: null,
-                });
-            }
-        },
-        List:{
-            screen: CPAListPage,
-            navigationOptions:({navigation}) => {
-                return ({
-                    title: '列表',
-                    headerRight: (
-                        <NavButton label="地图" onPress={() => {navigation.goBack();}} />
-                    ),
-                });
+            navigationOptions:  {
+                header: null,
             }
         },
         Location:{
             screen: CPALocationPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '选择城市',
-                });
+            navigationOptions: {
+                title: '选择城市',
             },
         },
         Details:{
             screen: CPADetailsPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '充电站详情',
-                });
+            navigationOptions: {
+                title: '充电站详情',
             }
         },
         MapNav:{
             screen: CPAMapNavigationPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '导航',
-                });
+            navigationOptions: {
+                title: '导航',
             }
         },
         PersonalData: {
             screen: CPAPersonalDataPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '个人资料',
-                });
+            navigationOptions: {
+                title: '个人资料',
             }
         },
         Wallet: {
             screen: CPAWalletPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '钱包',
-                });
+            navigationOptions: {
+                title: '钱包',
             }
         },
         ChargingRecords: {
             screen: CPAChargingRecordsPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '充电记录',
-                });
+            navigationOptions: {
+                title: '充电记录',
             }
         },
         MySubscribe: {
             screen: CPAMySubscribePage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '我的预约',
-                });
+            navigationOptions: {
+                title: '我的预约',
             }
         },
         Setting: {
             screen: CPASettingPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '设置',
-                });
+            navigationOptions: {
+                title: '设置',
             }
         },
         ChangePwd:{
             screen: CPAChangePwdPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '修改密码',
-                });
+            navigationOptions: {
+                title: '修改密码',
             }
         },
         PayRecords: {
             screen: CPAPayRecordsPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '充值记录',
-                });
+            navigationOptions: {
+                title: '充值记录',
             }
         },
         ActionPay: {
             screen: CPAActionPayPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '充值',
-                });
+            navigationOptions: {
+                title: '充值',
             }
         },
         UserAgreement: {
             screen: CPAUserAgreement,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '用户协议',
-                });
+            navigationOptions: {
+                title: '用户协议',
             }
         },
         AboutUs: {
             screen: CPAAboutUsPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '关于我们'
-                });
+            navigationOptions: {
+                title: '关于我们'
             },
         },
         Login: {
@@ -177,18 +128,14 @@ const CPAStackNavigator = StackNavigator(
         },
         Register: {
             screen: CPARegisterOrResetPwdPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '注册',
-                });
+            navigationOptions: {
+                title: '注册',
             },
         },
         Reset: {
             screen: CPARegisterOrResetPwdPage,
-            navigationOptions: ({navigation}) => {
-                return ({
-                    title: '重置密码',
-                });
+            navigationOptions: {
+                title: '重置密码',
             },
         },
         Scan: {
@@ -209,6 +156,11 @@ const CPAStackNavigator = StackNavigator(
             gesturesEnabled: true,
             headerTitleStyle: {
                 alignSelf: 'center',
+                color: colors.grey5,
+                fontSize: 18,
+            },
+            headerBackTitleStyle: {
+                color: colors.white,
             }
         },
         transitionConfig: () => ({

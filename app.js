@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {StyleSheet, ToastAndroid, BackHandler, View} from 'react-native';
+import {StyleSheet, ToastAndroid, BackHandler, View, StatusBar} from 'react-native';
 import CPAStackNavigator from './CustomComponents/Navigators/CPAStackNavigator';
 import {createStore} from 'redux';
+import colors from './Common/colors';
 
 let lastBackPressed = 0;
 /*let store = createStore(null);*/
@@ -28,6 +29,7 @@ class App extends Component{
     render() {
         return (
             <View style={styles.container}>
+                {/*<StatusBar backgroundColor={colors.primary2} barStyle="light-content"/>*/}
                 <CPAStackNavigator />
             </View>
         );

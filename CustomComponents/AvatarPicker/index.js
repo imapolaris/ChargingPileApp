@@ -1,16 +1,10 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
-
 import {Avatar} from 'react-native-elements'
 import ImagePicker from 'react-native-image-picker';
 
-export function showAvatarPicker(callback = ()=>{}) {
+export function showAvatarPicker(callback) {
     let options = {
         title: '选择头像',
-        /*customButtons: [
-            {name: 'selectpicture', title: '从手机相册选择'},
-            {name: 'takepicture', title:'拍照...'}
-        ],*/
         takePhotoButtonTitle: '拍照...',
         chooseFromLibraryButtonTitle: '从手机相册选择',
         cancelButtonTitle: '取消',
@@ -20,36 +14,21 @@ export function showAvatarPicker(callback = ()=>{}) {
         }
     };
 
-    let doCallback;
-    if (callback !== null && callback !== undefined){
-        doCallback = callback;
-    } else {
-        doCallback = (response) => {
-            console.log('Response = ', response);
+    ImagePicker.showImagePicker(options, callback);
+}
 
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            }
-            else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            }
-            else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
-            }
-            else {
-                let source = { uri: response.uri };
+// Launch Camera
+export function takePicture(callback) {
+    let options = {};
 
-                // You can also display the image using data:
-                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+    ImagePicker.launchCamera(options, callback);
+}
 
-                this.setState({
-                    avatarSource: source
-                });
-            }
-        }
-    }
+// Open Image Library
+export function selectFromLibrary(callback) {
+    let options = {};
 
-    ImagePicker.showImagePicker(options, doCallback);
+    ImagePicker.launchImageLibrary(options, callback);
 }
 
 class AvatarPickerDemo extends Component{
