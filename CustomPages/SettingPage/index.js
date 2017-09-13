@@ -52,6 +52,7 @@ class CPASettingPage extends Component{
                             <ListItem key={item.key}
                                       title={item.title}
                                       /*leftIcon={item.icon}*/
+                                      containerStyle={styles.item}
                                       onPress={() => item.callback && item.callback()}
                             />
                         ))

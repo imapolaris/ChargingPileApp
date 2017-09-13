@@ -6,20 +6,20 @@ import styles from './styles';
 import {List, ListItem, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import LabelTextInputListItem from "../../CustomComponents/LabelTextInputListItem/index";
+import {ToastAndroidBS} from "../../Common/functions";
 
 class CPAPersonalDataPage extends Component{
     _renderItem = ({item}) => {
         return (
             <LabelTextInputListItem label={item.label}
                                     previousValue={item.val}
+                                    containerStyle={styles.item}
             />
         );
     };
 
     _onPress = () => {
-        ToastAndroid.show('修改成功',
-            ToastAndroid.SHORT,
-            ToastAndroid.BOTTOM);
+        ToastAndroidBS('修改成功');
 
         const {goBack} = this.props.navigation;
         goBack && goBack();
@@ -49,7 +49,7 @@ class CPAPersonalDataPage extends Component{
         return (
             <View style={styles.container}>
                 <View style={styles.listContainer}>
-                    <FlatList style={styles.flatlist}
+                    <FlatList style={styles.flatList}
                               data={data}
                               renderItem={this._renderItem}
                     />
@@ -60,6 +60,7 @@ class CPAPersonalDataPage extends Component{
                                 <ListItem key={i}
                                           title={item.title}
                                           leftIcon={item.icon}
+                                          containerStyle={styles.item}
                                           onPress={() => item.callback && item.callback()}
                                 />
                             ))

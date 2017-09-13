@@ -1,18 +1,39 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {screenHeight, screenWidth} from "../../Common/styles";
 
-const {width,height} = Dimensions.get('window');
+export const SECTIONHEIGHT=30, ROWHEIGHT=40;
 
 const styles = StyleSheet.create({
     container: {
 
     },
+    listContainer: {
+        height: screenHeight,
+        marginBottom: 10,
+    },
     contentContainer: {
-        width: width,
+        width: screenWidth,
         backgroundColor: 'white',
+    },
+    header: {
+        height: SECTIONHEIGHT,
+        justifyContent: 'center',
+        paddingLeft: 5
+    },
+    headerTitle: {
+        color: 'rgb(40,169,185)',
+        fontWeight: 'bold',
+        fontSize: 18,
+    },
+    item: {
+        height: ROWHEIGHT,
+        justifyContent: 'center',
+        paddingLeft: 20,
+        paddingRight: 30
     },
     letters: {
         position: 'absolute',
-        height: height,
+        height: screenHeight,
         top: 15,
         bottom: 0,
         right: 8,
@@ -20,14 +41,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     letter: {
-        height: height*3.3/100,
-        width: width*3/50,
+        height: screenHeight*3.3/100,
+        width: screenWidth*3/50,
         justifyContent: 'center',
         alignItems: 'center',
     },
     letterText: {
         textAlign: 'center',
-        fontSize: height*1.1/50,
+        fontSize: screenHeight*1.1/50,
         color:'rgb(40,169,185)'
     },
     rowData:{

@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import colors from '../../Common/colors';
 
 const styles = StyleSheet.create({
     container: {
@@ -18,7 +19,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     list:{
-        paddingTop:0
+        paddingTop:0,
+        marginTop: 1,
+    },
+    item: {
+        backgroundColor: colors.white,
     },
     settings:{
         justifyContent: 'flex-start',

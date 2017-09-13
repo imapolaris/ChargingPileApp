@@ -35,6 +35,7 @@ class CPAWalletPage extends Component{
                                 <ListItem key={i}
                                           title={item.title}
                                           icon={item.icon}
+                                          containerStyle={styles.item}
                                           onPress={() => item.callback && item.callback()} />
                             ))
                         }

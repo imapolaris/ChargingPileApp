@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import colors from '../../Common/colors';
 
 const styles = StyleSheet.create({
     container:{
@@ -10,6 +11,10 @@ const styles = StyleSheet.create({
     list:{
         flex: 1,
         paddingTop:0,
+        marginTop: 1,
+    },
+    item: {
+        backgroundColor: colors.white,
     },
     balanceContainer:{
         flex: 3,
@@ -21,13 +26,15 @@ const styles = StyleSheet.create({
         fontSize:  14,
     },
     money:{
-        fontSize: 20,
+        fontSize: 26,
         color: '#FF0000',
         fontWeight: 'bold',
         marginLeft: 5,
         marginRight: 5,
     },
     charging:{
+        marginLeft: 10,
+        fontSize: 16,
         color: '#0000FF',
         textDecorationLine: 'underline',
     },

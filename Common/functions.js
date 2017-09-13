@@ -63,6 +63,10 @@ export function ToastAndroidBL() {
     ToastAndroid.show(message, ToastAndroid.BOTTOM, ToastAndroid.LONG);
 }
 
+export function ToastAndroidCS(message) {
+    ToastAndroid.show(message, ToastAndroid.CENTER, ToastAndroid.SHORT);
+}
+
 /*
  * 调用地图APP（百度、高德等）进行导航
  */

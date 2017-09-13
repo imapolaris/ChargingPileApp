@@ -190,6 +190,8 @@ class CPAMePage extends Component{
                                     <ListItem key={i}
                                               title={item.title}
                                               leftIcon={item.icon}
+                                              containerStyle={styles.item}
+                                              underlayColor='#F3F3F3'
                                               onPress={() => item.callback && item.callback()}
                                     />
                                 ))
@@ -202,6 +204,8 @@ class CPAMePage extends Component{
                                     <ListItem key={i}
                                               title={item.title}
                                               leftIcon={item.icon}
+                                              containerStyle={styles.item}
+                                              underlayColor='#F3F3F3'
                                               onPress={() => item.callback && item.callback()}
                                     />
                                 ))

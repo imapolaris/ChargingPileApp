@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import colors from '../../Common/colors';
 
 const styles = StyleSheet.create({
     container: {
@@ -8,7 +9,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent:'flex-start',
     },
-    flatlist: {
+    flatList: {
     },
     list: {
         justifyContent: 'flex-start',
@@ -16,6 +17,9 @@ const styles = StyleSheet.create({
         borderTopWidth: 0.5,
         borderTopColor: '#BBBBBB',
         marginTop: 30,
+    },
+    item: {
+        backgroundColor: colors.white,
     },
     buttonContainer: {
         marginTop: 20,
@@ -25,7 +29,7 @@ const styles = StyleSheet.create({
     },
     button: {
 
-    }
+    },
 });
 
 export default styles;

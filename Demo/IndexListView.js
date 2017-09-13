@@ -135,7 +135,7 @@ export default class CityIndexListView extends Component {
         for (let i = 0; i < index; i++) {
             position += totalheight[i]
         }
-        this._listView.scrollTo({y: position});
+        this._sectionList.scrollTo({y: position});
         this.refs.toast.show(letter, DURATION.LENGTH_SHORT);
     }
 
@@ -194,7 +194,7 @@ export default class CityIndexListView extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.listContainner}>
-                    <ListView ref={listView => this._listView = listView}
+                    <ListView ref={listView => this._sectionList = listView}
                               contentContainerStyle={styles.contentContainer} dataSource={this.state.dataSource}
                               renderRow={this._renderListRow} renderSectionHeader={this._renderListSectionHeader}
                               enableEmptySections={true} initialListSize={500}/>

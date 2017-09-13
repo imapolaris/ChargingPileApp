@@ -6,7 +6,7 @@ import styles from './styles';
 class LabelTextInputListItem extends Component{
     render() {
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, this.props.containerStyle]}>
                 <Text style={styles.text}>
                     {this.props.label}
                 </Text>

@@ -1,124 +1,49 @@
 import React, {Component} from 'react';
 import {
     View,
-    Image,
     TouchableOpacity,
-    Modal,
     Text,
-    ListView,
     Platform,
-    Dimensions,
-    StyleSheet,
-    Alert,
     SectionList,
 } from 'react-native';
-import _ from 'lodash';
-import data from '../../Resources/Data/city.json';
+import data from '../../Resources/Data/city';
 import styles from './styles';
-import ToastUtil from "../../Demo/ToastUtil";
+import {ToastAndroidCS} from "../../Common/functions";
 
-const SECTIONHEIGHT = 30,ROWHEIGHT = 40;
-// 这是利用lodash的range和数组的map画出26个英文字母
-const letters = _
-    .range('A'.charCodeAt(0), 'Z'.charCodeAt(0) + 1)
-    .map(n => String.fromCharCode(n).substr(0));
-    _.pull(letters,'O','V'); // 去掉o和V,这两个下面没有城市
-let city=[]; // 城市的数组
-let totalHeight=[]; // 每个字母对应的城市和字母的总高度
-let that = null;
+
+// 26个英文字母（去掉O和V,这两个下面没有城市）
+const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "W", "X", "Y", "Z"];
 
 export default class List extends Component {
-    constructor(props) {
-        super(props);
-        let getSectionData = (dataBlob, sectionID) => {
-            return dataBlob[sectionID];
-        };
-        let getRowData = (dataBlob, sectionID, rowID) => {
-            return dataBlob[rowID];
-        };
-        this.state = {
-            dataSource: new ListView.DataSource({
-                getRowData: getRowData,
-                getSectionHeaderData: getSectionData,
-                rowHasChanged: (row1, row2) => row1 !== row2,
-                sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
-            }),
-        };
-        that = this
-    }
-
-    componentWillMount() {
-        //把城市放到对应的字母中
-        for (let j = 0; j < letters.length; j++) {
-            let each = [];
-            for (let i = 0; i < data.CITIES.length; i++) {
-                if (letters[j] == data.CITIES[i].name_en.substr(0, 1)) {
-                    each.push(data.CITIES[i].name);
-                }
-            }
-            let _city = {};
-            _city.index = letters[j];
-            _city.name = each;
-            city.push(_city);
-        }
-    }
-
-    componentDidMount() {
-        let dataBlob = {};
-        let sectionIDs = [];
-        let rowIDs = [];
-
-        for (let ii = 0; ii < city.length; ii++) {
-            let sectionName = 'Section ' + ii;
-            sectionIDs.push(sectionName);
-            dataBlob[sectionName] = letters[ii];
-            rowIDs[ii] = [];
-
-            for (let j = 0; j < city[ii].name.length; j++) {
-                let rowName = ii + '-' + j;
-                rowIDs[ii].push(rowName);
-                dataBlob[rowName] = city[ii].name[j]
-            }
-            //计算每个字母和下面城市的总高度，递增放到数组中
-            // var eachheight = this.props.sectionHeight+this.props.rowHeight*newcity.length
-            let eachheight = SECTIONHEIGHT + ROWHEIGHT * city[ii].name.length;
-            totalHeight.push(eachheight)
-        }
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIDs, rowIDs)
-        })
-    }
-
-    renderRow(rowData, rowId) {
+    _renderItem({item}) {
         return (
             <TouchableOpacity
-                key={rowId}
-                style={{height: ROWHEIGHT, justifyContent: 'center', paddingLeft: 20, paddingRight: 30}}
+                key={item.key}
+                style={styles.item}
                 onPress={() => {
-                    this._chooseCity.bind(this, rowData)
+                    this._chooseCity.bind(this, item.name)
                 }}>
                 <View style={styles.rowData}>
                     <Text style={styles.rowDataText}>
-                        {rowData}
+                        {item.name}
                     </Text>
                 </View>
-
             </TouchableOpacity>
         )
     }
 
-    renderSectionHeader = (sectionData, sectionID) => {
+    _renderSectionHeader = ({section}) => {
         return (
-            <View style={{height: SECTIONHEIGHT, justifyContent: 'center', paddingLeft: 5}}>
-                <Text style={{color: 'rgb(40,169,185)', fontWeight: 'bold'}}>
-                    {sectionData}
+            <View style={styles.header}>
+                <Text style={styles.headerTitle}>
+                    {section.title}
                 </Text>
             </View>
         )
     };
 
     // render right index Letters
-    renderLetters(letter, index) {
+    _renderLetters(letter, index) {
         return (
             <TouchableOpacity key={index} activeOpacity={0.6} onPress={() => {
                 this.scrollTo(index)
@@ -137,32 +62,27 @@ export default class List extends Component {
 
     //touch right indexLetters, scroll the left
     scrollTo = (index) => {
+        ToastAndroidCS(letters[index]);
 
-
-        let position = 0;
-        for (let i = 0; i < index; i++) {
-            position += totalHeight[i]
-        }
-        this._listView.scrollTo({
-            y: position
-        })
+        //alert(index);
+        //this._sectionList.scrollToLocation({sectionIndex: 3, itemIndex: 0});
     };
 
     render() {
         return (
-            <View style={{height: Dimensions.get('window').height, marginBottom: 10}}>
-                <ListView
-                    contentContainerStyle={styles.contentContainer}
-                    ref={self => this._listView = self}
-                    dataSource={this.state.dataSource}
-                    renderRow={this.renderRow}
-                    renderSectionHeader={this.renderSectionHeader}
+            <View style={styles.listContainer}>
+                <SectionList
+                    ref={self => this._sectionList=self}
+                    refreshing={false}
+                    sections={data}
+                    renderItem={this._renderItem}
+                    renderSectionHeader={this._renderSectionHeader}
                     enableEmptySections={true}
-                    initialListSize={500}
-
                 />
                 <View style={styles.letters}>
-                    {letters.map((letter, index) => this.renderLetters(letter, index))}
+                    {
+                        letters.map((letter, index) => this._renderLetters(letter, index))
+                    }
                 </View>
             </View>
         );
