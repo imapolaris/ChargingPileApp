@@ -26,15 +26,25 @@ class DefinedTitleBar extends Component{
         this.props.search(inputSearchText);
     };
 
+    _showLeftLabel(label) {
+        if (label.length > 2)
+        {
+            return label.substring(0, 2) + "..";
+        } else {
+            return label;
+        }
+    };
+
     render() {
         const {style} = this.props;
 
         return (
             <Animated.View style={[styles.container, style]}>
                 <View style={styles.appBar}>
-                    <NavButton label={this.state.leftLabel}
+                    <NavButton label={this._showLeftLabel.bind(this, this.state.leftLabel)()}
                                style={styles.leftButton}
-                               onPress={this.props.toLocation && this.props.toLocation} />
+                               onPress={this.props.toLocation && this.props.toLocation}
+                               showIcon={true} />
                     <SearchBar ref={self => this._search = self}
                                containerStyle={styles.search}
                                inputStyle={styles.searchInput}

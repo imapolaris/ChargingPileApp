@@ -7,9 +7,16 @@ const styles = StyleSheet.create({
         marginLeft: NavButtonMarginN,
         marginRight: NavButtonMarginW,
     },
+    container: {
+        flexDirection: 'row'
+    },
     text: {
         fontSize: 16,
         color: colors.white,
+    },
+    icon: {
+        marginLeft: 2,
+        marginRight: 2,
     },
 });
 

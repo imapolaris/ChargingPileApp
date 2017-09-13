@@ -46,14 +46,17 @@ class CPAHomePage extends Component{
         };
     }
 
+    // 组件已挂载
+    componentDidMount() {
+        // 定位
+    }
+
     _toLocation = () => {
         const {nav} = this.props.screenProps;
         nav && nav('Location');
     };
 
     _toList = () => {
-        /*const {nav} = this.props.screenProps;
-        nav && nav('List');*/
         if (this.state.mapOrList === 'map') {
             this.setState({
                 ...this.state,

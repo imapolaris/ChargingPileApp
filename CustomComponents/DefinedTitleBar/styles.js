@@ -33,8 +33,7 @@ const styles = StyleSheet.create({
     },
     leftButton:{
         alignItems:'flex-start',
-        marginLeft: NavButtonMarginW,
-        marginRight: NavButtonMarginN,
+        marginRight: 5,
         justifyContent: 'center',
     },
     rightButton:{

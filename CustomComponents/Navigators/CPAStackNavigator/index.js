@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 
 import {StackNavigator, NavigationActions} from 'react-navigation';
-import CPAListPage from "../../../CustomPages/ListPage/index";
 import styles from './styles';
 import colors from '../../../Common/colors';
 import CPALocationPage from "../../../CustomPages/LocationPage/index";
