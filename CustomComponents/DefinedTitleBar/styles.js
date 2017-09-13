@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         backgroundColor:'transparent',
     },
     searchInput:{
-
+        backgroundColor: colors.white,
     },
     leftButton:{
         alignItems:'flex-start',

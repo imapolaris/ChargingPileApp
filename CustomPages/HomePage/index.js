@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Button, Modal} from 'react-native';
+import {View, Button, Modal, FlatList} from 'react-native';
 
 import styles from './styles';
 import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";
@@ -14,6 +14,7 @@ import {
 import {gotoNavigation, mapApp} from "../../Common/functions";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index";
 import {AlertStationBriefInfo} from "../../CustomComponents/AlertStationBriefInfo/index";
+import StationListItem from "../../CustomComponents/StationListItem/index";
 
 const selectedArr = [{key:1, title:"百度地图"}, {key:2, title:"高德地图"}];
 let position = null;
@@ -41,7 +42,7 @@ class CPAHomePage extends Component{
                     id: 1,
                 }
             ],
-            hide: true,
+            mapOrList: 'map',
         };
     }
 
@@ -51,8 +52,29 @@ class CPAHomePage extends Component{
     };
 
     _toList = () => {
-        const {nav} = this.props.screenProps;
-        nav && nav('List');
+        /*const {nav} = this.props.screenProps;
+        nav && nav('List');*/
+        if (this.state.mapOrList === 'map') {
+            this.setState({
+                ...this.state,
+                mapOrList: 'list'
+            });
+
+            this._titleBar.setState({
+                ...this._titleBar.state,
+                rightLabel: '地图',
+            });
+        } else if (this.state.mapOrList === 'list') {
+            this.setState({
+                ...this.state,
+                mapOrList: 'map'
+            });
+
+            this._titleBar.setState({
+                ...this._titleBar.state,
+                rightLabel: '附近',
+            });
+        }
     };
 
     _search = (text) => {
@@ -110,7 +132,7 @@ class CPAHomePage extends Component{
     };
 
     showAlertSelected(){
-        this._dialog.show("请选择导航地图", selectedArr, '#333333', this.callbackSelected);
+        this._navigator.show("请选择导航地图", selectedArr, '#333333', this.callbackSelected);
     }
     // 回调
     callbackSelected(i){
@@ -136,45 +158,120 @@ class CPAHomePage extends Component{
         }
     }
 
+    _onDetailsPress = () => {
+        const {nav} = this.props.screenProps;
+        nav && nav('Details');
+    };
+
+    _onNavPress = () => {
+        this.showAlertSelected();
+    };
+
+    _renderItem = ({item}) => {
+        return (
+            <StationListItem key={item.key}
+                             title={item.title}
+                             numbers={item.numbers}
+                             address={item.address}
+                             gotoDetails={item.callback1}
+                             gotoMapNav={item.callback2}
+            />
+        );
+    };
+
+    _renderMapView() {
+        return (
+            <View style={styles.container}>
+                <MapView
+                    trafficEnabled={this.state.trafficEnabled}
+                    baiduHeatMapEnabled={this.state.baiduHeatMapEnabled}
+                    zoom={this.state.zoom}
+                    mapType={this.state.mapType}
+                    center={this.state.center}
+                    marker={this.state.marker}
+                    markers={this.state.markers}
+                    style={styles.map}
+                    onMarkerClick={(e) => {this._showStationBasicInfo(e)}}
+                    onMapClick={(e) => {
+                    }}
+                >
+                </MapView>
+
+                <ActionButton buttonColor='rgba(231,76,60,1)'
+                              onPress={this._onStartChargingPress}
+                              icon={<Icon name="md-qr-scanner" style={styles.actionButtonIcon} />}
+                              position="center"
+                              offsetX={0}
+                              offsetY={20}
+                              buttonText="扫码充电"
+                />
+            </View>
+        );
+    };
+
+    _renderListView() {
+        const data = [
+            {
+                key: 1,
+                title:'加速器一区充电站',
+                numbers: '0/2',
+                address: '北京市海淀区永丰产业基地加速器一区',
+                callback1: this._onDetailsPress,
+                callback2: this._onNavPress,
+            },
+            {
+                key: 2,
+                title:'永丰地铁站充电站',
+                numbers: '2/5',
+                address: '北京市海淀区永丰地铁站',
+                callback1: this._onDetailsPress,
+                callback2: this._onNavPress,
+            },
+            {
+                key: 3,
+                title:'回龙观东大街地铁站',
+                numbers: '1/4',
+                address: '北京市昌平区回龙观东大街',
+                callback1: this._onDetailsPress,
+                callback2: this._onNavPress,
+            },
+            {
+                key: 4,
+                title:'回龙观东大街地铁站',
+                numbers: '1/4',
+                address: '北京市昌平区回龙观东大街',
+                callback1: this._onDetailsPress,
+                callback2: this._onNavPress,
+            },
+        ];
+
+        return (
+            <View style={styles.container}>
+                <FlatList data={data}
+                          renderItem={this._renderItem}
+                />
+            </View>
+        );
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <DefinedTitleBar toLocation={this._toLocation}
+                <DefinedTitleBar ref={self=>this._titleBar=self}
+                                 toLocation={this._toLocation}
                                  toList={this._toList}
                                  search={this._search} />
 
-                <View style={styles.container}>
-                    <MapView
-                        trafficEnabled={this.state.trafficEnabled}
-                        baiduHeatMapEnabled={this.state.baiduHeatMapEnabled}
-                        zoom={this.state.zoom}
-                        mapType={this.state.mapType}
-                        center={this.state.center}
-                        marker={this.state.marker}
-                        markers={this.state.markers}
-                        style={styles.map}
-                        onMarkerClick={(e) => {this._showStationBasicInfo(e)}}
-                        onMapClick={(e) => {
-                        }}
-                    >
-                    </MapView>
-
-                    <ActionButton buttonColor='rgba(231,76,60,1)'
-                                  onPress={this._onStartChargingPress}
-                                  icon={<Icon name="md-qr-scanner" style={styles.actionButtonIcon} />}
-                                  position="center"
-                                  offsetX={0}
-                                  offsetY={20}
-                                  buttonText="扫码充电"
-                    />
-                </View>
+                {
+                    this.state.mapOrList === 'map' ? this._renderMapView() : this._renderListView()
+                }
 
                 <AlertStationBriefInfo ref={self=>{
                     this._station = self;
                 }}/>
 
-                <AlertSelected ref={(dialog)=>{
-                    this._dialog = dialog;
+                <AlertSelected ref={self=>{
+                    this._navigator = self;
                 }} />
             </View>
         );
