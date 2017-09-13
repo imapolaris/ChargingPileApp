@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     rightButton:{
         alignItems: 'flex-end',
         justifyContent: 'center',
+        marginLeft: 0,
     },
 });
 
