@@ -16,16 +16,6 @@ class NavButton extends Component{
         return (
             <TouchableOpacity style={[styles.navButton, this.props.style]}>
                 <View style={styles.container}>
-                    {
-                        this.props.showIcon ?
-                            <Icon type={icons.SimpleLineIcon}
-                                  name="location-pin"
-                                  color={colors.white}
-                                  iconStyle={styles.icon} />
-                            :
-                            null
-                    }
-
                     <Text onPress={this.props.onPress || this._onPress}
                           style={styles.text}
                           numberOfLines={1}
@@ -33,6 +23,16 @@ class NavButton extends Component{
                           allowFontScaling={true} >
                         {this.props.label || 'Nav' }
                     </Text>
+
+                    {
+                        this.props.showIcon ?
+                            <Icon type={icons.SimpleLineIcon}
+                                  name="arrow-down"
+                                  color={colors.white}
+                                  iconStyle={styles.icon} size={14} />
+                            :
+                            null
+                    }
                 </View>
             </TouchableOpacity>
         );

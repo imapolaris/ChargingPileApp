@@ -173,7 +173,7 @@ export default class CityIndexListView extends Component {
             <TouchableOpacity key={'list_item_' + cityJson.id} style={styles.rowView} onPress={() => {
                 that._cityNameClick(cityJson)
             }}>
-                <View style={styles.rowdata}>
+                <View style={styles.rowData}>
                     <Text style={styles.rowdatatext}>{cityJson.name}</Text>
                 </View>
             </TouchableOpacity>
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#F4F4F4',
         borderBottomWidth: 0.5
     },
-    rowdata: {
+    rowData: {
         paddingTop: 10,
         paddingBottom: 2
     },

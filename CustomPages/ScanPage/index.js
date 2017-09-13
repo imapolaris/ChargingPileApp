@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, Keyboard, Dimensions} from 'react-native';
+import {View, Text, Keyboard, Dimensions, Vibration} from 'react-native';
 
 import styles from './styles';
 import {Button, Icon} from 'react-native-elements';
@@ -49,6 +49,7 @@ class CPAScanPage extends Component{
         try{
             // 如果手电筒打开，关闭手电筒
             this._switchTorch(true);
+            Vibration.vibrate();
 
             alert(e.data);
         } catch (e){

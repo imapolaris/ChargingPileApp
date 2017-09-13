@@ -75,7 +75,7 @@ class CPAHomePage extends Component{
 
             this._titleBar.setState({
                 ...this._titleBar.state,
-                rightLabel: '附近',
+                rightLabel: '列表',
             });
         }
     };

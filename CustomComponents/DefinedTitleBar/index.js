@@ -14,7 +14,7 @@ class DefinedTitleBar extends Component{
         // 初始状态
         this.state = {
             leftLabel: '北京',
-            rightLabel: '附近',
+            rightLabel: '列表',
         };
     }
 

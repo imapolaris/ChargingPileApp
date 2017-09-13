@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
         color: colors.white,
     },
     icon: {
-        marginLeft: 2,
+        marginLeft: 5,
         marginRight: 2,
     },
 });

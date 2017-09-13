@@ -13,8 +13,8 @@ import {
 } from 'react-native';
 
 import Picker from 'react-native-picker';
-import area from '../../../../GitProjects/react-native-city-pick/src/cities-list/area.json'
-import List from '../../../../GitProjects/react-native-city-pick/src/List'
+import area from '../../../GitProjects/react-native-city-pick/src/cities-list/area.json'
+import List from '../../../GitProjects/react-native-city-pick/src/List'
 const {width,height} = Dimensions.get('window')
 
 function createAreaData(callback){
