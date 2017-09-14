@@ -11,10 +11,11 @@ import {
     MapTypes,
     Geolocation
 } from 'react-native-baidu-map';
-import {gotoNavigation, mapApp} from "../../Common/functions";
+import {gotoNavigation, mapApp, ToastAndroidCL} from "../../Common/functions";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index";
 import {AlertStationBriefInfo} from "../../CustomComponents/AlertStationBriefInfo/index";
 import StationListItem from "../../CustomComponents/StationListItem/index";
+import {getAllStationsWithBriefInfo, getSingleStation} from '../../Common/webApi';
 
 const selectedArr = [{key:1, title:"百度地图"}, {key:2, title:"高德地图"}];
 let position = null;
@@ -33,23 +34,41 @@ class CPAHomePage extends Component{
             },
             trafficEnabled: false,
             baiduHeatMapEnabled: false,
-            markers: [
-                {
-                    longitude: 116.2499720000,
-                    latitude: 40.0885740000,
-                    title: '加速器一区充电站',
-                    address: '北京市海淀区永丰产业基地加速器一区充电站',
-                    id: 1,
-                }
-            ],
+            markers: [],
             mapOrList: 'map',
         };
+    }
+
+    componentWillMount() {
+        this._requestStations();
     }
 
     // 组件已挂载
     componentDidMount() {
         // 定位
     }
+
+    // 请求电站信息
+    _requestStations() {
+        getAllStationsWithBriefInfo()
+            .then(data=>{
+                let stations = [];
+                data.forEach((item)=>{
+                    stations.push({
+                        title: `${item.Id},${item.Name}`,
+                        longitude: item.Longitude,
+                        latitude: item.Latitude})
+                });
+
+                this.setState({
+                    ...this.state,
+                    markers: stations,
+                })
+            })
+            .catch(error=>{
+                ToastAndroidCL('请求电站信息失败，请检查网络是否正确连接！');
+            })
+    };
 
     _toLocation = () => {
         const {nav} = this.props.screenProps;
@@ -110,27 +129,37 @@ class CPAHomePage extends Component{
     };
 
     // 显示电站基本信息
-    _showStationBasicInfo = (e) => {
-        this._station.show(e.title,
-            '1/2',
-            '北京市海淀区永丰产业基地加速器一区',
-            (i)=>{
-                switch (i)
-                {
-                    case 0:
-                        const {nav} = this.props.screenProps;
-                        nav && nav('Details');
-                        break;
-                    case 1:
-                        /*const {nav} = this.props.screenProps;
-                        nav && nav('MapNav');*/
-
-                        position = e.position;
-                        this.showAlertSelected();
-                        break;
-                    default:
-                        break;
-                }
+    _showStationBriefInfo = (e) => {
+        let info = e.title.split(',');
+        if (info.length <= 1) {
+            alert('信息错误！');
+            return;
+        }
+        let id = info[0];
+        getSingleStation(id)
+            .then(response=>{
+                this._station.show(response.Name,
+                    '1/2',
+                    response.Address,
+                    (i)=>{
+                        switch (i)
+                        {
+                            case 0:
+                                const {nav} = this.props.screenProps;
+                                nav && nav('Details');
+                                break;
+                            case 1:
+                                position = e.position;
+                                this.showAlertSelected();
+                                break;
+                            default:
+                                break;
+                        }
+                    });
+            })
+            .catch(error=>{
+                console.error(error);
+                alert('没有找到该电站的信息...');
             });
     };
 
@@ -194,7 +223,7 @@ class CPAHomePage extends Component{
                     marker={this.state.marker}
                     markers={this.state.markers}
                     style={styles.map}
-                    onMarkerClick={(e) => {this._showStationBasicInfo(e)}}
+                    onMarkerClick={(e) => {this._showStationBriefInfo(e)}}
                     onMapClick={(e) => {
                     }}
                 >

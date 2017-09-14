@@ -37,22 +37,6 @@ export function prompt2(title='',
 }
 
 /*
- * send message, eg. verify code.
- */
-export function sendMessage(phoneNumbers){
-    let url = webApi.urls.messages+phoneNumbers;
-    return fetch(url, {
-        method: 'GEt',
-        timeout: 3000,
-        contentLength: 0,
-    })
-        .then(response=>response.json())
-        .catch(error=>{
-            console.log(error);
-        })
-}
-
-/*
  * function ToastAndroid.show(...) wrapper.
  */
 export function ToastAndroidBS(message) {
@@ -65,6 +49,10 @@ export function ToastAndroidBL() {
 
 export function ToastAndroidCS(message) {
     ToastAndroid.show(message, ToastAndroid.CENTER, ToastAndroid.SHORT);
+}
+
+export function ToastAndroidCL(message) {
+    ToastAndroid.show(message, ToastAndroid.CENTER, ToastAndroid.LONG);
 }
 
 /*
