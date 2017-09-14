@@ -1,4 +1,5 @@
 import {Alert, ToastAndroid, Linking} from 'react-native';
+import {Geolocation} from 'react-native-baidu-map';
 
 
 /*
@@ -110,5 +111,18 @@ export function gotoNavigation(whichApp, from, to, callback) {
             msg = 'An error occurred: ' + error;
             console.error(msg);
             callback && callback(!succeed, msg);
+        });
+}
+
+/*
+* get current location by baidumap.
+* */
+export function getCurrentLocation() {
+    return Geolocation.getCurrentPosition()
+        .then(response=>{
+            return response;
+        },
+        error=>{
+            throw new Error(error);
         });
 }

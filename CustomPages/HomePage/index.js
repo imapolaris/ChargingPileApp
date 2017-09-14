@@ -11,7 +11,7 @@ import {
     MapTypes,
     Geolocation
 } from 'react-native-baidu-map';
-import {gotoNavigation, mapApp, ToastAndroidCL} from "../../Common/functions";
+import {getCurrentLocation, gotoNavigation, mapApp, ToastAndroidCL} from "../../Common/functions";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index";
 import {AlertStationBriefInfo} from "../../CustomComponents/AlertStationBriefInfo/index";
 import StationListItem from "../../CustomComponents/StationListItem/index";
@@ -19,6 +19,7 @@ import {getAllStationsWithBriefInfo, getSingleStation} from '../../Common/webApi
 
 const selectedArr = [{key:1, title:"百度地图"}, {key:2, title:"高德地图"}];
 let position = null;
+let currentPosition = null;
 
 class CPAHomePage extends Component{
     // 构造
@@ -27,10 +28,10 @@ class CPAHomePage extends Component{
         // 初始状态
         this.state = {
             mayType: MapTypes.NORMAL,
-            zoom: 15,
+            zoom: 5,
             center: {
-                longitude: 116.2499720000,
-                latitude: 40.0885740000
+                longitude: 116.404185,
+                latitude: 39.91491, // 这是北京天安门的坐标
             },
             trafficEnabled: false,
             baiduHeatMapEnabled: false,
@@ -40,12 +41,33 @@ class CPAHomePage extends Component{
     }
 
     componentWillMount() {
-        this._requestStations();
+        //this._currentLocation();
     }
 
     // 组件已挂载
     componentDidMount() {
-        // 定位
+        this._requestStations();
+    }
+
+    // 定位
+    _currentLocation() {
+        getCurrentLocation()
+            .then(
+                data=>{
+                    this.setState({
+                        ...this.state,
+                        center: {
+                            longitude: data.longitude,
+                            latitude: data.latitude,
+                        }
+                    });
+
+                    currentPosition = {longitude: data.longitude, latitude: data.latitude};
+                },
+                error=>{
+                    console.log(error);
+                    ToastAndroidCL(error);
+                });
     }
 
     // 请求电站信息
@@ -66,8 +88,9 @@ class CPAHomePage extends Component{
                 })
             })
             .catch(error=>{
+                console.log(error);
                 ToastAndroidCL('请求电站信息失败，请检查网络是否正确连接！');
-            })
+            });
     };
 
     _toLocation = () => {
@@ -138,8 +161,13 @@ class CPAHomePage extends Component{
         let id = info[0];
         getSingleStation(id)
             .then(response=>{
+                if (response === null || response === undefined) {
+                    //alert('');
+                    return;
+                }
+
                 this._station.show(response.Name,
-                    '1/2',
+                    response.Numbers,
                     response.Address,
                     (i)=>{
                         switch (i)
@@ -181,8 +209,14 @@ class CPAHomePage extends Component{
         }
 
         if (theMap !== 'cp:cancel') {
+            if (position === null || position === undefined)
+            {
+                alert('目的地无法解析，无法导航！');
+                return;
+            }
+
             gotoNavigation(theMap,
-                {"longitude":116.388236, "latitude": 40.106099},
+                currentPosition,
                 position,
                 (succeed, msg)=>{
                     alert(msg);

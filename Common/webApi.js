@@ -28,21 +28,21 @@ export function getAllStationsWithBriefInfo() {
         method: 'GET',
         timeout: 3000,
         contentLength: 0,
-        headers: {
+        /*headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-        }
+        }*/
     })
         .then(response=>{
             if (response.status === 200) {
                 return response.json();
             } else {
-                throw new Error(reponse.status);
+                throw new Error(response.status);
             }
         })
         .catch(error=>{
-            console.error(error);
-        })
+            console.log(error);
+        });
 }
 
 /*
@@ -63,6 +63,6 @@ export function getSingleStation(id, callback) {
             }
         })
         .catch(error=>{
-            console.error(error);
-        })
+            console.log(error);
+        });
 }
