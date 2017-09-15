@@ -25,9 +25,16 @@ import CPAScanScreen from "../../../CustomPages/ScanPage/index";
 import CPAWaitingSubscribePage from "../../../CustomPages/WaitingSubscribePage/index";
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
 import CPAListPage from "../../../CustomPages/ListPage/index";
+import CPAWelcomePage from "../../../CustomPages/WelcomePage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
+        Welcome:{
+            screen: CPAWelcomePage,
+            navigationOptions: {
+                header: null,
+            }
+        },
         Home:{
             screen: CPATabScreen,
             navigationOptions:  {
@@ -159,6 +166,7 @@ const CPAStackNavigator = StackNavigator(
         }
     },
     {
+        initialRouteName: 'Welcome',
         navigationOptions: {
             gesturesEnabled: true,
             headerTitleStyle: {
