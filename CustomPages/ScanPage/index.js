@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, Keyboard, Dimensions, Vibration} from 'react-native';
+import {View, Text, Keyboard, Vibration} from 'react-native';
 
 import styles from './styles';
 import {Button, Icon} from 'react-native-elements';
@@ -7,10 +7,10 @@ import {GPlaceholderTextColor} from "../../Common/colors";
 import {StackNavigator} from 'react-navigation';
 import CPAWaitingChargingPage from "../WaitingChargingPage/index";
 
-//import QRCodeScanner from 'react-native-qrcode-scanner';
 import {ScTextInput} from "../../CustomComponents/SimpleCustomComponent/index";
 import Camera from 'react-native-camera';
 import colors from '../../Common/colors';
+import {startCharging} from "../../Common/webApi";
 
 
 class CPAScanPage extends Component{
@@ -51,7 +51,18 @@ class CPAScanPage extends Component{
             this._switchTorch(true);
             Vibration.vibrate();
 
-            alert(e.data);
+            // 检查一下扫码的数据是否合法，过滤不正确的二维码
+            // code here.
+
+            startCharging('123'/*e.data*/)
+                .then(response=>{
+                    alert(response);
+                })
+                .catch(error=>{
+                    console.log(error);
+                    alert(error);
+                });
+
         } catch (e){
             alert('An error occurred', e.message);
         }

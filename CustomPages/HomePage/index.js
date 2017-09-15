@@ -138,6 +138,8 @@ class CPAHomePage extends Component{
             return;
         }
         let id = info[0];
+        // 后面可能会改成从请求过的数据直接加载，避免再次访问网络服务。
+        // code here.
         getSingleStation(id)
             .then(response=>{
                 if (response === null || response === undefined) {

@@ -1,7 +1,14 @@
+import {myFetch} from "./functions";
+
 const urls = {
     messages: 'http://192.168.0.201/ChargingPileService/api/messages',
     stations: 'http://192.168.0.201/ChargingPileService/api/stations',
     chargingRecords: 'http://192.168.0.201/ChargingPileService/api/chargingRecords',
+    charging: 'http://192.168.0.201/ChargingPileService/api/charging',
+};
+
+const headers = {
+    'Content-Type': 'application/json; charset: utf-8',
 };
 
 /*
@@ -25,24 +32,13 @@ export function sendMessage(phoneNumbers){
  **/
 export function getAllStationsWithBriefInfo() {
     let url = urls.stations;
-    return fetch(url, {
-        method: 'GET',
-        timeout: 3000,
-        contentLength: 0,
-        /*headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        }*/
-    })
+
+    return myFetch(url, 'GET', headers)
         .then(response=>{
-            if (response.status === 200) {
-                return response.json();
-            } else {
-                throw new Error(response.status);
-            }
+            return response.json();
         })
         .catch(error=>{
-            console.log(error);
+            throw new Error(error);
         });
 }
 
@@ -74,21 +70,14 @@ export function getSingleStation(id, callback) {
 export function getChargingRecords(refreshing=false) {
     let url = `${urls.chargingRecords}?refreshing=${refreshing}`;
 
-    return fetch(url, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json; charset: utf-8',
-        },
-        contentLength: 0,
-    })
-        .then(response=>{
-            if (response.status === 200) {
-                return response.json();
-            } else {
-                throw new Error(response.status);
-            }
-        })
-        .catch(error=>{
-            throw new Error(error);
-        });
+    return myFetch(url, 'GET', headers);
+}
+
+/*
+* start charging after scan the qrcode or input serial number.
+* */
+export function startCharging(serialNumber) {
+    let url = `${urls.charging}?serialNumber=${serialNumber}`;
+
+    return myFetch(url, 'POST', headers);
 }

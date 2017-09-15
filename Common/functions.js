@@ -126,3 +126,45 @@ export function getCurrentLocation() {
             throw new Error(error);
         });
 }
+
+/*
+* the fetch wrapper.
+* */
+export function myFetch(url, method, headers, body) {
+    // get method
+    if (method.toUpperCase() === 'GET'){
+        return fetch(url, {
+            method: 'GET',
+            timeout: 3000,
+            headers: headers,
+            contentLength: 0,
+        })
+            .then(response=>{
+                if (response.status === 200) {
+                    return response;
+                } else {
+                    throw new Error(response.status);
+                }
+            })
+            .catch(error=>{
+                throw new Error(error);
+            });
+    } else if (method.toUpperCase() === 'POST') { // post method
+        return fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: body,
+        })
+            .then(response=>{
+                if (response.status === 200) {
+                    return response;
+                } else {
+                    throw new Error(response.status);
+                }
+            })
+            .catch(error=>{
+                throw new Error(error);
+            });
+    }
+
+}
