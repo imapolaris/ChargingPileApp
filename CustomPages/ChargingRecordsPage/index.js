@@ -3,8 +3,54 @@ import {View, FlatList} from 'react-native';
 
 import styles from './styles';
 import RecordWithSubtitleListItem from "../../CustomComponents/RecordWithSubtitleListItem/index";
+import {getChargingRecords} from "../../Common/webApi";
+import {ToastAndroidBS} from "../../Common/functions";
 
 class CPACharingRecordsPage extends Component{
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            refreshing: false,
+            data: [],
+        };
+    }
+
+    componentDidMount() {
+        this._requestData(false);
+    }
+
+    _requestData(refreshing) {
+        getChargingRecords(refreshing)
+            .then(response=>{
+                if (response === null || response === undefined){
+                    ToastAndroidBS('请求数据失败！');
+                    return;
+                }
+
+                let data = [];
+                let k = 0;
+                response.forEach(item=>{
+                    data.push({key: k++,
+                        title: `充电度数：${item.Kwhs}kWh`,
+                        subtitle: item.ChargingDate,
+                        content: `花费 ${item.Cost}元`
+                    });
+                });
+
+                this.setState({
+                    ...this.state,
+                    data: data,
+                    refreshing: false,
+                })
+            })
+            .catch(error=>{
+                console.log(error);
+                alert(error);
+            });
+    }
+
     _renderItem = ({item}) => {
         return (
             <RecordWithSubtitleListItem title={item.title}
@@ -14,18 +60,22 @@ class CPACharingRecordsPage extends Component{
         );
     };
 
-    render() {
-        const data = [
-            {key:1, title:'充电度数：50kWh', subtitle:'2017-08-04 09:40:33', content:'花费20.0元'},
-            {key:2, title:'充电度数：50kWh', subtitle:'2017-08-04 09:40:33', content:'花费20.0元'},
-            {key:3, title:'充电度数：50kWh', subtitle:'2017-08-04 09:40:33', content:'花费20.0元'},
-            {key:4, title:'充电度数：50kWh', subtitle:'2017-08-04 09:40:33', content:'花费20.0元'},
-            {key:5, title:'充电度数：50kWh', subtitle:'2017-08-04 09:40:33', content:'花费20.0元'},
-        ];
+    _refresh = () => {
+        this.setState({
+            ...this.state,
+            refreshing: true,
+        });
 
+        this._requestData(true);
+    };
+
+    render() {
         return (
-            <View>
-                <FlatList data={data} renderItem={this._renderItem} />
+            <View style={styles.container}>
+                <FlatList data={this.state.data}
+                          renderItem={this._renderItem}
+                          refreshing={this.state.refreshing}
+                          onRefresh={this._refresh}/>
             </View>
         );
     }

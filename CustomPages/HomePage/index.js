@@ -30,8 +30,8 @@ class CPAHomePage extends Component{
             mayType: MapTypes.NORMAL,
             zoom: 5,
             center: {
-                longitude: 116.404185,
-                latitude: 39.91491, // 这是北京天安门的坐标
+                longitude: 108.552500,
+                latitude: 34.322700,  // 这是北京天安门的坐标(116.404185,39.91491)
             },
             trafficEnabled: false,
             baiduHeatMapEnabled: false,

@@ -1,6 +1,7 @@
 const urls = {
     messages: 'http://192.168.0.201/ChargingPileService/api/messages',
     stations: 'http://192.168.0.201/ChargingPileService/api/stations',
+    chargingRecords: 'http://192.168.0.201/ChargingPileService/api/chargingRecords',
 };
 
 /*
@@ -64,5 +65,30 @@ export function getSingleStation(id, callback) {
         })
         .catch(error=>{
             console.log(error);
+        });
+}
+
+/*
+* get current logon user' charging records.
+* */
+export function getChargingRecords(refreshing=false) {
+    let url = `${urls.chargingRecords}?refreshing=${refreshing}`;
+
+    return fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json; charset: utf-8',
+        },
+        contentLength: 0,
+    })
+        .then(response=>{
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error(response.status);
+            }
+        })
+        .catch(error=>{
+            throw new Error(error);
         });
 }
