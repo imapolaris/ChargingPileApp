@@ -33,13 +33,13 @@ const styles = StyleSheet.create({
     },
     leftButton:{
         alignItems:'flex-start',
-        marginRight: 0,
+        marginRight: 5,
         justifyContent: 'center',
     },
     rightButton:{
         alignItems: 'flex-end',
         justifyContent: 'center',
-        marginLeft: 0,
+        marginLeft: 5,
     },
 });
 

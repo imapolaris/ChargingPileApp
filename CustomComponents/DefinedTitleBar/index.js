@@ -14,7 +14,6 @@ class DefinedTitleBar extends Component{
         // 初始状态
         this.state = {
             leftLabel: '北京',
-            rightLabel: '列表',
         };
     }
 
@@ -55,7 +54,7 @@ class DefinedTitleBar extends Component{
                                clearIcon={{color:'#86939e', name: 'clear'}}
                                onSubmitEditing={this._toSearch}
                     />
-                    <NavButton label={this.state.rightLabel}
+                    <NavButton label={this.props.rightLabel}
                                style={styles.rightButton}
                                onPress={this.props.toList && this.props.toList} />
                 </View>

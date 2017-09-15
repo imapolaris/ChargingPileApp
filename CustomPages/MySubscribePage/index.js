@@ -5,6 +5,16 @@ import styles from './styles';
 import RecordWithSubtitleListItem from "../../CustomComponents/RecordWithSubtitleListItem/index";
 
 class CPAMySubscribePage extends Component{
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            data: [],
+            refreshing: false,
+        };
+    }
+
     _renderItem = ({item}) => {
         return (
             <RecordWithSubtitleListItem title={item.title}
@@ -12,6 +22,10 @@ class CPAMySubscribePage extends Component{
                                         content={item.content}
             />
         );
+    };
+
+    _refresh = () => {
+
     };
 
     render() {
@@ -24,8 +38,11 @@ class CPAMySubscribePage extends Component{
         ];
 
         return (
-            <View>
-                <FlatList data={data} renderItem={this._renderItem} />
+            <View style={styles.container}>
+                <FlatList data={data}
+                          renderItem={this._renderItem}
+                          refreshing={this.state.refreshing}
+                          onRefresh={this._refresh} />
             </View>
         );
     }

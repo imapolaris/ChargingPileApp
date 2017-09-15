@@ -5,6 +5,7 @@ import styles from './styles';
 import {TabNavigator} from 'react-navigation';
 import {Button} from 'react-native-elements';
 import ElectricPileListItem from "../../CustomComponents/ElectricPileListItem/index";
+import colors from '../../Common/colors';
 
 class CPADetailsPage extends Component{
     render() {
@@ -143,6 +144,7 @@ const StationNavigator = TabNavigator(
             showIcon:false,
             tabStyle:{
                 flexDirection:'row',
+                backgroundColor: colors.theme1,
             }
         },
     }

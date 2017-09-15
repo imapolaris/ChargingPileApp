@@ -56,6 +56,9 @@ const CPATabNavigator = TabNavigator(
                 flexDirection:'row',
                 backgroundColor: colors.theme1,
             },
+            labelStyle: {
+                fontSize: 15,
+            }
         },
     }
 );

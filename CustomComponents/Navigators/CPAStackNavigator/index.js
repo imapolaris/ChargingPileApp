@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 
 import {StackNavigator, NavigationActions} from 'react-navigation';
 import styles from './styles';
@@ -24,12 +24,19 @@ import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPa
 import CPAScanScreen from "../../../CustomPages/ScanPage/index";
 import CPAWaitingSubscribePage from "../../../CustomPages/WaitingSubscribePage/index";
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
+import CPAListPage from "../../../CustomPages/ListPage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
         Home:{
             screen: CPATabScreen,
             navigationOptions:  {
+                header: null,
+            }
+        },
+        List:{
+            screen: CPAListPage,
+            navigationOptions: {
                 header: null,
             }
         },
@@ -161,7 +168,8 @@ const CPAStackNavigator = StackNavigator(
             },
             headerBackTitleStyle: {
                 color: colors.white,
-            }
+            },
+            headerRight:<Text/>,
         },
         transitionConfig: () => ({
             screenInterpolator: CardStackStyleInterpolator.forHorizontal,
