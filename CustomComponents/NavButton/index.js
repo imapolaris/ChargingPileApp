@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, Text, View} from 'react-native';
-
 import styles from './styles';
-import icons from '../../Common/fonts';
-import colors from '../../Common/colors';
-import {Icon} from 'react-native-elements';
 
 // navigator button.
 class NavButton extends Component{
@@ -26,10 +22,9 @@ class NavButton extends Component{
 
                     {
                         this.props.showIcon ?
-                            <Icon type={icons.SimpleLineIcon}
-                                  name="arrow-down"
-                                  color={colors.white}
-                                  iconStyle={styles.icon} size={14} />
+                            <View style={styles.iconContainer}>
+                                {this.props.icon}
+                            </View>
                             :
                             null
                     }

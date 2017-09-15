@@ -43,7 +43,8 @@ class DefinedTitleBar extends Component{
                     <NavButton label={this._showLeftLabel.bind(this, this.state.leftLabel)()}
                                style={styles.leftButton}
                                onPress={this.props.toLocation && this.props.toLocation}
-                               showIcon={true} />
+                               showIcon={true}
+                               icon={this.props.icon} />
                     <SearchBar ref={self => this._search = self}
                                containerStyle={styles.search}
                                inputStyle={styles.searchInput}

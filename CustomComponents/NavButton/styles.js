@@ -14,9 +14,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: colors.white,
     },
-    icon: {
+    iconContainer: {
         marginLeft: 5,
         marginRight: 2,
+        justifyContent: 'center',
     },
 });
 

@@ -5,6 +5,7 @@ import styles from './styles';
 import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons';
 
 import {
     MapView,
@@ -15,6 +16,9 @@ import {getCurrentLocation, gotoNavigation, mapApp, ToastAndroidCL} from "../../
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index";
 import {AlertStationBriefInfo} from "../../CustomComponents/AlertStationBriefInfo/index";
 import {getAllStationsWithBriefInfo, getSingleStation} from '../../Common/webApi';
+
+import icons from '../../Common/fonts';
+import colors from '../../Common/colors';
 
 const selectedArr = [{key:1, title:"百度地图"}, {key:2, title:"高德地图"}];
 let position = null;
@@ -242,7 +246,8 @@ class CPAHomePage extends Component{
                                  toLocation={this._toLocation}
                                  toList={this._toList}
                                  search={this._search}
-                                 rightLabel="列表"/>
+                                 rightLabel="列表"
+                                 icon={<SimpleIcon type={icons.SimpleLineIcon} name="arrow-down" color={colors.white} size={14} />} />
 
                 {
                     this._renderMapView()
