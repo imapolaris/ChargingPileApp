@@ -1,8 +1,11 @@
+import './Common/appStorage';
+import './Common/appContext';
+
 import React, {Component} from 'react';
 import {StyleSheet, ToastAndroid, BackHandler, View, StatusBar} from 'react-native';
 import CPAStackNavigator from './CustomComponents/Navigators/CPAStackNavigator';
 import {createStore} from 'redux';
-import colors from './Common/colors';
+import constants from './Common/constants';
 
 let lastBackPressed = 0;
 /*let store = createStore(null);*/
@@ -14,7 +17,11 @@ class App extends Component{
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this._onBackAndroid);
+
+
     }
+
+
 
     _onBackAndroid = () => {
         /*let now = new Date().getTime();

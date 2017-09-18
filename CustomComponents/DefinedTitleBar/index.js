@@ -52,7 +52,6 @@ class DefinedTitleBar extends Component{
                                round
                                onChangeText={(e)=>inputSearchText=e}
                                placeholder='搜索...'
-                               clearIcon={{color:'#86939e', name: 'clear'}}
                                onSubmitEditing={this._toSearch}
                     />
                     <NavButton label={this.props.rightLabel}
