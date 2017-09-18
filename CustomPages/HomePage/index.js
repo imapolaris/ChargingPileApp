@@ -33,8 +33,8 @@ class CPAHomePage extends Component{
             mayType: MapTypes.NORMAL,
             zoom: 5,
             center: {
-                longitude: 108.552500,
-                latitude: 34.322700,  // 这是北京天安门的坐标(116.404185,39.91491)
+                longitude: 105.552500,
+                latitude: 34.322700,  // 北京天安门的坐标是(116.404185,39.91491)
             },
             trafficEnabled: false,
             baiduHeatMapEnabled: false,
@@ -100,19 +100,26 @@ class CPAHomePage extends Component{
         nav && nav('Location', {callback: this._resetCenter});
     };
 
-    _resetCenter = (cityName) => {
-        if (cityName !== null && cityName !== undefined) {
-            this._getCoordinate(cityName);
-        }
-    };
-
     _toList = () => {
         const {nav} = this.props.screenProps;
         nav && nav('List');
     };
 
-    _search = (text) => {
-        this._getCoordinate(text);
+    _resetCenter = (cityName) => {
+        if (cityName !== null && cityName !== undefined) {
+            this._titleBar.setState({
+                ...this._titleBar.state,
+                leftLabel: cityName,
+            });
+        }
+
+        this._search(cityName);
+    };
+
+    _search = (cityName) => {
+        if (cityName !== null && cityName !== undefined) {
+            this._getCoordinate(cityName);
+        }
     };
 
     _getCoordinate = (text) => {

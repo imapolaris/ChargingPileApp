@@ -63,8 +63,20 @@ const styles = StyleSheet.create({
         color:'gray',
         fontSize: 15,
     },
+    search: {
+        flex: 1,
+    },
     searchContainer: {
-
+        flexDirection: 'row',
+    },
+    cancelSearch: {
+        marginRight: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    cancel: {
+        fontSize: 15,
+        color: colors.theme1,
     },
     locationContainerWhole: {
         height: 45,
@@ -114,7 +126,16 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         backgroundColor: colors.white,
-    }
+    },
+    searchResultContainer: {
+        height: ROWHEIGHT * 5,
+    },
+    searchResult: {
+
+    },
+    searchResultItem: {
+
+    },
 });
 
 export default styles;

@@ -3,6 +3,8 @@ import {
     View,
     Text,
     TouchableOpacity,
+    FlatList,
+    Keyboard,
 } from 'react-native';
 
 import styles from './styles';
@@ -14,6 +16,9 @@ import {getCurrentLocation} from "../../Common/functions";
 import {Geolocation} from 'react-native-baidu-map';
 import DividerLine from "../../CustomComponents/DividerLine/index";
 import {SearchBar} from 'react-native-elements';
+import data from '../../Resources/Data/city';
+
+let that;
 
 class CPALocationPage extends Component{
     // 构造
@@ -23,7 +28,11 @@ class CPALocationPage extends Component{
         this.state = {
             currentPosition: '',
             recentlyCities: ['北京', '上海', '杭州'],
+            searchState: false,
+            searchResult: [],
         };
+
+        that = this;
     }
 
     componentWillMount() {
@@ -58,23 +67,69 @@ class CPALocationPage extends Component{
     };
 
     _changeCity = (cityName) => {
-        //alert(cityName);
-
-
         const {state, goBack} = this.props.navigation;
         state.params.callback && state.params.callback(cityName);
         goBack && goBack();
-
-
     };
 
-    render() {
+    _onSearch = (text) => {
+        if (text.length > 0) {
+            let result = [];
+            let k = 0;
+            data.forEach((section)=>{
+                section.data.forEach((item)=>{
+                    if (item.name.indexOf(text) >= 0
+                        || item.name_en.toLowerCase().indexOf(text.toLowerCase()) >= 0) {
+                        result.push({key: k++, name: item.name})
+                    }
+                })
+            });
+
+            this.setState({
+                ...this.state,
+                searchResult: result,
+            });
+        }
+    };
+
+    _onFocus = () => {
+        this._searchBar.clearText();
+
+        this.setState({
+            ...this.state,
+            searchState: true,
+        });
+    };
+
+    _cancelSearch = () => {
+        this.setState({
+            ...this.state,
+            searchState: false,
+        });
+
+        Keyboard.dismiss();
+    };
+
+    _renderItem({item}){
+        return (
+            <TouchableOpacity
+                key={item.key}
+                style={styles.item}
+                onPress={()=>{
+                    this._changeCity(item.name)
+                }}>
+                <View style={styles.rowData}>
+                    <Text style={styles.rowDataText}>
+                        {item.name}
+                    </Text>
+                </View>
+            </TouchableOpacity>
+        );
+    }
+
+    _renderOptions() {
         return (
             <View style={styles.container}>
-                <View style={styles.searchContainer}>
-                    <SearchBar lightTheme />
-                    {/*<DividerLine/>*/}
-                </View>
                 <View style={styles.locationContainerWhole}>
                     <View style={styles.locationContainer}>
                         <Text style={[styles.title, {flex: 1}]}>当前定位城市</Text>
@@ -113,6 +168,51 @@ class CPALocationPage extends Component{
                     <Text style={[styles.title, {marginLeft: 5}]}>全部城市</Text>
                     <List chooseCity={this._changeCity}/>
                 </View>
+            </View>
+        )
+    }
+
+    _renderSearchOptions() {
+        return (
+            <View style={styles.searchResultContainer}>
+                <FlatList data={this.state.searchResult}
+                          renderItem={this._renderItem.bind(this)} />
+            </View>
+        );
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={styles.searchContainer}>
+                    <SearchBar ref={self=>this._searchBar=self}
+                               lightTheme
+                               onChangeText={this._onSearch}
+                               clearTextOnFocus={true}
+                               onFocus={this._onFocus}
+                               returnKeyType="search"
+                               maxLength={20}
+                               containerStyle={styles.search}
+                               clearIcon={this.state.searchState ? {color:'#86939e', name:'clear'} : null} />
+                    {
+                        this.state.searchState ?
+                            <TouchableOpacity onPress={this._cancelSearch}
+                                              style={styles.cancelSearch} >
+                                <Text style={styles.cancel}>
+                                    取消
+                                </Text>
+                            </TouchableOpacity>
+                            :
+                            null
+                    }
+                </View>
+
+                {
+                    this.state.searchState === true ?
+                        this._renderSearchOptions()
+                        :
+                        this._renderOptions()
+                }
             </View>
         );
     }
