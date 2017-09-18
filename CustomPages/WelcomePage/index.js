@@ -3,7 +3,8 @@ import {View, Animated, Text} from 'react-native';
 import styles from './styles';
 import {Avatar} from 'react-native-elements';
 import colors from '../../Common/colors';
-import {screenHeight, screenWidth} from "../../Common/styles"
+import {screenHeight, screenWidth} from "../../Common/styles";
+import {NavigationActions} from 'react-navigation';
 
 class CPAWelcomePage extends Component{
     // 构造
@@ -38,8 +39,13 @@ class CPAWelcomePage extends Component{
         }).start();
 
         this._timer = setTimeout(() => {
-            const {navigate} = this.props.navigation;
-            navigate && navigate('Home');
+            const resetAction = NavigationActions.reset({
+                index: 0,
+                actions: [
+                    NavigationActions.navigate({routeName: 'Home'})
+                ]
+            });
+            this.props.navigation.dispatch(resetAction);
         }, 3000);
     }
 
