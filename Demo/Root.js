@@ -100,7 +100,7 @@ class Nav extends Component {
                 name:'list',
                 component:List,
                 params:({
-                    changeCity:(city)=>{this.setState({
+                    chooseCity:(city)=>{this.setState({
                         city:city
                     })}
                 })

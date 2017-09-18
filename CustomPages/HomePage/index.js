@@ -12,7 +12,7 @@ import {
     MapTypes,
     Geolocation
 } from 'react-native-baidu-map';
-import {getCurrentLocation, gotoNavigation, mapApp, ToastAndroidCL} from "../../Common/functions";
+import {getCurrentLocation, gotoNavigation, IsNullOrUndefined, mapApp, ToastAndroidCL} from "../../Common/functions";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index";
 import {AlertStationBriefInfo} from "../../CustomComponents/AlertStationBriefInfo/index";
 import {getAllStationsWithBriefInfo, getSingleStation} from '../../Common/webApi';
@@ -97,7 +97,13 @@ class CPAHomePage extends Component{
 
     _toLocation = () => {
         const {nav} = this.props.screenProps;
-        nav && nav('Location');
+        nav && nav('Location', {callback: this._resetCenter});
+    };
+
+    _resetCenter = (cityName) => {
+        if (cityName !== null && cityName !== undefined) {
+            this._getCoordinate(cityName);
+        }
     };
 
     _toList = () => {
@@ -106,6 +112,10 @@ class CPAHomePage extends Component{
     };
 
     _search = (text) => {
+        this._getCoordinate(text);
+    };
+
+    _getCoordinate = (text) => {
         Geolocation.geocode(text, text)
             .then(location=>{
                 if (location.longitude === null || location.longitude === undefined
@@ -117,6 +127,7 @@ class CPAHomePage extends Component{
 
                 this.setState({
                     ...this.state,
+                    zoom: 10,
                     center: {
                         longitude: location.longitude,
                         latitude: location.latitude

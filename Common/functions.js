@@ -166,5 +166,4 @@ export function myFetch(url, method, headers, body) {
                 throw new Error(error);
             });
     }
-
 }

@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {screenHeight, screenWidth} from "../../Common/styles";
+import colors from '../../Common/colors';
 
 export const SECTIONHEIGHT=30, ROWHEIGHT=40;
 
@@ -29,7 +30,8 @@ const styles = StyleSheet.create({
         height: ROWHEIGHT,
         justifyContent: 'center',
         paddingLeft: 20,
-        paddingRight: 30
+        paddingRight: 30,
+        backgroundColor: colors.white,
     },
     letters: {
         position: 'absolute',
@@ -59,7 +61,60 @@ const styles = StyleSheet.create({
     },
     rowDataText:{
         color:'gray',
+        fontSize: 15,
     },
+    searchContainer: {
+
+    },
+    locationContainerWhole: {
+        height: 45,
+    },
+    locationContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: 5,
+    },
+    title: {
+        fontSize: 16,
+        color: colors.black,
+    },
+    cityName: {
+        fontSize: 14,
+        backgroundColor: 'transparent',
+    },
+    locationButton: {
+        backgroundColor: colors.theme1,
+        height: 35,
+        paddingLeft: 15,
+        paddingRight: 15,
+        borderRadius: 3,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: 5,
+    },
+    locationIcon: {
+        marginLeft: 3,
+    },
+    currentCityContainer: {
+
+    },
+    currentCities: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 5,
+        justifyContent: 'space-around',
+        padding: 15,
+    },
+    currentCity: {
+        borderWidth: 0.5,
+        borderColor: 'grey',
+        paddingLeft: 30,
+        paddingRight: 30,
+        paddingTop: 10,
+        paddingBottom: 10,
+        backgroundColor: colors.white,
+    }
 });
 
 export default styles;

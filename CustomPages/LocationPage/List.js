@@ -13,15 +13,25 @@ import {ToastAndroidCS} from "../../Common/functions";
 
 // 26个英文字母（去掉O和V,这两个下面没有城市）
 const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "W", "X", "Y", "Z"];
+let that;
 
 export default class List extends Component {
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {};
+
+        that = this;
+    }
+
     _renderItem({item}) {
         return (
             <TouchableOpacity
                 key={item.key}
                 style={styles.item}
-                onPress={() => {
-                    this._chooseCity.bind(this, item.name)
+                onPress={()=>{
+                    that._chooseCity(item.name);
                 }}>
                 <View style={styles.rowData}>
                     <Text style={styles.rowDataText}>
@@ -57,7 +67,7 @@ export default class List extends Component {
 
     //回调改变显示的城市
     _chooseCity(cityName) {
-        this.props.changeCity && this.props.changeCity(cityName)
+        that.props.chooseCity && that.props.chooseCity(cityName)
     };
 
     //touch right indexLetters, scroll the left
@@ -79,11 +89,11 @@ export default class List extends Component {
                     renderSectionHeader={this._renderSectionHeader}
                     enableEmptySections={true}
                 />
-                <View style={styles.letters}>
+               {/*<View style={styles.letters}>
                     {
                         letters.map((letter, index) => this._renderLetters(letter, index))
                     }
-                </View>
+                </View>*/}
             </View>
         );
     }
