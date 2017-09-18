@@ -5,6 +5,7 @@ const urls = {
     stations: 'http://192.168.0.201/ChargingPileService/api/stations',
     chargingRecords: 'http://192.168.0.201/ChargingPileService/api/chargingRecords',
     charging: 'http://192.168.0.201/ChargingPileService/api/charging',
+    users: 'http://192.168.0.201/ChargingPileService/api/users',
 };
 
 const headers = {

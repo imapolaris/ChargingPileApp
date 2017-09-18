@@ -6,22 +6,24 @@ import {StyleSheet, ToastAndroid, BackHandler, View, StatusBar} from 'react-nati
 import CPAStackNavigator from './CustomComponents/Navigators/CPAStackNavigator';
 import {createStore} from 'redux';
 import constants from './Common/constants';
+import {appInit} from "./Common/appContext";
 
 let lastBackPressed = 0;
 /*let store = createStore(null);*/
 
 class App extends Component{
+    componentWillMount() {
+        // initialize the app context.
+        appInit();
+    }
+
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
     }
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this._onBackAndroid);
-
-
     }
-
-
 
     _onBackAndroid = () => {
         /*let now = new Date().getTime();

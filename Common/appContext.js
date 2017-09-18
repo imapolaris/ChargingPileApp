@@ -5,6 +5,10 @@ const appContext = {
     avatar: null,
 };
 
+export function appInit() {
+    loadUserProfile();
+}
+
 function loadUserProfile() {
     storage.load({
         key: constants.LoginedKey,
