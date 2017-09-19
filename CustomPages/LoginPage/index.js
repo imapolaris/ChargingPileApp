@@ -10,7 +10,7 @@ import {
 import styles from './styles';
 import {Button, Avatar} from 'react-native-elements';
 import {GPlaceholderTextColor} from "../../Common/colors";
-import {ScTextInput} from "../../CustomComponents/SimpleCustomComponent/index";
+import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles";
 
 class CPALoginPage extends Component{
     _onPress = () => {
@@ -23,7 +23,7 @@ class CPALoginPage extends Component{
     };
 
     _forgotPwd = () => {
-        ToastAndroid.show('忘记密码，好开心，😫！',
+        ToastAndroid.show('忘记密码，好不开心，😫！',
             ToastAndroid.SHORT,
             ToastAndroid.BOTTOM);
 
@@ -43,15 +43,15 @@ class CPALoginPage extends Component{
                         />
                     </View>
 
-                    <ScTextInput placeholderTextColor={GPlaceholderTextColor}
+                    <TextInput placeholderTextColor={GPlaceholderTextColor}
                                placeholder='用户名'
-                               style={styles.textInput}
+                               style={[styles.textInput, TextInputStyles.textInput]}
                                underlineColorAndroid='transparent'
                     />
-                    <ScTextInput placeholder='密码'
+                    <TextInput placeholder='密码'
                                placeholderTextColor={GPlaceholderTextColor}
                                secureTextEntry={true}
-                               style={styles.textInput}
+                               style={[styles.textInput, TextInputStyles.textInput]}
                                underlineColorAndroid='transparent'
                     />
                 </View>

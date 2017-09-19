@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: '#C3C3C3',
         marginTop: 10,
+        fontSize: 14,
     },
     buttonContainer:{
         flexDirection: 'column',

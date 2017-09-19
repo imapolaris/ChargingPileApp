@@ -4,7 +4,7 @@ import {View, Text, TextInput, ToastAndroid, TouchableOpacity} from 'react-nativ
 import styles from './styles';
 import {Button, Avatar} from 'react-native-elements';
 import {GPlaceholderTextColor} from "../../Common/colors";
-import {ScTextInput} from "../../CustomComponents/SimpleCustomComponent/index";
+import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles";
 import {sendMessage, ToastAndroidBS} from "../../Common/functions";
 
 class CPARegisterOrResetPwdPage extends Component {
@@ -56,24 +56,27 @@ class CPARegisterOrResetPwdPage extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
-                    <ScTextInput ref={self=>this._phoneNumber=self}
-                                placeholderTextColor={GPlaceholderTextColor}
-                                placeholder='输入手机号'
-                                style={styles.textInput}
+                    <TextInput ref={self=>this._phoneNumber=self}
+                               placeholderTextColor={GPlaceholderTextColor}
+                               placeholder='输入手机号'
+                               style={[styles.textInput, TextInputStyles.textInput]}
+                               keyboardType={'numeric'}
                     />
                     <View style={styles.vcodeContainer}>
-                        <ScTextInput placeholder='输入验证码'
+                        <TextInput placeholder='输入验证码'
                                    placeholderTextColor={GPlaceholderTextColor}
-                                   style={[styles.textInput, styles.vcodeTextInput]}
+                                   style={[styles.textInput, styles.vcodeTextInput, TextInputStyles.textInput]}
+                                   keyboardType={'numeric'}
                         />
                         <Button title="获取"
                                 onPress={this._getVCode}
                                 buttonStyle={styles.vcodeButton}
                         />
                     </View>
-                    <ScTextInput placeholder={params.registerOrReset === 'register' ? '输入密码' : '输入新密码'}
+                    <TextInput placeholder={params.registerOrReset === 'register' ? '输入密码' : '输入新密码'}
                                placeholderTextColor={GPlaceholderTextColor}
-                               style={styles.textInput}
+                               style={[styles.textInput, TextInputStyles.textInput]}
+                               secureTextEntry={true}
                     />
                 </View>
 
