@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {View, Text, TextInput, ToastAndroid, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 
 import styles from './styles';
-import {Button, Avatar} from 'react-native-elements';
+import {Button} from 'react-native-elements';
 import {GPlaceholderTextColor} from "../../Common/colors";
 import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles";
-import {sendMessage, ToastAndroidBS} from "../../Common/functions";
+import {ToastAndroidBS, validatePhoneNumber} from "../../Common/functions";
+import {sendMessage} from "../../Common/webApi";
 
 class CPARegisterOrResetPwdPage extends Component {
     // 构造
@@ -13,22 +14,24 @@ class CPARegisterOrResetPwdPage extends Component {
         super(props);
         // 初始状态
         this.state = {
-
+            phoneNumber: '',
+            vCode: '',
+            pwd: '',
         };
     }
 
+    // 获取验证码
     _getVCode = () => {
         // 先验证手机号码是否合法
-        let correct = true;
+        let phoneNumber = this.state.phoneNumber;
+        let correct = validatePhoneNumber(phoneNumber);
         if (correct){
-            let phoneNumber = this._phoneNumber.state.value || '13269734774';
-            alert(phoneNumber);
             sendMessage(phoneNumber);
 
             ToastAndroidBS('验证码已发送！');
         }
         else {
-            ToastAndroidBS('请检查手机号码是否正确...');
+            ToastAndroidBS('手机号码不正确！');
         }
     };
 
@@ -56,27 +59,49 @@ class CPARegisterOrResetPwdPage extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
-                    <TextInput ref={self=>this._phoneNumber=self}
-                               placeholderTextColor={GPlaceholderTextColor}
+                    <TextInput placeholderTextColor={GPlaceholderTextColor}
                                placeholder='输入手机号'
                                style={[styles.textInput, TextInputStyles.textInput]}
                                keyboardType={'numeric'}
+                               value={this.state.phoneNumber}
+                               onChangeText={(text)=>{
+                                   this.setState({
+                                       ...this.state,
+                                       phoneNumber: text,
+                                   })
+                               }}
                     />
                     <View style={styles.vcodeContainer}>
                         <TextInput placeholder='输入验证码'
                                    placeholderTextColor={GPlaceholderTextColor}
                                    style={[styles.textInput, styles.vcodeTextInput, TextInputStyles.textInput]}
                                    keyboardType={'numeric'}
+                                   value={this.state.vCode}
+                                   onChangeText={(text)=>{
+                                       this.setState({
+                                           ...this.state,
+                                           vCode: text,
+                                       })
+                                   }}
                         />
-                        <Button title="获取"
-                                onPress={this._getVCode}
-                                buttonStyle={styles.vcodeButton}
-                        />
+                        <TouchableOpacity onPress={this._getVCode}
+                                          style={styles.vcodeButton}>
+                            <Text style={styles.vcodeText}>
+                                获取验证码
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                     <TextInput placeholder={params.registerOrReset === 'register' ? '输入密码' : '输入新密码'}
                                placeholderTextColor={GPlaceholderTextColor}
                                style={[styles.textInput, TextInputStyles.textInput]}
                                secureTextEntry={true}
+                               value={this.state.pwd}
+                               onChangeText={(text)=>{
+                                   this.setState({
+                                       ...this.state,
+                                       pwd: text,
+                                   })
+                               }}
                     />
                 </View>
 

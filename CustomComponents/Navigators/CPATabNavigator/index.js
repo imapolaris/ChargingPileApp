@@ -50,7 +50,7 @@ const CPATabNavigator = TabNavigator(
         animationEnabled: true,
 
         tabBarOptions:{
-            activeTintColor: '#e91e63',
+            activeTintColor: colors.tintColor,
             showIcon:true,
             tabStyle:{
                 flexDirection:'row',

@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {screenWidth} from "../../Common/styles";
+import colors from '../../Common/colors';
 
 const styles = StyleSheet.create({
     container: {
@@ -14,11 +15,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     vcodeButton: {
-        width: 60,
+        marginLeft: 5,
+        marginRight: 5,
         marginTop: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: colors.tintColor,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 5,
+        paddingRight: 5,
     },
     vcodeTextInput: {
         flex: 1,
+    },
+    vcodeText: {
+        color: colors.tintColor,
     },
     textInput:{
         borderWidth: 0.5,

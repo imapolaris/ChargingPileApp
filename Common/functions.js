@@ -167,3 +167,12 @@ export function myFetch(url, method, headers, body) {
             });
     }
 }
+
+/*
+* validate the phone number.
+* */
+export function validatePhoneNumber(phoneNumber) {
+    let reg = /^1[34578]\d{9}$/; //验证规则
+
+    return reg.test(phoneNumber); //true
+}
