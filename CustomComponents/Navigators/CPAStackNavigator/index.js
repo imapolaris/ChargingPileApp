@@ -26,6 +26,7 @@ import CPAWaitingSubscribePage from "../../../CustomPages/WaitingSubscribePage/i
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
 import CPAListPage from "../../../CustomPages/ListPage/index";
 import CPAWelcomePage from "../../../CustomPages/WelcomePage/index";
+import CPASearchPage from "../../../CustomPages/SearchPage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -37,7 +38,13 @@ const CPAStackNavigator = StackNavigator(
         },
         Home:{
             screen: CPATabScreen,
-            navigationOptions:  {
+            navigationOptions: {
+                header: null,
+            }
+        },
+        Search:{
+            screen: CPASearchPage,
+            navigationOptions: {
                 header: null,
             }
         },

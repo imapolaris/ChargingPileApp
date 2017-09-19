@@ -102,12 +102,12 @@ class CPALocationPage extends Component{
     };
 
     _cancelSearch = () => {
+        Keyboard.dismiss();
+
         this.setState({
             ...this.state,
             searchState: false,
         });
-
-        Keyboard.dismiss();
     };
 
     _renderItem({item}){

@@ -46,7 +46,7 @@ export function getAllStationsWithBriefInfo() {
 /*
  * query the station by id.
  */
-export function getSingleStation(id, callback) {
+export function getSingleStation(id) {
     let url =  `${urls.stations}/${id}`;
     return fetch(url, {
         method: 'GET',
@@ -63,6 +63,14 @@ export function getSingleStation(id, callback) {
         .catch(error=>{
             console.log(error);
         });
+}
+
+/*
+* query the station names by the filter condition.
+* */
+export function getStationNames(filter) {
+    let url = '';
+
 }
 
 /*

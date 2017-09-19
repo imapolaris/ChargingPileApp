@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     content:{
-
+        marginTop: 1,
     },
     actionButtonIcon: {
         fontSize: 20,

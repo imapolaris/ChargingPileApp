@@ -6,7 +6,7 @@ export const SECTIONHEIGHT=30, ROWHEIGHT=40;
 
 const styles = StyleSheet.create({
     container: {
-
+        flex: 1,
     },
     listContainer: {
         height: screenHeight,
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     searchResultContainer: {
-        height: ROWHEIGHT * 5,
+        flex: 1,
     },
     searchResult: {
 

@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import {View, Animated, Text} from 'react-native';
+import {View, Animated, Text, Keyboard} from 'react-native';
 
 import styles from './styles';
 import NavButton from "../NavButton/index";
 import {SearchBar} from 'react-native-elements';
-
-let inputSearchText = '';
 
 class DefinedTitleBar extends Component{
     // 构造
@@ -18,11 +16,8 @@ class DefinedTitleBar extends Component{
     }
 
     _toSearch = () => {
-        if ((inputSearchText || '').length <= 0)
-            return;
-
         this.props.search &&
-        this.props.search(inputSearchText);
+        this.props.search();
     };
 
     _showLeftLabel(label) {
@@ -32,6 +27,10 @@ class DefinedTitleBar extends Component{
         } else {
             return label;
         }
+    };
+
+    blur(){
+        this._search.blur();
     };
 
     render() {
@@ -50,9 +49,8 @@ class DefinedTitleBar extends Component{
                                inputStyle={styles.searchInput}
                                lightTheme
                                round
-                               onChangeText={(e)=>inputSearchText=e}
                                placeholder='搜索...'
-                               onSubmitEditing={this._toSearch}
+                               onFocus={this._toSearch}
                     />
                     <NavButton label={this.props.rightLabel}
                                style={styles.rightButton}
@@ -62,5 +60,7 @@ class DefinedTitleBar extends Component{
         );
     }
 }
+
+
 
 export default DefinedTitleBar;

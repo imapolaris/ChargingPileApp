@@ -113,14 +113,26 @@ class CPAHomePage extends Component{
             });
         }
 
-        this._search(cityName);
+        this._goToTheCity(cityName);
     };
 
-    _search = (cityName) => {
-        /*if (cityName !== null && cityName !== undefined) {
-            this._getCoordinate(cityName);
-        }*/
+    _search = () => {
+        const {nav} = this.props.screenProps;
+        nav && nav('Search', {callback: this._searchCompleted});
+    };
 
+    _searchCompleted = (cityName)=>{
+        this._titleBar.blur();
+
+        this._goToTheCity(cityName);
+    };
+
+    _goToTheCity = (cityName)=>{
+        if (cityName !== null
+            && cityName !== undefined
+            && cityName !== '') {
+            this._getCoordinate(cityName);
+        }
     };
 
     _getCoordinate = (text) => {

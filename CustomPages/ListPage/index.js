@@ -107,6 +107,7 @@ class CPAListPage extends Component{
                           renderItem={this._renderItem}
                           ItemSeparatorComponent={this._renderSeparator}
                           ListFooterComponent={this._renderBottom}
+                          style={styles.content}
                 />
             </View>
         );
