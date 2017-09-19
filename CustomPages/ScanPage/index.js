@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, Keyboard, Vibration} from 'react-native';
+import {View, Text, Keyboard, Vibration, TextInput} from 'react-native';
 
 import styles from './styles';
 import {Button, Icon} from 'react-native-elements';

@@ -30,7 +30,7 @@ class CPAWelcomePage extends Component{
         Animated.timing(this._animatedRotateValue, {
             toValue: 100,
             delay: 1000,
-            duration: 2000,
+            duration: 1000,
         }).start();
 
         Animated.timing(this._animatedMovingValue, {
@@ -46,7 +46,7 @@ class CPAWelcomePage extends Component{
                 ]
             });
             this.props.navigation.dispatch(resetAction);
-        }, 3000);
+        }, 2000);
     }
 
     componentWillUpdate() {
@@ -88,7 +88,6 @@ class CPAWelcomePage extends Component{
                             充电桩APP
                         </Text>
                     </Animated.View>
-
 
                     <View style={styles.infoContainer}>
                         <Text style={styles.companyInfo}>

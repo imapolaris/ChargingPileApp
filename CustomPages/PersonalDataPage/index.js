@@ -1,22 +1,19 @@
 import React, {Component} from 'react';
-import {View, FlatList, ToastAndroid} from 'react-native';
-
+import {View, FlatList} from 'react-native';
 import styles from './styles';
-
 import {List, ListItem, Button} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import LabelTextInputListItem from "../../CustomComponents/LabelTextInputListItem/index";
 import {ToastAndroidBS} from "../../Common/functions";
 
 class CPAPersonalDataPage extends Component{
-    _renderItem = ({item}) => {
-        return (
-            <LabelTextInputListItem label={item.label}
-                                    previousValue={item.val}
-                                    containerStyle={styles.item}
-            />
-        );
-    };
+    componentDidMount() {
+        this._getUserProfile();
+    }
+
+    // 查询用户个人信息
+    _getUserProfile() {
+
+    }
 
     _onPress = () => {
         ToastAndroidBS('修改成功');
@@ -30,12 +27,22 @@ class CPAPersonalDataPage extends Component{
         navigate && navigate('ChangePwd');
     };
 
+    _renderItem = ({item}) => {
+        return (
+            <LabelTextInputListItem label={item.label}
+                                    previousValue={item.val}
+                                    containerStyle={styles.item}
+                                    editable={item.editable}
+            />
+        );
+    };
+
     render() {
         const data = [
-            {key:1, label:'用户名', val:'孙辉'},
-            {key:2, label:'昵称', val:'alex'},
-            {key:3, label:'性别', val:'男'},
-            {key:4, label:'联系电话', val:'13000000000'},
+            {key:1, label:'用户名', val:'孙辉', editable:true},
+            {key:2, label:'昵称', val:'alex', editable:true},
+            {key:3, label:'性别', val:'男', editable:true},
+            {key:4, label:'联系电话', val:'13000000000', editable:false},
         ];
 
         const list = [
