@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+} from 'react-native';
 
 import styles from './styles';
 import {Button} from 'react-native-elements';
@@ -27,18 +31,21 @@ class StationListItem extends Component{
                 <DividerLine style={styles.divider} />
 
                 <View style={styles.actionContainer}>
-                    <View style={styles.leftContainer}>
-                        <Button title="详情"
-                                onPress={() => this.props.gotoDetails && this.props.gotoDetails()}
-                                style={styles.button} />
-                    </View>
+                    <TouchableOpacity onPress={() => this.props.gotoDetails && this.props.gotoDetails()}
+                                      style={[styles.button, styles.leftContainer]}>
+                        <Text style={styles.buttonText}>
+                            详情
+                        </Text>
+                    </TouchableOpacity>
 
-                    <View style={styles.rightContainer}>
-                        <Button title="导航"
-                                onPress={() => this.props.gotoMapNav && this.props.gotoMapNav()}
-                                style={styles.button} />
-                    </View>
+                    <TouchableOpacity onPress={() => this.props.gotoMapNav && this.props.gotoMapNav()}
+                                      style={[styles.button, styles.rightContainer]}>
+                        <Text style={styles.buttonText}>
+                            导航
+                        </Text>
+                    </TouchableOpacity>
                 </View>
+                <DividerLine/>
             </View>
         );
     }

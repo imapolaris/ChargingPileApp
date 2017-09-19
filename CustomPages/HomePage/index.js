@@ -117,9 +117,10 @@ class CPAHomePage extends Component{
     };
 
     _search = (cityName) => {
-        if (cityName !== null && cityName !== undefined) {
+        /*if (cityName !== null && cityName !== undefined) {
             this._getCoordinate(cityName);
-        }
+        }*/
+
     };
 
     _getCoordinate = (text) => {

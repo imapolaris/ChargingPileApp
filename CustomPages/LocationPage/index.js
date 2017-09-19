@@ -193,6 +193,7 @@ class CPALocationPage extends Component{
                                returnKeyType="search"
                                maxLength={20}
                                containerStyle={styles.search}
+                               placeholder='搜索...'
                                clearIcon={this.state.searchState ? {color:'#86939e', name:'clear'} : null} />
                     {
                         this.state.searchState ?

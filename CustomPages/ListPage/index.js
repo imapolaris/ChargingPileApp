@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, Text} from 'react-native';
 import styles from './styles';
 import StationListItem from "../../CustomComponents/StationListItem/index";
 import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";
-
+import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons';
+import icons from '../../Common/fonts';
+import colors from '../../Common/colors';
 
 class CPAListPage extends Component{
     _onDetailsPress = () => {
@@ -16,6 +18,10 @@ class CPAListPage extends Component{
         navigate('MapNav');
     };
 
+    _toLocation = () => {
+
+    };
+
     _toList = () => {
         const {goBack} = this.props.navigation;
         goBack && goBack();
@@ -23,14 +29,32 @@ class CPAListPage extends Component{
 
     _renderItem = ({item}) => {
         return (
-            <StationListItem key={item.key}
-                             title={item.title}
-                             numbers={item.numbers}
-                             address={item.address}
-                             gotoDetails={item.callback1}
-                             gotoMapNav={item.callback2}
-            />
+            <View style={styles.item}>
+                <StationListItem key={item.key}
+                                 title={item.title}
+                                 numbers={item.numbers}
+                                 address={item.address}
+                                 gotoDetails={item.callback1}
+                                 gotoMapNav={item.callback2}
+                />
+            </View>
         );
+    };
+
+    _renderSeparator = ()=>{
+        return (
+            <View style={styles.separator} />
+        );
+    };
+
+    _renderBottom = ()=>{
+        return (
+            <View style={styles.bottomContainer}>
+                <Text style={styles.bottom}>
+                    我是有底线的...
+                </Text>
+            </View>
+        )
     };
 
     render() {
@@ -75,10 +99,14 @@ class CPAListPage extends Component{
                                  toLocation={this._toLocation}
                                  toList={this._toList}
                                  search={this._search}
-                                 rightLabel="地图"/>
+                                 rightLabel="地图"
+                                 showIcon={true}
+                                 icon={<SimpleIcon type={icons.SimpleLineIcon} name="arrow-down" color={colors.white} size={14} />} />
 
                 <FlatList data={data}
                           renderItem={this._renderItem}
+                          ItemSeparatorComponent={this._renderSeparator}
+                          ListFooterComponent={this._renderBottom}
                 />
             </View>
         );
