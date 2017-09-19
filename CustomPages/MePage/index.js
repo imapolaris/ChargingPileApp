@@ -4,6 +4,7 @@ import styles from './styles';
 import {List, ListItem, Avatar} from 'react-native-elements';
 import {selectFromLibrary, showAvatarPicker, takePicture} from '../../CustomComponents/AvatarPicker/index';
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index.android";
+import {loadAvatar, saveAvatar} from "../../Common/appContext";
 
 const selectArr = [{key: 0, title:'拍照...'}, {key: 1, title: '从手机相册选择'}];
 class CPAMePage extends Component{
@@ -12,8 +13,26 @@ class CPAMePage extends Component{
         super(props);
         // 初始状态
         this.state = {
+            avatarSource: null,
             logined: false,
         };
+    }
+
+    componentDidMount() {
+        this._loadAvatar();
+    }
+
+    _loadAvatar() {
+        loadAvatar()
+            .then(data=>{
+                this.setState({
+                    ...this.state,
+                    avatarSource: { uri: 'data:image/jpeg;base64,' + data.data }
+                });
+            })
+            .catch(error=>{
+                console.log(error);
+            });
     }
 
     // 个人资料
@@ -84,11 +103,13 @@ class CPAMePage extends Component{
             // You can also display the image using data:
             // let source = { uri: 'data:image/jpeg;base64,' + response.data };
 
+            saveAvatar(response.data);
+
             this.setState({
                 avatarSource: source
             });
         }
-    }
+    };
 
     // 登录
     _login = () => {
@@ -149,7 +170,7 @@ class CPAMePage extends Component{
                                     rounded
                                     onPress={this._changeAvatar}
                                     activeOpacity={0.7}
-                                    /*icon={{name: 'user', type: 'simple-line-icon', color:'yellow'}}*/
+                                    icon={{name: 'user', type: 'simple-line-icon', color:'yellow'}}
                                     source={this.state.avatarSource}
                             />
 

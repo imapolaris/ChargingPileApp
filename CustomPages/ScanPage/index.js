@@ -7,7 +7,7 @@ import {GPlaceholderTextColor} from "../../Common/colors";
 import {StackNavigator} from 'react-navigation';
 import CPAWaitingChargingPage from "../WaitingChargingPage/index";
 
-import {ScTextInput} from "../../CustomComponents/SimpleCustomComponent/index";
+import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles";
 import Camera from 'react-native-camera';
 import colors from '../../Common/colors';
 import {startCharging} from "../../Common/webApi";
@@ -154,11 +154,11 @@ class CPAScanPage extends Component{
                 <View style={styles.upperContainer}>
                     <View style={styles.inputContainer}>
                         <View style={styles.textInputContainer}>
-                            <ScTextInput underlineColorAndroid='transparent'
-                                         placeholder='请输入充电桩编号'
-                                         placeholderTextColor={GPlaceholderTextColor}
-                                         style={styles.textInput}
-                                         keyboardType='numeric'
+                            <TextInput underlineColorAndroid='transparent'
+                                       placeholder='请输入充电桩编号'
+                                       placeholderTextColor={GPlaceholderTextColor}
+                                       style={[styles.textInput, TextInputStyles.textInput]}
+                                       keyboardType='numeric'
                             />
                         </View>
                         <View style={styles.buttonContainer}>

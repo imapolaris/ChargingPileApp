@@ -9,7 +9,7 @@ export function appInit() {
     loadUserProfile();
 }
 
-function loadUserProfile() {
+export function loadUserProfile() {
     storage.load({
         key: constants.LoginedKey,
         autoSync: true,
@@ -19,22 +19,34 @@ function loadUserProfile() {
             appContext.logined = ret;
         })
         .catch(error=>{
-            console.warn(error.message);
+            console.log(error.message);
         });
 }
 
-function loadAvatar() {
-    storage.load({
+export function loadAvatar() {
+    return storage.load({
         key: constants.AvatarKey,
         autoSync: true,
         syncInBackground: false,
     })
         .then(ret=>{
             appContext.avatar = ret;
+            return ret;
         })
         .catch(error=>{
             console.warn(error.message);
+            throw new Error(error);
         });
+}
+
+export function saveAvatar(data) {
+    storage.save({
+        key: constants.AvatarKey,
+        data: {
+            data: data,
+        },
+        expires: null
+    });
 }
 
 global.AppContext = appContext;
