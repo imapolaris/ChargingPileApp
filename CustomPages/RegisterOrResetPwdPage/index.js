@@ -5,34 +5,78 @@ import styles from './styles';
 import {Button} from 'react-native-elements';
 import {GPlaceholderTextColor} from "../../Common/colors";
 import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles";
-import {ToastAndroidBS, validatePhoneNumber} from "../../Common/functions";
-import {sendMessage} from "../../Common/webApi";
+import {ToastAndroidBL, ToastAndroidBS, validatePhoneNumber} from "../../Common/functions";
+import {register, sendMessage} from "../../Common/webApi";
 
+const GetVCode = '获取验证码';
+const CountTime = 120;
 class CPARegisterOrResetPwdPage extends Component {
     // 构造
     constructor(props) {
         super(props);
         // 初始状态
         this.state = {
+            username: '',
             phoneNumber: '',
             vCode: '',
             pwd: '',
+            countTime: CountTime, // 验证码倒计时120秒
+            vCodeSent: false,
+            vCodeText: GetVCode,
         };
     }
 
+    componentWillUnmount() {
+        this._timer && clearInterval(this._timer);
+    }
+
     // 获取验证码
-    _getVCode = () => {
+    _getVCode = ()=>{
         // 先验证手机号码是否合法
         let phoneNumber = this.state.phoneNumber;
         let correct = validatePhoneNumber(phoneNumber);
         if (correct){
-            sendMessage(phoneNumber);
+            sendMessage(phoneNumber)
+                .then(ret=>{
+                    this.setState({
+                        ...this.state,
+                        vCodeSent: true,
+                    });
 
-            ToastAndroidBS('验证码已发送！');
+                    ToastAndroidBS('验证码已发送！');
+
+                    this._onSentVCode();
+                })
+                .catch(err=>{
+                    ToastAndroidBS('验证码发送失败！');
+                    console.log(err);
+                });
         }
         else {
             ToastAndroidBS('手机号码不正确！');
         }
+    };
+
+    _onSentVCode = ()=>{
+        this._timer = setInterval(()=>{
+            let countTime = this.state.countTime - 1;
+            if (countTime === 0) {
+                this.setState({
+                    ...this.state,
+                    vCodeText: GetVCode,
+                    vCodeSent: false,
+                    countTime: CountTime,
+                });
+
+                this._timer && clearInterval(this._timer);
+            } else {
+                this.setState({
+                    ...this.state,
+                    vCodeText: `重新获取${countTime}s`,
+                    countTime: countTime,
+                });
+            }
+        }, 1000);
     };
 
     _showUserAgreement = () => {
@@ -41,16 +85,45 @@ class CPARegisterOrResetPwdPage extends Component {
     };
 
     _registerOrReset = () => {
-        const {params} = this.props.navigation.state;
+        let username = this.state.username;
+        if (username.length <= 0) {
+            ToastAndroidBL('用户名不能为空！');
+            return;
+        }
 
+        let phoneNumber = this.state.phoneNumber;
+        if (phoneNumber.length <= 0 || !validatePhoneNumber(phoneNumber)) {
+            ToastAndroidBL('手机号不正确！');
+            return;
+        }
+
+        let vCode = this.state.vCode;
+        if (vCode.length !== 6) {
+            ToastAndroidBL('验证码不正确！');
+            return;
+        }
+        let pwd = this.state.pwd;
+        if (pwd.length <= 0) {
+            ToastAndroidBL('密码不能为空！');
+            return;
+        }
+
+        const {params} = this.props.navigation.state;
         if (params.registerOrReset === 'register'){
-            ToastAndroidBS('注册成功！');
+            register(username, phoneNumber, vCode, pwd)
+                .then(ret=>{
+                    ToastAndroidBS('注册成功，请登录！');
+
+                    const {goBack} = this.props.navigation;
+                    goBack && goBack();
+                })
+                .catch(err=>{
+                    console.log(err);
+                    ToastAndroidBS('注册失败！');
+                });
         } else {
             ToastAndroidBS('重置成功！');
         }
-
-        const {goBack} = this.props.navigation;
-        goBack && goBack();
     };
 
     render() {
@@ -59,6 +132,23 @@ class CPARegisterOrResetPwdPage extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
+                    {
+                        params.registerOrReset === 'register' ?
+                            <TextInput placeholderTextColor={GPlaceholderTextColor}
+                                       placeholder='输入用户名'
+                                       style={[styles.textInput, TextInputStyles.textInput]}
+                                       keyboardType={'numeric'}
+                                       value={this.state.username}
+                                       onChangeText={(text)=>{
+                                           this.setState({
+                                               ...this.state,
+                                               username: text,
+                                           })
+                                       }}
+                            />
+                            : null
+                    }
+
                     <TextInput placeholderTextColor={GPlaceholderTextColor}
                                placeholder='输入手机号'
                                style={[styles.textInput, TextInputStyles.textInput]}
@@ -74,7 +164,9 @@ class CPARegisterOrResetPwdPage extends Component {
                     <View style={styles.vcodeContainer}>
                         <TextInput placeholder='输入验证码'
                                    placeholderTextColor={GPlaceholderTextColor}
-                                   style={[styles.textInput, styles.vcodeTextInput, TextInputStyles.textInput]}
+                                   style={[styles.textInput,
+                                       styles.vcodeTextInput,
+                                       TextInputStyles.textInput]}
                                    keyboardType={'numeric'}
                                    value={this.state.vCode}
                                    onChangeText={(text)=>{
@@ -85,15 +177,17 @@ class CPARegisterOrResetPwdPage extends Component {
                                    }}
                         />
                         <TouchableOpacity onPress={this._getVCode}
-                                          style={styles.vcodeButton}>
-                            <Text style={styles.vcodeText}>
-                                获取验证码
+                                          style={[styles.vcodeButton, this.state.vCodeSent ? styles.vcodeButtonSent : null]}
+                                          disabled={this.state.vCodeSent} >
+                            <Text style={[styles.vcodeText, this.state.vCodeSent ? styles.vcodeTextSent : null]}>
+                                {this.state.vCodeText}
                             </Text>
                         </TouchableOpacity>
                     </View>
                     <TextInput placeholder={params.registerOrReset === 'register' ? '输入密码' : '输入新密码'}
                                placeholderTextColor={GPlaceholderTextColor}
-                               style={[styles.textInput, TextInputStyles.textInput]}
+                               style={[styles.textInput,
+                                   TextInputStyles.textInput]}
                                secureTextEntry={true}
                                value={this.state.pwd}
                                onChangeText={(text)=>{
@@ -102,6 +196,7 @@ class CPARegisterOrResetPwdPage extends Component {
                                        pwd: text,
                                    })
                                }}
+                               onSubmitEditing={this._registerOrReset}
                     />
                 </View>
 

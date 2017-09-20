@@ -27,11 +27,17 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5,
     },
+    vcodeButtonSent: {
+        borderColor: colors.grey3,
+    },
     vcodeTextInput: {
         flex: 1,
     },
     vcodeText: {
         color: colors.tintColor,
+    },
+    vcodeTextSent: {
+        color: colors.grey3,
     },
     textInput:{
         borderWidth: 0.5,

@@ -44,7 +44,7 @@ export function ToastAndroidBS(message) {
     ToastAndroid.show(message, ToastAndroid.BOTTOM, ToastAndroid.SHORT);
 }
 
-export function ToastAndroidBL() {
+export function ToastAndroidBL(message) {
     ToastAndroid.show(message, ToastAndroid.BOTTOM, ToastAndroid.LONG);
 }
 
@@ -173,8 +173,16 @@ export function myFetch(url, method, headers, body) {
 * */
 export function validateUserName(userName) {
     let reg = /^[a-zA-Z0-9_-]{4,20}$/;
-
     return reg.test(userName);
+}
+
+/*
+* validate whether the password is strong.
+* */
+export function isStrongPassword(pwd) {
+    //最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
+    let reg = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/;
+    return reg.test(pwd);
 }
 
 /*
@@ -182,6 +190,5 @@ export function validateUserName(userName) {
 * */
 export function validatePhoneNumber(phoneNumber) {
     let reg = /^1[34578]\d{9}$/; //验证规则
-
     return reg.test(phoneNumber);
 }

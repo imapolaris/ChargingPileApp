@@ -75,12 +75,13 @@ export function login(username, pwd) {
 /*
 * register the user.
 * */
-export function register(username, phoneNumber, vCode) {
+export function register(username, phoneNumber, vCode, pwd) {
     let url = `${urls.users}/register`;
     let data = {
         username: username,
         phoneNumber: phoneNumber,
         vCode: vCode,
+        password: pwd,
     };
 
     return myFetch(url, 'POST', headers, data);
