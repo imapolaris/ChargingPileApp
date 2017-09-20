@@ -5,6 +5,7 @@ import {List, ListItem, Avatar} from 'react-native-elements';
 import {selectFromLibrary, showAvatarPicker, takePicture} from '../../CustomComponents/AvatarPicker/index';
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index.android";
 import {loadAvatar, saveAvatar} from "../../Common/appContext";
+import {NavigationActions} from 'react-navigation';
 
 const selectArr = [{key: 0, title:'拍照...'}, {key: 1, title: '从手机相册选择'}];
 class CPAMePage extends Component{
@@ -120,16 +121,28 @@ class CPAMePage extends Component{
     // 登录
     _login = () => {
         if (!this.state.logined){
-            const {nav} = this.props.screenProps;
-            nav && nav('Login');
+            this._goToLogin();
         }
+    };
+
+    _goToLogin = ()=>{
+        const {nav} = this.props.screenProps;
+        nav && nav('Login');
     };
 
     // 注册
     _register = () => {
         if (!this.state.logined){
             const {nav} = this.props.screenProps;
-            nav && nav('Register', {registerOrReset: 'register'});
+            nav && nav('Register', {registerOrReset: 'register', callback: this._onRegistered});
+        }
+    };
+
+    // 注册完成
+    _onRegistered = (status)=>{
+        // 注册成功
+        if (status === true) {
+            //this._goToLogin();
         }
     };
 

@@ -19,12 +19,17 @@ class CPAListPage extends Component{
     };
 
     _toLocation = () => {
-
+        const {navigate} = this.props.navigation;
+        navigate && navigate('Location', {callback: this._searchStation});
     };
 
     _toList = () => {
         const {goBack} = this.props.navigation;
         goBack && goBack();
+    };
+
+    _searchStation = (cityName)=>{
+        alert(cityName);
     };
 
     _renderItem = ({item}) => {

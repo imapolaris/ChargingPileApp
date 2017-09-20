@@ -2,7 +2,7 @@ import {StyleSheet, Dimensions} from 'react-native';
 
 export const {width, height} = Dimensions.get('window');
 const [left, top] = [0, 0];
-export const [aWidth] = [width-20];
+export const [aWidth] = [width];
 export const [middleLeft] = [(width - aWidth) / 2];
 
 const styles = StyleSheet.create({

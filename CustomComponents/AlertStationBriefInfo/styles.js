@@ -3,8 +3,7 @@ import colors from '../../Common/colors';
 
 export const {width, height} = Dimensions.get('window');
 const [left, top] = [0, 0];
-export const [aWidth] = [width-20];
-export const [middleLeft] = [(width - aWidth) / 2];
+export const [aWidth] = [width];
 
 const styles = StyleSheet.create({
     mask: {

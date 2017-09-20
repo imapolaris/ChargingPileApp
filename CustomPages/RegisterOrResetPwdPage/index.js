@@ -8,6 +8,7 @@ import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles
 import {ToastAndroidBL, ToastAndroidBS, validatePhoneNumber} from "../../Common/functions";
 import {register, sendMessage} from "../../Common/webApi";
 
+
 const GetVCode = '获取验证码';
 const CountTime = 120;
 class CPARegisterOrResetPwdPage extends Component {
@@ -85,26 +86,14 @@ class CPARegisterOrResetPwdPage extends Component {
     };
 
     _registerOrReset = () => {
+        this._goToLogin();
+        return;
+
         let username = this.state.username;
-        if (username.length <= 0) {
-            ToastAndroidBL('用户名不能为空！');
-            return;
-        }
-
         let phoneNumber = this.state.phoneNumber;
-        if (phoneNumber.length <= 0 || !validatePhoneNumber(phoneNumber)) {
-            ToastAndroidBL('手机号不正确！');
-            return;
-        }
-
         let vCode = this.state.vCode;
-        if (vCode.length !== 6) {
-            ToastAndroidBL('验证码不正确！');
-            return;
-        }
         let pwd = this.state.pwd;
-        if (pwd.length <= 0) {
-            ToastAndroidBL('密码不能为空！');
+        if (!this._validateInput(username, phoneNumber, vCode, pwd)) {
             return;
         }
 
@@ -114,16 +103,49 @@ class CPARegisterOrResetPwdPage extends Component {
                 .then(ret=>{
                     ToastAndroidBS('注册成功，请登录！');
 
-                    const {goBack} = this.props.navigation;
-                    goBack && goBack();
+                    this._goToLogin();
                 })
                 .catch(err=>{
                     console.log(err);
                     ToastAndroidBS('注册失败！');
                 });
         } else {
+
+
             ToastAndroidBS('重置成功！');
         }
+    };
+
+    _validateInput = (username, phoneNumber, vCode, pwd)=>{
+        if (username.length <= 0) {
+            ToastAndroidBL('用户名不能为空！');
+            return false;
+        }
+
+
+        if (phoneNumber.length <= 0 || !validatePhoneNumber(phoneNumber)) {
+            ToastAndroidBL('手机号不正确！');
+            return false;
+        }
+
+
+        if (vCode.length !== 6) {
+            ToastAndroidBL('验证码不正确！');
+            return false;
+        }
+
+        if (pwd.length <= 0) {
+            ToastAndroidBL('密码不能为空！');
+            return false;
+        }
+
+        return true;
+    };
+
+    _goToLogin = ()=>{
+        const {state, goBack} = this.props.navigation;
+        goBack && goBack();
+        //state.params.callback && state.params.callback(true);
     };
 
     render() {

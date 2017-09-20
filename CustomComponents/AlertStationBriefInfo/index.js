@@ -2,15 +2,12 @@ import React, {Component} from 'react';
 import {
     View,
     Text,
-    TouchableHighlight,
     Platform,
     TouchableOpacity,
     Modal
 } from 'react-native';
-import styles, {aWidth} from './styles';
-import {Button} from 'react-native-elements';
+import styles from './styles';
 import DividerLine from "../DividerLine/index";
-
 
 export class AlertStationBriefInfo extends Component {
     // 构造

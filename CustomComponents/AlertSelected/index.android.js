@@ -76,13 +76,6 @@ export class AlertSelected extends Component {
         );
     }
 
-    _in = () => {
-        this.setState({
-            ...this.state,
-            show: true
-        })
-    };
-
     _out = () => {
         this.setState({
             ...this.state,
