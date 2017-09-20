@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
     },
     avatarContainer:{
         alignItems: 'center',
-        marginTop: 20,
-        marginBottom: 20,
+        marginTop: 10,
+        marginBottom: 10,
     },
     textInput:{
         borderWidth: 0.5,
@@ -26,10 +26,15 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 30,
+        paddingTop: 20,
     },
     button:{
-        width: screenWidth-30,
+        width: screenWidth-20,
+    },
+    forgotPwdContainer: {
+        paddingLeft: 15,
+        paddingRight: 15,
+        alignItems: 'flex-end',
     },
     text:{
         marginTop: 15,

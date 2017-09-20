@@ -14,12 +14,18 @@ class CPAMePage extends Component{
         // 初始状态
         this.state = {
             avatarSource: null,
-            logined: false,
+            logon: false,
+            nickname: '',
         };
     }
 
     componentDidMount() {
         this._loadAvatar();
+
+        /*this.setState({
+            ...this.state,
+            logon: AppContext.isLogon,
+        });*/
     }
 
     _loadAvatar() {
@@ -175,10 +181,10 @@ class CPAMePage extends Component{
                             />
 
                             {
-                                this.state.logined ?
+                                this.state.logon ?
                                     <View style={{marginTop:10}}>
                                         <Text style={styles.text}>
-                                            {this.props.nickname || 'alex'}
+                                            {this.props.nickname}
                                         </Text>
                                     </View>
                                     :

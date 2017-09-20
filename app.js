@@ -2,7 +2,7 @@ import './Common/appStorage';
 import './Common/appContext';
 
 import React, {Component} from 'react';
-import {StyleSheet, ToastAndroid, BackHandler, View, StatusBar} from 'react-native';
+import {StyleSheet, BackHandler, View, StatusBar} from 'react-native';
 import CPAStackNavigator from './CustomComponents/Navigators/CPAStackNavigator';
 import {createStore} from 'redux';
 import constants from './Common/constants';

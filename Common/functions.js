@@ -141,7 +141,7 @@ export function myFetch(url, method, headers, body) {
         })
             .then(response=>{
                 if (response.status === 200) {
-                    return response;
+                    return response.json();
                 } else {
                     throw new Error(response.status);
                 }
@@ -153,11 +153,11 @@ export function myFetch(url, method, headers, body) {
         return fetch(url, {
             method: 'POST',
             headers: headers,
-            body: body,
+            body: JSON.stringify(body),
         })
             .then(response=>{
                 if (response.status === 200) {
-                    return response;
+                    return response.json();
                 } else {
                     throw new Error(response.status);
                 }
@@ -169,10 +169,19 @@ export function myFetch(url, method, headers, body) {
 }
 
 /*
+* validate the user name.
+* */
+export function validateUserName(userName) {
+    let reg = /^[a-zA-Z0-9_-]{4,20}$/;
+
+    return reg.test(userName);
+}
+
+/*
 * validate the phone number.
 * */
 export function validatePhoneNumber(phoneNumber) {
     let reg = /^1[34578]\d{9}$/; //验证规则
 
-    return reg.test(phoneNumber); //true
+    return reg.test(phoneNumber);
 }

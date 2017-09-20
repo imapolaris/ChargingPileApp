@@ -6,6 +6,15 @@ const storage = new Storage({
     storageBackend: AsyncStorage,
     defaultExpires: null,
     enableCache: true,
+    sync: {
+        userProfile(){
+            return {
+                username: '小李',
+                nickname: 'alex',
+                gender:'男',
+            }
+        }
+    }
 });
 
 global.storage = storage;

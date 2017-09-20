@@ -1,7 +1,8 @@
 import constants from "./constants";
 
 const appContext = {
-    logined: false,
+    isLogon: false,
+    userProfile: null,
     avatar: null,
 };
 
@@ -11,16 +12,33 @@ export function appInit() {
 
 export function loadUserProfile() {
     storage.load({
-        key: constants.LoginedKey,
+        key: constants.UserProfileKey,
         autoSync: true,
         syncInBackground: false,
     })
         .then(ret=> {
-            appContext.logined = ret;
+            appContext.logined = ret.isLogon;
+            appContext.userProfile = ret.profile;
+            return ret.isLogon;
         })
         .catch(error=>{
             console.log(error.message);
         });
+}
+
+export function saveUserProfile(data) {
+    storage.save({
+        key: constants.UserProfileKey,
+        data: {
+            isLogon: true,
+            profile: {
+                username: data.username,
+                nickname: data.nickname,
+                gender: data.gender,
+            }
+        },
+        expires: null
+    });
 }
 
 export function loadAvatar() {
