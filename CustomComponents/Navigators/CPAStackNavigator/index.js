@@ -14,7 +14,6 @@ import CPAWalletPage from "../../../CustomPages/WalletPage/index";
 import CPAChargingRecordsPage from "../../../CustomPages/ChargingRecordsPage/index";
 import CPAMySubscribePage from "../../../CustomPages/MySubscribePage/index";
 import CPAPayRecordsPage from "../../../CustomPages/PayRecordsPage/index";
-import CPAActionPayPage from "../../../CustomPages/ActionPayPage/index";
 import CPAChangePwdPage from "../../../CustomPages/ChangePwdPage/index";
 import CPASettingPage from "../../../CustomPages/SettingPage/index";
 import CPAUserAgreement from "../../UserAgreement/index";
@@ -121,12 +120,6 @@ const CPAStackNavigator = StackNavigator(
             screen: CPAPayRecordsPage,
             navigationOptions: {
                 title: '充值记录',
-            }
-        },
-        ActionPay: {
-            screen: CPAActionPayPage,
-            navigationOptions: {
-                title: '充值',
             }
         },
         UserAgreement: {
