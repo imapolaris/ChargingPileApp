@@ -5,6 +5,7 @@ import styles from './styles';
 import {Button, CheckBox} from 'react-native-elements';
 import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles";
 import Alipay from 'react-native-yunpeng-alipay';
+import {ToastAndroidBS} from "../../Common/functions";
 
 class CPAActionPayPage extends Component{
     // 构造
@@ -44,10 +45,7 @@ class CPAActionPayPage extends Component{
                 alert(error);
             });*/
 
-        ToastAndroid.show('充值成功！',
-                ToastAndroid.SHORT,
-                ToastAndroid.BOTTOM
-        );
+        ToastAndroidBS('充值成功！');
 
         const {goBack} = this.props.navigation;
         goBack && goBack();

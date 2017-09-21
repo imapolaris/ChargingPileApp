@@ -80,8 +80,17 @@ const CPAStackNavigator = StackNavigator(
         },
         Wallet: {
             screen: CPAWalletPage,
-            navigationOptions: {
-                title: '钱包',
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '钱包',
+                    headerRight: (
+                        <NavButton label="明细"
+                                   onPress={() => {
+                                       navigation.navigate('PayRecords');
+                                   }}
+                        />
+                    ),
+                });
             }
         },
         ChargingRecords: {

@@ -1,61 +1,106 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import TextInputStyles from '../../CustomComponents/SimpleCustomComponent/styles';
 
 import styles from './styles';
-import {List, ListItem} from 'react-native-elements';
+import {CheckBox, Button} from 'react-native-elements';
+import {ToastAndroidBS} from "../../Common/functions";
 
 class CPAWalletPage extends Component{
-    // 查看充值记录
-    _payRecords = () => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate('PayRecords');
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            wxChecked: true,
+            zfbChecked: false,
+        };
+    }
+
+    _onWxPress = () => {
+        let checked = !this.state.wxChecked;
+        this.setState({
+            wxChecked: checked,
+            zfbChecked: !checked,
+        });
     };
 
-    // 充值
-    _actionPay = () => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate('ActionPay');
+    _onZfbPress = () => {
+        let checked = !this.state.zfbChecked;
+        this.setState({
+            wxChecked: !checked,
+            zfbChecked: checked,
+        });
+    };
+
+    _onSubmit = () => {
+        /*Alipay.pay('signed pay info string')
+            .then(data=>{
+                console.log(data);
+                alert(data);
+            })
+            .catch(error=>{
+                console.error(error);
+                alert(error);
+            });*/
+
+        ToastAndroidBS('充值成功！');
     };
 
     render() {
-        const list = [
-            {
-                title: '充值记录',
-                icon: {name:'list', type:'simple-line-icon'},
-                callback: this._payRecords,
-            }
-        ];
-
         return (
             <View style={styles.container}>
-                <View style={styles.listContainer}>
-                    <List style={styles.list}>
-                        {
-                            list.map((item, i) => (
-                                <ListItem key={i}
-                                          title={item.title}
-                                          icon={item.icon}
-                                          containerStyle={styles.item}
-                                          onPress={() => item.callback && item.callback()} />
-                            ))
-                        }
-                    </List>
-                </View>
-
                 <View style={styles.balanceContainer}>
                     <Text style={styles.label}>
                         余额：
                     </Text>
                     <Text style={styles.money}>
                         {this.props.money || '89.32'}
-                    </Text>
-                    <TouchableOpacity>
-                        <Text style={styles.charging}
-                              onPress={this._actionPay}
-                        >
-                            充值
+                        <Text style={styles.label}>
+                            {'  '}元
                         </Text>
-                    </TouchableOpacity>
+                    </Text>
+                </View>
+
+                <View style={styles.payContainer}>
+                    <View style={styles.inputContainer}>
+                        <TextInput style={[styles.textInput, TextInputStyles.textInput]}
+                                   placeholder='请输入充值金额（最少10元）'
+                                   placeholderTextColor='#C3C3C3'
+                                   underlineColorAndroid='transparent'
+                                   keyboardType='numeric'
+                        />
+                        <Text style={styles.text}>
+                            元
+                        </Text>
+                    </View>
+
+                    <View style={styles.payWayContainer}>
+                        <Text>
+                            充值方式：
+                        </Text>
+
+                        <View style={styles.checkboxContainer}>
+                            <CheckBox style={styles.checkbox}
+                                      center
+                                      title="微信"
+                                      checked={this.state.wxChecked}
+                                      onPress={this._onWxPress}
+                            />
+                            <CheckBox style={styles.checkbox}
+                                      title="支付宝"
+                                      checked={this.state.zfbChecked}
+                                      onPress={this._onZfbPress}
+                            />
+                        </View>
+                    </View>
+
+                    <View style={styles.submitButtonContainer}>
+                        <Button title="充值"
+                                buttonStyle={styles.submitButton}
+                                onPress={this._onSubmit}
+                        />
+                    </View>
                 </View>
             </View>
         );
