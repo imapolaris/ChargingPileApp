@@ -12,10 +12,10 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     buttonContainer:{
-        padding: 30,
+        paddingTop: 30,
     },
     button: {
-        width: 150,
+
     },
 });
 

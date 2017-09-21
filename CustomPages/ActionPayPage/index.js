@@ -90,7 +90,7 @@ class CPAActionPayPage extends Component{
 
                 <View style={styles.submitButtonContainer}>
                     <Button title="提交"
-                            style={styles.submitButton}
+                            buttonStyle={styles.submitButton}
                             onPress={this._onSubmit}
                     />
                 </View>

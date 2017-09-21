@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {screenWidth} from "../../Common/styles";
 
 const styles = StyleSheet.create({
     container: {
@@ -40,12 +41,12 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     submitButtonContainer: {
-        marginTop: 50,
-        marginLeft: 30,
-        marginRight: 30,
+        paddingTop: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     submitButton:{
-
+        width: screenWidth - 20,
     },
 });
 

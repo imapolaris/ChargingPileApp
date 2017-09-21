@@ -10,8 +10,6 @@ const styles = StyleSheet.create(
         },
         buttonContainer:{
             marginTop: 30,
-            marginLeft: 30,
-            marginRight: 30,
             justifyContent: 'center',
         },
     }

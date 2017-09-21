@@ -47,10 +47,10 @@ const styles = StyleSheet.create({
     buttonContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 30,
+        paddingTop: 20,
     },
     button: {
-        width: screenWidth-30,
+        width: screenWidth-20,
     },
     text: {
         marginTop: 10,

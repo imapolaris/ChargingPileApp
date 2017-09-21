@@ -160,7 +160,7 @@ class CPARegisterOrResetPwdPage extends Component {
                     {
                         params.registerOrReset === 'register' ?
                             <TextInput placeholderTextColor={GPlaceholderTextColor}
-                                       placeholder='输入用户名'
+                                       placeholder='用户名'
                                        style={[styles.textInput, TextInputStyles.textInput]}
                                        keyboardType={'numeric'}
                                        value={this.state.username}
@@ -175,7 +175,7 @@ class CPARegisterOrResetPwdPage extends Component {
                     }
 
                     <TextInput placeholderTextColor={GPlaceholderTextColor}
-                               placeholder='输入手机号'
+                               placeholder='手机号'
                                style={[styles.textInput, TextInputStyles.textInput]}
                                keyboardType={'numeric'}
                                value={this.state.phoneNumber}
@@ -187,7 +187,7 @@ class CPARegisterOrResetPwdPage extends Component {
                                }}
                     />
                     <View style={styles.vcodeContainer}>
-                        <TextInput placeholder='输入验证码'
+                        <TextInput placeholder='验证码'
                                    placeholderTextColor={GPlaceholderTextColor}
                                    style={[styles.textInput,
                                        styles.vcodeTextInput,
@@ -209,7 +209,7 @@ class CPARegisterOrResetPwdPage extends Component {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <TextInput placeholder={params.registerOrReset === 'register' ? '输入密码' : '输入新密码'}
+                    <TextInput placeholder={params.registerOrReset === 'register' ? '密码' : '新密码'}
                                placeholderTextColor={GPlaceholderTextColor}
                                style={[styles.textInput,
                                    TextInputStyles.textInput]}
