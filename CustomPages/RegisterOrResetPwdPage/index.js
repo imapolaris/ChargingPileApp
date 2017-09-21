@@ -6,7 +6,7 @@ import {Button} from 'react-native-elements';
 import {GPlaceholderTextColor} from "../../Common/colors";
 import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles";
 import {ToastAndroidBL, ToastAndroidBS, validatePhoneNumber} from "../../Common/functions";
-import {register, sendMessage} from "../../Common/webApi";
+import {register, resetPwd, sendMessage} from "../../Common/webApi";
 
 
 const GetVCode = '获取验证码';
@@ -86,9 +86,6 @@ class CPARegisterOrResetPwdPage extends Component {
     };
 
     _registerOrReset = () => {
-        this._goToLogin();
-        return;
-
         let username = this.state.username;
         let phoneNumber = this.state.phoneNumber;
         let vCode = this.state.vCode;
@@ -110,24 +107,30 @@ class CPARegisterOrResetPwdPage extends Component {
                     ToastAndroidBS('注册失败！');
                 });
         } else {
-
-
-            ToastAndroidBS('重置成功！');
+            resetPwd(phoneNumber, vCode, pwd)
+                .then(ret=>{
+                    ToastAndroidBS('重置密码成功，请使用新密码登录！');
+                })
+                .catch(err=>{
+                    console.log(err);
+                    ToastAndroidBS('重置密码失败！');
+                });
         }
     };
 
     _validateInput = (username, phoneNumber, vCode, pwd)=>{
-        if (username.length <= 0) {
-            ToastAndroidBL('用户名不能为空！');
-            return false;
+        const {params} = this.props.navigation.state;
+        if (params.registerOrReset === 'register') {
+            if (username.length <= 0) {
+                ToastAndroidBL('用户名不能为空！');
+                return false;
+            }
         }
-
 
         if (phoneNumber.length <= 0 || !validatePhoneNumber(phoneNumber)) {
             ToastAndroidBL('手机号不正确！');
             return false;
         }
-
 
         if (vCode.length !== 6) {
             ToastAndroidBL('验证码不正确！');

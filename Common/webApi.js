@@ -88,6 +88,20 @@ export function register(username, phoneNumber, vCode, pwd) {
 }
 
 /*
+* reset the password.
+* */
+export function resetPwd(phoneNumber, vCode, pwd) {
+    let url = `${urls.users}/reset`;
+    let data = {
+        phoneNumber: phoneNumber,
+        vCode: vCode,
+        password: pwd,
+    };
+
+    return myFetch(url, 'POST', headers, data);
+}
+
+/*
 * upload the avatar to server.
 * */
 export function uploadAvatar(avatar) {
