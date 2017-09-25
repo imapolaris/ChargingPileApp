@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {screenWidth} from "../../Common/styles";
+import colors from '../../Common/colors';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,6 +16,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10,
         marginBottom: 10,
+    },
+    WelcomeTitle: {
+        fontSize: 24,
+        color: colors.theme1,
     },
     textInput:{
         borderWidth: 0.5,

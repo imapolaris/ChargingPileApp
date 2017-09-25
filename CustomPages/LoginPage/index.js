@@ -20,30 +20,16 @@ class CPALoginPage extends Component{
         super(props);
         // 初始状态
         this.state = {
-            username: '',
+            phoneNumber: '',
             pwd: '',
-            avatarSource: null,
         };
     }
 
-    componentDidMount() {
-        loadAvatar()
-            .then(ret=>{
-                this.setState({
-                    ...this.state,
-                    avatarSource: { uri: 'data:image/jpeg;base64,' + ret.data }
-                })
-            })
-            .catch(err=>{
-                console.log(err);
-            });
-    }
-
     _login = () => {
-        let username = this.state.username;
+        let phoneNumber = this.state.phoneNumber;
         let pwd = this.state.pwd;
 
-        login(username, pwd)
+        login(phoneNumber, pwd)
             .then(ret=>{
                 if (ret.result === true) {
                     // 登录成功
@@ -76,23 +62,21 @@ class CPALoginPage extends Component{
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
                     <View style={styles.avatarContainer}>
-                        <Avatar large
-                                rounded
-                                icon={{name:'user', type:'simple-line-icon', color:'yellow'}}
-                                source={this.state.avatarSource}
-                                activeOpacity={0.7}
-                        />
+                        <Text style={styles.WelcomeTitle}>
+                            欢迎登录
+                        </Text>
                     </View>
 
                     <TextInput placeholderTextColor={GPlaceholderTextColor}
-                               placeholder='用户名'
+                               placeholder='手机号'
                                style={[styles.textInput, TextInputStyles.textInput]}
                                underlineColorAndroid='transparent'
-                               value={this.state.username}
+                               keyboardType={'numeric'}
+                               value={this.state.phoneNumber}
                                onChangeText={(text)=>{
                                    this.setState({
                                        ...this.state,
-                                       username: text,
+                                       phoneNumber: text,
                                    });
                                }}
                     />

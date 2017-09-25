@@ -17,7 +17,6 @@ class CPARegisterOrResetPwdPage extends Component {
         super(props);
         // 初始状态
         this.state = {
-            username: '',
             phoneNumber: '',
             vCode: '',
             pwd: '',
@@ -86,17 +85,16 @@ class CPARegisterOrResetPwdPage extends Component {
     };
 
     _registerOrReset = () => {
-        let username = this.state.username;
         let phoneNumber = this.state.phoneNumber;
         let vCode = this.state.vCode;
         let pwd = this.state.pwd;
-        if (!this._validateInput(username, phoneNumber, vCode, pwd)) {
+        if (!this._validateInput(phoneNumber, vCode, pwd)) {
             return;
         }
 
         const {params} = this.props.navigation.state;
         if (params.registerOrReset === 'register'){
-            register(username, phoneNumber, vCode, pwd)
+            register(phoneNumber, vCode, pwd)
                 .then(ret=>{
                     ToastAndroidBS('注册成功，请登录！');
 
@@ -118,15 +116,7 @@ class CPARegisterOrResetPwdPage extends Component {
         }
     };
 
-    _validateInput = (username, phoneNumber, vCode, pwd)=>{
-        const {params} = this.props.navigation.state;
-        if (params.registerOrReset === 'register') {
-            if (username.length <= 0) {
-                ToastAndroidBL('用户名不能为空！');
-                return false;
-            }
-        }
-
+    _validateInput = (phoneNumber, vCode, pwd)=>{
         if (phoneNumber.length <= 0 || !validatePhoneNumber(phoneNumber)) {
             ToastAndroidBL('手机号不正确！');
             return false;
@@ -157,23 +147,6 @@ class CPARegisterOrResetPwdPage extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
-                    {
-                        params.registerOrReset === 'register' ?
-                            <TextInput placeholderTextColor={GPlaceholderTextColor}
-                                       placeholder='用户名'
-                                       style={[styles.textInput, TextInputStyles.textInput]}
-                                       keyboardType={'numeric'}
-                                       value={this.state.username}
-                                       onChangeText={(text)=>{
-                                           this.setState({
-                                               ...this.state,
-                                               username: text,
-                                           })
-                                       }}
-                            />
-                            : null
-                    }
-
                     <TextInput placeholderTextColor={GPlaceholderTextColor}
                                placeholder='手机号'
                                style={[styles.textInput, TextInputStyles.textInput]}

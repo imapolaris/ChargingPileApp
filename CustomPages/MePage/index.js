@@ -206,17 +206,17 @@ class CPAMePage extends Component{
                                             <Text style={[styles.text, styles.login]}
                                                   onPress={this._login}
                                                   textDecorationLine='underline'>
-                                                登录
+                                                登录/注册
                                             </Text>
                                         </TouchableOpacity>
-                                        <Text> / </Text>
+                                        {/*<Text> / </Text>
                                         <TouchableOpacity>
                                             <Text style={[styles.text, styles.register]}
                                                   onPress={this._register}
                                                   textDecorationLine='underline'>
                                                 注册
                                             </Text>
-                                        </TouchableOpacity>
+                                        </TouchableOpacity>*/}
                                     </View>
                             }
                         </View>
