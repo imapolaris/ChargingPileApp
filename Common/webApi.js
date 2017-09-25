@@ -65,9 +65,9 @@ export function startCharging(serialNumber) {
 /*
 * login the app.
 * */
-export function login(username, pwd) {
+export function login(phoneNumber, pwd) {
     let url = `${urls.users}/login`;
-    let data = {username: username, password: pwd};
+    let data = {phoneNumber: phoneNumber, password: pwd};
 
     return myFetch(url, 'POST', headers, data);
 }

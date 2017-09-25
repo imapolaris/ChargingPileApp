@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
         marginTop: 10,
         color: '#00FFFF',
     },
+    userAgreementContainer: {
+        alignItems: 'center',
+    },
     userAgreement: {
         textDecorationLine : 'underline',
     },

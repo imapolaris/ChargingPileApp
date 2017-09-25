@@ -22,7 +22,7 @@ class CPAUserAgreement extends Component{
             '否则您无权注册、登录或使用本协议所涉服务。' +
             '您的注册、登录、使用等行为将视为对本协议的接受，' +
             '并同意接受本协议各项条款的约束。';
-        for (let i=1; i<=10; i++){
+        for (let i=1; i<=3; i++){
             content += content;
         }
 

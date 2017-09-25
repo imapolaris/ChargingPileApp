@@ -6,6 +6,15 @@ import LabelTextInputListItem from "../../CustomComponents/LabelTextInputListIte
 import {ToastAndroidBS} from "../../Common/functions";
 
 class CPAPersonalDataPage extends Component{
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            userProfile: [],
+        };
+    }
+
     componentDidMount() {
         this._getUserProfile();
     }
@@ -15,7 +24,7 @@ class CPAPersonalDataPage extends Component{
 
     }
 
-    _onPress = () => {
+    _confirmModify = () => {
         ToastAndroidBS('修改成功');
 
         const {goBack} = this.props.navigation;
@@ -32,17 +41,14 @@ class CPAPersonalDataPage extends Component{
             <LabelTextInputListItem label={item.label}
                                     previousValue={item.val}
                                     containerStyle={styles.item}
-                                    editable={item.editable}
             />
         );
     };
 
     render() {
         const data = [
-            {key:1, label:'用户名', val:'孙辉', editable:true},
-            {key:2, label:'昵称', val:'alex', editable:true},
-            {key:3, label:'性别', val:'男', editable:true},
-            {key:4, label:'联系电话', val:'13000000000', editable:false},
+            {key:2, label:'昵称', val:'alex'},
+            {key:3, label:'性别', val:'男'},
         ];
 
         const list = [
@@ -78,7 +84,7 @@ class CPAPersonalDataPage extends Component{
                 <View style={styles.buttonContainer}>
                     <Button style={styles.button}
                             title="确认修改"
-                            onPress={this._onPress}
+                            onPress={this._confirmModify}
                     />
                 </View>
             </View>

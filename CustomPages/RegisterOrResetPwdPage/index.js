@@ -38,17 +38,20 @@ class CPARegisterOrResetPwdPage extends Component {
         if (correct){
             sendMessage(phoneNumber)
                 .then(ret=>{
-                    this.setState({
-                        ...this.state,
-                        vCodeSent: true,
-                    });
+                    if (ret.result === true) {
+                        this.setState({
+                            ...this.state,
+                            vCodeSent: true,
+                        });
+                        ToastAndroidBS('验证码已发送！');
 
-                    ToastAndroidBS('验证码已发送！');
-
-                    this._onSentVCode();
+                        this._onSentVCode();
+                    } else {
+                        ToastAndroidBS(ret.message);
+                    }
                 })
                 .catch(err=>{
-                    ToastAndroidBS('验证码发送失败！');
+                    ToastAndroidBS('验证码发送失败：'+err);
                     console.log(err);
                 });
         }
@@ -96,13 +99,16 @@ class CPARegisterOrResetPwdPage extends Component {
         if (params.registerOrReset === 'register'){
             register(phoneNumber, vCode, pwd)
                 .then(ret=>{
-                    ToastAndroidBS('注册成功，请登录！');
-
-                    this._goToLogin();
+                    if (ret.result === true) {
+                        ToastAndroidBS('注册成功，请登录！');
+                        this._goToLogin();
+                    } else {
+                        ToastAndroidBS(ret.message);
+                    }
                 })
                 .catch(err=>{
                     console.log(err);
-                    ToastAndroidBS('注册失败！');
+                    ToastAndroidBS('注册失败：'+err);
                 });
         } else {
             resetPwd(phoneNumber, vCode, pwd)
@@ -203,21 +209,22 @@ class CPARegisterOrResetPwdPage extends Component {
                             buttonStyle={styles.button}
                             onPress={this._registerOrReset}
                     />
-                    {
-                        params.registerOrReset === 'register' ?
-                            <TouchableOpacity>
-                                <Text style={styles.text}>
-                                    注册即代表同意
-                                    <Text style={styles.userAgreement}
-                                          onPress={this._showUserAgreement}
-                                    >
-                                        用户协议
-                                    </Text>
-                                </Text>
-                            </TouchableOpacity>
-                            : null
-                    }
                 </View>
+
+                {
+                    params.registerOrReset === 'register' ?
+                        <TouchableOpacity style={styles.userAgreementContainer}>
+                            <Text style={styles.text}>
+                                注册即代表同意
+                                <Text style={styles.userAgreement}
+                                      onPress={this._showUserAgreement}
+                                >
+                                    用户协议
+                                </Text>
+                            </Text>
+                        </TouchableOpacity>
+                        : null
+                }
             </View>
         );
     }

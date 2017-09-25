@@ -42,13 +42,12 @@ class CPALoginPage extends Component{
                     goBack && goBack();
                 } else {
                     // 登录失败
-                    ToastAndroidBS('登录失败！');
+                    ToastAndroidBS(ret.message);
                 }
             })
             .catch(error=>{
                 console.log(error);
-
-                ToastAndroidBS('登录失败！');
+                ToastAndroidBS('登录失败:'+error);
             });
     };
 
