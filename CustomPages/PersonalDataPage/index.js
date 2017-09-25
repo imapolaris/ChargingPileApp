@@ -3,10 +3,10 @@ import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {List, ListItem, Button, Avatar} from 'react-native-elements';
 import {ToastAndroidBS} from "../../Common/functions";
-import {getUserProfile} from "../../Common/webApi";
+import {getUserProfile, updateUserProfile} from "../../Common/webApi";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index.android";
 import {selectFromLibrary, takePicture} from '../../CustomComponents/AvatarPicker/index';
-import {saveAvatar} from "../../Common/appContext";
+import {saveAvatar, loadAvatar} from "../../Common/appContext";
 
 const selectArr = [{key: 0, title:'拍照...'}, {key: 1, title: '从手机相册选择'}];
 const selectGenderArr = [{key: 0, title: '男'}, {key: 1, title:'女'}];
@@ -25,6 +25,17 @@ class CPAPersonalDataPage extends Component{
 
     componentDidMount() {
         //this._getUserProfile();
+
+        loadAvatar()
+            .then(data=>{
+                this.setState({
+                    ...this.state,
+                    avatarSource: { uri: 'data:image/jpeg;base64,' + data.data }
+                });
+            })
+            .catch(error=>{
+                console.log(error);
+            });
     }
 
     // 查询用户个人信息
@@ -40,10 +51,25 @@ class CPAPersonalDataPage extends Component{
     }
 
     _confirmModify = () => {
-        ToastAndroidBS('修改成功');
+        let avatar = this.state.avatarSource;
+        let nickname = this.state.nickname;
+        let gender = this.state.gender;
 
-        const {goBack} = this.props.navigation;
-        goBack && goBack();
+        updateUserProfile()
+            .then(ret=>{
+                if (ret.result === true){
+                    ToastAndroidBS('修改成功');
+
+                    const {goBack} = this.props.navigation;
+                    goBack && goBack();
+                } else {
+                    ToastAndroidBS(ret.message);
+                }
+            })
+            .catch(err=>{
+                console.error(err);
+                ToastAndroidBS("修改个人信息出错：" +err);
+            });
     };
 
     // 更换头像
@@ -168,7 +194,7 @@ class CPAPersonalDataPage extends Component{
 
                         <TouchableOpacity style={styles.button}
                                           onPress={this._changeGender}>
-                            <Text>
+                            <Text style={styles.buttonText}>
                                 {this.state.gender}
                             </Text>
                         </TouchableOpacity>

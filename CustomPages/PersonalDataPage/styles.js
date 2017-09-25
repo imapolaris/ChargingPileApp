@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         paddingRight: 5,
     },
+    buttonText: {
+        fontSize: 16,
+        color: colors.dkGreyBg,
+    },
     itemContainer:{
         height: 50,
         flexDirection: 'row',

@@ -6,6 +6,17 @@ import LabelTextInputListItem from "../../CustomComponents/LabelTextInputListIte
 import {Button} from 'react-native-elements';
 
 class CPAChangePwdPage extends Component{
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            oldPwd: '',
+            oldPwdAgain: '',
+            newPwd: '',
+        };
+    }
+
     _renderItem = ({item}) => {
         return (
             <LabelTextInputListItem label={item.label}
