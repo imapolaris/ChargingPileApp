@@ -2,12 +2,8 @@ import React, {Component} from 'react';
 import {View, ScrollView, ImageBackground, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {List, ListItem, Avatar} from 'react-native-elements';
-import {selectFromLibrary, showAvatarPicker, takePicture} from '../../CustomComponents/AvatarPicker/index';
-import {AlertSelected} from "../../CustomComponents/AlertSelected/index.android";
-import {loadAvatar, saveAvatar} from "../../Common/appContext";
-import {NavigationActions} from 'react-navigation';
+import {loadAvatar} from "../../Common/appContext";
 
-const selectArr = [{key: 0, title:'拍照...'}, {key: 1, title: '从手机相册选择'}];
 class CPAMePage extends Component{
     // 构造
     constructor(props) {
@@ -70,52 +66,6 @@ class CPAMePage extends Component{
     _setting = () => {
         const {nav} = this.props.screenProps;
         nav && nav('Setting');
-    };
-
-    // 更换头像
-    _changeAvatar = () => {
-        this._selector.show('选择头像',
-            selectArr,
-            '#333333',
-            (i)=>{
-                switch (i){
-                    case 0:
-                        takePicture(this.selectAvatarResponse);
-                        break;
-                    case 1:
-                        selectFromLibrary(this.selectAvatarResponse);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        );
-    };
-
-    selectAvatarResponse = (response) => {
-        console.log('Response = ', response);
-
-        if (response.didCancel) {
-            console.log('User cancelled image picker');
-        }
-        else if (response.error) {
-            console.log('ImagePicker Error: ', response.error);
-        }
-        else if (response.customButton) {
-            console.log('User tapped custom button: ', response.customButton);
-        }
-        else {
-            let source = { uri: response.uri };
-
-            // You can also display the image using data:
-            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-            saveAvatar(response.data);
-
-            this.setState({
-                avatarSource: source
-            });
-        }
     };
 
     // 登录
@@ -253,8 +203,6 @@ class CPAMePage extends Component{
                         </List>
                     </View>
                 </ScrollView>
-
-                <AlertSelected ref={self=>this._selector=self} />
             </View>
         );
     }

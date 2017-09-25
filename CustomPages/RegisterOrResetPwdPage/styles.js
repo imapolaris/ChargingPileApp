@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         width: screenWidth-20,
     },
     text: {
-        marginTop: 10,
+        marginTop: 15,
         color: '#00FFFF',
     },
     userAgreementContainer: {

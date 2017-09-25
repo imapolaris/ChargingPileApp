@@ -111,3 +111,24 @@ export function uploadAvatar(avatar) {
 
     return myFetch(url, 'POST', headers, data);
 }
+
+/*
+* get user profile by phone number.
+* */
+export function getUserProfile(phoneNumber) {
+    let url = `${urls.users}/info`;
+    let data = {
+        phoneNumber: phoneNumber
+    };
+
+    return myFetch(url, 'POST', headers, data);
+}
+
+/*
+* update user profile.
+* */
+export function updateUserProfile(data) {
+    let url = `${urls.users}/update`;
+
+    return myFetch(url, 'POST', headers, data);
+}
