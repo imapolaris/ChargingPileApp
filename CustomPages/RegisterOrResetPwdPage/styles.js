@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     text: {
         marginTop: 15,
         color: '#00FFFF',
+        fontSize: 15,
     },
     userAgreementContainer: {
         alignItems: 'center',

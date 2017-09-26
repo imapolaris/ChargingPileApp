@@ -36,7 +36,18 @@ const styles = StyleSheet.create({
     button:{
         width: screenWidth-20,
     },
+    shortCutContainer: {
+
+        flexDirection: 'row',
+    },
+    quickLoginContainer: {
+        flex: 1,
+        paddingLeft: 15,
+        paddingRight: 15,
+        alignItems: 'flex-start',
+    },
     forgotPwdContainer: {
+        flex: 1,
         paddingLeft: 15,
         paddingRight: 15,
         alignItems: 'flex-end',
@@ -44,6 +55,7 @@ const styles = StyleSheet.create({
     text:{
         marginTop: 15,
         color: '#00FFFF',
+        fontSize: 15,
     },
 });
 

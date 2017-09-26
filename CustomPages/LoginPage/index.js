@@ -4,10 +4,11 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
+    Keyboard,
 } from 'react-native';
 
 import styles from './styles';
-import {Button, Avatar} from 'react-native-elements';
+import {Button} from 'react-native-elements';
 import {GPlaceholderTextColor} from "../../Common/colors";
 import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles";
 import {login} from "../../Common/webApi";
@@ -26,6 +27,8 @@ class CPALoginPage extends Component{
     }
 
     _login = () => {
+        Keyboard.dismiss();
+
         let phoneNumber = this.state.phoneNumber;
         let pwd = this.state.pwd;
 
@@ -49,6 +52,10 @@ class CPALoginPage extends Component{
                 console.log(error);
                 ToastAndroidBS('登录失败:'+error);
             });
+    };
+
+    _quickLogin = () => {
+
     };
 
     _forgotPwd = () => {
@@ -102,13 +109,23 @@ class CPALoginPage extends Component{
                             onPress={this._login} />
                 </View>
 
-                <TouchableOpacity style={styles.forgotPwdContainer}>
-                    <Text textDecorationLine="underline"
-                          style={styles.text}
-                          onPress={this._forgotPwd} >
-                        忘记密码?
-                    </Text>
-                </TouchableOpacity>
+                <View style={styles.shortCutContainer}>
+                    {/*<TouchableOpacity style={styles.quickLoginContainer}>
+                        <Text textDecorationLine="underline"
+                              style={styles.text}
+                              onPress={this._quickLogin} >
+                            快捷登录
+                        </Text>
+                    </TouchableOpacity>*/}
+
+                    <TouchableOpacity style={styles.forgotPwdContainer}>
+                        <Text textDecorationLine="underline"
+                              style={styles.text}
+                              onPress={this._forgotPwd} >
+                            忘记密码?
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }

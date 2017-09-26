@@ -18,7 +18,7 @@ class CPAMePage extends Component{
     }
 
     componentDidMount() {
-        this._loadAvatar();
+        //this._loadAvatar();
 
         /*this.setState({
             ...this.state,
