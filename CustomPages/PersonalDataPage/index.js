@@ -50,14 +50,17 @@ class CPAPersonalDataPage extends Component{
         let avatar = this.state.avatarSource;
         let nickname = this.state.nickname;
         let gender = this.state.gender;
-        let data = {Id: AppContext.userId, nickname: nickname, gender: gender, avatar: avatar};
+        let data = {nickname: nickname, gender: gender, avatar: avatar};
 
-        updateUserProfile(data)
+        updateUserProfile(Object.assign({}, data, {Id: AppContext.userId}))
             .then(ret=>{
                 if (ret.result === true){
                     ToastAndroidBS('修改成功');
 
-                    const {goBack} = this.props.navigation;
+                    AppContext.updateUserProfile(data);
+
+                    const {state, goBack} = this.props.navigation;
+                    state.params.callback && state.params.callback();
                     goBack && goBack();
                 } else {
                     ToastAndroidBS(ret.message);

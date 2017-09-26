@@ -16,7 +16,7 @@ import CPAMySubscribePage from "../../../CustomPages/MySubscribePage/index";
 import CPAPayRecordsPage from "../../../CustomPages/PayRecordsPage/index";
 import CPAChangePwdPage from "../../../CustomPages/ChangePwdPage/index";
 import CPASettingPage from "../../../CustomPages/SettingPage/index";
-import CPAUserAgreement from "../../../CustomPages/UserAgreement/index";
+import CPAUserAgreement from "../../../CustomPages/UserAgreementPage/index";
 import CPAAboutUsPage from "../../../CustomPages/AboutUsPage/index";
 import CPALoginPage from "../../../CustomPages/LoginPage/index";
 import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPage/index";

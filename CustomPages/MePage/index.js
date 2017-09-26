@@ -18,33 +18,33 @@ class CPAMePage extends Component{
     }
 
     componentDidMount() {
-        if (AppContext.isLogon === true) {
-            this._loadUserProfile();
-        }
+        this._loadUserProfile();
     }
 
     _loadUserProfile() {
-        AppContext.loadUserProfile()
-            .then(ret=> {
-                if (ret === null || ret === undefined){
-                    ToastAndroidBS("登录信息失效，请重新登录！");
-                } else {
-                    this.setState({
-                        ...this.state,
-                        nickname: ret.nickname,
-                        avatarSource: ret.avatar,
-                        logon: true,
-                    });
-                }
-            })
-            .catch(error=>{
-                console.log(error.message);
-            });
+        if (AppContext.isLogon === true) {
+            AppContext.loadUserProfile()
+                .then(ret => {
+                    if (ret === null || ret === undefined) {
+                        ToastAndroidBS("登录信息失效，请重新登录！");
+                    } else {
+                        this.setState({
+                            ...this.state,
+                            nickname: ret.nickname,
+                            avatarSource: ret.avatar,
+                            logon: true,
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.log(error.message);
+                });
+        }
     }
 
     // 个人资料
     _personalData = () => {
-        this._navigateTo('PersonalData');
+        this._navigateTo('PersonalData', {callback: this._onUpdate});
     };
 
     // 钱包
@@ -65,7 +65,7 @@ class CPAMePage extends Component{
     // 设置
     _setting = () => {
         const {nav} = this.props.screenProps;
-        nav && nav('Setting');
+        nav && nav('Setting', {callback: this._onLogout});
     };
 
     // 登录
@@ -77,13 +77,32 @@ class CPAMePage extends Component{
 
     _goToLogin = ()=>{
         const {nav} = this.props.screenProps;
-        nav && nav('Login');
+        nav && nav('Login', {callback: this._onLogin});
     };
 
-    _navigateTo = (screenKey) => {
+    _onLogin = () => {
+        this._loadUserProfile();
+    };
+
+    _onLogout = () => {
+        this.setState({
+            ...this.state,
+            nickname: '',
+            logon: false,
+        });
+    };
+
+    _onUpdate = () => {
+        this._loadUserProfile();
+    };
+
+    _navigateTo = (screenKey, params) => {
         if (AppContext.isLogon === true) {
             const {nav} = this.props.screenProps;
-            nav && nav(screenKey);
+            if (params === null || params === undefined)
+                nav && nav(screenKey);
+            else
+                nav && nav(screenKey, params);
         } else {
             ToastAndroidBS('请先登录！');
             this._goToLogin();

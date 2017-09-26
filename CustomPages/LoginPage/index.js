@@ -37,10 +37,10 @@ class CPALoginPage extends Component{
                     // 登录成功
                     ToastAndroidBS(`登录成功！`);
 
-                    alert(ret.data.id);
                     AppContext.login({userId: ret.data.id, nickname:ret.data.nickname, avatar: ret.data.avatar});
 
-                    const {goBack} = this.props.navigation;
+                    const {state, goBack} = this.props.navigation;
+                    state.params.callback && state.params.callback();
                     goBack && goBack();
                 } else {
                     // 登录失败

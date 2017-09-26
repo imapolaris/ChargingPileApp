@@ -18,18 +18,9 @@ const appContext = {
     },
     login: function (data) {
         this.isLogon = true;
-        this.userProfile = data;
         this.userId = data.userId;
-        storage.save({
-            key: constants.UserProfileKey,
-            data: {
-                isLogon: true,
-                userId: data.userId,
-                nickname: data.nickname,
-                avatar: data.avatar,
-            },
-            expires: null
-        });
+        this.userProfile = Object.assign({}, data, {isLogon: true});
+        this.updateUserProfile(this.userProfile);
     },
     hadLogon: function () {
         storage.load({
@@ -58,12 +49,11 @@ const appContext = {
                 console.log(error.message);
             });
     },
-    saveAvatar: function(data) {
+    updateUserProfile: function (data) {
+        this.userProfile = Object.assign({}, this.userProfile, data);
         storage.save({
             key: constants.UserProfileKey,
-            data: Object.Assign({},
-                appContext.userProfile, {avatar: data}
-            ),
+            data: this.userProfile,
             expires: null
         });
     },
@@ -71,10 +61,6 @@ const appContext = {
 
 export function appInit() {
     appContext.hadLogon();
-}
-
-export function loadUserProfile() {
-
 }
 
 global.AppContext = appContext;

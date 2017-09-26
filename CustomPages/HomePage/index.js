@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Button, Modal, FlatList} from 'react-native';
+import {View} from 'react-native';
 
 import styles from './styles';
 import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";
@@ -12,7 +12,7 @@ import {
     MapTypes,
     Geolocation
 } from 'react-native-baidu-map';
-import {getCurrentLocation, gotoNavigation, IsNullOrUndefined, mapApp, ToastAndroidCL} from "../../Common/functions";
+import {getCurrentLocation, gotoNavigation, mapApp, ToastAndroidCL, ToastAndroidBS} from "../../Common/functions";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index";
 import {AlertStationBriefInfo} from "../../CustomComponents/AlertStationBriefInfo/index";
 import {getAllStationsWithBriefInfo, getSingleStation} from '../../Common/webApi';
@@ -73,7 +73,7 @@ class CPAHomePage extends Component{
     }
 
     // 请求电站信息
-    _requestStations() {
+    _requestStations = ()=> {
         getAllStationsWithBriefInfo()
             .then(data=>{
                 let stations = [];
@@ -162,7 +162,14 @@ class CPAHomePage extends Component{
     // 扫一扫
     _onStartChargingPress = () => {
         const {nav} = this.props.screenProps;
-        nav && nav('Scan', {headerVisible: true});
+
+        if (AppContext.isLogon === true) {
+            nav && nav('Scan', {headerVisible: true});
+        } else {
+            ToastAndroidBS('请先登录！');
+
+            //nav && nav('Login');
+        }
     };
 
     // 显示电站基本信息
