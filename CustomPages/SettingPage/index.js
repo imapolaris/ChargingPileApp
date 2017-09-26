@@ -3,6 +3,7 @@ import {View, ToastAndroid} from 'react-native';
 
 import styles from './styles';
 import {Button, List, ListItem} from 'react-native-elements';
+import {ToastAndroidBS} from "../../Common/functions";
 
 class CPASettingPage extends Component{
     // 用户协议
@@ -19,10 +20,8 @@ class CPASettingPage extends Component{
 
     // 退出登录
     _quitMe = () => {
-        ToastAndroid.show('已退出登录！',
-                ToastAndroid.SHORT,
-                    ToastAndroid.BOTTOM
-        );
+        AppContext.logout();
+        ToastAndroidBS("退出登录！");
 
         const {goBack} = this.props.navigation;
         goBack && goBack();
@@ -59,11 +58,16 @@ class CPASettingPage extends Component{
                     }
                 </List>
 
-                <View style={styles.buttonContainer}>
-                    <Button title="退出登录"
-                            onPress={this._quitMe}
-                            style={styles.button} />
-                </View>
+                {
+                    AppContext.isLogon === true ?
+                        <View style={styles.buttonContainer}>
+                            <Button title="退出登录"
+                                    onPress={this._quitMe}
+                                    style={styles.button} />
+                        </View>
+                        :
+                        null
+                }
             </View>
         );
     }

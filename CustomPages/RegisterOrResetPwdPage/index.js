@@ -142,9 +142,8 @@ class CPARegisterOrResetPwdPage extends Component {
     };
 
     _goToLogin = ()=>{
-        const {state, goBack} = this.props.navigation;
+        const {goBack} = this.props.navigation;
         goBack && goBack();
-        //state.params.callback && state.params.callback(true);
     };
 
     render() {

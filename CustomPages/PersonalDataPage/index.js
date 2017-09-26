@@ -6,7 +6,6 @@ import {ToastAndroidBS} from "../../Common/functions";
 import {getUserProfile, updateUserProfile} from "../../Common/webApi";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index.android";
 import {selectFromLibrary, takePicture} from '../../CustomComponents/AvatarPicker/index';
-import {saveAvatar, loadAvatar} from "../../Common/appContext";
 
 const selectArr = [{key: 0, title:'拍照...'}, {key: 1, title: '从手机相册选择'}];
 const selectGenderArr = [{key: 0, title: '男'}, {key: 1, title:'女'}];
@@ -16,33 +15,30 @@ class CPAPersonalDataPage extends Component{
         super(props);
         // 初始状态
         this.state = {
-            userProfile: [],
             avatarSource: null,
-            nickname: 'alex',
-            gender: '男',
+            nickname: '',
+            gender: '',
         };
     }
 
     componentDidMount() {
-        //this._getUserProfile();
-
-        loadAvatar()
-            .then(data=>{
-                this.setState({
-                    ...this.state,
-                    avatarSource: { uri: 'data:image/jpeg;base64,' + data.data }
-                });
-            })
-            .catch(error=>{
-                console.log(error);
-            });
+        this._getUserProfile();
     }
 
     // 查询用户个人信息
     _getUserProfile() {
-        getUserProfile('')
+        getUserProfile(AppContext.userId)
             .then(ret=>{
-
+                if (ret.result === true){
+                    this.setState({
+                        ...this.state,
+                        nickname: ret.data.nickname,
+                        gender: ret.data.gender,
+                        avatarSource: ret.data.avatar,
+                    })
+                } else {
+                    ToastAndroidBS(ret.message);
+                }
             })
             .catch(err=>{
                 console.error(err);
@@ -54,8 +50,9 @@ class CPAPersonalDataPage extends Component{
         let avatar = this.state.avatarSource;
         let nickname = this.state.nickname;
         let gender = this.state.gender;
+        let data = {Id: AppContext.userId, nickname: nickname, gender: gender, avatar: avatar};
 
-        updateUserProfile()
+        updateUserProfile(data)
             .then(ret=>{
                 if (ret.result === true){
                     ToastAndroidBS('修改成功');
@@ -129,12 +126,12 @@ class CPAPersonalDataPage extends Component{
             console.log('User tapped custom button: ', response.customButton);
         }
         else {
-            let source = { uri: response.uri };
+            // let source = { uri: response.uri };
 
             // You can also display the image using data:
-            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+            let source = { uri: 'data:image/jpeg;base64,' + response.data };
 
-            saveAvatar(response.data);
+            //AppContext.saveAvatar(source);
 
             this.setState({
                 avatarSource: source

@@ -13,7 +13,6 @@ import {GPlaceholderTextColor} from "../../Common/colors";
 import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles";
 import {login} from "../../Common/webApi";
 import {ToastAndroidBS} from "../../Common/functions";
-import {loadAvatar, saveUserProfile} from "../../Common/appContext";
 
 class CPALoginPage extends Component{
     // 构造
@@ -38,8 +37,8 @@ class CPALoginPage extends Component{
                     // 登录成功
                     ToastAndroidBS(`登录成功！`);
 
-                    saveUserProfile({username: '小佟', nickname:'alice', gender:'女'});
-                    AppContext.isLogon = true;
+                    alert(ret.data.id);
+                    AppContext.login({userId: ret.data.id, nickname:ret.data.nickname, avatar: ret.data.avatar});
 
                     const {goBack} = this.props.navigation;
                     goBack && goBack();
@@ -54,10 +53,12 @@ class CPALoginPage extends Component{
             });
     };
 
+    // 快捷登录
     _quickLogin = () => {
 
     };
 
+    // 忘记密码
     _forgotPwd = () => {
         const {navigate} = this.props.navigation;
         navigate && navigate('Reset', {registerOrReset: 'reset'});

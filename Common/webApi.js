@@ -101,24 +101,12 @@ export function resetPwd(phoneNumber, vCode, pwd) {
 }
 
 /*
-* upload the avatar to server.
-* */
-export function uploadAvatar(avatar) {
-    let url = `${urls.users}/avatar`;
-    let data = {
-        avatar: avatar
-    };
-
-    return myFetch(url, 'POST', headers, data);
-}
-
-/*
 * get user profile by phone number.
 * */
-export function getUserProfile(phoneNumber) {
+export function getUserProfile(userId) {
     let url = `${urls.users}/info`;
     let data = {
-        phoneNumber: phoneNumber
+        Id: userId
     };
 
     return myFetch(url, 'POST', headers, data);

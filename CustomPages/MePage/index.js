@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {View, ScrollView, ImageBackground, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {List, ListItem, Avatar} from 'react-native-elements';
-import {loadAvatar} from "../../Common/appContext";
 import colors from "../../Common/colors";
+import {ToastAndroidBS} from "../../Common/functions";
 
 class CPAMePage extends Component{
     // 构造
@@ -18,49 +18,48 @@ class CPAMePage extends Component{
     }
 
     componentDidMount() {
-        //this._loadAvatar();
-
-        /*this.setState({
-            ...this.state,
-            logon: AppContext.isLogon,
-        });*/
+        if (AppContext.isLogon === true) {
+            this._loadUserProfile();
+        }
     }
 
-    _loadAvatar() {
-        loadAvatar()
-            .then(data=>{
-                this.setState({
-                    ...this.state,
-                    avatarSource: { uri: 'data:image/jpeg;base64,' + data.data }
-                });
+    _loadUserProfile() {
+        AppContext.loadUserProfile()
+            .then(ret=> {
+                if (ret === null || ret === undefined){
+                    ToastAndroidBS("登录信息失效，请重新登录！");
+                } else {
+                    this.setState({
+                        ...this.state,
+                        nickname: ret.nickname,
+                        avatarSource: ret.avatar,
+                        logon: true,
+                    });
+                }
             })
             .catch(error=>{
-                console.log(error);
+                console.log(error.message);
             });
     }
 
     // 个人资料
     _personalData = () => {
-        const {nav} = this.props.screenProps;
-        nav && nav('PersonalData');
+        this._navigateTo('PersonalData');
     };
 
     // 钱包
     _wallet = () => {
-        const {nav} = this.props.screenProps;
-        nav && nav('Wallet');
+        this._navigateTo('Wallet');
     };
 
     // 充电记录
     _chargingRecords = () => {
-        const {nav} = this.props.screenProps;
-        nav && nav('ChargingRecords');
+        this._navigateTo('ChargingRecords');
     };
 
     // 我的预约
     _mySubscribe = () => {
-        const {nav} = this.props.screenProps;
-        nav && nav('MySubscribe');
+        this._navigateTo('MySubscribe');
     };
 
     // 设置
@@ -81,19 +80,21 @@ class CPAMePage extends Component{
         nav && nav('Login');
     };
 
+    _navigateTo = (screenKey) => {
+        if (AppContext.isLogon === true) {
+            const {nav} = this.props.screenProps;
+            nav && nav(screenKey);
+        } else {
+            ToastAndroidBS('请先登录！');
+            this._goToLogin();
+        }
+    };
+
     // 注册
     _register = () => {
         if (!this.state.logined){
             const {nav} = this.props.screenProps;
             nav && nav('Register', {registerOrReset: 'register', callback: this._onRegistered});
-        }
-    };
-
-    // 注册完成
-    _onRegistered = (status)=>{
-        // 注册成功
-        if (status === true) {
-            //this._goToLogin();
         }
     };
 
@@ -143,10 +144,10 @@ class CPAMePage extends Component{
                             />
 
                             {
-                                this.state.logon ?
+                                this.state.logon === true ?
                                     <View style={{marginTop:10}}>
                                         <Text style={styles.text}>
-                                            {this.props.nickname}
+                                            {this.state.nickname}
                                         </Text>
                                     </View>
                                     :

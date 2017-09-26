@@ -153,6 +153,7 @@ export function myFetch(url, method, headers, body) {
         return fetch(url, {
             method: 'POST',
             headers: headers,
+            timeout: 3000,
             body: JSON.stringify(body),
         })
             .then(response=>{

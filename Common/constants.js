@@ -1,5 +1,4 @@
 export default {
-    LoginedKey: 'logined',
-    AvatarKey: 'avatar',
+    IsLogonKey: 'isLogon',
     UserProfileKey: 'userProfile',
 }
