@@ -9,7 +9,6 @@ import {
 
 import styles from './styles';
 import List from "./List";
-import NavButton from "../../CustomComponents/NavButton/index";
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import colors from '../../Common/colors';
 import {getCurrentLocation} from "../../Common/functions";
@@ -17,8 +16,7 @@ import {Geolocation} from 'react-native-baidu-map';
 import DividerLine from "../../CustomComponents/DividerLine/index";
 import {SearchBar} from 'react-native-elements';
 import data from '../../Resources/Data/city';
-
-let that;
+import {getRecentVisitCities, updateRecentVisitCities} from "../../Common/appContext";
 
 class CPALocationPage extends Component{
     // 构造
@@ -27,16 +25,15 @@ class CPALocationPage extends Component{
         // 初始状态
         this.state = {
             currentPosition: '',
-            recentlyCities: ['北京', '上海', '杭州'],
+            recentlyCities: ['', '', ''],
             searchState: false,
             searchResult: [],
         };
-
-        that = this;
     }
 
     componentWillMount() {
         this._getCurrentCity();
+        this._getRecentVisitCities();
     }
 
     // 获取当前定位城市
@@ -66,7 +63,38 @@ class CPALocationPage extends Component{
             })
     };
 
+    _getRecentVisitCities = () => {
+        getRecentVisitCities()
+            .then(ret=>{
+                this.setState({
+                    ...this.state,
+                    recentlyCities: ret
+                })
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+    };
+
+    _updateRecentVisitCities = (cityName) => {
+        let cities = this.state.recentlyCities;
+        let data = [];
+        data.push(cityName);
+        let j = 0;
+        for (let i = 0; i < 2;){
+            if (cities[j] !== cityName)
+            {
+                i++;
+                data.push(cities[j]);
+            }
+            j++;
+        }
+        updateRecentVisitCities(data);
+    };
+
     _changeCity = (cityName) => {
+        this._updateRecentVisitCities(cityName);
+
         const {state, goBack} = this.props.navigation;
         state.params.callback && state.params.callback(cityName);
         goBack && goBack();
@@ -110,7 +138,7 @@ class CPALocationPage extends Component{
         });
     };
 
-    _renderItem({item}){
+    _renderItem = ({item}) => {
         return (
             <TouchableOpacity
                 key={item.key}
@@ -125,9 +153,9 @@ class CPALocationPage extends Component{
                 </View>
             </TouchableOpacity>
         );
-    }
+    };
 
-    _renderOptions() {
+    _renderOptions = () => {
         return (
             <View style={styles.container}>
                 <View style={styles.locationContainerWhole}>
@@ -149,15 +177,19 @@ class CPALocationPage extends Component{
                     <View style={styles.currentCities}>
                         {
                             this.state.recentlyCities && this.state.recentlyCities.map((item, index)=>{
-                                return (
-                                    <TouchableOpacity key={index}
-                                                      style={styles.currentCity}
-                                                      onPress={()=>this._changeCity(item)} >
-                                        <Text style={styles.cityName}>
-                                            {item}
-                                        </Text>
-                                    </TouchableOpacity>
-                                )
+                                if (item !== null && item !== undefined && item.length > 0){
+                                    return (
+                                        <TouchableOpacity key={index}
+                                                          style={styles.currentCity}
+                                                          onPress={()=>this._changeCity(item)} >
+                                            <Text style={styles.cityName}>
+                                                {item.length > 3 ? item.substring(0, 3) + '..' : item}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    )
+                                } else {
+                                    return null;
+                                }
                             })
                         }
                     </View>
@@ -170,16 +202,16 @@ class CPALocationPage extends Component{
                 </View>
             </View>
         )
-    }
+    };
 
-    _renderSearchOptions() {
+    _renderSearchOptions = () => {
         return (
             <View style={styles.searchResultContainer}>
                 <FlatList data={this.state.searchResult}
-                          renderItem={this._renderItem.bind(this)} />
+                          renderItem={this._renderItem} />
             </View>
         );
-    }
+    };
 
     render() {
         return (

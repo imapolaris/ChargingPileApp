@@ -9,7 +9,6 @@ const storage = new Storage({
     sync: {
         userProfile(){
             return {
-                username: '小李',
                 nickname: 'alex',
                 gender:'男',
             }

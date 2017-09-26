@@ -1,5 +1,8 @@
 import constants from "./constants";
 
+/*
+* the context of the app.
+* */
 const appContext = {
     isLogon: false,
     userProfile: null,
@@ -66,3 +69,28 @@ export function appInit() {
 }
 
 global.AppContext = appContext;
+
+/*
+* recent visit cities.
+* */
+export function updateRecentVisitCities(cities) {
+    storage.save({
+        key: constants.RecentVisitCitiesKey,
+        data: cities,
+        expires: null
+    });
+}
+
+export function getRecentVisitCities() {
+    return storage.load({
+        key: constants.RecentVisitCitiesKey,
+        autoSync: true,
+        syncInBackground: false,
+    })
+        .then(ret=> {
+            return ret || ['北京', '上海', '杭州'];
+        })
+        .catch(error=>{
+            console.log(error.message);
+        });
+}
