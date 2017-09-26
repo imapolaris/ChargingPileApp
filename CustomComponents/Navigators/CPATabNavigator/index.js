@@ -38,7 +38,7 @@ const CPATabNavigator = TabNavigator(
                 title: '我的',
                 tabBarIcon: ({tintColor}) => {
                     return (
-                        <Icon name="people" size={16} color={tintColor}/>
+                        <Icon name="user" size={16} color={tintColor}/>
                     );
                 },
             },

@@ -31,13 +31,14 @@ class CPAMePage extends Component{
                         this.setState({
                             ...this.state,
                             nickname: ret.nickname,
-                            avatarSource: ret.avatar,
+                            avatarSource: ret.avatar !== null ? JSON.parse(ret.avatar) : null,
                             logon: true,
                         });
                     }
                 })
                 .catch(error => {
                     console.log(error.message);
+                    ToastAndroidBS("加载个人信息失败！");
                 });
         }
     }

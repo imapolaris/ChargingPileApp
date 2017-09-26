@@ -22,7 +22,7 @@ const appContext = {
         this.userProfile = Object.assign({}, data, {isLogon: true});
         this.updateUserProfile(this.userProfile);
     },
-    hadLogon: function () {
+    init: function () {
         storage.load({
             key: constants.UserProfileKey,
             autoSync: true,
@@ -30,6 +30,8 @@ const appContext = {
         })
             .then(ret=> {
                 this.isLogon = ret.isLogon;
+                this.userId = ret.userId;
+                this.userProfile = ret;
             })
             .catch(error=>{
                 console.log(error.message);
@@ -60,7 +62,7 @@ const appContext = {
 };
 
 export function appInit() {
-    appContext.hadLogon();
+    appContext.init();
 }
 
 global.AppContext = appContext;

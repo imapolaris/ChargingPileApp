@@ -26,7 +26,7 @@ class CPAPersonalDataPage extends Component{
     }
 
     // 查询用户个人信息
-    _getUserProfile() {
+    _getUserProfile =() => {
         getUserProfile(AppContext.userId)
             .then(ret=>{
                 if (ret.result === true){
@@ -34,7 +34,7 @@ class CPAPersonalDataPage extends Component{
                         ...this.state,
                         nickname: ret.data.nickname,
                         gender: ret.data.gender,
-                        avatarSource: ret.data.avatar,
+                        avatarSource: ret.data.avatar !== null ? JSON.parse(ret.data.avatar) : null,
                     })
                 } else {
                     ToastAndroidBS(ret.message);
@@ -44,15 +44,15 @@ class CPAPersonalDataPage extends Component{
                 console.error(err);
                 ToastAndroidBS("无法获取用户信息："+err);
             })
-    }
+    };
 
     _confirmModify = () => {
-        let avatar = this.state.avatarSource;
+        let avatar = JSON.stringify(this.state.avatarSource);
         let nickname = this.state.nickname;
         let gender = this.state.gender;
         let data = {nickname: nickname, gender: gender, avatar: avatar};
 
-        updateUserProfile(Object.assign({}, data, {Id: AppContext.userId}))
+        updateUserProfile(Object.assign({}, data, {id: AppContext.userId}))
             .then(ret=>{
                 if (ret.result === true){
                     ToastAndroidBS('修改成功');
@@ -67,7 +67,7 @@ class CPAPersonalDataPage extends Component{
                 }
             })
             .catch(err=>{
-                console.error(err);
+                console.log(err);
                 ToastAndroidBS("修改个人信息出错：" +err);
             });
     };
