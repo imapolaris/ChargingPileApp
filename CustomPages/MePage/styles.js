@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     },
     backgroundImage:{
         flex: 1,
-        //resizeMode: 'cover',
         height: undefined,
         width: undefined,
         justifyContent: 'center',
@@ -38,7 +37,8 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
     },
     login: {
-        color: '#397af8',
+        color: colors.white,
+        //fontStyle: "italic",
     },
     register:{
         color: '#397af8',

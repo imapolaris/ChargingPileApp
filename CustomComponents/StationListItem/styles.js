@@ -9,11 +9,11 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         paddingTop: 5,
         paddingBottom: 5,
-        backgroundColor: colors.theme1,
+        //backgroundColor: colors.theme1,
     },
     title: {
         fontSize: 18,
-        color: colors.white,
+        //color: colors.white,
     },
     infoContainer: {
         height: 60,

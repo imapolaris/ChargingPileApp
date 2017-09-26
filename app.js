@@ -7,6 +7,7 @@ import CPAStackNavigator from './CustomComponents/Navigators/CPAStackNavigator';
 import {createStore} from 'redux';
 import constants from './Common/constants';
 import {appInit} from "./Common/appContext";
+import colors from './Common/colors';
 
 let lastBackPressed = 0;
 /*let store = createStore(null);*/
@@ -38,7 +39,7 @@ class App extends Component{
     render() {
         return (
             <View style={styles.container}>
-                {/*<StatusBar backgroundColor={colors.primary2} barStyle="light-content"/>*/}
+                <StatusBar backgroundColor={colors.theme1} barStyle="light-content"/>
                 <CPAStackNavigator />
             </View>
         );

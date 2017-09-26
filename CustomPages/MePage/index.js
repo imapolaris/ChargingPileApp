@@ -3,6 +3,7 @@ import {View, ScrollView, ImageBackground, Text, TouchableOpacity} from 'react-n
 import styles from './styles';
 import {List, ListItem, Avatar} from 'react-native-elements';
 import {loadAvatar} from "../../Common/appContext";
+import colors from "../../Common/colors";
 
 class CPAMePage extends Component{
     // 构造
@@ -131,11 +132,9 @@ class CPAMePage extends Component{
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
-                    <ImageBackground  ref={self=>this._avatar=self}
-                            style={styles.backgroundImage}
-                            source={require('../../Resources/Images/homebk.png')}>
+                    <ImageBackground  style={[styles.backgroundImage, {backgroundColor: colors.theme1}]}>
                         <View style={{alignItems:'center'}}>
-                            <Avatar width={100} height={100}
+                            <Avatar width={110} height={110}
                                     rounded
                                     onPress={this._changeAvatar}
                                     activeOpacity={0.7}

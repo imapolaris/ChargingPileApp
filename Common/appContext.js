@@ -3,7 +3,6 @@ import constants from "./constants";
 const appContext = {
     isLogon: false,
     userProfile: null,
-    avatar: null,
 };
 
 export function appInit() {
@@ -17,8 +16,8 @@ export function loadUserProfile() {
         syncInBackground: false,
     })
         .then(ret=> {
-            appContext.logined = ret.isLogon;
-            appContext.userProfile = ret.profile;
+            appContext.isLogon = ret.isLogon;
+            appContext.userProfile = ret.userProfile;
             return ret.isLogon;
         })
         .catch(error=>{
@@ -31,10 +30,10 @@ export function saveUserProfile(data) {
         key: constants.UserProfileKey,
         data: {
             isLogon: true,
-            profile: {
-                username: data.username,
+            userProfile: {
+                phoneNumber: data.phoneNumber,
                 nickname: data.nickname,
-                gender: data.gender,
+                avatar: data.avatar,
             }
         },
         expires: null
