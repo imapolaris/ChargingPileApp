@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {
+    View,
+    Modal,
+    Text,
+} from 'react-native';
 
 import styles from './styles';
 import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";
@@ -124,10 +128,11 @@ class CPAHomePage extends Component{
         nav && nav('Search', {callback: this._searchCompleted});
     };
 
-    _searchCompleted = (cityName)=>{
+    _searchCompleted = (station)=>{
         this._titleBar.blur();
 
-        this._goToTheCity(cityName);
+        let {address} = station;
+        this._goToTheCity(address);
     };
 
     _goToTheCity = (cityName)=>{
@@ -186,33 +191,35 @@ class CPAHomePage extends Component{
         // 后面可能会改成从请求过的数据直接加载，避免再次访问网络服务。
         // code here.
         getSingleStation(id)
-            .then(response=>{
-                if (response === null || response === undefined) {
-                    //alert('');
-                    return;
+            .then(ret=>{
+                if (ret.result === true) {
+                    let {data} = ret;
+                    this._station.show(data.name,
+                        data.numbers,
+                        data.address,
+                        (i)=>{
+                            switch (i)
+                            {
+                                case 0:
+                                    const {nav} = this.props.screenProps;
+                                    nav && nav('Details', {stationId: id});
+                                    break;
+                                case 1:
+                                    position = e.position;
+                                    this.showAlertSelected();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        });
+                } else {
+                    let {message} = ret;
+                    ToastAndroidBS(message);
+                    console.log(message);
                 }
-
-                this._station.show(response.Name,
-                    response.Numbers,
-                    response.Address,
-                    (i)=>{
-                        switch (i)
-                        {
-                            case 0:
-                                const {nav} = this.props.screenProps;
-                                nav && nav('Details');
-                                break;
-                            case 1:
-                                position = e.position;
-                                this.showAlertSelected();
-                                break;
-                            default:
-                                break;
-                        }
-                    });
             })
-            .catch(error=>{
-                console.error(error);
+            .catch(err=>{
+                console.error(err);
                 alert('没有找到该电站的信息...');
             });
     };
@@ -250,7 +257,7 @@ class CPAHomePage extends Component{
         }
     }
 
-    _renderMapView() {
+    _renderMapView = () => {
         return (
             <View style={styles.container}>
                 <MapView
@@ -280,6 +287,25 @@ class CPAHomePage extends Component{
         );
     };
 
+    _renderListView = () => {
+        return (
+            <Modal
+                animationType={'slide'}
+                transparent={true}
+                visible={this.state.show}
+                onShow={() => {
+                }}
+                onRequestClose={() => {
+                }}
+                style={{paddingTop: 30}}
+            >
+
+                <View style={[styles.container, {backgroundColor: 'red'}]}>
+                </View>
+            </Modal>
+        );
+    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -292,6 +318,10 @@ class CPAHomePage extends Component{
 
                 {
                     this._renderMapView()
+                    //this._renderListView()
+
+
+
                 }
 
                 <AlertStationBriefInfo ref={self=>{

@@ -30,7 +30,7 @@ class CPASearchPage extends Component{
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._queryHistory();
     }
 
@@ -70,8 +70,7 @@ class CPASearchPage extends Component{
 
         if (station !== null && station !== undefined) {
             this._updateSearchHistoryStations(station);
-            let {address} = station;
-            state && state.params.callback(address);
+            state && state.params.callback(station);
         }
 
         goBack && goBack();

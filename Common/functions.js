@@ -79,8 +79,7 @@ export function gotoNavigation(whichApp, from, to, callback) {
         uri += 'destination=name:|latlng:' + to.latitude + ',' + to.longitude;
         uri += '&mode=driving';
     } else if (whichApp === mapApp.gdMap) {
-        uri += 'amapuri://route/plan/?';
-        uri += 'sourceApplication=cp';
+        uri += 'amapuri://route/plan/?sourceApplication=cp';
         if (from !== null && from !== undefined) {
             uri += '&slat=' + from.latitude;
             uri += '&slon=' + from.longitude;

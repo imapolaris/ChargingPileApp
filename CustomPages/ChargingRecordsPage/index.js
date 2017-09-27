@@ -21,7 +21,7 @@ class CPACharingRecordsPage extends Component{
         this._requestData(false);
     }
 
-    _requestData(refreshing) {
+    _requestData = (refreshing) => {
         getChargingRecords(refreshing)
             .then(response=>{
                 if (response === null || response === undefined){
@@ -49,7 +49,7 @@ class CPACharingRecordsPage extends Component{
                 console.log(error);
                 alert(error);
             });
-    }
+    };
 
     _renderItem = ({item}) => {
         return (

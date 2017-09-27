@@ -8,6 +8,15 @@ import icons from '../../Common/fonts';
 import colors from '../../Common/colors';
 
 class CPAListPage extends Component{
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            stations: []
+        };
+    }
+
     _onDetailsPress = () => {
         const {navigate} = this.props.navigation;
         navigate('Details');
@@ -30,6 +39,15 @@ class CPAListPage extends Component{
 
     _searchStation = (cityName)=>{
         alert(cityName);
+    };
+
+    _search = () => {
+        const {navigate} = this.props.navigation;
+        navigate && navigate('Search', {callback: this._searchCompleted});
+    };
+
+    _searchCompleted = (station)=>{
+
     };
 
     _renderItem = ({item}) => {
@@ -63,41 +81,6 @@ class CPAListPage extends Component{
     };
 
     render() {
-        const data = [
-            {
-                key: 1,
-                title:'加速器一区充电站',
-                numbers: '0/2',
-                address: '北京市海淀区永丰产业基地加速器一区',
-                callback1: this._onDetailsPress,
-                callback2: this._onNavPress,
-            },
-            {
-                key: 2,
-                title:'永丰地铁站充电站',
-                numbers: '2/5',
-                address: '北京市海淀区永丰地铁站',
-                callback1: this._onDetailsPress,
-                callback2: this._onNavPress,
-            },
-            {
-                key: 3,
-                title:'回龙观东大街地铁站',
-                numbers: '1/4',
-                address: '北京市昌平区回龙观东大街',
-                callback1: this._onDetailsPress,
-                callback2: this._onNavPress,
-            },
-            {
-                key: 4,
-                title:'回龙观东大街地铁站',
-                numbers: '1/4',
-                address: '北京市昌平区回龙观东大街',
-                callback1: this._onDetailsPress,
-                callback2: this._onNavPress,
-            },
-        ];
-
         return (
             <View style={styles.container}>
                 <DefinedTitleBar ref={self=>this._titleBar=self}
@@ -108,10 +91,15 @@ class CPAListPage extends Component{
                                  showIcon={true}
                                  icon={<SimpleIcon type={icons.SimpleLineIcon} name="arrow-down" color={colors.white} size={14} />} />
 
-                <FlatList data={data}
+                <FlatList data={this.state.stations}
                           renderItem={this._renderItem}
                           ItemSeparatorComponent={this._renderSeparator}
-                          ListFooterComponent={this._renderBottom}
+                          ListFooterComponent={
+                              this.state.stations.length > 0 ?
+                                  this._renderBottom
+                                  :
+                                  null
+                          }
                           style={styles.content}
                 />
             </View>

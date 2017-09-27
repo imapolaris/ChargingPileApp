@@ -31,7 +31,7 @@ class CPALocationPage extends Component{
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._getCurrentCity();
         this._getRecentVisitCities();
     }
