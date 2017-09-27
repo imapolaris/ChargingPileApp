@@ -92,5 +92,36 @@ export function getRecentVisitCities() {
         })
         .catch(error=>{
             console.log(error.message);
+            throw new Error();
         });
+}
+
+/*
+* search historical stations.
+* */
+export function updateSearchHistoryStations(stations) {
+    storage.save({
+        key: constants.SearchHistoryStationsKey,
+        data: stations,
+        expires: null,
+    });
+}
+
+export function getSearchHistoryStations() {
+    return storage.load({
+        key: constants.SearchHistoryStationsKey,
+        autoSync: true,
+        syncInBackground: false,
+    })
+        .then(ret=>{
+            return ret || [];
+        })
+        .catch(err=>{
+            console.log(err);
+            throw new Error();
+        })
+}
+
+export function clearSearchHistoryStations() {
+    storage.remove({key: constants.SearchHistoryStationsKey});
 }

@@ -76,18 +76,21 @@ class CPAHomePage extends Component{
     _requestStations = ()=> {
         getAllStationsWithBriefInfo()
             .then(data=>{
-                let stations = [];
-                data.forEach((item)=>{
-                    stations.push({
-                        title: `${item.Id},${item.Name}`,
-                        longitude: item.Longitude,
-                        latitude: item.Latitude})
-                });
+                if (data !== null && data !== undefined && data.length > 0){
+                    let stations = [];
+                    data.forEach((item)=>{
+                        stations.push({
+                            title: `${item.id},${item.name}`,
+                            longitude: item.longitude,
+                            latitude: item.latitude
+                        });
+                    });
 
-                this.setState({
-                    ...this.state,
-                    markers: stations,
-                })
+                    this.setState({
+                        ...this.state,
+                        markers: stations,
+                    });
+                }
             })
             .catch(error=>{
                 console.log(error);

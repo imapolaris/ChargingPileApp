@@ -14,12 +14,15 @@ const headers = {
     'Content-Type': 'application/json; charset=utf-8',
 };
 
+const GET = 'GET';
+const POST = 'POST';
+
 /*
  * send message, eg. verify code.
  */
 export function sendMessage(phoneNumbers){
     let url = `${urls.messages}?phoneNumber=${phoneNumbers}`;
-    return myFetch(url, 'GET', headers);
+    return myFetch(url, GET, headers);
 }
 
 /*
@@ -27,7 +30,7 @@ export function sendMessage(phoneNumbers){
  **/
 export function getAllStationsWithBriefInfo() {
     let url = urls.stations;
-    return myFetch(url, 'GET', headers);
+    return myFetch(url, GET, headers);
 }
 
 /*
@@ -35,15 +38,15 @@ export function getAllStationsWithBriefInfo() {
  */
 export function getSingleStation(id) {
     let url =  `${urls.stations}/${id}`;
-    return myFetch(url, 'GET', headers);
+    return myFetch(url, GET, headers);
 }
 
 /*
 * query the station names by the filter condition.
 * */
-export function getStationNames(filter) {
-    let url = '';
-
+export function getStationsByName(text) {
+    let url = `${urls.stations}/search/${text}`;
+    return myFetch(url, GET, headers);
 }
 
 /*
@@ -51,7 +54,7 @@ export function getStationNames(filter) {
 * */
 export function getChargingRecords(refreshing=false) {
     let url = `${urls.chargingRecords}?refreshing=${refreshing}`;
-    return myFetch(url, 'GET', headers);
+    return myFetch(url, GET, headers);
 }
 
 /*
@@ -59,7 +62,7 @@ export function getChargingRecords(refreshing=false) {
 * */
 export function startCharging(serialNumber) {
     let url = `${urls.charging}?serialNumber=${serialNumber}`;
-    return myFetch(url, 'POST', headers);
+    return myFetch(url, POST, headers);
 }
 
 /*
@@ -69,7 +72,7 @@ export function login(phoneNumber, pwd) {
     let url = `${urls.users}/login`;
     let data = {phoneNumber: phoneNumber, password: pwd};
 
-    return myFetch(url, 'POST', headers, data);
+    return myFetch(url, POST, headers, data);
 }
 
 /*
@@ -83,7 +86,7 @@ export function register(phoneNumber, vCode, pwd) {
         password: pwd,
     };
 
-    return myFetch(url, 'POST', headers, data);
+    return myFetch(url, POST, headers, data);
 }
 
 /*
@@ -97,7 +100,7 @@ export function resetPwd(phoneNumber, vCode, pwd) {
         password: pwd,
     };
 
-    return myFetch(url, 'POST', headers, data);
+    return myFetch(url, POST, headers, data);
 }
 
 /*
@@ -109,7 +112,7 @@ export function getUserProfile(userId) {
         Id: userId
     };
 
-    return myFetch(url, 'POST', headers, data);
+    return myFetch(url, POST, headers, data);
 }
 
 /*
@@ -118,5 +121,5 @@ export function getUserProfile(userId) {
 export function updateUserProfile(data) {
     let url = `${urls.users}/update`;
 
-    return myFetch(url, 'POST', headers, data);
+    return myFetch(url, POST, headers, data);
 }

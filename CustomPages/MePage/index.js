@@ -155,7 +155,7 @@ class CPAMePage extends Component{
                 <View style={styles.infoContainer}>
                     <ImageBackground  style={[styles.backgroundImage, {backgroundColor: colors.theme1}]}>
                         <View style={{alignItems:'center'}}>
-                            <Avatar width={110} height={110}
+                            <Avatar width={100} height={100}
                                     rounded
                                     onPress={this._changeAvatar}
                                     activeOpacity={0.7}

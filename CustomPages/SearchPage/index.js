@@ -11,6 +11,12 @@ import styles from './styles';
 import searchStyles from '../../CustomComponents/DefinedTitleBar/styles';
 import NavButton from '../../CustomComponents/NavButton/index';
 import {SearchBar} from 'react-native-elements';
+import {
+    clearSearchHistoryStations, getSearchHistoryStations,
+    updateSearchHistoryStations
+} from "../../Common/appContext";
+import {getStationsByName} from "../../Common/webApi";
+import {SearchHistoryCount} from "../../Common/constants";
 
 class CPASearchPage extends Component{
     // 构造
@@ -24,13 +30,13 @@ class CPASearchPage extends Component{
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this._queryHistory();
     }
 
     _toCancel = ()=>{
         Keyboard.dismiss();
-        this._searchFinished('');
+        this._searchFinished(null);
     };
 
     _startSearch = (text)=>{
@@ -41,35 +47,84 @@ class CPASearchPage extends Component{
             });
         }
 
-        // query station names by filter=>text
-        // code here.
+        getStationsByName(text)
+            .then(ret=>{
+                if (ret !== null && ret !== undefined && ret.length > 0) {
+                    let data = ret.map((item, index)=>{
+                        return Object.assign({}, item, {key: index})
+                    });
+
+                    this.setState({
+                        ...this.state,
+                        searchResult: data
+                    });
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+            });
     };
 
-    _searchFinished(cityName) {
+    _searchFinished(station) {
         const {state, goBack} = this.props.navigation;
-        state && state.params.callback(cityName);
+
+        if (station !== null && station !== undefined) {
+            this._updateSearchHistoryStations(station);
+            let {address} = station;
+            state && state.params.callback(address);
+        }
+
         goBack && goBack();
     }
+
+    _updateSearchHistoryStations = (station) => {
+        try {
+            let data = [];
+            data.push(station);
+            let len = this.state.historyResult.length;
+            let {id} = station;
+            let j = 1;
+            for (let i = 0; i < len;) {
+                if (j >= SearchHistoryCount)
+                    break;
+                if (this.state.historyResult[i].id !== id) {
+                    data.push(this.state.historyResult[i]);
+                    j++;
+                }
+                i++;
+            }
+
+            updateSearchHistoryStations(data);
+        }
+        catch (ex) {
+            console.log(ex);
+        }
+    };
 
     /*
     * get historical query items.
     * */
     _queryHistory = ()=>{
-        const history = [
-            {key: 1, name:'加速器一区充电站', address:'北京市海淀区永丰产业基地加速器一区'},
-            {key: 2, name:'徐家汇充电站', address:'上海市静安区徐家汇'},
-            {key: 3, name:'滕州充电站', address:'山东省枣庄市滕州东站'}
-        ];
+        getSearchHistoryStations()
+            .then(ret=>{
+                if (ret !== null && ret !== undefined && ret.length > 0) {
+                    let history = ret.map((item, index) => {
+                        return Object.assign({}, item, {key: index})
+                    });
 
-        this.setState({
-            ...this.state,
-            historyResult: history,
-        });
+                    this.setState({
+                        ...this.state,
+                        historyResult: history,
+                    });
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+            });
     };
 
     _chooseStation = (station)=>{
-        let {address} = station;
-        this._searchFinished(address);
+        this._searchFinished(station);
     };
 
     _clearHistory = ()=>{
@@ -78,8 +133,7 @@ class CPASearchPage extends Component{
             searchState: true,
         });
 
-        // clear history options.
-        // code here.
+        clearSearchHistoryStations();
     };
 
     _renderItem = ({item})=>{
@@ -99,7 +153,7 @@ class CPASearchPage extends Component{
         );
     };
 
-    _renderSearchHistory() {
+    _renderSearchHistory = () => {
         return (
             <View style={[styles.searchResultContainer, styles.searchHistoryContainer]}>
                 <View style={[styles.item, styles.historyTitle]}>
@@ -118,9 +172,9 @@ class CPASearchPage extends Component{
                 </TouchableOpacity>
             </View>
         );
-    }
+    };
 
-    _renderSearchOptions() {
+    _renderSearchOptions = () => {
         return (
             <View style={styles.searchResultContainer}>
                 <FlatList style={styles.searchResult}
@@ -128,7 +182,7 @@ class CPASearchPage extends Component{
                           renderItem={this._renderItem} />
             </View>
         );
-    }
+    };
 
     render() {
         return (
@@ -158,7 +212,10 @@ class CPASearchPage extends Component{
                     this.state.searchState === true ?
                         this._renderSearchOptions()
                         :
-                        this._renderSearchHistory()
+                        this.state.historyResult.length > 0 ?
+                            this._renderSearchHistory()
+                            :
+                            null
                 }
             </View>
         );

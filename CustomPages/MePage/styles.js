@@ -32,13 +32,14 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     text: {
-        fontSize: 16,
+        fontSize: 18,
         backgroundColor: 'transparent',
         color: '#FFFFFF',
     },
     login: {
         color: colors.white,
         //fontStyle: "italic",
+        fontSize: 16,
     },
     register:{
         color: '#397af8',
