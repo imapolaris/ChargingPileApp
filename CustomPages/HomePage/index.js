@@ -29,7 +29,7 @@ import {shadowStyle} from "../../Common/styles";
 const selectedArr = [{key:1, title:"百度地图"}, {key:2, title:"高德地图"}];
 let position = null;
 let currentPosition = null;
-const Zoom = 15;
+const Zoom = 12.5;
 
 class CPAHomePage extends Component{
     // 构造
@@ -73,8 +73,7 @@ class CPAHomePage extends Component{
             })
             .catch(error => {
                 console.log(error);
-                ToastAndroidBS(error.message);
-                //ToastAndroidBS('无法准确定位，请检查网络是否可以连接！');
+                ToastAndroidBS('无法准确定位，请检查网络是否正确连接！');
             });
     };
 
@@ -311,6 +310,7 @@ class CPAHomePage extends Component{
                     onMarkerClick={(e) => {this._showStationBriefInfo(e)}}
                     onMapClick={(e) => {
                     }}
+                    onMapLoaded={this._currentLocation}
                 >
                 </MapView>
 

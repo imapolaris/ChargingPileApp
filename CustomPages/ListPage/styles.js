@@ -13,9 +13,6 @@ const styles = StyleSheet.create({
         height: 22,
         color: colors.white,
     },
-    map: {
-        flex: 1,
-    },
     item: {
         backgroundColor: colors.white,
     },

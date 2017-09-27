@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 6,
-        top: 6+50,
+        top: 6+30,
     },
 });
 

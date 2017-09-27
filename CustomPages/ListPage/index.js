@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {View, FlatList, Text} from 'react-native';
 import styles from './styles';
 import StationListItem from "../../CustomComponents/StationListItem/index";
-import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";
-import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons';
 import icons from '../../Common/fonts';
 import colors from '../../Common/colors';
 
@@ -25,29 +23,6 @@ class CPAListPage extends Component{
     _onNavPress = () => {
         const {navigate} = this.props.navigation;
         navigate('MapNav');
-    };
-
-    _toLocation = () => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate('Location', {callback: this._searchStation});
-    };
-
-    _toList = () => {
-        const {goBack} = this.props.navigation;
-        goBack && goBack();
-    };
-
-    _searchStation = (cityName)=>{
-        alert(cityName);
-    };
-
-    _search = () => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate('Search', {callback: this._searchCompleted});
-    };
-
-    _searchCompleted = (station)=>{
-
     };
 
     _renderItem = ({item}) => {
@@ -83,14 +58,6 @@ class CPAListPage extends Component{
     render() {
         return (
             <View style={styles.container}>
-                <DefinedTitleBar ref={self=>this._titleBar=self}
-                                 toLocation={this._toLocation}
-                                 toList={this._toList}
-                                 search={this._search}
-                                 rightLabel="地图"
-                                 showIcon={true}
-                                 icon={<SimpleIcon type={icons.SimpleLineIcon} name="arrow-down" color={colors.white} size={14} />} />
-
                 <FlatList data={this.state.stations}
                           renderItem={this._renderItem}
                           ItemSeparatorComponent={this._renderSeparator}

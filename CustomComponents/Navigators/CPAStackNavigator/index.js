@@ -7,7 +7,6 @@ import colors from '../../../Common/colors';
 import CPALocationPage from "../../../CustomPages/LocationPage/index";
 import NavButton from '../../NavButton/index';
 import CPADetailsPage from "../../../CustomPages/DetailsPage/index";
-import CPAMapNavigationPage from "../../../CustomPages/MapNavigationPage/index";
 import CPATabScreen from "../CPATabNavigator/index";
 import CPAPersonalDataPage from "../../../CustomPages/PersonalDataPage/index";
 import CPAWalletPage from "../../../CustomPages/WalletPage/index";
@@ -50,7 +49,7 @@ const CPAStackNavigator = StackNavigator(
         List:{
             screen: CPAListPage,
             navigationOptions: {
-                header: null,
+                title: '周边站点',
             }
         },
         Location:{
@@ -63,12 +62,6 @@ const CPAStackNavigator = StackNavigator(
             screen: CPADetailsPage,
             navigationOptions: {
                 title: '充电站详情',
-            }
-        },
-        MapNav:{
-            screen: CPAMapNavigationPage,
-            navigationOptions: {
-                title: '导航',
             }
         },
         PersonalData: {
