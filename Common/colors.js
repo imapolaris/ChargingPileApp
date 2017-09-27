@@ -20,6 +20,7 @@ export default {
     white: '#ffffff',
     error: '#ff190c',
     tintColor: '#e91e63',
+    tintColor2: '#e74c3c',
 }
 
 /*

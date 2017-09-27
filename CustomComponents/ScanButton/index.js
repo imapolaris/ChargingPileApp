@@ -2,36 +2,29 @@ import React, {Component} from 'react';
 import {TouchableOpacity, Text, View} from 'react-native';
 
 import styles from './styles';
-import themes from '../../Common/styles';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {shadowStyle} from "../../Common/styles";
 
 class CPAScanButton extends Component{
-    // 构造
-    constructor(props) {
-        super(props);
-        // 初始状态
-        this.state = {
-            pressIn: false,
-        };
-    }
-
-    render(){
+    render() {
         return (
-            <TouchableOpacity style={[styles.button,
-                                        styles.buttonNormal]}
-                              onPress={this._onPress}
-                              activeOpacity={0.6}
-            >
-                <View style={styles.textContainer}>
+            <View pointerEvents="box-none"
+                  style={[styles.container, shadowStyle]}>
+                <TouchableOpacity onPress={this._onPress}
+                                  onLongPress={this._onPress}
+                                  style={styles.button}
+                                  activeOpacity={0.9} >
+                    <Icon name="md-qr-scanner" size={20} style={styles.icon} />
                     <Text style={styles.text}>
-                        {this.props.label || '扫一扫'}
+                        扫码充电
                     </Text>
-                </View>
-            </TouchableOpacity>
+                </TouchableOpacity>
+            </View>
         );
     }
 
     _onPress = () => {
-        this.props.OnPress && this.props.OnPress();
+        this.props.onPress && this.props.onPress();
     }
 }
 

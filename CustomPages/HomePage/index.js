@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {
     View,
     Modal,
-    Text,
+    TouchableHighlight,
 } from 'react-native';
 
 import styles from './styles';
 import DefinedTitleBar from "../../CustomComponents/DefinedTitleBar/index";
-import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/Ionicons';
 import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import {
     MapView,
@@ -23,10 +23,13 @@ import {getAllStationsWithBriefInfo, getSingleStation} from '../../Common/webApi
 
 import icons from '../../Common/fonts';
 import colors from '../../Common/colors';
+import CPAScanButton from "../../CustomComponents/ScanButton/index";
+import {shadowStyle} from "../../Common/styles";
 
 const selectedArr = [{key:1, title:"百度地图"}, {key:2, title:"高德地图"}];
 let position = null;
 let currentPosition = null;
+const Zoom = 15;
 
 class CPAHomePage extends Component{
     // 构造
@@ -46,35 +49,34 @@ class CPAHomePage extends Component{
         };
     }
 
-    componentWillMount() {
-        //this._currentLocation();
-    }
-
     // 组件已挂载
     componentDidMount() {
         this._requestStations();
     }
 
     // 定位
-    _currentLocation() {
+    _currentLocation = () => {
         getCurrentLocation()
-            .then(
-                data=>{
+            .then(data => {
+                if (data !== null && data !== undefined) {
                     this.setState({
                         ...this.state,
                         center: {
                             longitude: data.longitude,
                             latitude: data.latitude,
-                        }
+                        },
+                        zoom: Zoom,
                     });
 
                     currentPosition = {longitude: data.longitude, latitude: data.latitude};
-                },
-                error=>{
-                    console.log(error);
-                    ToastAndroidCL(error);
-                });
-    }
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                ToastAndroidBS(error.message);
+                //ToastAndroidBS('无法准确定位，请检查网络是否可以连接！');
+            });
+    };
 
     // 请求电站信息
     _requestStations = ()=> {
@@ -110,6 +112,13 @@ class CPAHomePage extends Component{
     _toList = () => {
         const {nav} = this.props.screenProps;
         nav && nav('List');
+    };
+
+    _showTraffic = () => {
+        this.setState({
+            ...this.state,
+            trafficEnabled: !this.state.trafficEnabled,
+        });
     };
 
     _resetCenter = (cityName) => {
@@ -155,7 +164,7 @@ class CPAHomePage extends Component{
 
                 this.setState({
                     ...this.state,
-                    zoom: 10,
+                    zoom: Zoom,
                     center: {
                         longitude: location.longitude,
                         latitude: location.latitude
@@ -257,6 +266,36 @@ class CPAHomePage extends Component{
         }
     }
 
+    _renderLocationIcon = () => {
+        return (
+            <View pointerEvents="box-none"
+                  style={[styles.icon, styles.location, shadowStyle]}>
+                <TouchableHighlight activeOpacity={0.6}
+                                    style={[styles.iconContainer]}
+                                    onPress={this._currentLocation}
+                                    underlayColor={colors.grey4} >
+                    <Icon name="md-locate"
+                          size={20} color={colors.theme1} />
+                </TouchableHighlight>
+            </View>
+        );
+    };
+
+    _renderTrafficIcon = () => {
+        return (
+            <View pointerEvents="box-none"
+                  style={[styles.icon, styles.traffic, shadowStyle]}>
+                <TouchableHighlight activeOpacity={0.6}
+                                    style={[styles.iconContainer]}
+                                    onPress={this._showTraffic}
+                                    underlayColor={colors.grey4}>
+                    <MaterialIcon name="traffic" size={20}
+                                  color={this.state.trafficEnabled ? colors.secondary2 : colors.grey3}/>
+                </TouchableHighlight>
+            </View>
+        );
+    };
+
     _renderMapView = () => {
         return (
             <View style={styles.container}>
@@ -275,14 +314,14 @@ class CPAHomePage extends Component{
                 >
                 </MapView>
 
-                <ActionButton buttonColor='rgba(231,76,60,1)'
-                              onPress={this._onStartChargingPress}
-                              icon={<Icon name="md-qr-scanner" style={styles.actionButtonIcon} />}
-                              position="center"
-                              offsetX={0}
-                              offsetY={20}
-                              buttonText="扫码充电"
-                />
+                <CPAScanButton onPress={this._onStartChargingPress}/>
+
+                {
+                    this._renderLocationIcon()
+                }
+                {
+                    this._renderTrafficIcon()
+                }
             </View>
         );
     };
@@ -319,9 +358,6 @@ class CPAHomePage extends Component{
                 {
                     this._renderMapView()
                     //this._renderListView()
-
-
-
                 }
 
                 <AlertStationBriefInfo ref={self=>{

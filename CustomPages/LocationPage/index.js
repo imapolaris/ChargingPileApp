@@ -11,7 +11,7 @@ import styles from './styles';
 import List from "./List";
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import colors from '../../Common/colors';
-import {getCurrentLocation} from "../../Common/functions";
+import {getCurrentLocation, ToastAndroidBS} from "../../Common/functions";
 import {Geolocation} from 'react-native-baidu-map';
 import DividerLine from "../../CustomComponents/DividerLine/index";
 import {SearchBar} from 'react-native-elements';
@@ -60,6 +60,10 @@ class CPALocationPage extends Component{
                     .catch(error=>{
                         console.error(error);
                     })
+            })
+            .catch(err=>{
+                console.log(err);
+                ToastAndroidBS("无法获取当前定位城市！");
             })
     };
 
