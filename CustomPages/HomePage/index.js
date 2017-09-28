@@ -15,7 +15,7 @@ import {
     MapTypes,
     Geolocation
 } from 'react-native-baidu-map';
-import {getCurrentLocation, gotoNavigation, mapApp, ToastAndroidCL, ToastAndroidBS} from "../../Common/functions";
+import {getCurrentLocation, ToastAndroidCL, ToastAndroidBS} from "../../Common/functions";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index";
 import {AlertStationBriefInfo} from "../../CustomComponents/AlertStationBriefInfo/index";
 import {getAllStationsWithBriefInfo, getSingleStation} from '../../Common/webApi';
@@ -24,8 +24,8 @@ import icons from '../../Common/fonts';
 import colors from '../../Common/colors';
 import CPAScanButton from "../../CustomComponents/ScanButton/index";
 import {shadowStyle} from "../../Common/styles";
+import {showMapSelector} from "../../CustomComponents/AlertSelected/index.android";
 
-const selectedArr = [{key:1, title:"百度地图"}, {key:2, title:"高德地图"}];
 let position = null;
 let currentPosition = {longitude:116.404185, latitude: 39.91491};  // 北京天安门的坐标
 const Zoom = 12.5;
@@ -216,7 +216,7 @@ class CPAHomePage extends Component{
                                     break;
                                 case 1:
                                     position = e.position;
-                                    this.showAlertSelected();
+                                    this._showMapSelector();
                                     break;
                                 default:
                                     break;
@@ -234,37 +234,8 @@ class CPAHomePage extends Component{
             });
     };
 
-    showAlertSelected(){
-        this._navigator.show("请选择导航地图", selectedArr, '#333333', this.callbackSelected);
-    }
-    // 回调
-    callbackSelected(i){
-        let theMap = 'cp:cancel';
-        switch (i) {
-            case 0:
-                theMap = mapApp.bdMap;
-                break;
-            case 1:
-                theMap = mapApp.gdMap;
-                break;
-            default:
-                break;
-        }
-
-        if (theMap !== 'cp:cancel') {
-            if (position === null || position === undefined)
-            {
-                alert('目的地无法解析，无法导航！');
-                return;
-            }
-
-            gotoNavigation(theMap,
-                currentPosition,
-                position,
-                (succeed, msg)=>{
-                    alert(msg);
-                });
-        }
+    _showMapSelector(){
+        showMapSelector(this._navigator, {start: currentPosition, end: position});
     }
 
     _renderLocationIcon = () => {

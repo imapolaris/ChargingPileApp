@@ -8,6 +8,7 @@ import {
     Modal
 } from 'react-native';
 import styles, {aWidth} from './styles';
+import {gotoNavigation, mapApp} from "../../Common/functions";
 
 
 export class AlertSelected extends Component {
@@ -18,7 +19,8 @@ export class AlertSelected extends Component {
         this.state = {
             show: false,
             title: "",
-            tipTextColor: '#333333',
+            start: null,
+            end: null,
         };
 
         this.entityList = [];//数据源
@@ -33,7 +35,7 @@ export class AlertSelected extends Component {
                 <TouchableOpacity onPress={this._choose.bind(this, i)} key={i}>
                     <View style={styles.item}>
                         <Text style={{
-                            color: this.state.tipTextColor,
+                            color: '#333333',
                             fontSize: 17,
                             textAlign: "center",
                         }}>{item.title}</Text>
@@ -91,7 +93,7 @@ export class AlertSelected extends Component {
     //选择
     _choose(i) {
         this._out();
-        this.callback && this.callback(i);
+        this.callback && this.callback(i, this.state.params);
     };
 
     /*
@@ -100,7 +102,7 @@ export class AlertSelected extends Component {
      * tipTextColor: 字体颜色
      * callback：回调方法
      */
-    show(title: string, entityList: Array, tipTextColor: string, callback: Object) {
+    show(title: string, entityList: Array, callback: Object, params: Object) {
         this.entityList = entityList;
         this.callback = callback;
 
@@ -108,8 +110,50 @@ export class AlertSelected extends Component {
             this.setState({
                 title: title,
                 show: true,
-                tipTextColor: tipTextColor,
+                params: params,
             });
         }
+    }
+}
+
+/*
+* show the selector for select one map to navigation.
+* */
+const selectedArr = [{key:1, title:"百度地图"}, {key:2, title:"高德地图"}];
+export function showMapSelector(selector: Object, params: Object) {
+    if (selector === null || selector === undefined)
+        return;
+
+    selector.show("请选择导航地图", selectedArr, callbackSelected, params);
+}
+
+// 回调
+function callbackSelected(i, params){
+    let theMap = 'cp:cancel';
+    switch (i) {
+        case 0:
+            theMap = mapApp.bdMap;
+            break;
+        case 1:
+            theMap = mapApp.gdMap;
+            break;
+        default:
+            break;
+    }
+
+    let {start, end} = params;
+    if (theMap !== 'cp:cancel') {
+        if (end === null || end === undefined)
+        {
+            alert('目的地无法解析，无法进行导航！');
+            return;
+        }
+
+        gotoNavigation(theMap,
+            start,
+            end,
+            (succeed, msg)=>{
+                alert(msg);
+            });
     }
 }

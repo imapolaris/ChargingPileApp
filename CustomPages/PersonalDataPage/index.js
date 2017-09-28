@@ -76,7 +76,6 @@ class CPAPersonalDataPage extends Component{
     _changeAvatar = () => {
         this._selector.show('选择头像',
             selectArr,
-            '#333333',
             (i)=>{
                 switch (i){
                     case 0:
@@ -95,7 +94,6 @@ class CPAPersonalDataPage extends Component{
     _changeGender = () => {
         this._genderSelector.show('选择性别',
             selectGenderArr,
-            '#333333',
             (i)=>{
                 switch (i){
                     case 0:
