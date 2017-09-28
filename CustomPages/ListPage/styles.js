@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     separator: {
-        height: 15,
+        height: 10,
     },
     bottomContainer: {
         height: 30,

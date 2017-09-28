@@ -7,6 +7,7 @@ import colors from '../../Common/colors';
 import {getNearbyStations} from "../../Common/webApi";
 import {ToastAndroidBS} from "../../Common/functions";
 import Icon from 'react-native-vector-icons/Ionicons';
+import {AlertSelected, showMapSelector} from "../../CustomComponents/AlertSelected/index.android";
 
 
 const LoadingGreetings = '正在加载，请稍后...';
@@ -61,14 +62,24 @@ class CPAListPage extends Component{
         });
     };
 
-    _onDetailsPress = () => {
+    _onDetailsPress = (item) => {
+        if (item === null || item === undefined){
+            ToastAndroidBS('电站信息错误，无法查看详情！');
+            return;
+        }
+
         const {navigate} = this.props.navigation;
-        navigate('Details');
+        navigate('Details', {stationId: item.id});
     };
 
-    _onNavPress = () => {
-        const {navigate} = this.props.navigation;
-        navigate('MapNav');
+    _onNavPress = (item) => {
+        if (item === null || item === undefined){
+            ToastAndroidBS('电站信息错误，无法进行导航！');
+            return;
+        }
+
+        showMapSelector(this._mapSelector,
+            {start:null, end: {longitude: item.longitude, latitude: item.latitude}});
     };
 
     _renderItem = ({item}) => {
@@ -78,8 +89,8 @@ class CPAListPage extends Component{
                                  title={item.name}
                                  numbers={item.numbers}
                                  address={item.address}
-                                 gotoDetails={item.callback1}
-                                 gotoMapNav={item.callback2}
+                                 gotoDetails={()=>this._onDetailsPress(item)}
+                                 gotoMapNav={()=>this._onNavPress(item)}
                 />
             </View>
         );
@@ -133,6 +144,8 @@ class CPAListPage extends Component{
                           refreshing={this.state.refreshing}
                           onRefresh={this._onRefresh}
                 />
+
+                <AlertSelected ref={self=>this._mapSelector=self}/>
             </View>
         );
     }

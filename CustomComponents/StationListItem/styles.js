@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 16,
-        color: colors.grey0,
+        color: colors.theme1,
     },
     divider: {
         backgroundColor: '#C3C3C3',

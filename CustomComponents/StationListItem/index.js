@@ -6,14 +6,13 @@ import {
 } from 'react-native';
 
 import styles from './styles';
-import {Button} from 'react-native-elements';
 import DividerLine from "../DividerLine/index";
 
 class StationListItem extends Component{
     render() {
         return (
             <View style={styles.container}>
-                <DividerLine />
+                <DividerLine style={styles.divider} />
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>
                         {this.props.title}
@@ -45,7 +44,7 @@ class StationListItem extends Component{
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <DividerLine/>
+                <DividerLine style={styles.divider} />
             </View>
         );
     }

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     mask: {
         justifyContent: "center",
         backgroundColor: "#000000",
-        opacity: 0.1,
+        opacity: 0.3,
         position: "absolute",
         width: width,
         height: height,
