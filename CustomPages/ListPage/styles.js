@@ -27,7 +27,17 @@ const styles = StyleSheet.create({
     bottom: {
         fontSize: 12,
         color: colors.grey3,
-    }
+    },
+    emptyContainer: {
+        height: 250,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    empty: {
+        fontSize: 14,
+        color: colors.grey3,
+    },
 });
 
 export default styles;

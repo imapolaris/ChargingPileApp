@@ -6,14 +6,19 @@ import icons from '../../Common/fonts';
 import colors from '../../Common/colors';
 import {getNearbyStations} from "../../Common/webApi";
 import {ToastAndroidBS} from "../../Common/functions";
+import Icon from 'react-native-vector-icons/Ionicons';
 
+
+const LoadingGreetings = '正在加载，请稍后...';
+const EmptyDataGreetings = '客官，方圆50公里的范围内都没有充电站啊！';
 class CPAListPage extends Component{
     // 构造
     constructor(props) {
         super(props);
         // 初始状态
         this.state = {
-            stations: []
+            stations: [],
+            refreshing: true,
         };
     }
 
@@ -34,14 +39,26 @@ class CPAListPage extends Component{
 
                         this.setState({
                             ...this.state,
-                            stations: data
+                            stations: data,
+                            refreshing: false,
                         });
                     }
                 })
                 .catch(err=>{
                     console.log(err);
+                    this._onRefreshStatusChanged(false);
                 });
+        } else {
+            this._onRefreshStatusChanged(false);
         }
+    };
+
+    // 刷新完成
+    _onRefreshStatusChanged = (status) => {
+        this.setState({
+            ...this.state,
+            refreshing: status,
+        });
     };
 
     _onDetailsPress = () => {
@@ -84,6 +101,21 @@ class CPAListPage extends Component{
         )
     };
 
+    _renderEmpty = () =>{
+        return (
+            <View style={styles.emptyContainer}>
+                <Text style={styles.empty}>
+                    {this.state.refreshing ? LoadingGreetings : EmptyDataGreetings}
+                </Text>
+                <Icon name={this.state.refreshing ? "md-happy" : "md-sad"} size={20} color={colors.tintColor} />
+            </View>
+        );
+    };
+
+    _onRefresh = () =>{
+        this._requestNearbyStations();
+    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -97,7 +129,9 @@ class CPAListPage extends Component{
                                   null
                           }
                           style={styles.content}
-
+                          ListEmptyComponent={this._renderEmpty}
+                          refreshing={this.state.refreshing}
+                          onRefresh={this._onRefresh}
                 />
             </View>
         );
