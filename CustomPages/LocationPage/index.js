@@ -37,7 +37,7 @@ class CPALocationPage extends Component{
     }
 
     // 获取当前定位城市
-    _getCurrentCity = () => {
+    _getCurrentCity() {
         getCurrentLocation()
             .then(data=>{
                 Geolocation.reverseGeoCode(data.latitude, data.longitude)

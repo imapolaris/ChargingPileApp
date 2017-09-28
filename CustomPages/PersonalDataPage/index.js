@@ -26,7 +26,7 @@ class CPAPersonalDataPage extends Component{
     }
 
     // 查询用户个人信息
-    _getUserProfile =() => {
+    _getUserProfile() {
         getUserProfile(AppContext.userId)
             .then(ret=>{
                 if (ret.result === true){

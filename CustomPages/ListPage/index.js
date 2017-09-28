@@ -15,6 +15,10 @@ class CPAListPage extends Component{
         };
     }
 
+    componentDidMount() {
+        let position = this.props.position;
+    }
+
     _onDetailsPress = () => {
         const {navigate} = this.props.navigation;
         navigate('Details');
