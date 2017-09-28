@@ -6,6 +6,7 @@ import {TabNavigator} from 'react-navigation';
 import {Button} from 'react-native-elements';
 import ElectricPileListItem from "../../CustomComponents/ElectricPileListItem/index";
 import colors from '../../Common/colors';
+import {AlertSelected, showMapSelector} from "../../CustomComponents/AlertSelected/index.android";
 
 class CPADetailsPage extends Component{
     render() {
@@ -23,8 +24,7 @@ class CPADetailsPage extends Component{
 class CPABasicInfoPage extends Component{
     // 导航
     _mapNavigation = () => {
-        const {nav} = this.props.screenProps;
-        nav && nav('MapNav');
+        showMapSelector(this._mapSelector, {});
     };
 
     render() {
@@ -42,6 +42,8 @@ class CPABasicInfoPage extends Component{
                             buttonStyle={styles.button}
                     />
                 </View>
+
+                <AlertSelected ref={self=>this._mapSelector=self} />
             </View>
         );
     }
@@ -49,6 +51,17 @@ class CPABasicInfoPage extends Component{
 
 // 电桩信息
 class CPAElectricPileInfoPage extends Component{
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            chargingPiles: [],
+            refreshing: false,
+
+        };
+    }
+
     // 导航
     _subscribeCharging = () => {
         const {nav} = this.props.screenProps;
@@ -105,7 +118,8 @@ class CPAElectricPileInfoPage extends Component{
         return (
             <View style={styles.infoContainer}>
                 <ScrollView style={styles.contentContainer}>
-                    <FlatList data={data} renderItem={this._renderItem} />
+                    <FlatList data={this.state.chargingPiles}
+                              renderItem={this._renderItem} />
                 </ScrollView>
 
                 <View style={styles.actionContainer}>
@@ -114,6 +128,8 @@ class CPAElectricPileInfoPage extends Component{
                             buttonStyle={styles.button}
                     />
                 </View>
+
+
             </View>
         );
     }
