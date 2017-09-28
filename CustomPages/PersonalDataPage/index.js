@@ -41,7 +41,7 @@ class CPAPersonalDataPage extends Component{
                 }
             })
             .catch(err=>{
-                console.error(err);
+                console.log(err);
                 ToastAndroidBS("无法获取用户信息："+err);
             })
     };

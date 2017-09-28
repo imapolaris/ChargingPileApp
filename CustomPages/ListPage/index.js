@@ -72,6 +72,7 @@ class CPAListPage extends Component{
                                   null
                           }
                           style={styles.content}
+
                 />
             </View>
         );

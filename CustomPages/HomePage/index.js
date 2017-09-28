@@ -326,25 +326,6 @@ class CPAHomePage extends Component{
         );
     };
 
-    _renderListView = () => {
-        return (
-            <Modal
-                animationType={'slide'}
-                transparent={true}
-                visible={this.state.show}
-                onShow={() => {
-                }}
-                onRequestClose={() => {
-                }}
-                style={{paddingTop: 30}}
-            >
-
-                <View style={[styles.container, {backgroundColor: 'red'}]}>
-                </View>
-            </Modal>
-        );
-    };
-
     render() {
         return (
             <View style={styles.container}>
@@ -352,12 +333,11 @@ class CPAHomePage extends Component{
                                  toLocation={this._toLocation}
                                  toList={this._toList}
                                  search={this._search}
-                                 rightLabel="列表"
+                                 rightLabel="附近"
                                  icon={<SimpleIcon type={icons.SimpleLineIcon} name="arrow-down" color={colors.white} size={14} />} />
 
                 {
                     this._renderMapView()
-                    //this._renderListView()
                 }
 
                 <AlertStationBriefInfo ref={self=>{

@@ -17,6 +17,8 @@ import {
 } from "../../Common/appContext";
 import {getStationsByName} from "../../Common/webApi";
 import {SearchHistoryCount} from "../../Common/constants";
+import colors from '../../Common/colors';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class CPASearchPage extends Component{
     // 构造
@@ -65,28 +67,33 @@ class CPASearchPage extends Component{
             });
     };
 
-    _searchFinished(station) {
+    _searchLocationNameFinished = (locationName) => {
+        this._searchFinished({name: locationName, address: locationName});
+    };
+
+    _searchFinished = (station) => {
         const {state, goBack} = this.props.navigation;
 
         if (station !== null && station !== undefined) {
-            this._updateSearchHistoryStations(station);
-            state && state.params.callback(station);
+            let searchRecord = Object.assign({}, station, {keyword: station.name});
+            this._updateSearchHistoryStations(searchRecord);
+            state && state.params.callback(searchRecord);
         }
 
         goBack && goBack();
-    }
+    };
 
-    _updateSearchHistoryStations = (station) => {
+    _updateSearchHistoryStations(searchRecord) {
         try {
             let data = [];
-            data.push(station);
+            data.push(searchRecord);
             let len = this.state.historyResult.length;
-            let {id} = station;
+            let {keyword} = searchRecord;
             let j = 1;
             for (let i = 0; i < len;) {
                 if (j >= SearchHistoryCount)
                     break;
-                if (this.state.historyResult[i].id !== id) {
+                if (this.state.historyResult[i].keyword !== keyword) {
                     data.push(this.state.historyResult[i]);
                     j++;
                 }
@@ -98,12 +105,12 @@ class CPASearchPage extends Component{
         catch (ex) {
             console.log(ex);
         }
-    };
+    }
 
     /*
     * get historical query items.
     * */
-    _queryHistory = ()=>{
+    _queryHistory() {
         getSearchHistoryStations()
             .then(ret=>{
                 if (ret !== null && ret !== undefined && ret.length > 0) {
@@ -126,6 +133,29 @@ class CPASearchPage extends Component{
         this._searchFinished(station);
     };
 
+    _clearOneHistory = (item)=>{
+        try {
+            let data = [];
+            let len = this.state.historyResult.length;
+            let {keyword} = item;
+            for (let i = 0; i < len; i++) {
+                if (this.state.historyResult[i].keyword !== keyword) {
+                    data.push(this.state.historyResult[i]);
+                }
+            }
+
+            this.setState({
+                ...this.state,
+                historyResult: data,
+            });
+
+            updateSearchHistoryStations(data);
+        }
+        catch (ex) {
+            console.log(ex);
+        }
+    };
+
     _clearHistory = ()=>{
         this.setState({
             ...this.state,
@@ -135,17 +165,43 @@ class CPASearchPage extends Component{
         clearSearchHistoryStations();
     };
 
-    _renderItem = ({item})=>{
+    _renderHistoryItem = ({item})=>{
         return (
             <TouchableOpacity
                 key={item.key}
-                style={styles.item}
+                style={[styles.item, {flexDirection: 'row'}]}
                 onPress={()=>{
                     this._chooseStation(item)
                 }}>
                 <View style={styles.rowData}>
+                    <View style={styles.rowDataKey}>
+                        <Text style={styles.rowDataText}>
+                            {item.name}
+                        </Text>
+                    </View>
+                </View>
+                <TouchableOpacity style={styles.rowDataIcon}
+                                  onPress={()=>this._clearOneHistory(item)}>
+                    <Icon name="md-trash" size={16} color={colors.secondary2} />
+                </TouchableOpacity>
+            </TouchableOpacity>
+        );
+    };
+
+    _renderStationItem = ({item})=>{
+        return (
+            <TouchableOpacity
+                key={item.key}
+                style={[styles.item, styles.stationItem]}
+                onPress={()=>{
+                    this._chooseStation(item)
+                }}>
+                <View style={[styles.rowData, styles.station]}>
                     <Text style={styles.rowDataText}>
                         {item.name}
+                    </Text>
+                    <Text style={[styles.rowDataText, styles.address]}>
+                        {item.address}
                     </Text>
                 </View>
             </TouchableOpacity>
@@ -162,7 +218,7 @@ class CPASearchPage extends Component{
                 </View>
                 <FlatList style={styles.searchResult}
                           data={this.state.historyResult}
-                          renderItem={this._renderItem} />
+                          renderItem={this._renderHistoryItem} />
                 <TouchableOpacity style={[styles.item, styles.historyTitle]}
                                   onPress={this._clearHistory} >
                     <Text style={styles.rowDataText}>
@@ -178,7 +234,7 @@ class CPASearchPage extends Component{
             <View style={styles.searchResultContainer}>
                 <FlatList style={styles.searchResult}
                           data={this.state.searchResult}
-                          renderItem={this._renderItem} />
+                          renderItem={this._renderStationItem} />
             </View>
         );
     };
@@ -193,13 +249,18 @@ class CPASearchPage extends Component{
                                    inputStyle={styles.searchInput}
                                    lightTheme
                                    round
-                                   placeholder='搜索...'
+                                   placeholder='输入地名、站点名称进行搜索...'
                                    onFocus={this._toSearch}
                                    autoFocus={true}
                                    returnKeyType="search"
                                    onChangeText={this._startSearch}
                                    clearIcon={{color:'#86939e', name:'clear'}}
                                    showLoadingIcon={false}
+                                   onSubmitEditing={
+                                       (event)=> {
+                                           this._searchLocationNameFinished(event.nativeEvent.text);
+                                       }
+                                   }
                         />
                         <NavButton label='取消'
                                    style={styles.cancel}

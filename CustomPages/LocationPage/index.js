@@ -37,7 +37,7 @@ class CPALocationPage extends Component{
     }
 
     // 获取当前定位城市
-    _getCurrentCity() {
+    _getCurrentCity = () => {
         getCurrentLocation()
             .then(data=>{
                 Geolocation.reverseGeoCode(data.latitude, data.longitude)
@@ -50,7 +50,7 @@ class CPALocationPage extends Component{
                                 this.setState({
                                     ...this.state,
                                     currentPosition: response.city
-                                })
+                                });
                             }
                         },
                         (error)=>{
@@ -166,7 +166,10 @@ class CPALocationPage extends Component{
                     <View style={styles.locationContainer}>
                         <Text style={[styles.title, {flex: 1}]}>当前定位城市</Text>
                         <TouchableOpacity style={styles.locationButton}
-                                          onPress={()=>this._changeCity(this.state.currentPosition)}>
+                                          onPress={()=>this._changeCity(this.state.currentPosition)}
+                                          disabled={this.state.currentPosition === null
+                                          || this.state.currentPosition === undefined
+                                          || this.state.currentPosition.length <= 0}>
                             <Text style={[styles.cityName, {color: colors.white}]}>
                                 {this.state.currentPosition}
                             </Text>

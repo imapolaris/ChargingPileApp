@@ -43,10 +43,29 @@ const styles = StyleSheet.create({
         borderBottomWidth:0.5,
         justifyContent: 'center',
         flex: 1,
+        flexDirection: 'row',
+    },
+    rowDataKey: {
+        flex: 1,
+        alignItems:'flex-start',
+        justifyContent: 'center',
+    },
+    rowDataIcon: {
+        justifyContent: 'center',
+        marginLeft: 10,
+    },
+    stationItem: {
+        height: ROWHEIGHT + 15,
+    },
+    station: {
+        flexDirection: 'column',
     },
     rowDataText:{
         color:'gray',
         fontSize: 15,
+    },
+    address: {
+        fontSize: 13,
     },
     historyTitle: {
         alignItems: 'center',
