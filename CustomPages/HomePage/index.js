@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {
     View,
-    Modal,
     TouchableHighlight,
 } from 'react-native';
 
@@ -28,7 +27,7 @@ import {shadowStyle} from "../../Common/styles";
 
 const selectedArr = [{key:1, title:"百度地图"}, {key:2, title:"高德地图"}];
 let position = null;
-let currentPosition = null;
+let currentPosition = {longitude:116.404185, latitude: 39.91491};  // 北京天安门的坐标
 const Zoom = 12.5;
 
 class CPAHomePage extends Component{
@@ -40,8 +39,8 @@ class CPAHomePage extends Component{
             mayType: MapTypes.NORMAL,
             zoom: 5,
             center: {
-                longitude: 105.552500,
-                latitude: 34.322700,  // 北京天安门的坐标是(116.404185,39.91491)
+                longitude: 105.552500, // 中间点坐标
+                latitude: 34.322700,
             },
             trafficEnabled: false,
             baiduHeatMapEnabled: false,
@@ -110,7 +109,7 @@ class CPAHomePage extends Component{
 
     _toList = () => {
         const {nav} = this.props.screenProps;
-        nav && nav('List');
+        nav && nav('List', {position: currentPosition});
     };
 
     _showTraffic = () => {
@@ -157,9 +156,11 @@ class CPAHomePage extends Component{
                 if (location.longitude === null || location.longitude === undefined
                     || location.latitude === null || location.latitude === undefined)
                 {
-                    alert('请输入正确、合法的地名！');
+                    ToastAndroidBS('无法解析该地址！');
                     return;
                 }
+
+                currentPosition = {longitude: location.longitude, latitude: location.latitude};
 
                 this.setState({
                     ...this.state,
@@ -168,10 +169,11 @@ class CPAHomePage extends Component{
                         longitude: location.longitude,
                         latitude: location.latitude
                     }
-                })
+                });
             })
             .catch(error=>{
                 console.log(`cannot analyse the address, error: ${error}`);
+                ToastAndroidBS('无法解析该地址！');
             });
     };
 

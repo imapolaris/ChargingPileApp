@@ -20,8 +20,6 @@ export default class List extends Component {
         super(props);
         // 初始状态
         this.state = {};
-
-        that = this;
     }
 
     _renderItem = ({item}) => {
@@ -30,7 +28,7 @@ export default class List extends Component {
                 key={item.key}
                 style={styles.item}
                 onPress={()=>{
-                    that._chooseCity(item.name);
+                    this._chooseCity(item.name);
                 }}>
                 <View style={styles.rowData}>
                     <Text style={styles.rowDataText}>

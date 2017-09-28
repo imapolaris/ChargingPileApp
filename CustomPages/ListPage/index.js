@@ -4,6 +4,8 @@ import styles from './styles';
 import StationListItem from "../../CustomComponents/StationListItem/index";
 import icons from '../../Common/fonts';
 import colors from '../../Common/colors';
+import {getNearbyStations} from "../../Common/webApi";
+import {ToastAndroidBS} from "../../Common/functions";
 
 class CPAListPage extends Component{
     // 构造
@@ -16,8 +18,31 @@ class CPAListPage extends Component{
     }
 
     componentDidMount() {
-        let position = this.props.position;
+        this._requestNearbyStations();
     }
+
+    _requestNearbyStations = () => {
+        let {state} = this.props.navigation;
+        let position = state.params.position;
+        if (position !== null && position !== undefined) {
+            getNearbyStations(position)
+                .then(ret=>{
+                    if (ret !== null && ret !== undefined && ret.length > 0) {
+                        let data = ret.map((item, index)=>{
+                            return Object.assign({}, item, {key: index});
+                        });
+
+                        this.setState({
+                            ...this.state,
+                            stations: data
+                        });
+                    }
+                })
+                .catch(err=>{
+                    console.log(err);
+                });
+        }
+    };
 
     _onDetailsPress = () => {
         const {navigate} = this.props.navigation;
@@ -33,7 +58,7 @@ class CPAListPage extends Component{
         return (
             <View style={styles.item}>
                 <StationListItem key={item.key}
-                                 title={item.title}
+                                 title={item.name}
                                  numbers={item.numbers}
                                  address={item.address}
                                  gotoDetails={item.callback1}

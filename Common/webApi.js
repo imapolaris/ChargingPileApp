@@ -50,6 +50,19 @@ export function getStationsByName(text) {
 }
 
 /*
+* query the nearby stations by the position.
+* */
+export function getNearbyStations(position) {
+    let url = `${urls.stations}/nearby`;
+    let data = {
+        longitude: position.longitude,
+        latitude: position.latitude
+    };
+
+    return myFetch(url, POST, headers, data);
+}
+
+/*
 * get current logon user' charging records.
 * */
 export function getChargingRecords(refreshing=false) {
