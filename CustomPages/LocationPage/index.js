@@ -99,6 +99,10 @@ class CPALocationPage extends Component{
     _changeCity = (cityName) => {
         this._updateRecentVisitCities(cityName);
 
+        this._onCityChanged(cityName);
+    };
+
+    _onCityChanged = (cityName) => {
         const {state, goBack} = this.props.navigation;
         state.params.callback && state.params.callback(cityName);
         goBack && goBack();
@@ -166,7 +170,7 @@ class CPALocationPage extends Component{
                     <View style={styles.locationContainer}>
                         <Text style={[styles.title, {flex: 1}]}>当前定位城市</Text>
                         <TouchableOpacity style={styles.locationButton}
-                                          onPress={()=>this._changeCity(this.state.currentPosition)}
+                                          onPress={()=>this._onCityChanged(this.state.currentPosition)}
                                           disabled={this.state.currentPosition === null
                                           || this.state.currentPosition === undefined
                                           || this.state.currentPosition.length <= 0}>
@@ -232,6 +236,7 @@ class CPALocationPage extends Component{
                                returnKeyType="search"
                                maxLength={20}
                                containerStyle={styles.search}
+                               inputStyle={styles.searchInput}
                                placeholder='搜索...'
                                clearIcon={this.state.searchState ? {color:'#86939e', name:'clear'} : null} />
                     {

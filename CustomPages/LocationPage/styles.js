@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
     search: {
         flex: 1,
     },
+    searchInput: {
+        backgroundColor: colors.white,
+    },
     searchContainer: {
         flexDirection: 'row',
     },
