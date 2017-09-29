@@ -212,7 +212,7 @@ class CPAHomePage extends Component{
                             {
                                 case 0:
                                     const {nav} = this.props.screenProps;
-                                    nav && nav('Details', {stationId: id});
+                                    nav && nav('Details', {station: data});
                                     break;
                                 case 1:
                                     position = e.position;

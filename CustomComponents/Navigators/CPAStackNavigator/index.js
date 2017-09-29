@@ -15,7 +15,7 @@ import CPAMySubscribePage from "../../../CustomPages/MySubscribePage/index";
 import CPAPayRecordsPage from "../../../CustomPages/PayRecordsPage/index";
 import CPAChangePwdPage from "../../../CustomPages/ChangePwdPage/index";
 import CPASettingPage from "../../../CustomPages/SettingPage/index";
-import CPAUserAgreement from "../../../CustomPages/UserAgreementPage/index";
+import CPAUserAgreementPage from "../../../CustomPages/UserAgreementPage/index";
 import CPAAboutUsPage from "../../../CustomPages/AboutUsPage/index";
 import CPALoginPage from "../../../CustomPages/LoginPage/index";
 import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPage/index";
@@ -116,7 +116,7 @@ const CPAStackNavigator = StackNavigator(
             }
         },
         UserAgreement: {
-            screen: CPAUserAgreement,
+            screen: CPAUserAgreementPage,
             navigationOptions: {
                 title: '用户协议',
             }

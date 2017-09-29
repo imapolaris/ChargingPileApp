@@ -3,6 +3,8 @@ import {myFetch} from "./functions";
 const urls = {
     messages: 'http://192.168.0.201/ChargingPileService/api/messages',
     stations: 'http://192.168.0.201/ChargingPileService/api/stations',
+    stationDetails: 'http://192.168.0.201/ChargingPileService/api/stationDetails',
+    chargingPiles: 'http://192.168.0.201/ChargingPileService/api/chargingPiles',
     chargingRecords: 'http://192.168.0.201/ChargingPileService/api/chargingRecords',
     charging: 'http://192.168.0.201/ChargingPileService/api/charging',
     users: 'http://192.168.0.201/ChargingPileService/api/users',
@@ -60,6 +62,22 @@ export function getNearbyStations(position) {
     };
 
     return myFetch(url, POST, headers, data);
+}
+
+/*
+* query the details of the station by id.
+* */
+export function getStationDetails(stationId) {
+    let url = `${urls.stationDetails}/${stationId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* query charging piles of the station by id.
+* */
+export function getChargingPiles(stationId) {
+    let url = `${urls.chargingPiles}/${stationId}`;
+    return myFetch(url, GET, headers);
 }
 
 /*

@@ -69,7 +69,7 @@ class CPAListPage extends Component{
         }
 
         const {navigate} = this.props.navigation;
-        navigate('Details', {stationId: item.id});
+        navigate('Details', {station: item});
     };
 
     _onNavPress = (item) => {
@@ -96,31 +96,10 @@ class CPAListPage extends Component{
         );
     };
 
-    _renderSeparator = ()=>{
-        return (
-            <View style={styles.separator} />
-        );
-    };
 
-    _renderBottom = ()=>{
-        return (
-            <View style={styles.bottomContainer}>
-                <Text style={styles.bottom}>
-                    我是有底线的...
-                </Text>
-            </View>
-        )
-    };
 
     _renderEmpty = () =>{
-        return (
-            <View style={styles.emptyContainer}>
-                <Text style={styles.empty}>
-                    {this.state.refreshing ? LoadingGreetings : EmptyDataGreetings}
-                </Text>
-                <Icon name={this.state.refreshing ? "md-happy" : "md-sad"} size={20} color={colors.tintColor} />
-            </View>
-        );
+        return renderEmpty(this.state.refreshing, EmptyDataGreetings);
     };
 
     _onRefresh = () =>{
@@ -132,10 +111,10 @@ class CPAListPage extends Component{
             <View style={styles.container}>
                 <FlatList data={this.state.stations}
                           renderItem={this._renderItem}
-                          ItemSeparatorComponent={this._renderSeparator}
+                          ItemSeparatorComponent={renderSeparator}
                           ListFooterComponent={
                               this.state.stations.length > 0 ?
-                                  this._renderBottom
+                                  renderBottom()
                                   :
                                   null
                           }
@@ -149,6 +128,33 @@ class CPAListPage extends Component{
             </View>
         );
     }
+}
+
+export function renderSeparator(){
+    return (
+        <View style={styles.separator} />
+    );
+}
+
+export function renderBottom(){
+    return (
+        <View style={styles.bottomContainer}>
+            <Text style={styles.bottom}>
+                我是有底线的...
+            </Text>
+        </View>
+    );
+}
+
+export function renderEmpty(refreshing, EmptyDataGreetings) {
+    return (
+        <View style={styles.emptyContainer}>
+            <Text style={styles.empty}>
+                {refreshing ? LoadingGreetings : EmptyDataGreetings}
+            </Text>
+            <Icon name={refreshing ? "md-happy" : "md-sad"} size={20} color={colors.tintColor} />
+        </View>
+    );
 }
 
 export default CPAListPage;

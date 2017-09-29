@@ -55,6 +55,7 @@ const CPATabNavigator = TabNavigator(
             tabStyle:{
                 flexDirection:'row',
                 backgroundColor: colors.theme1,
+                marginBottom: 1,
             },
             labelStyle: {
                 fontSize: 15,

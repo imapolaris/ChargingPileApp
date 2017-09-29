@@ -29,10 +29,10 @@ class ElectricPileListItem extends Component{
                         类型：{this.props.pileType}
                     </Text>
                     <Text style={styles.info}>
-                        收费：{this.props.unitPrice}
+                        收费：{this.props.unitPrice} 元/度
                     </Text>
                 </View>
-                <DividerLine />
+                {/*<DividerLine style={styles.divider} />*/}
             </View>
         );
     }
