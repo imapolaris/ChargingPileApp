@@ -160,6 +160,13 @@ export function getUserProfile(userId) {
 * */
 export function updateUserProfile(data) {
     let url = `${urls.users}/update`;
-
     return myFetch(url, POST, headers, data);
+}
+
+/*
+* query pay records by user id.
+* */
+export function getPayRecords(userId) {
+    let url = `${urls.payRecords}/${userId}`;
+    return myFetch(url, GET, headers);
 }
