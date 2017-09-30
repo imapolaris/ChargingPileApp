@@ -19,7 +19,7 @@ class CPACharingRecordsPage extends Component{
     }
 
     componentDidMount() {
-        this._requestData(false);
+        this._requestData();
     }
 
     _requestData = () => {
@@ -71,16 +71,11 @@ class CPACharingRecordsPage extends Component{
     };
 
     _refresh = () => {
-        this.setState({
-            ...this.state,
-            refreshing: true,
-        });
-
         this._requestData(true);
     };
 
     _renderEmpty = () => {
-        return renderEmpty(this.state.refreshing, '没有发现充电记录...');
+        return renderEmpty(this.state.refreshing, '没有找到充电记录...');
     };
 
     render() {

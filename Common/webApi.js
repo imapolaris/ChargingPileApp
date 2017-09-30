@@ -7,6 +7,7 @@ const urls = {
     chargingPiles: 'http://192.168.0.201/ChargingPileService/api/chargingPiles',
     chargingRecords: 'http://192.168.0.201/ChargingPileService/api/chargingRecords',
     charging: 'http://192.168.0.201/ChargingPileService/api/charging',
+    subscribeRecords: 'http://192.168.0.201/ChargingPileService/api/subscribeRecords',
     users: 'http://192.168.0.201/ChargingPileService/api/users',
     payRecords: 'http://192.168.0.201/ChargingPileService/api/payRecords',
 };
@@ -85,6 +86,14 @@ export function getChargingPiles(stationId) {
 * */
 export function getChargingRecords(userId) {
     let url = `${urls.chargingRecords}/${userId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* get subscribe records by user id.
+* */
+export function getSubscribeRecords(userId) {
+    let url = `${urls.subscribeRecords}/${userId}`;
     return myFetch(url, GET, headers);
 }
 
