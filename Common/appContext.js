@@ -7,6 +7,34 @@ const appContext = {
     isLogon: false,
     userProfile: null,
     userId: '',
+    container: [],
+    register: function(func){
+        let exists = false;
+        for (let i=0; i < this.container.length; ++i) {
+            if (this.container[i] === func) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            this.container.push(func);
+        }
+    },
+    unRegister: function (func) {
+        let index = this.container.indexOf(func);
+        if (index >= 0) {
+            this.container = Object.assign([], this.container.slice(0, index), this.container.slice(index+1));
+        }
+    },
+    clearListeners: function() {
+        this.container.clear();
+    },
+    noticeListeners: function() {
+        for (let i = 0; i < this.container.length; ++i) {
+            let func = this.container[i];
+            func && func({isLogon: this.isLogon, userId: this.userId, userProfile: this.userProfile});
+        }
+    },
     logout: function () {
         this.isLogon = false;
         this.userProfile = null;
@@ -18,6 +46,8 @@ const appContext = {
             ),
             expires: null
         });
+
+        this.noticeListeners();
     },
     login: function (data) {
         this.isLogon = true;
@@ -61,6 +91,8 @@ const appContext = {
             data: this.userProfile,
             expires: null
         });
+
+        this.noticeListeners();
     },
 };
 

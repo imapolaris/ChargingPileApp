@@ -39,8 +39,7 @@ class CPALoginPage extends Component{
 
                     AppContext.login({userId: ret.data.id, nickname:ret.data.nickname, avatar: ret.data.avatar});
 
-                    const {state, goBack} = this.props.navigation;
-                    state.params.callback && state.params.callback();
+                    const {goBack} = this.props.navigation;
                     goBack && goBack();
                 } else {
                     // 登录失败

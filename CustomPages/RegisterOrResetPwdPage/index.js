@@ -112,12 +112,18 @@ class CPARegisterOrResetPwdPage extends Component {
                 });
         } else {
             resetPwd(phoneNumber, vCode, pwd)
-                .then(ret=>{
-                    ToastAndroidBS('重置密码成功，请使用新密码登录！');
+                .then(ret=> {
+                    if (ret.result === true) {
+                        ToastAndroidBS('重置密码成功，请使用新密码重新登录！');
+
+                        this._goToLogin();
+                    } else {
+                        ToastAndroidBS(ret.message);
+                    }
                 })
                 .catch(err=>{
                     console.log(err);
-                    ToastAndroidBS('重置密码失败！');
+                    ToastAndroidBS(err.message);
                 });
         }
     };

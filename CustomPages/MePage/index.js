@@ -21,6 +21,33 @@ class CPAMePage extends Component{
         this._loadUserProfile();
     }
 
+    componentWillMount() {
+        AppContext.register(this._appContextListener);
+    }
+
+    componentWillUnmount() {
+        AppContext.unRegister(this._appContextListener);
+    }
+
+    _appContextListener = (context) =>{
+        if (context !== null && context !== undefined) {
+            this.setState({
+                ...this.state,
+                logon: context.isLogon,
+            });
+
+            if (context.isLogon === true) {
+                this.setState({
+                    ...this.state,
+                    nickname: context.userProfile && context.userProfile.nickname,
+                    avatarSource: (context.userProfile
+                                        && context.userProfile.avatar !== null) ?
+                                        JSON.parse(context.userProfile.avatar) : null,
+                })
+            }
+        }
+    };
+
     _loadUserProfile() {
         if (AppContext.isLogon === true) {
             AppContext.loadUserProfile()
@@ -45,7 +72,7 @@ class CPAMePage extends Component{
 
     // 个人资料
     _personalData = () => {
-        this._navigateTo('PersonalData', {callback: this._onUpdate});
+        this._navigateTo('PersonalData');
     };
 
     // 钱包
@@ -66,7 +93,7 @@ class CPAMePage extends Component{
     // 设置
     _setting = () => {
         const {nav} = this.props.screenProps;
-        nav && nav('Setting', {callback: this._onLogout});
+        nav && nav('Setting');
     };
 
     // 登录
@@ -78,32 +105,13 @@ class CPAMePage extends Component{
 
     _goToLogin = ()=>{
         const {nav} = this.props.screenProps;
-        nav && nav('Login', {callback: this._onLogin});
-    };
-
-    _onLogin = () => {
-        this._loadUserProfile();
-    };
-
-    _onLogout = () => {
-        this.setState({
-            ...this.state,
-            nickname: '',
-            logon: false,
-        });
-    };
-
-    _onUpdate = () => {
-        this._loadUserProfile();
+        nav && nav('Login');
     };
 
     _navigateTo = (screenKey, params) => {
         if (AppContext.isLogon === true) {
             const {nav} = this.props.screenProps;
-            if (params === null || params === undefined)
-                nav && nav(screenKey);
-            else
-                nav && nav(screenKey, params);
+            nav && nav(screenKey, params);
         } else {
             ToastAndroidBS('请先登录！');
             this._goToLogin();
@@ -113,8 +121,7 @@ class CPAMePage extends Component{
     // 注册
     _register = () => {
         if (!this.state.logined){
-            const {nav} = this.props.screenProps;
-            nav && nav('Register', {registerOrReset: 'register', callback: this._onRegistered});
+            this._navigateTo('Register', {registerOrReset: 'register', callback: this._onRegistered});
         }
     };
 

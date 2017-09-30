@@ -185,8 +185,7 @@ class CPAHomePage extends Component{
             nav && nav('Scan', {headerVisible: true});
         } else {
             ToastAndroidBS('请先登录！');
-
-            //nav && nav('Login');
+            nav && nav('Login');
         }
     };
 

@@ -59,8 +59,7 @@ class CPAPersonalDataPage extends Component{
 
                     AppContext.updateUserProfile(data);
 
-                    const {state, goBack} = this.props.navigation;
-                    state.params.callback && state.params.callback();
+                    const {goBack} = this.props.navigation;
                     goBack && goBack();
                 } else {
                     ToastAndroidBS(ret.message);
@@ -142,7 +141,7 @@ class CPAPersonalDataPage extends Component{
 
     _onChangePwd = () => {
         const {navigate} = this.props.navigation;
-        navigate && navigate('ChangePwd');
+        navigate && navigate('ChangePwd', {PersonalKey: this.props.navigation.state.key});
     };
 
     render() {

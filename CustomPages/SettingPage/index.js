@@ -23,8 +23,7 @@ class CPASettingPage extends Component{
         AppContext.logout();
         ToastAndroidBS("退出登录！");
 
-        const {state, goBack} = this.props.navigation;
-        state.params.callback && state.params.callback();
+        const {goBack} = this.props.navigation;
         goBack && goBack();
     };
 

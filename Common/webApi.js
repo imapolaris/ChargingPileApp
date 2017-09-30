@@ -164,6 +164,14 @@ export function updateUserProfile(data) {
 }
 
 /*
+* change user's password.
+* */
+export function changePwd(user) {
+    let url = `${urls.users}/change`;
+    return myFetch(url, POST, headers, user);
+}
+
+/*
 * query pay records by user id.
 * */
 export function getPayRecords(userId) {

@@ -24,6 +24,8 @@ class App extends Component{
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this._onBackAndroid);
+
+        AppContext.clearListeners();
     }
 
     _onBackAndroid = () => {
