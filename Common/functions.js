@@ -10,7 +10,7 @@ export function prompt(title='',
                         btnTitle='ok',
                         callback=()=>{},
                         canCancel=true) {
-    Alert.alert(name,
+    Alert.alert(title,
         msg,
         [
             {text: btnTitle, onPress: ()=>callback()},
@@ -191,4 +191,11 @@ export function isStrongPassword(pwd) {
 export function validatePhoneNumber(phoneNumber) {
     let reg = /^1[34578]\d{9}$/; //验证规则
     return reg.test(phoneNumber);
+}
+
+/*
+* make a call
+* */
+export function makeCall(telephone) {
+
 }
