@@ -126,6 +126,7 @@ class CPAChangePwdPage extends Component{
                 <View style={styles.buttonContainer}>
                     <Button title="确认修改"
                             onPress={this._onPress}
+                            disabledStyle={styles.disabledButton}
                             disabled={!(this.state.oldPwd.length > 0
                                             && this.state.newPwd.length > 0
                                             && this.state.newPwdAgain.length > 0

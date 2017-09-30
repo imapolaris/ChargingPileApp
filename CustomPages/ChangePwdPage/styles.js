@@ -26,6 +26,9 @@ const styles = StyleSheet.create(
         text: {
             color: colors.tintColor2,
         },
+        disabledButton:{
+            backgroundColor: colors.grey3,
+        },
     }
 );
 
