@@ -83,8 +83,8 @@ export function getChargingPiles(stationId) {
 /*
 * get current logon user' charging records.
 * */
-export function getChargingRecords(refreshing=false) {
-    let url = `${urls.chargingRecords}?refreshing=${refreshing}`;
+export function getChargingRecords(userId) {
+    let url = `${urls.chargingRecords}/${userId}`;
     return myFetch(url, GET, headers);
 }
 

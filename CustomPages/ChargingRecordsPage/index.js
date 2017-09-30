@@ -5,6 +5,7 @@ import styles from './styles';
 import RecordWithSubtitleListItem from "../../CustomComponents/RecordWithSubtitleListItem/index";
 import {getChargingRecords} from "../../Common/webApi";
 import {ToastAndroidBS} from "../../Common/functions";
+import {renderEmpty, renderSeparator} from "../ListPage/index";
 
 class CPACharingRecordsPage extends Component{
     // 构造
@@ -12,7 +13,7 @@ class CPACharingRecordsPage extends Component{
         super(props);
         // 初始状态
         this.state = {
-            refreshing: false,
+            refreshing: true,
             data: [],
         };
     }
@@ -21,11 +22,12 @@ class CPACharingRecordsPage extends Component{
         this._requestData(false);
     }
 
-    _requestData = (refreshing) => {
-        getChargingRecords(refreshing)
+    _requestData = () => {
+        getChargingRecords(AppContext.userId)
             .then(response=>{
                 if (response === null || response === undefined){
                     ToastAndroidBS('请求数据失败！');
+                    this._onRefreshStatusChanged(false);
                     return;
                 }
 
@@ -47,8 +49,16 @@ class CPACharingRecordsPage extends Component{
             })
             .catch(error=>{
                 console.log(error);
-                alert(error);
+                ToastAndroidBS(error.message);
+                this._onRefreshStatusChanged(false);
             });
+    };
+
+    _onRefreshStatusChanged = (status) => {
+        this.setState({
+            ...this.state,
+            refreshing: status,
+        });
     };
 
     _renderItem = ({item}) => {
@@ -69,13 +79,18 @@ class CPACharingRecordsPage extends Component{
         this._requestData(true);
     };
 
+    _renderEmpty = () => {
+        return renderEmpty(this.state.refreshing, '没有发现充电记录...');
+    };
+
     render() {
         return (
             <View style={styles.container}>
                 <FlatList data={this.state.data}
                           renderItem={this._renderItem}
                           refreshing={this.state.refreshing}
-                          onRefresh={this._refresh}/>
+                          onRefresh={this._refresh}
+                          ListEmptyComponent={this._renderEmpty} />
             </View>
         );
     }
