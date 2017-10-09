@@ -5,10 +5,10 @@ import {Geolocation} from 'react-native-baidu-map';
 /*
  * 展示信息（1个按钮）
  */
-export function prompt(title='',
+export function myAlert(title='',
                         msg='',
-                        btnTitle='ok',
                         callback=()=>{},
+                        btnTitle='ok',
                         canCancel=true) {
     Alert.alert(title,
         msg,
@@ -16,6 +16,20 @@ export function prompt(title='',
             {text: btnTitle, onPress: ()=>callback()},
         ],
         {cancelable:canCancel});
+}
+
+/*
+* 提示信息
+* */
+export function prompt(msg, callback) {
+    myAlert('提示', msg, callback);
+}
+
+/*
+* 错误信息
+* */
+export function error(msg, callback) {
+    myAlert('错误', msg, callback);
 }
 
 /*
@@ -191,6 +205,22 @@ export function isStrongPassword(pwd) {
 export function validatePhoneNumber(phoneNumber) {
     let reg = /^1[34578]\d{9}$/; //验证规则
     return reg.test(phoneNumber);
+}
+
+/*
+* valid numbers.
+* */
+export function validNumber(number) {
+    let reg = /^[0-9]*$/;
+    return reg.test(number);
+}
+
+/*
+* valid serial number of charging pile.
+* */
+export function validSerialNumber(serialNumber) {
+    let reg = /^\d{10}$/;
+    return reg.test(serialNumber);
 }
 
 /*

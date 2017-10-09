@@ -22,9 +22,10 @@ import {startCharging} from "../../Common/webApi";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DividerLine from "../../CustomComponents/DividerLine/index";
-import {ToastAndroidBS} from "../../Common/functions";
+import {error, prompt, ToastAndroidBS, validSerialNumber} from "../../Common/functions";
 
 
+const SNCount = 10;
 class CPAScanPage extends Component {
     // 构造
     constructor(props) {
@@ -33,6 +34,7 @@ class CPAScanPage extends Component {
         this.state = {
             scanOrInput: 'scan',
             torchMode: Camera.constants.TorchMode.off,
+            sn: '',
         };
     }
 
@@ -72,7 +74,8 @@ class CPAScanPage extends Component {
         if (this.state.scanOrInput === 'input') {
             this.setState({
                 ...this.state,
-                scanOrInput: 'scan'
+                scanOrInput: 'scan',
+                sn: '',
             });
         }
     };
@@ -82,7 +85,8 @@ class CPAScanPage extends Component {
         if (this.state.scanOrInput === 'scan') {
             this.setState({
                 ...this.state,
-                scanOrInput: 'input'
+                scanOrInput: 'input',
+                sn: '',
             });
         }
     };
@@ -94,20 +98,16 @@ class CPAScanPage extends Component {
             this._switchTorch(true);
             Vibration.vibrate();
 
-            // 检查一下扫码的数据是否合法，过滤不正确的二维码
-            // code here.
+            let sn = e.data;
 
-            startCharging('123'/*e.data*/)
-                .then(ret => {
-                    alert(ret);
-                })
-                .catch(err => {
-                    console.log(err);
-                    ToastAndroidBS(err.message);
-                });
-
+            // verify the serial number.
+            if (/*validSerialNumber(sn)*/true) {
+                this._startCharging(sn);
+            } else {
+                prompt('编号不正确！');
+            }
         } catch (e) {
-            alert('An error occurred', e.message);
+            error('An error occurred', e.message);
         }
     };
 
@@ -116,8 +116,8 @@ class CPAScanPage extends Component {
         this._switchTorch();
     };
 
-    /*switch torch, add by alex, on 090517*/
     /*
+     * switch torch.
      * close: 关闭手电筒，不打开
      */
     _switchTorch = (close) => {
@@ -144,11 +144,25 @@ class CPAScanPage extends Component {
         // 如果键盘打开，隐藏键盘
         Keyboard.dismiss();
 
-        const {nav} = this.props.screenProps;
+        let sn = this.state.sn;
+        this._startCharging(sn);
+    };
+
+    _startCharging = (sn)=> {
+        startCharging(sn)
+            .then(ret => {
+                alert(ret);
+
+                /*const {nav} = this.props.screenProps;
         nav && nav.setParams({headerVisible: false});
 
         const {navigate} = this.props.navigation;
-        navigate && navigate('WaitingCharging', {waitingOrFinished: 'waiting'});
+        navigate && navigate('WaitingCharging', {waitingOrFinished: 'waiting'});*/
+            })
+            .catch(err => {
+                console.log(err);
+                ToastAndroidBS(err.message);
+            });
     };
 
     render() {
@@ -237,7 +251,7 @@ class CPAScanPage extends Component {
             <View style={styles.container}>
                 <View style={[styles.textContainer, {marginTop: 30}]}>
                     <Text style={styles.text}>
-                        请输入充电桩编号，然后点击按钮！
+                        请输入充电桩编号，然后点击确认按钮！
                     </Text>
                 </View>
                 <View style={styles.upperContainer}>
@@ -249,6 +263,13 @@ class CPAScanPage extends Component {
                                        style={[styles.textInput, TextInputStyles.textInput]}
                                        keyboardType='numeric'
                                        autoFocus={true}
+                                       value={this.state.sn}
+                                       onChangeText={(text)=>{
+                                           this.setState({
+                                               ...this.state,
+                                               sn: text,
+                                           });
+                                       }}
                             />
                         </View>
                         <View style={styles.buttonContainer}>
@@ -260,7 +281,9 @@ class CPAScanPage extends Component {
                             <View style={styles.rightButtonContainer}>
                                 <Button title="确定"
                                         buttonStyle={styles.button}
-                                        onPress={this._onInputFinishedPress} />
+                                        onPress={this._onInputFinishedPress}
+                                        disabled={this.state.sn.length < SNCount}
+                                        disabledStyle={{backgroundColor: colors.grey3}} />
                             </View>
                         </View>
                     </View>
