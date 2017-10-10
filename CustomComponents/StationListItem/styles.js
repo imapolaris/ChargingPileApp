@@ -13,40 +13,33 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 18,
-        //color: colors.white,
+        color: colors.primary1,
     },
     infoContainer: {
-        height: 60,
+        height: 80,
         paddingLeft: 15,
-        justifyContent: 'center',
-    },
-    info: {
-        fontSize: 12,
-    },
-    actionContainer: {
-        height: 45,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
         flexDirection: 'row',
     },
-    leftContainer: {
+    infoLeftContainer:{
         flex: 1,
-        borderRightWidth: 0.5,
-        borderRightColor: colors.grey4,
     },
-    rightContainer: {
-        flex: 1,
-        borderLeftWidth: 0.5,
-        borderLeftColor: colors.grey4,
-    },
-    button: {
-        paddingTop: 10,
-        paddingBottom: 10,
+    infoRightContainer: {
+        width: 55,
+        height: 55,
+        backgroundColor: colors.primary1,
+        margin: 20,
+        borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.white,
     },
-    buttonText: {
-        fontSize: 16,
-        color: colors.theme1,
+    info: {
+        fontSize: 13,
+    },
+    navigate:{
+        fontSize: 14,
+        color: colors.white,
     },
     divider: {
         backgroundColor: '#C3C3C3',

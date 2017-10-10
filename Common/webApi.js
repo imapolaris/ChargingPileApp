@@ -101,7 +101,23 @@ export function getSubscribeRecords(userId) {
 * start charging after scan the qrcode or input serial number.
 * */
 export function startCharging(serialNumber) {
-    let url = `${urls.charging}?serialNumber=${serialNumber}`;
+    let url = `${urls.charging}/start/${serialNumber}`;
+    return myFetch(url, POST, headers);
+}
+
+/*
+* stop charging.
+* */
+export function stopCharging(serialNumber) {
+    let url = `${urls.charging}/stop/${serialNumber}`;
+    return myFetch(url, POST, headers);
+}
+
+/*
+* request charging status.
+* */
+export function getChargingStatus(serialNumber) {
+    let url = `${urls.charging}/status/${serialNumber}`;
     return myFetch(url, POST, headers);
 }
 

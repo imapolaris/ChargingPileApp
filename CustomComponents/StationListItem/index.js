@@ -7,12 +7,16 @@ import {
 
 import styles from './styles';
 import DividerLine from "../DividerLine/index";
+import {Icon} from 'react-native-elements';
+import colors from '../../Common/colors';
+import icons from '../../Common/fonts';
 
 class StationListItem extends Component{
     render() {
         return (
-            <View style={styles.container}>
-                <DividerLine style={styles.divider} />
+            <TouchableOpacity style={styles.container}
+                              activeOpacity={0.6}
+                              onPress={() => this.props.gotoDetails && this.props.gotoDetails()}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>
                         {this.props.title}
@@ -20,32 +24,25 @@ class StationListItem extends Component{
                 </View>
                 <DividerLine style={styles.divider} />
                 <View style={styles.infoContainer}>
-                    <Text style={styles.info}>
-                        空闲电桩：{this.props.numbers}
-                    </Text>
-                    <Text style={styles.info}>
-                        {this.props.address}
-                    </Text>
-                </View>
-                <DividerLine style={styles.divider} />
-
-                <View style={styles.actionContainer}>
-                    <TouchableOpacity onPress={() => this.props.gotoDetails && this.props.gotoDetails()}
-                                      style={[styles.button, styles.leftContainer]}>
-                        <Text style={styles.buttonText}>
-                            详情
+                    <View style={styles.infoLeftContainer}>
+                        <Text style={styles.info}>
+                            空闲电桩：{this.props.numbers}
                         </Text>
-                    </TouchableOpacity>
+                        <Text style={styles.info}>
+                            {this.props.address}
+                        </Text>
+                    </View>
 
-                    <TouchableOpacity onPress={() => this.props.gotoMapNav && this.props.gotoMapNav()}
-                                      style={[styles.button, styles.rightContainer]}>
-                        <Text style={styles.buttonText}>
+                    <TouchableOpacity style={styles.infoRightContainer}
+                                      onPress={() => this.props.gotoMapNav && this.props.gotoMapNav()}
+                                      activeOpacity={0.9}>
+                        <Icon type={icons.Ionicon} name="md-navigate" size={18} color={colors.white} />
+                        <Text style={styles.navigate}>
                             导航
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <DividerLine style={styles.divider} />
-            </View>
+            </TouchableOpacity>
         );
     }
 }

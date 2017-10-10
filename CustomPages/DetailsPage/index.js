@@ -10,7 +10,7 @@ import {
 
 import styles from './styles';
 import {TabNavigator} from 'react-navigation';
-import {Button, Icon} from 'react-native-elements';
+import {Icon} from 'react-native-elements';
 import ElectricPileListItem from "../../CustomComponents/ElectricPileListItem/index";
 import colors from '../../Common/colors';
 import {AlertSelected, showMapSelector} from "../../CustomComponents/AlertSelected/index.android";
@@ -192,10 +192,21 @@ class CPAElectricPileInfoPage extends Component{
         });
     };
 
-    // 导航
-    _subscribeCharging = () => {
-        const {nav} = this.props.screenProps;
-        nav && nav('Subscribe');
+    // 预约
+    _subscribeCharging = (item) => {
+        if (item.status === '在线'){
+            this._subscriber.show('预约充电', [{key:0, title:'预约'}], (i)=>{
+                switch (i) {
+                    case 0:
+                        const {nav} = this.props.screenProps;
+                        const {navigate} = nav;
+                        navigate && navigate('Subscribe');
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
     };
 
     _renderItem = ({item}) => {
@@ -205,6 +216,9 @@ class CPAElectricPileInfoPage extends Component{
                                   serialNumber={item.serialNumber}
                                   pileType={item.category}
                                   unitPrice={item.price}
+                                  onPress={()=>{
+                                      this._subscribeCharging(item);
+                                  }}
             />
         );
     };
@@ -226,6 +240,8 @@ class CPAElectricPileInfoPage extends Component{
                           onRefresh={this._onRefresh}
                           ItemSeparatorComponent={renderSeparator}
                           ListEmptyComponent={this._renderEmpty} />
+
+                <AlertSelected ref={self=>this._subscriber=self}/>
             </ScrollView>
         );
     }
