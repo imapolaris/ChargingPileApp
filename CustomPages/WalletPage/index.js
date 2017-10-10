@@ -64,15 +64,6 @@ class CPAWalletPage extends Component{
     };
 
     _onSubmit = () => {
-        /*Alipay.pay('signed pay info string')
-            .then(data=>{
-                console.log(data);
-                alert(data);
-            })
-            .catch(error=>{
-                console.error(error);
-                alert(error);
-            });*/
         let userId = AppContext.userId;
         let money = this.state.money;
         let payWay = this.state.wxChecked === true ? '微信支付' : '支付宝支付';

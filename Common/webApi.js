@@ -83,6 +83,14 @@ export function getChargingPiles(stationId) {
 }
 
 /*
+* subscribe the charging pile.
+* */
+export function makeOneSubscribe(userId, sn) {
+    let url = `${urls.chargingPiles}/subscribe?userId=${userId}&sn=${sn}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
 * get current logon user' charging records.
 * */
 export function getChargingRecords(userId) {

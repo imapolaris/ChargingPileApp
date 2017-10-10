@@ -80,7 +80,7 @@ class CPAPayRecordsPage extends Component{
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <FlatList data={this.state.data}
                           renderItem={this._renderItem}
                           refreshing={this.state.refreshing}

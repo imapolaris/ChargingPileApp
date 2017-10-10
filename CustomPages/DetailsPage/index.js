@@ -15,7 +15,7 @@ import ElectricPileListItem from "../../CustomComponents/ElectricPileListItem/in
 import colors from '../../Common/colors';
 import {AlertSelected, showMapSelector} from "../../CustomComponents/AlertSelected/index.android";
 import icons from '../../Common/fonts';
-import {getChargingPiles, getStationDetails} from "../../Common/webApi";
+import {getChargingPiles, getStationDetails, makeOneSubscribe} from "../../Common/webApi";
 import {ToastAndroidBS} from "../../Common/functions";
 import {renderBottom, renderEmpty, renderSeparator} from "../ListPage/index";
 
@@ -198,15 +198,34 @@ class CPAElectricPileInfoPage extends Component{
             this._subscriber.show('预约充电', [{key:0, title:'预约'}], (i)=>{
                 switch (i) {
                     case 0:
-                        const {nav} = this.props.screenProps;
-                        const {navigate} = nav;
-                        navigate && navigate('Subscribe');
+                        this._makeOneSubscribe(item);
                         break;
                     default:
                         break;
                 }
             });
         }
+    };
+
+    _makeOneSubscribe = (item)=>{
+        let userId = AppContext.userId;
+        let sn = item.serialNumber;
+        makeOneSubscribe(userId, sn)
+            .then(ret=>{
+                if (ret.result === true) {
+                    /*const {nav} = this.props.screenProps;
+                    const {navigate} = nav;
+                    navigate && navigate('Subscribe');*/
+
+                    ToastAndroidBS('预约成功');
+                } else {
+                    ToastAndroidBS(ret.message);
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+                ToastAndroidBS(err.message);
+            });
     };
 
     _renderItem = ({item}) => {
