@@ -23,12 +23,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.white,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 5,
     },
     label:{
         fontSize:  14,
     },
     money:{
-        fontSize: 30,
+        fontSize: 36,
         color: '#FF0000',
         fontWeight: 'bold',
         marginLeft: 5,
@@ -43,23 +46,35 @@ const styles = StyleSheet.create({
     payContainer: {
         flex: 3,
         flexDirection: 'column',
-        padding: 15,
+        padding: 5,
     },
-    inputContainer:{
-        height: 50,
+    moneyContainer:{
         flexDirection: 'row',
-        alignItems: 'center',
+        justifyContent: 'space-around',
+        marginTop: 10,
     },
-    textInput:{
-        flex: 1,
+    moneyItem: {
+        height: 45,
+        width: 100,
+        backgroundColor: colors.white,
+        justifyContent: 'center',
     },
-    text:{
-        marginLeft: 5,
-        marginRight: 5,
+    chargeMoneyItem:{
+        borderColor: colors.primary1,
+        borderWidth: 1,
+    },
+    moneyItemText:{
+        fontSize: 16,
+        alignSelf: 'center',
+    },
+    chargeMoneyItemText:{
+        color: colors.primary1,
     },
     payWayContainer:{
         flexDirection: 'column',
         marginTop: 15,
+        marginLeft: 5,
+        marginRight: 5,
     },
     checkboxContainer:{
         flexDirection: 'row',

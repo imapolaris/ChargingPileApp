@@ -10,6 +10,7 @@ const urls = {
     subscribeRecords: 'http://192.168.0.201/ChargingPileService/api/subscribeRecords',
     users: 'http://192.168.0.201/ChargingPileService/api/users',
     payRecords: 'http://192.168.0.201/ChargingPileService/api/payRecords',
+    wallet: 'http://192.168.0.201/ChargingPileService/api/wallet',
 };
 
 const headers = {
@@ -192,5 +193,21 @@ export function changePwd(user) {
 * */
 export function getPayRecords(userId) {
     let url = `${urls.payRecords}/${userId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* query balance of user' wallet
+* */
+export function getWalletBalance(userId) {
+    let url = `${urls.wallet}/balance/${userId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* make one charge.
+* */
+export function makeOneCharge(userId, money, payWay) {
+    let url = `${urls.wallet}/charge?userId=${userId}&money=${money}&payway=${payWay}`;
     return myFetch(url, GET, headers);
 }

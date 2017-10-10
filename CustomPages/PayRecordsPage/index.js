@@ -37,7 +37,7 @@ class CPAPayRecordsPage extends Component{
                     data.push({key: k++,
                         title: item.PayWay,
                         subtitle: item.PayDate,
-                        content: `${item.PayMoney}`
+                        content: `${item.PayMoney} 元`
                     });
                 });
 
