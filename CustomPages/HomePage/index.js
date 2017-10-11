@@ -129,13 +129,11 @@ class CPAHomePage extends Component{
     };
 
     _toLocation = () => {
-        const {nav} = this.props.screenProps;
-        nav && nav('Location', {callback: this._resetCenter});
+        this._navigateTo('Location', {callback: this._resetCenter});
     };
 
     _toList = () => {
-        const {nav} = this.props.screenProps;
-        nav && nav('List', {position: currentPosition});
+        this._navigateTo('List', {position: currentPosition});
     };
 
     _showTraffic = () => {
@@ -157,8 +155,13 @@ class CPAHomePage extends Component{
     };
 
     _search = () => {
+        this._navigateTo('Search', {callback: this._searchCompleted});
+    };
+
+    _navigateTo = (screenKey, params)=>{
         const {nav} = this.props.screenProps;
-        nav && nav('Search', {callback: this._searchCompleted});
+        const {navigate} = nav;
+        navigate && navigate(screenKey, params);
     };
 
     _searchCompleted = (station)=>{
@@ -205,13 +208,11 @@ class CPAHomePage extends Component{
 
     // 扫一扫
     _onStartChargingPress = () => {
-        const {nav} = this.props.screenProps;
-
         if (AppContext.isLogon === true) {
-            nav && nav('Scan', {headerVisible: true});
+            this._navigateTo('Scan', {headerVisible: true});
         } else {
             ToastAndroidBS('请先登录！');
-            nav && nav('Login');
+            this._navigateTo('Login');
         }
     };
 

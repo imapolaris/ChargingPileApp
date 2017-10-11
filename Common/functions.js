@@ -35,13 +35,13 @@ export function error(msg, callback) {
 /*
  * 展示信息（2个按钮）
  */
-export function prompt2(title='',
-                        msg='',
-                        btn1Title='cancel',
-                        btn2Title='ok',
-                        callback1=()=>{},
-                        callback2=()=>{},
-                        canCancel=true) {
+export function myAlert2(title='',
+                         msg='',
+                         callback1=()=>{},
+                         callback2=()=>{},
+                         btn1Title='cancel',
+                         btn2Title='ok',
+                         canCancel=true) {
     Alert.alert(title,
         msg,
         [
@@ -49,6 +49,20 @@ export function prompt2(title='',
             {text: btn2Title, onPress: ()=>callback2()},
         ],
         {cancelable:canCancel});
+}
+
+/*
+* 提示信息（2个按钮）
+* */
+export function prompt2(msg, callback1, callback2) {
+    myAlert2('提示', msg, callback1, callback2);
+}
+
+/*
+* 错误信息（2个按钮）
+* */
+export function error2(msg, callback1, callback2) {
+    myAlert('错误', msg, callback1, callback2);
 }
 
 /*

@@ -12,7 +12,7 @@ import {
 import styles, {Size} from './styles';
 import {Button} from 'react-native-elements';
 import {GPlaceholderTextColor} from "../../Common/colors";
-import {StackNavigator} from 'react-navigation';
+import {StackNavigator, NavigationActions} from 'react-navigation';
 import CPAWaitingChargingPage from "../WaitingChargingPage/index";
 
 import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles";
@@ -151,17 +151,25 @@ class CPAScanPage extends Component {
     _startCharging = (sn)=> {
         startCharging(sn)
             .then(ret => {
-                alert(ret);
+                if (ret.result === true) {
+                    ToastAndroidBS('开始充电...');
 
-                /*const {nav} = this.props.screenProps;
-        nav && nav.setParams({headerVisible: false});
-
-        const {navigate} = this.props.navigation;
-        navigate && navigate('WaitingCharging', {waitingOrFinished: 'waiting'});*/
+                    const resetAction = NavigationActions.reset({
+                        index: 1,
+                        actions: [
+                            NavigationActions.navigate({ routeName: 'Home'}),
+                            NavigationActions.navigate({ routeName: 'WaitingCharging'})
+                        ]
+                    });
+                    const nav = this.props.navigation;
+                    nav && nav.dispatch(resetAction);
+                } else {
+                    ToastAndroidBS(ret.message);
+                }
             })
             .catch(err => {
                 console.log(err);
-                ToastAndroidBS(err.message);
+                alert(err.message);
             });
     };
 
@@ -299,54 +307,4 @@ class CPAScanPage extends Component {
     }
 }
 
-const CPAStackNavigator = StackNavigator(
-    {
-        Scan: {
-            screen: CPAScanPage,
-            navigationOptions: {
-                title: '充电',
-            }
-        },
-        WaitingCharging: {
-            screen: CPAWaitingChargingPage,
-            navigationOptions: {
-                title: '正在充电',
-            }
-        },
-        FinishedCharging:{
-            screen: CPAWaitingChargingPage,
-            navigationOptions: {
-                title: '完成充电',
-            }
-        },
-    },
-    {
-        navigationOptions: {
-            gesturesEnabled: true,
-            headerTitleStyle: {
-                alignSelf: 'center',
-            },
-            header: null,
-        },
-    }
-);
-
-class CPAScanScreen extends Component{
-    static navigationOptions = ({navigation}) => {
-        return ({
-            header: navigation.state.params
-            && navigation.state.params.headerVisible ?
-                undefined : null,
-        });
-    };
-
-    render() {
-        return (
-            <View style={{flex: 1}}>
-                <CPAStackNavigator screenProps={{nav: this.props.navigation}} />
-            </View>
-        )
-    }
-}
-
-export default CPAScanScreen;
+export default CPAScanPage;

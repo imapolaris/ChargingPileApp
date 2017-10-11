@@ -67,12 +67,10 @@ const CPATabNavigator = TabNavigator(
 
 class CPATabScreen extends Component{
     render() {
-        const {navigate} = this.props.navigation;
-
         return (
             <View style={styles.container}>
                 <CPATabNavigator style={styles.navigator}
-                                 screenProps={{nav: navigate}}
+                                 screenProps={{nav: this.props.navigation}}
                 />
             </View>
         );

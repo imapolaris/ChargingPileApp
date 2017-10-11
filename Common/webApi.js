@@ -111,7 +111,7 @@ export function getSubscribeRecords(userId) {
 * */
 export function startCharging(serialNumber) {
     let url = `${urls.charging}/start/${serialNumber}`;
-    return myFetch(url, POST, headers);
+    return myFetch(url, GET, headers);
 }
 
 /*
@@ -119,7 +119,7 @@ export function startCharging(serialNumber) {
 * */
 export function stopCharging(serialNumber) {
     let url = `${urls.charging}/stop/${serialNumber}`;
-    return myFetch(url, POST, headers);
+    return myFetch(url, GET, headers);
 }
 
 /*
@@ -127,7 +127,7 @@ export function stopCharging(serialNumber) {
 * */
 export function getChargingStatus(serialNumber) {
     let url = `${urls.charging}/status/${serialNumber}`;
-    return myFetch(url, POST, headers);
+    return myFetch(url, GET, headers);
 }
 
 /*

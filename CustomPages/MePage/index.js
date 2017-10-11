@@ -92,36 +92,35 @@ class CPAMePage extends Component{
 
     // 设置
     _setting = () => {
-        const {nav} = this.props.screenProps;
-        nav && nav('Setting');
+        this._navigateToNoAuth('Setting');
     };
 
     // 登录
     _login = () => {
         if (!this.state.logined){
-            this._goToLogin();
+            this._navigateToNoAuth('Login');
         }
-    };
-
-    _goToLogin = ()=>{
-        const {nav} = this.props.screenProps;
-        nav && nav('Login');
     };
 
     _navigateTo = (screenKey, params) => {
         if (AppContext.isLogon === true) {
-            const {nav} = this.props.screenProps;
-            nav && nav(screenKey, params);
+            this._navigateToNoAuth(screenKey, params);
         } else {
             ToastAndroidBS('请先登录！');
-            this._goToLogin();
+            this._navigateToNoAuth('Login');
         }
+    };
+
+    _navigateToNoAuth = (screenKey, params)=>{
+        const {nav} = this.props.screenProps;
+        const {navigate} = nav;
+        navigate && navigate(screenKey, params);
     };
 
     // 注册
     _register = () => {
         if (!this.state.logined){
-            this._navigateTo('Register', {registerOrReset: 'register', callback: this._onRegistered});
+            this._navigateToNoAuth('Register', {registerOrReset: 'register', callback: this._onRegistered});
         }
     };
 

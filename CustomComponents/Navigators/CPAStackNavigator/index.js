@@ -19,11 +19,12 @@ import CPAUserAgreementPage from "../../../CustomPages/UserAgreementPage/index";
 import CPAAboutUsPage from "../../../CustomPages/AboutUsPage/index";
 import CPALoginPage from "../../../CustomPages/LoginPage/index";
 import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPage/index";
-import CPAScanScreen from "../../../CustomPages/ScanPage/index";
+import CPAScanPage from "../../../CustomPages/ScanPage/index";
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
 import CPAListPage from "../../../CustomPages/ListPage/index";
 import CPAWelcomePage from "../../../CustomPages/WelcomePage/index";
 import CPASearchPage from "../../../CustomPages/SearchPage/index";
+import CPAWaitingChargingPage from "../../../CustomPages/WaitingChargingPage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -154,9 +155,15 @@ const CPAStackNavigator = StackNavigator(
             },
         },
         Scan: {
-            screen: CPAScanScreen,
+            screen: CPAScanPage,
             navigationOptions: {
                 title: '充电'
+            }
+        },
+        WaitingCharging: {
+            screen: CPAWaitingChargingPage,
+            navigationOptions: {
+                title: '正在充电'
             }
         },
     },
