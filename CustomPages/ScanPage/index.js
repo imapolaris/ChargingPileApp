@@ -153,6 +153,7 @@ class CPAScanPage extends Component {
             .then(ret => {
                 if (ret.result === true) {
                     ToastAndroidBS('开始充电...');
+                    AppContext.startCharging();
 
                     const resetAction = NavigationActions.reset({
                         index: 1,
@@ -169,7 +170,7 @@ class CPAScanPage extends Component {
             })
             .catch(err => {
                 console.log(err);
-                alert(err.message);
+                ToastAndroidBS(err.message);
             });
     };
 

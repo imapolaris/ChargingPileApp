@@ -75,6 +75,7 @@ class CPAHomePage extends Component{
                 this._startSubscribe();
                 break;
             case AppStatus.Charging:
+                this._startCharging();
                 break;
         }
     };
@@ -339,6 +340,20 @@ class CPAHomePage extends Component{
         showMapSelector(this._navigator, {start: null, end: destination});
     };
 
+    // 开始充电
+    _startCharging = ()=>{
+        this.setState({
+            ...this.state,
+            subscribe: false,
+            charging: true,
+        });
+    };
+
+    // 查看充电状态
+    _checkChargingStatus = ()=>{
+        this._navigateTo('WaitingCharging');
+    };
+
     _renderLocationIcon = () => {
         return (
             <View pointerEvents="box-none"
@@ -425,6 +440,24 @@ class CPAHomePage extends Component{
         );
     };
 
+    _renderWaitingChargingBanner = ()=>{
+        return (
+            <View pointerEvents='box-none'
+                  style={[styles.chargingBanner, shadowStyle]}>
+                <View style={styles.chargingInfoLeftContainer}>
+                    <Text style={[styles.chargingBannerText, styles.bannerTextColor]}>
+                        您的爱车正在充电，可查看充电状态。
+                    </Text>
+                </View>
+                <TouchableOpacity style={styles.chargingInfoRightContainer}
+                                  activeOpacity={0.6}
+                                  onPress={this._checkChargingStatus}>
+                    <Icon name="md-arrow-forward" size={18} color={colors.white} />
+                </TouchableOpacity>
+            </View>
+        );
+    };
+
     _renderMapView = () => {
         return (
             <View style={styles.container}>
@@ -444,7 +477,11 @@ class CPAHomePage extends Component{
                 >
                 </MapView>
 
-                <CPAScanButton onPress={this._onStartChargingPress}/>
+                {
+                    this.state.charging ?
+                        null
+                        : <CPAScanButton onPress={this._onStartChargingPress}/>
+                }
 
                 {
                     this._renderLocationIcon()
@@ -458,7 +495,12 @@ class CPAHomePage extends Component{
                         : null
                 }
                 {
-                    this.state.markers.length <= 0 && !this.state.subscribe ?
+                    this.state.charging ?
+                        this._renderWaitingChargingBanner()
+                        : null
+                }
+                {
+                    this.state.markers.length <= 0 && !this.state.subscribe && !this.state.charging ?
                         this._renderRefreshStationsIcon()
                         : null
                 }
@@ -474,7 +516,7 @@ class CPAHomePage extends Component{
                                  toList={this._toList}
                                  search={this._search}
                                  rightLabel="附近"
-                                 disableRightLabel={this.state.subscribe}
+                                 disableRightLabel={this.state.subscribe || this.state.charging}
                                  icon={<SimpleIcon type={icons.SimpleLineIcon} name="arrow-down" color={colors.white} size={14} />} />
 
                 {

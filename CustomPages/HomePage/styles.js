@@ -111,6 +111,37 @@ const styles = StyleSheet.create({
     divider: {
         backgroundColor: colors.white,
     },
+    chargingBanner: {
+        bottom: 0,
+        left: 5,
+        right: 5,
+        top: 10,
+        position: 'absolute',
+        width: screenWidth - 10,
+        height: 50,
+        backgroundColor: colors.primary1,
+        zIndex: 9999,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: 15,
+        paddingRight: 15,
+    },
+    chargingInfoLeftContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    chargingInfoRightContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: colors.tintColor2,
+        height: 40,
+        width: 40,
+        borderRadius: 20,
+    },
+    chargingBannerText: {
+        fontSize: 16,
+    },
 });
 
 export default styles;
