@@ -7,9 +7,9 @@ const appContext = {
     isLogon: false,
     userProfile: null,
     userId: '',
-    container: [],
     appStatus: AppStatus.Normal,
-    subscribeData: {},
+    subscribeInfo: {},
+    container: [],
     register: function(func){
         let exists = false;
         for (let i=0; i < this.container.length; ++i) {
@@ -34,13 +34,18 @@ const appContext = {
     noticeListeners: function() {
         for (let i = 0; i < this.container.length; ++i) {
             let func = this.container[i];
-            func && func({isLogon: this.isLogon, userId: this.userId, userProfile: this.userProfile});
+            func && func({isLogon: this.isLogon,
+                userId: this.userId,
+                userProfile: this.userProfile,
+                appStatus: this.appStatus,
+                subscribeInfo: this.subscribeInfo});
         }
     },
     logout: function () {
         this.isLogon = false;
         this.userProfile = null;
         this.userId = '';
+        this.appStatus = AppStatus.Normal;
         storage.save({
             key: constants.UserProfileKey,
             data: Object.assign({},
@@ -97,8 +102,8 @@ const appContext = {
         this.noticeListeners();
     },
     subscribe: function (data) {
+        this.subscribeInfo = data;
         this.changeAppStatus(AppStatus.Subscribe);
-        this.subscribeData = data;
     },
     unSubscribe: function (status) {
         this.changeAppStatus(status);
@@ -111,6 +116,7 @@ const appContext = {
     },
     changeAppStatus: function (status) {
         this.appStatus = status;
+        this.noticeListeners();
     },
 };
 

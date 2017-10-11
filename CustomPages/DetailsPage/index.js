@@ -195,16 +195,24 @@ class CPAElectricPileInfoPage extends Component{
 
     // 预约
     _subscribeCharging = (item) => {
-        if (/*item.status === '在线'*/true){
-            this._subscriber.show('预约充电', [{key:0, title:'预约'}], (i)=>{
-                switch (i) {
-                    case 0:
-                        this._makeOneSubscribe(item);
-                        break;
-                    default:
-                        break;
-                }
-            });
+        if (AppContext.isLogon === true) {
+            if (/*item.status === '在线'*/true) {
+                this._subscriber.show('预约充电', [{key: 0, title: '预约'}], (i) => {
+                    switch (i) {
+                        case 0:
+                            this._makeOneSubscribe(item);
+                            break;
+                        default:
+                            break;
+                    }
+                });
+            }
+        } else {
+            ToastAndroidBS('请先登录！');
+
+            let {nav} = this.props.screenProps;
+            let {navigate} = nav;
+            navigate && navigate('Login');
         }
     };
 
@@ -226,7 +234,6 @@ class CPAElectricPileInfoPage extends Component{
                             NavigationActions.navigate({ routeName: 'Home'})
                         ],
                     });
-
                     nav && nav.dispatch(resetAction);
                 } else {
                     ToastAndroidBS(ret.message);

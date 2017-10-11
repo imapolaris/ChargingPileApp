@@ -30,7 +30,9 @@ class CPAWaitingChargingPage extends Component{
     _onFinishedChargingPress = () => {
         prompt2('确定要结束充电吗？',
             ()=>{},
-            ()=> {
+            ()=>{
+                AppContext.stopCharging();
+
                 const {goBack} = this.props.navigation;
                 goBack && goBack();
             });

@@ -53,7 +53,8 @@ class DefinedTitleBar extends Component{
                                onFocus={this._toSearch}
                     />
                     <NavButton label={this.props.rightLabel}
-                               style={[styles.rightButton, this.props.disableRightLabel ? styles.disabled : null]}
+                               style={styles.rightButton}
+                               disabledStyle={this.props.disableRightLabel ? styles.disabled : null}
                                onPress={()=>{!this.props.disableRightLabel && this.props.toList && this.props.toList();}} />
                 </View>
             </Animated.View>

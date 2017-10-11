@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
     },
     disabled: {
-
+        color: colors.grey4,
     },
 });
 

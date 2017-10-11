@@ -13,7 +13,7 @@ class NavButton extends Component{
             <TouchableOpacity style={[styles.navButton, this.props.style]}>
                 <View style={styles.container}>
                     <Text onPress={this.props.onPress || this._onPress}
-                          style={styles.text}
+                          style={[styles.text, this.props.disabledStyle]}
                           numberOfLines={1}
                           adjustsFontSizeToFit={true}
                           allowFontScaling={true} >
@@ -22,7 +22,7 @@ class NavButton extends Component{
 
                     {
                         this.props.showIcon ?
-                            <View style={styles.iconContainer}>
+                            <View style={[styles.iconContainer, this.props.disabledStyle]}>
                                 {this.props.icon}
                             </View>
                             :

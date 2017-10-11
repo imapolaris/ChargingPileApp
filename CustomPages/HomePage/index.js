@@ -17,7 +17,7 @@ import {
     MapTypes,
     Geolocation
 } from 'react-native-baidu-map';
-import {getCurrentLocation, ToastAndroidCL, ToastAndroidBS, formatTime, prompt} from "../../Common/functions";
+import {getCurrentLocation, ToastAndroidCL, ToastAndroidBS, formatTime, prompt, prompt2} from "../../Common/functions";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index";
 import {AlertStationBriefInfo} from "../../CustomComponents/AlertStationBriefInfo/index";
 import {getAllStationsWithBriefInfo, getSingleStation} from '../../Common/webApi';
@@ -57,18 +57,36 @@ class CPAHomePage extends Component{
         };
     }
 
+    componentWillMount() {
+        AppContext.register(this._appContextListener);
+    }
+
     // 组件已挂载
     componentDidMount() {
-        this._init();
+        this._init(AppContext.appStatus || AppStatus.Normal);
     }
 
     componentWillUnmount() {
         this._stopTimer();
+        AppContext.unRegister(this._appContextListener);
     }
 
-    _init = ()=>{
-        switch (AppContext.appStatus){
+    _appContextListener = (context) => {
+        if (context !== null && context !== undefined) {
+            let status = context.appStatus;
+            this._init(status);
+        }
+    };
+
+    _init = (status)=>{
+        switch (status){
             case AppStatus.Normal:
+                this.setState({
+                    ...this.state,
+                    subscribe: false,
+                    charging: false,
+                });
+                this._stopTimer();
                 this._requestStations();
                 break;
             case AppStatus.Subscribe:
@@ -266,7 +284,7 @@ class CPAHomePage extends Component{
     }
 
     _startSubscribe = () => {
-        let {station} = AppContext.subscribeData;
+        let {station} = AppContext.subscribeInfo;
         this.setState({
             ...this.state,
             subscribe: true,
@@ -279,14 +297,12 @@ class CPAHomePage extends Component{
 
     _stopSubscribe = () => {
         this._stopTimer();
-
-        AppContext.unSubscribe(AppStatus.Normal);
         this.setState({
             ...this.state,
             subscribe: false,
         });
 
-        this._init();
+        AppContext.unSubscribe(AppStatus.Normal);
     };
 
     _startTimer = ()=>{
@@ -322,9 +338,11 @@ class CPAHomePage extends Component{
 
     // 取消预约
     _onCancelSubscribe = () => {
-        prompt('确定要取消预约吗？', ()=>{
-            this._stopSubscribe();
-        });
+        prompt2('确定要取消预约吗？',
+            ()=>{},
+            ()=> {
+                this._stopSubscribe();
+            });
     };
 
     // 导航到预约电站
@@ -342,6 +360,10 @@ class CPAHomePage extends Component{
 
     // 开始充电
     _startCharging = ()=>{
+        if (this.state.subscribe === true) {
+            this._stopTimer();
+        }
+
         this.setState({
             ...this.state,
             subscribe: false,
