@@ -347,7 +347,7 @@ class CPAHomePage extends Component{
                                     onPress={this._currentLocation}
                                     underlayColor={colors.grey4} >
                     <Icon name="md-locate"
-                          size={20} color={colors.theme1} />
+                          size={20} color={colors.grey3} />
                 </TouchableHighlight>
             </View>
         );

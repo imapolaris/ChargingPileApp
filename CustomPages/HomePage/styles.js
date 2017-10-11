@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: screenWidth - 10,
         height: 90,
-        backgroundColor: colors.primary2,
+        backgroundColor: colors.primary1,
         //borderRadius: 10,
         zIndex: 9999,
     },

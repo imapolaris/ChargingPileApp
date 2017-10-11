@@ -20,7 +20,6 @@ import CPAAboutUsPage from "../../../CustomPages/AboutUsPage/index";
 import CPALoginPage from "../../../CustomPages/LoginPage/index";
 import CPARegisterOrResetPwdPage from "../../../CustomPages/RegisterOrResetPwdPage/index";
 import CPAScanScreen from "../../../CustomPages/ScanPage/index";
-import CPAWaitingSubscribePage from "../../../CustomPages/WaitingSubscribePage/index";
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
 import CPAListPage from "../../../CustomPages/ListPage/index";
 import CPAWelcomePage from "../../../CustomPages/WelcomePage/index";
@@ -160,12 +159,6 @@ const CPAStackNavigator = StackNavigator(
                 title: '充电'
             }
         },
-        Subscribe: {
-            screen: CPAWaitingSubscribePage,
-            navigationOptions: {
-                title: '预约等待'
-            }
-        }
     },
     {
         initialRouteName: 'Welcome',

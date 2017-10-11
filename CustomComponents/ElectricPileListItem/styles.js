@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
     },
     rightContainer: {
-        paddingRight: 10,
+        paddingRight: 15,
         alignItems: 'flex-end',
         justifyContent: 'center',
     },
@@ -30,9 +30,30 @@ const styles = StyleSheet.create({
         color: colors.primary1,
     },
     infoContainer: {
+        flex: 1,
+        flexDirection: 'row',
         paddingLeft: 15,
         paddingBottom: 3,
         paddingTop: 3,
+        height: 80,
+        alignItems: 'center',
+    },
+    infoLeftContainer: {
+        flex: 1,
+    },
+    infoRightContainer: {
+        width: 60,
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.primary1,
+        borderRadius: 30,
+        marginRight: 10,
+    },
+    buttonText: {
+        alignSelf: 'center',
+        fontSize: 15,
+        color: colors.white,
     },
     info: {
         fontSize: 14,
