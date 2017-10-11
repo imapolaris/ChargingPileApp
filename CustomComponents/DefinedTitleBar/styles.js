@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginLeft: 5,
     },
+    disabled: {
+
+    },
 });
 
 export default styles;

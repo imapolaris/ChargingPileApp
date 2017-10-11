@@ -17,7 +17,7 @@ import {
     MapTypes,
     Geolocation
 } from 'react-native-baidu-map';
-import {getCurrentLocation, ToastAndroidCL, ToastAndroidBS} from "../../Common/functions";
+import {getCurrentLocation, ToastAndroidCL, ToastAndroidBS, formatTime, prompt} from "../../Common/functions";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index";
 import {AlertStationBriefInfo} from "../../CustomComponents/AlertStationBriefInfo/index";
 import {getAllStationsWithBriefInfo, getSingleStation} from '../../Common/webApi';
@@ -48,13 +48,36 @@ class CPAHomePage extends Component{
             trafficEnabled: false,
             baiduHeatMapEnabled: false,
             markers: [],
+            subscribe: false,
+            // 计时时间
+            countdown: 0,
+            showtime: '',
+            charging: false,
+            station: null,
         };
     }
 
     // 组件已挂载
     componentDidMount() {
-        this._requestStations();
+        this._init();
     }
+
+    componentWillUnmount() {
+        this._stopTimer();
+    }
+
+    _init = ()=>{
+        switch (AppContext.appStatus){
+            case AppStatus.Normal:
+                this._requestStations();
+                break;
+            case AppStatus.Subscribe:
+                this._startSubscribe();
+                break;
+            case AppStatus.Charging:
+                break;
+        }
+    };
 
     // 定位
     _currentLocation = () => {
@@ -196,7 +219,7 @@ class CPAHomePage extends Component{
     _showStationBriefInfo = (e) => {
         let info = e.title.split(',');
         if (info.length <= 1) {
-            alert('信息错误！');
+            prompt('信息错误！');
             return;
         }
         let id = info[0];
@@ -232,13 +255,88 @@ class CPAHomePage extends Component{
             })
             .catch(err=>{
                 console.error(err);
-                alert('没有找到该电站的信息...');
+                prompt('没有找到该电站的信息...');
             });
     };
 
     _showMapSelector(){
         showMapSelector(this._navigator, {start: currentPosition, end: position});
     }
+
+    _startSubscribe = () => {
+        let {station} = AppContext.subscribeData;
+        this.setState({
+            ...this.state,
+            subscribe: true,
+            countdown: 15 * 60, // 计时时间15分钟
+            station: station,
+        });
+
+        this._startTimer();
+    };
+
+    _stopSubscribe = () => {
+        this._stopTimer();
+
+        AppContext.unSubscribe(AppStatus.Normal);
+        this.setState({
+            ...this.state,
+            subscribe: false,
+        });
+
+        this._init();
+    };
+
+    _startTimer = ()=>{
+        this._timer = setInterval(
+            () => {
+                this.setState(prevdata => {
+                    return {
+                        ...this.state,
+                        countdown: prevdata.countdown - 1
+                    };
+                });
+
+                let showtime = '';
+                if (this.state.countdown <= 0){
+                    showtime = formatTime(0);
+                    this._stopSubscribe();
+                } else {
+                    showtime = formatTime(this.state.countdown);
+                }
+
+                this.setState({
+                    ...this.state,
+                    showtime: showtime,
+                });
+            },
+            1000 // every 1s
+        );
+    };
+
+    _stopTimer = ()=>{
+        this._timer && clearInterval(this._timer);
+    };
+
+    // 取消预约
+    _onCancelSubscribe = () => {
+        prompt('确定要取消预约吗？', ()=>{
+            this._stopSubscribe();
+        });
+    };
+
+    // 导航到预约电站
+    _onNavigateSubscribe = ()=>{
+        let station = this.state.station;
+        if (station === null || station === undefined
+            || station.latitude === null || station.latitude === undefined
+            || station.longitude === null || station.longitude === undefined){
+            ToastAndroidBS('无法导航到这个电站！');
+            return;
+        }
+        let destination = {longitude: station.longitude, latitude: station.latitude};
+        showMapSelector(this._navigator, {start: null, end: destination});
+    };
 
     _renderLocationIcon = () => {
         return (
@@ -292,31 +390,31 @@ class CPAHomePage extends Component{
                 <View style={styles.bannerContainer}>
                     <View style={styles.titleContainer}>
                         <View style={styles.titleLeftContainer}>
-                            <Text style={[styles.bannerTitle, styles.bannerTextColor]}>
-                                加速器一区充电站
+                            <Text style={[styles.bannerTitle, styles.bannerTextColor]}
+                                  numberOfLines={1}>
+                                {this.state.station && this.state.station.name}
                             </Text>
                             <Text style={[styles.bannerAddress, styles.bannerTextColor]}
                                   numberOfLines={1}>
-                                北京市海淀区永丰产业基地加速器一区
+                                {this.state.station && this.state.station.address}
                             </Text>
                         </View>
 
                         <View style={styles.titleRightContainer}>
                             <TouchableOpacity activeOpacity={0.6}
-                                              style={styles.button}>
+                                              style={styles.button}
+                                              onPress={this._onNavigateSubscribe}>
                                 <Icon name="md-navigate" size={20} color={colors.white} />
                             </TouchableOpacity>
                             <TouchableOpacity activeOpacity={0.6}
-                                              style={styles.button}>
+                                              style={styles.button}
+                                              onPress={this._onCancelSubscribe}>
                                 <Icon name="md-close" size={20} color={colors.white} />
                             </TouchableOpacity>
                         </View>
                     </View>
                     <DividerLine style={styles.divider}/>
                     <View style={styles.infoContainer}>
-                        {/*<Text style={[styles.bannerText, styles.bannerTextColor]}>
-                            剩余时间：
-                        </Text>*/}
                         <Text style={[styles.time, styles.bannerTextColor]}>
                             {this.state.showtime || '14分钟59秒'}
                         </Text>
@@ -354,10 +452,12 @@ class CPAHomePage extends Component{
                     this._renderTrafficIcon()
                 }
                 {
-                    this._renderWaitingSubscribeBanner()
+                    this.state.subscribe ?
+                        this._renderWaitingSubscribeBanner()
+                        : null
                 }
                 {
-                    this.state.markers.length <= 0 ?
+                    this.state.markers.length <= 0 && !this.state.subscribe ?
                         this._renderRefreshStationsIcon()
                         : null
                 }
@@ -373,6 +473,7 @@ class CPAHomePage extends Component{
                                  toList={this._toList}
                                  search={this._search}
                                  rightLabel="附近"
+                                 disableRightLabel={this.state.subscribe}
                                  icon={<SimpleIcon type={icons.SimpleLineIcon} name="arrow-down" color={colors.white} size={14} />} />
 
                 {

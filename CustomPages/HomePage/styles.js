@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: screenWidth - 10,
         height: 90,
-        backgroundColor: colors.theme1,
-        borderRadius: 10,
+        backgroundColor: colors.primary2,
+        //borderRadius: 10,
         zIndex: 9999,
     },
     bannerContainer: {
@@ -107,10 +107,6 @@ const styles = StyleSheet.create({
         height: 30,
         backgroundColor: colors.tintColor2,
         borderRadius: 15,
-    },
-    buttonText: {
-        color: colors.white,
-        fontSize: 16,
     },
     divider: {
         backgroundColor: colors.white,

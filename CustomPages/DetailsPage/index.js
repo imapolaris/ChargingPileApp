@@ -18,6 +18,7 @@ import icons from '../../Common/fonts';
 import {getChargingPiles, getStationDetails, makeOneSubscribe} from "../../Common/webApi";
 import {ToastAndroidBS} from "../../Common/functions";
 import {renderBottom, renderEmpty, renderSeparator} from "../ListPage/index";
+import { NavigationActions } from 'react-navigation';
 
 class CPADetailsPage extends Component{
     render() {
@@ -213,11 +214,20 @@ class CPAElectricPileInfoPage extends Component{
         makeOneSubscribe(userId, sn)
             .then(ret=>{
                 if (ret.result === true) {
-                    /*const {nav} = this.props.screenProps;
-                    const {navigate} = nav;
-                    navigate && navigate('Subscribe');*/
-
                     ToastAndroidBS('预约成功');
+                    // 预约
+                    const {nav} = this.props.screenProps;
+                    let {station} = nav.state.params;
+                    AppContext.subscribe({station: station});
+
+                    const resetAction = NavigationActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({ routeName: 'Home'})
+                        ],
+                    });
+
+                    nav && nav.dispatch(resetAction);
                 } else {
                     ToastAndroidBS(ret.message);
                 }

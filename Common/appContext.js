@@ -1,4 +1,4 @@
-import constants from "./constants";
+import constants, {AppStatus} from "./constants";
 
 /*
 * the context of the app.
@@ -8,6 +8,8 @@ const appContext = {
     userProfile: null,
     userId: '',
     container: [],
+    appStatus: AppStatus.Normal,
+    subscribeData: {},
     register: function(func){
         let exists = false;
         for (let i=0; i < this.container.length; ++i) {
@@ -27,7 +29,7 @@ const appContext = {
         }
     },
     clearListeners: function() {
-        this.container.clear();
+        this.container && this.container.clear();
     },
     noticeListeners: function() {
         for (let i = 0; i < this.container.length; ++i) {
@@ -93,6 +95,22 @@ const appContext = {
         });
 
         this.noticeListeners();
+    },
+    subscribe: function (data) {
+        this.changeAppStatus(AppStatus.Subscribe);
+        this.subscribeData = data;
+    },
+    unSubscribe: function (status) {
+        this.changeAppStatus(status);
+    },
+    startCharging: function () {
+        this.changeAppStatus(AppStatus.Charging);
+    },
+    stopCharging: function () {
+        this.changeAppStatus(AppStatus.Normal);
+    },
+    changeAppStatus: function (status) {
+        this.appStatus = status;
     },
 };
 
