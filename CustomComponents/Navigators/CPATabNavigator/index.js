@@ -13,7 +13,7 @@ const CPATabNavigator = TabNavigator(
         Home: {
             screen: HomePage,
             navigationOptions:{
-                title:'找电桩',
+                title:'找桩',
                 tabBarIcon:({tintColor}) => {
                     return (
                         <Icon name="home" size={16} color={tintColor} />

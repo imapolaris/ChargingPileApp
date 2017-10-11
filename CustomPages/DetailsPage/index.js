@@ -194,7 +194,7 @@ class CPAElectricPileInfoPage extends Component{
 
     // 预约
     _subscribeCharging = (item) => {
-        if (item.status === '在线'){
+        if (/*item.status === '在线'*/true){
             this._subscriber.show('预约充电', [{key:0, title:'预约'}], (i)=>{
                 switch (i) {
                     case 0:

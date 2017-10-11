@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {
     View,
     TouchableHighlight,
+    Text,
+    TouchableOpacity,
 } from 'react-native';
 
 import styles from './styles';
@@ -25,6 +27,7 @@ import colors from '../../Common/colors';
 import CPAScanButton from "../../CustomComponents/ScanButton/index";
 import {shadowStyle} from "../../Common/styles";
 import {showMapSelector} from "../../CustomComponents/AlertSelected/index.android";
+import DividerLine from "../../CustomComponents/DividerLine/index";
 
 let position = null;
 let currentPosition = {longitude:116.404185, latitude: 39.91491};  // 北京天安门的坐标
@@ -267,6 +270,62 @@ class CPAHomePage extends Component{
         );
     };
 
+    _renderRefreshStationsIcon = ()=> {
+        return (
+            <View pointerEvents="box-none"
+                  style={[styles.icon, styles.refresh, shadowStyle]}>
+                <TouchableHighlight activeOpacity={0.6}
+                                    style={[styles.iconContainer]}
+                                    onPress={this._requestStations}
+                                    underlayColor={colors.grey4}>
+                    <MaterialIcon name="refresh" size={20}
+                                  color={colors.grey3}/>
+                </TouchableHighlight>
+            </View>
+        );
+    };
+
+    _renderWaitingSubscribeBanner = ()=> {
+        return (
+            <View pointerEvents='box-none'
+                  style={[styles.banner, shadowStyle]}>
+                <View style={styles.bannerContainer}>
+                    <View style={styles.titleContainer}>
+                        <View style={styles.titleLeftContainer}>
+                            <Text style={[styles.bannerTitle, styles.bannerTextColor]}>
+                                加速器一区充电站
+                            </Text>
+                            <Text style={[styles.bannerAddress, styles.bannerTextColor]}
+                                  numberOfLines={1}>
+                                北京市海淀区永丰产业基地加速器一区
+                            </Text>
+                        </View>
+
+                        <View style={styles.titleRightContainer}>
+                            <TouchableOpacity activeOpacity={0.6}
+                                              style={styles.button}>
+                                <Icon name="md-navigate" size={20} color={colors.white} />
+                            </TouchableOpacity>
+                            <TouchableOpacity activeOpacity={0.6}
+                                              style={styles.button}>
+                                <Icon name="md-close" size={20} color={colors.white} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <DividerLine style={styles.divider}/>
+                    <View style={styles.infoContainer}>
+                        {/*<Text style={[styles.bannerText, styles.bannerTextColor]}>
+                            剩余时间：
+                        </Text>*/}
+                        <Text style={[styles.time, styles.bannerTextColor]}>
+                            {this.state.showtime || '14分钟59秒'}
+                        </Text>
+                    </View>
+                </View>
+            </View>
+        );
+    };
+
     _renderMapView = () => {
         return (
             <View style={styles.container}>
@@ -293,6 +352,14 @@ class CPAHomePage extends Component{
                 }
                 {
                     this._renderTrafficIcon()
+                }
+                {
+                    this._renderWaitingSubscribeBanner()
+                }
+                {
+                    this.state.markers.length <= 0 ?
+                        this._renderRefreshStationsIcon()
+                        : null
                 }
             </View>
         );

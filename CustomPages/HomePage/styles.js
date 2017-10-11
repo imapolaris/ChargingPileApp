@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import colors from '../../Common/colors';
+import {screenWidth} from "../../Common/styles";
 
 const Size = 39;
 const styles = StyleSheet.create({
@@ -16,10 +17,10 @@ const styles = StyleSheet.create({
     },
     location: {
         justifyContent: "flex-end",
-        alignItems: 'flex-end',
-        bottom: 6+100,
-        left: 0,
-        right: 6,
+        alignItems: 'flex-start',
+        bottom: 6,
+        left: 6,
+        right: 0,
         top: 0,
     },
     iconContainer: {
@@ -32,12 +33,87 @@ const styles = StyleSheet.create({
         borderColor: colors.grey4,
     },
     traffic: {
-        justifyContent: "flex-start",
+        justifyContent: "flex-end",
         alignItems: 'flex-end',
-        bottom: 0,
+        bottom: 2*Size+20,
         left: 0,
         right: 6,
-        top: 6+30,
+        top: 0,
+    },
+    refresh: {
+        justifyContent: "flex-end",
+        alignItems: 'flex-start',
+        bottom: 6+Size,
+        left: 6,
+        right: 0,
+        top: 0,
+    },
+    banner: {
+        bottom: 0,
+        left: 5,
+        right: 5,
+        top: 10,
+        position: 'absolute',
+        width: screenWidth - 10,
+        height: 90,
+        backgroundColor: colors.theme1,
+        borderRadius: 10,
+        zIndex: 9999,
+    },
+    bannerContainer: {
+        flex: 1,
+        flexDirection: 'column',
+    },
+    bannerTextColor: {
+        color: colors.white,
+    },
+    bannerTitle: {
+        fontSize: 16,
+    },
+    bannerAddress: {
+        fontSize: 12,
+    },
+    bannerText: {
+        fontSize: 16,
+    },
+    infoContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    titleContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        height: 45,
+        alignItems: 'center',
+    },
+    titleLeftContainer: {
+        flex: 1,
+        paddingLeft: 10,
+    },
+    titleRightContainer: {
+        width: 90,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
+    time: {
+        fontSize: 20,
+    },
+    button: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 30,
+        height: 30,
+        backgroundColor: colors.tintColor2,
+        borderRadius: 15,
+    },
+    buttonText: {
+        color: colors.white,
+        fontSize: 16,
+    },
+    divider: {
+        backgroundColor: colors.white,
     },
 });
 
