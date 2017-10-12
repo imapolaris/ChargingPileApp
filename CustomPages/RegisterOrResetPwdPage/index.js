@@ -20,6 +20,7 @@ class CPARegisterOrResetPwdPage extends Component {
             phoneNumber: '',
             vCode: '',
             pwd: '',
+            lastCountDownDate: null,
             countTime: CountTime, // 验证码倒计时120秒
             vCodeSent: false,
             vCodeText: GetVCode,
@@ -42,6 +43,7 @@ class CPARegisterOrResetPwdPage extends Component {
                         this.setState({
                             ...this.state,
                             vCodeSent: true,
+                            lastCountDownDate: new Date(),
                         });
                         ToastAndroidBS('验证码已发送！');
 
@@ -62,13 +64,18 @@ class CPARegisterOrResetPwdPage extends Component {
 
     _onSentVCode = ()=>{
         this._timer = setInterval(()=>{
-            let countTime = this.state.countTime - 1;
-            if (countTime === 0) {
+            let now = new Date();
+            let start = this.state.lastCountDownDate;
+            let diff = parseInt((now - start) / 1000);
+
+            let countTime = this.state.countTime - diff;
+            if (countTime <= 0) {
                 this.setState({
                     ...this.state,
                     vCodeText: GetVCode,
                     vCodeSent: false,
                     countTime: CountTime,
+                    lastCountDownDate: now,
                 });
 
                 this._timer && clearInterval(this._timer);
@@ -77,6 +84,7 @@ class CPARegisterOrResetPwdPage extends Component {
                     ...this.state,
                     vCodeText: `重新获取${countTime}s`,
                     countTime: countTime,
+                    lastCountDownDate: now,
                 });
             }
         }, 1000);

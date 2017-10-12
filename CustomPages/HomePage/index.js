@@ -32,6 +32,7 @@ import DividerLine from "../../CustomComponents/DividerLine/index";
 let position = null;
 let currentPosition = {longitude:116.404185, latitude: 39.91491};  // 北京天安门的坐标
 const Zoom = 12.5;
+const CountDown = 15 * 60; // 计时时间15分钟
 
 class CPAHomePage extends Component{
     // 构造
@@ -50,6 +51,7 @@ class CPAHomePage extends Component{
             markers: [],
             subscribe: false,
             // 计时时间
+            lastCountDownDate: null,
             countdown: 0,
             showtime: '',
             charging: false,
@@ -288,8 +290,9 @@ class CPAHomePage extends Component{
         this.setState({
             ...this.state,
             subscribe: true,
-            countdown: 15 * 60, // 计时时间15分钟
+            countdown: CountDown,
             station: station,
+            lastCountDownDate: new Date(),
         });
 
         this._startTimer();
@@ -308,10 +311,15 @@ class CPAHomePage extends Component{
     _startTimer = ()=>{
         this._timer = setInterval(
             () => {
+                let now = new Date();
+                let start = this.state.lastCountDownDate;
+                let diff = parseInt((now -start) / 1000);
+
                 this.setState(prevdata => {
                     return {
                         ...this.state,
-                        countdown: prevdata.countdown - 1
+                        countdown: prevdata.countdown - diff,
+                        lastCountDownDate: now,
                     };
                 });
 
