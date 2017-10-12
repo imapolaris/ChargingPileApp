@@ -1,4 +1,4 @@
-import {Alert, ToastAndroid, Linking} from 'react-native';
+import {Alert, ToastAndroid, Linking, PermissionsAndroid} from 'react-native';
 import {Geolocation} from 'react-native-baidu-map';
 
 
@@ -264,4 +264,29 @@ export function formatTime(time) {
     }
 
     return showtime;
+}
+
+/*
+* request permission for camera.
+* */
+export function requestCameraPermission() {
+    PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.CAMERA)
+        .then(ret=> {
+            if (ret === false) {
+                const granted = PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.CAMERA,
+                    {
+                        'title': '申请使用相机权限',
+                        'message': '需要使用您的相机进行扫码充电'
+                    }
+                );
+                if (granted !== PermissionsAndroid.RESULTS.GRANTED){
+                    ToastAndroidBS('没有获得相应权限！');
+                }
+            }
+        })
+        .catch(err=>{
+            console.log(err);
+            ToastAndroidBS(err.message);
+        });
 }
