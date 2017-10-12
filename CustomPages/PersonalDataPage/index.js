@@ -6,6 +6,7 @@ import {ToastAndroidBS} from "../../Common/functions";
 import {getUserProfile, updateUserProfile} from "../../Common/webApi";
 import {AlertSelected} from "../../CustomComponents/AlertSelected/index.android";
 import {selectFromLibrary, takePicture} from '../../CustomComponents/AvatarPicker/index';
+import AlertWaiting, {closeWaitingAlert, openWaitingAlert} from "../../CustomComponents/AlertWaiting/index";
 
 const selectArr = [{key: 0, title:'拍照...'}, {key: 1, title: '从手机相册选择'}];
 const selectGenderArr = [{key: 0, title: '男'}, {key: 1, title:'女'}];
@@ -18,6 +19,7 @@ class CPAPersonalDataPage extends Component{
             avatarSource: null,
             nickname: '',
             gender: '',
+            loaded: false,
         };
     }
 
@@ -25,25 +27,38 @@ class CPAPersonalDataPage extends Component{
         this._getUserProfile();
     }
 
+    componentWillUnmount() {
+        closeWaitingAlert(this._waiting);
+    }
+
     // 查询用户个人信息
-    _getUserProfile() {
+    _getUserProfile = ()=> {
+        openWaitingAlert(this._waiting);
+        this.setState({
+            ...this.state,
+            loaded: false,
+        });
         getUserProfile(AppContext.userId)
             .then(ret=>{
+                closeWaitingAlert(this._waiting);
+
                 if (ret.result === true){
                     this.setState({
                         ...this.state,
                         nickname: ret.data.nickname,
                         gender: ret.data.gender,
                         avatarSource: ret.data.avatar !== null ? JSON.parse(ret.data.avatar) : null,
+                        loaded: true,
                     })
                 } else {
                     ToastAndroidBS(ret.message);
                 }
             })
             .catch(err=>{
+                closeWaitingAlert(this._waiting);
                 console.log(err);
                 ToastAndroidBS("无法获取用户信息："+err);
-            })
+            });
     };
 
     _confirmModify = () => {
@@ -52,8 +67,11 @@ class CPAPersonalDataPage extends Component{
         let gender = this.state.gender;
         let data = {nickname: nickname, gender: gender, avatar: avatar};
 
+        this._waiting.waitingIn('正在保存...');
         updateUserProfile(Object.assign({}, data, {id: AppContext.userId}))
             .then(ret=>{
+                this._waiting.waitingOut();
+
                 if (ret.result === true){
                     ToastAndroidBS('修改成功');
 
@@ -66,6 +84,7 @@ class CPAPersonalDataPage extends Component{
                 }
             })
             .catch(err=>{
+                this._waiting.waitingOut();
                 console.log(err);
                 ToastAndroidBS("修改个人信息出错：" +err);
             });
@@ -215,11 +234,14 @@ class CPAPersonalDataPage extends Component{
                     <Button style={styles.button}
                             title="确认修改"
                             onPress={this._confirmModify}
+                            disabled={!this.state.loaded}
+                            disabledStyle={styles.disabled}
                     />
                 </View>
 
                 <AlertSelected ref={self=>this._selector=self} />
                 <AlertSelected ref={self=>this._genderSelector=self} />
+                <AlertWaiting ref={self=>this._waiting=self} />
             </View>
         );
     }

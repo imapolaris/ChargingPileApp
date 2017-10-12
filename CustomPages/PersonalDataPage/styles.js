@@ -55,6 +55,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign:'right',
     },
+    disabled: {
+        backgroundColor: colors.grey3,
+    },
 });
 
 export default styles;

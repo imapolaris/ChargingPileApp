@@ -22,6 +22,8 @@ export default {
     tintColor: '#e91e63',
     tintColor2: '#e74c3c',
     yellow: '#eeee00',
+    black: '#000000',
+    transparent: 'transparent',
 }
 
 /*

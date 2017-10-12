@@ -13,6 +13,8 @@ import {GPlaceholderTextColor} from "../../Common/colors";
 import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles";
 import {login} from "../../Common/webApi";
 import {ToastAndroidBS} from "../../Common/functions";
+import {closeWaitingAlert, openWaitingAlert} from "../../CustomComponents/AlertWaiting/index";
+import AlertWaiting from "../../CustomComponents/AlertWaiting/index";
 
 class CPALoginPage extends Component{
     // 构造
@@ -31,8 +33,11 @@ class CPALoginPage extends Component{
         let phoneNumber = this.state.phoneNumber;
         let pwd = this.state.pwd;
 
+        openWaitingAlert(this._waiting, '正在登录...');
         login(phoneNumber, pwd)
             .then(ret=>{
+                closeWaitingAlert(this._waiting);
+
                 if (ret.result === true) {
                     // 登录成功
                     ToastAndroidBS(`登录成功！`);
@@ -47,6 +52,7 @@ class CPALoginPage extends Component{
                 }
             })
             .catch(error=>{
+                closeWaitingAlert(this._waiting);
                 console.log(error);
                 ToastAndroidBS('登录失败:'+error);
             });
@@ -128,6 +134,8 @@ class CPALoginPage extends Component{
                         </Text>
                     </TouchableOpacity>
                 </View>
+
+                <AlertWaiting ref={self=>this._waiting=self} />
             </View>
         );
     }

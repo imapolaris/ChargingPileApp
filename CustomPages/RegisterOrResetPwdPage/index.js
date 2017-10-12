@@ -7,6 +7,7 @@ import {GPlaceholderTextColor} from "../../Common/colors";
 import TextInputStyles from "../../CustomComponents/SimpleCustomComponent/styles";
 import {ToastAndroidBL, ToastAndroidBS, validatePhoneNumber} from "../../Common/functions";
 import {register, resetPwd, sendMessage} from "../../Common/webApi";
+import AlertWaiting, {closeWaitingAlert, openWaitingAlert} from "../../CustomComponents/AlertWaiting/index";
 
 
 const GetVCode = '获取验证码';
@@ -105,8 +106,11 @@ class CPARegisterOrResetPwdPage extends Component {
 
         const {params} = this.props.navigation.state;
         if (params.registerOrReset === 'register'){
+            openWaitingAlert(this._waiting, '正在注册...');
             register(phoneNumber, vCode, pwd)
                 .then(ret=>{
+                    closeWaitingAlert(this._waiting);
+
                     if (ret.result === true) {
                         ToastAndroidBS('注册成功，请登录！');
                         this._goToLogin();
@@ -115,12 +119,16 @@ class CPARegisterOrResetPwdPage extends Component {
                     }
                 })
                 .catch(err=>{
+                    closeWaitingAlert(this._waiting);
                     console.log(err);
                     ToastAndroidBS('注册失败：'+err);
                 });
         } else {
+            openWaitingAlert(this._waiting, '正在重置密码...');
             resetPwd(phoneNumber, vCode, pwd)
                 .then(ret=> {
+                    closeWaitingAlert(this._waiting);
+
                     if (ret.result === true) {
                         ToastAndroidBS('重置密码成功，请使用新密码重新登录！');
 
@@ -130,6 +138,7 @@ class CPARegisterOrResetPwdPage extends Component {
                     }
                 })
                 .catch(err=>{
+                    closeWaitingAlert(this._waiting);
                     console.log(err);
                     ToastAndroidBS(err.message);
                 });
@@ -240,6 +249,8 @@ class CPARegisterOrResetPwdPage extends Component {
                         </TouchableOpacity>
                         : null
                 }
+
+                <AlertWaiting ref={self=>this._waiting=self} />
             </View>
         );
     }
