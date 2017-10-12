@@ -26,6 +26,7 @@ import {error, prompt, ToastAndroidBS, validSerialNumber} from "../../Common/fun
 
 
 const SNCount = 10;
+const ScanInterval = 3000; // 扫描成功后，间隔3s允许再次处理
 class CPAScanPage extends Component {
     // 构造
     constructor(props) {
@@ -35,6 +36,7 @@ class CPAScanPage extends Component {
             scanOrInput: 'scan',
             torchMode: Camera.constants.TorchMode.off,
             sn: '',
+            scanning: false,
         };
     }
 
@@ -53,6 +55,7 @@ class CPAScanPage extends Component {
 
     componentWillUnmount() {
         this._timer && clearInterval(this._timer);
+        this._scanTimer && clearTimeout(this._scanTimer);
     }
 
     _startScanStrip = () => {
@@ -93,22 +96,38 @@ class CPAScanPage extends Component {
 
     // 扫描成功
     _onScanSuccess = (e) => {
-        try {
-            // 如果手电筒打开，关闭手电筒
-            this._switchTorch(true);
-            Vibration.vibrate();
+        if (!this.state.scanning) {
+            this._onScanningStatusChanged(true);
 
-            let sn = e.data;
+            try {
+                // 如果手电筒打开，关闭手电筒
+                this._switchTorch(true);
+                Vibration.vibrate();
 
-            // verify the serial number.
-            if (/*validSerialNumber(sn)*/true) {
-                this._startCharging(sn);
-            } else {
-                prompt('编号不正确！');
+                let sn = e.data;
+
+                // verify the serial number.
+                if (/*validSerialNumber(sn)*/true) {
+                    this._startCharging(sn);
+                } else {
+                    prompt('编号不正确！');
+                }
+            } catch (e) {
+                error('An error occurred', e.message);
             }
-        } catch (e) {
-            error('An error occurred', e.message);
+
+            this._scanTimer = setTimeout(()=>{
+                this._onScanningStatusChanged(false);
+                this._scanTimer && clearTimeout(this._scanTimer);
+            }, ScanInterval);
         }
+    };
+
+    _onScanningStatusChanged = (status)=>{
+        this.setState({
+            ...this.state,
+            scanning: status,
+        });
     };
 
     // 打开/关闭闪光灯
@@ -152,7 +171,7 @@ class CPAScanPage extends Component {
         startCharging(sn)
             .then(ret => {
                 if (ret.result === true) {
-                    ToastAndroidBS('开始充电...');
+                    ToastAndroidBS('开始充电');
                     AppContext.startCharging();
 
                     const resetAction = NavigationActions.reset({
