@@ -40,7 +40,7 @@ class CPAHomePage extends Component{
         super(props);
         // 初始状态
         this.state = {
-            mayType: MapTypes.NORMAL,
+            mapType: MapTypes.NORMAL,
             zoom: 5,
             center: {
                 longitude: 105.552500, // 中间点坐标

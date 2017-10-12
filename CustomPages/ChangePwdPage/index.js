@@ -7,6 +7,8 @@ import {ToastAndroidBS} from "../../Common/functions";
 import TextInputStyles from '../../CustomComponents/SimpleCustomComponent/styles';
 import {GPlaceholderTextColor} from "../../Common/colors";
 import {changePwd} from "../../Common/webApi";
+import {closeWaitingAlert, openWaitingAlert} from "../../CustomComponents/AlertWaiting/index";
+import AlertWaiting from "../../CustomComponents/AlertWaiting/index";
 
 class CPAChangePwdPage extends Component{
     // 构造
@@ -30,8 +32,11 @@ class CPAChangePwdPage extends Component{
             return;
         }
 
+        openWaitingAlert(this._waiting, '正在保存...');
         changePwd({id: AppContext.userId, password: oldPwd, newpassword: newPwd})
             .then(ret=>{
+                closeWaitingAlert(this._waiting);
+
                 if (ret.result === true) {
                     ToastAndroidBS('密码修改成功，请使用新密码重新登录！');
 
@@ -44,21 +49,16 @@ class CPAChangePwdPage extends Component{
                 }
             })
             .catch(err=>{
+                closeWaitingAlert(this._waiting);
                 ToastAndroidBS(err.message);
                 console.log(err);
             });
-
-
     };
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.listContainer}>
-                    {/*<FlatList data={data}
-                              renderItem={this._renderItem}
-                    />*/}
-
                     <TextInput style={[styles.textInput, TextInputStyles.textInput]}
                                placeholder='原密码'
                                placeholderTextColor={GPlaceholderTextColor}
@@ -132,6 +132,8 @@ class CPAChangePwdPage extends Component{
                                             && this.state.newPwdAgain.length > 0
                                             && this.state.newPwdFit)} />
                 </View>
+
+                <AlertWaiting ref={self=>this._waiting=self} />
             </View>
         );
     }

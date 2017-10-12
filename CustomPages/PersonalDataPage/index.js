@@ -57,7 +57,7 @@ class CPAPersonalDataPage extends Component{
             .catch(err=>{
                 closeWaitingAlert(this._waiting);
                 console.log(err);
-                ToastAndroidBS("无法获取用户信息："+err);
+                ToastAndroidBS(err.message);
             });
     };
 
@@ -67,10 +67,10 @@ class CPAPersonalDataPage extends Component{
         let gender = this.state.gender;
         let data = {nickname: nickname, gender: gender, avatar: avatar};
 
-        this._waiting.waitingIn('正在保存...');
+        openWaitingAlert(this._waiting, '正在保存...');
         updateUserProfile(Object.assign({}, data, {id: AppContext.userId}))
             .then(ret=>{
-                this._waiting.waitingOut();
+                closeWaitingAlert(this._waiting);
 
                 if (ret.result === true){
                     ToastAndroidBS('修改成功');
@@ -84,9 +84,9 @@ class CPAPersonalDataPage extends Component{
                 }
             })
             .catch(err=>{
-                this._waiting.waitingOut();
+                closeWaitingAlert(this._waiting);
                 console.log(err);
-                ToastAndroidBS("修改个人信息出错：" +err);
+                ToastAndroidBS(err.message);
             });
     };
 
