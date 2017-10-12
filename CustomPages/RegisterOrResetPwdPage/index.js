@@ -221,6 +221,8 @@ class CPARegisterOrResetPwdPage extends Component {
                     <Button title={params.registerOrReset === 'register' ? "注册" : '确定'}
                             buttonStyle={styles.button}
                             onPress={this._registerOrReset}
+                            disabled={this.state.phoneNumber.length <= 0 || this.state.vCode.length <= 0 || this.state.pwd.length <= 0}
+                            disabledStyle={styles.disabled}
                     />
                 </View>
 

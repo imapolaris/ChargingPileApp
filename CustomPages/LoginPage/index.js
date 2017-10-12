@@ -106,7 +106,9 @@ class CPALoginPage extends Component{
                 <View style={styles.buttonContainer}>
                     <Button buttonStyle={styles.button}
                             title="登录"
-                            onPress={this._login} />
+                            onPress={this._login}
+                            disabled={this.state.phoneNumber.length <= 0 || this.state.pwd.length <= 0}
+                            disabledStyle={styles.disabled} />
                 </View>
 
                 <View style={styles.shortCutContainer}>

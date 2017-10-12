@@ -63,6 +63,9 @@ const styles = StyleSheet.create({
     userAgreement: {
         textDecorationLine : 'underline',
     },
+    disabled: {
+        backgroundColor: colors.grey3,
+    },
 });
 
 export default styles;
