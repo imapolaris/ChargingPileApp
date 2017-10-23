@@ -27,10 +27,6 @@ class CPAPersonalDataPage extends Component{
         this._getUserProfile();
     }
 
-    componentWillUnmount() {
-        closeWaitingAlert(this._waiting);
-    }
-
     // 查询用户个人信息
     _getUserProfile = ()=> {
         openWaitingAlert(this._waiting);
