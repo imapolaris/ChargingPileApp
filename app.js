@@ -9,6 +9,8 @@ import constants from './Common/constants';
 import {appInit} from "./Common/appContext";
 import colors from './Common/colors';
 
+import JPushModule from 'jpush-react-native';
+
 let lastBackPressed = 0;
 /*let store = createStore(null);*/
 
@@ -16,6 +18,8 @@ class App extends Component{
     componentWillMount() {
         // initialize the app context.
         appInit();
+
+        this._registerJPushModule();
     }
 
     componentDidMount() {
@@ -25,8 +29,37 @@ class App extends Component{
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this._onBackAndroid);
 
+        this._unRegisterJPushModule();
         AppContext.clearListeners();
     }
+
+    _registerJPushModule = ()=>{
+        JPushModule.notifyJSDidLoad((resultCode)=>{
+            if (resultCode === 0) {
+                alert('0');
+            }
+        });
+        // 默认消息
+        JPushModule.addReceiveNotificationListener((map)=>{
+            console.log('alertContent: ' + map.alertContent);
+            console.log('extras: ' + map.extras);
+        });
+        // 点击通知
+        JPushModule.addReceiveOpenNotificationListener((map)=>{
+            console.log('Opening notification!');
+            console.log('map.extras: ' + map.key);
+        });
+        // 自定义消息
+        JPushModule.addReceiveCustomMsgListener((map)=>{
+            console.log('message: ' + map.message)
+        });
+    };
+
+    _unRegisterJPushModule = ()=>{
+        JPushModule.removeOpenNotificationLaunchAppEventListener();
+        JPushModule.removeReceiveCustomMsgListener();
+        JPushModule.removeReceiveNotificationListener();
+    };
 
     _onBackAndroid = () => {
         /*let now = new Date().getTime();
