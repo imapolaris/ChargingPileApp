@@ -57,6 +57,19 @@
 		028340A2349E44FBA8E91391 /* libthird-party.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F69C3F7F6AB447FA4C48663 /* libthird-party.a */; };
 		0024E2F04D534D888A126686 /* libdouble-conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6264F7260AA4657B7C50485 /* libdouble-conversion.a */; };
 		D6D69B8F18A54CA2A16CAFC7 /* libRCTBaiduMap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E728E436A79A402480576E78 /* libRCTBaiduMap.a */; };
+		6AD76E88FB2F496391ACC493 /* libRCTJCoreModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE7A2BB0BF0D4BC09FA1518F /* libRCTJCoreModule.a */; };
+		AFAFCE89DA6A457FA39D84C3 /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FF1FD9EE4B46E88349F49D /* libRCTJPushModule.a */; };
+		CC91E02F3AC641B3A25DB8F4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B3F76B36EE84269A083EF71 /* libz.tbd */; };
+		7147201BB373470B891BEB76 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4B2C68580CF45859C9B576A /* UserNotifications.framework */; };
+		61C7C3FE659340ACB38F603E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B84DAF271F34B3EA0D90919 /* CoreTelephony.framework */; };
+		B0B45EAE21E4479594582E11 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B790FBBD2D71488594B09AA1 /* Security.framework */; };
+		2486F155CFEB4F38BBECCFEB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF3EE13AAE941E1B1FE7F22 /* CFNetwork.framework */; };
+		4D3FC889162C4B7B8A9634DC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D78C5848F684927961CA268 /* CoreFoundation.framework */; };
+		6ED6D4CA101D47EA9029DFE5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC0BC5F3D4B4430BC7F03B9 /* SystemConfiguration.framework */; };
+		2022F18479D8408AB0525FDC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7BDFBBA7CD458AA1044898 /* Foundation.framework */; };
+		DCE7DA0B23474612AAC84A48 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54148E38CB064FD795D17634 /* UIKit.framework */; };
+		56FF2B35EEDD473BB0A00D4F /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 628EB63C305F4B8AA2E868D7 /* libresolv.tbd */; };
+		9DDA28D5C49A48A990B85C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80CFDE165A44481FB0017379 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,6 +358,21 @@
 		A6264F7260AA4657B7C50485 /* libdouble-conversion.a */ = {isa = PBXFileReference; name = "libdouble-conversion.a"; path = "libdouble-conversion.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		444EE28B3BA648479EF59E19 /* RCTBaiduMap.xcodeproj */ = {isa = PBXFileReference; name = "RCTBaiduMap.xcodeproj"; path = "../node_modules/react-native-baidu-map/ios/RCTBaiduMap.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		E728E436A79A402480576E78 /* libRCTBaiduMap.a */ = {isa = PBXFileReference; name = "libRCTBaiduMap.a"; path = "libRCTBaiduMap.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		8CA83FE48C574C019EE2AB74 /* RCTJCoreModule.xcodeproj */ = {isa = PBXFileReference; name = "RCTJCoreModule.xcodeproj"; path = "../node_modules/jcore-react-native/ios/RCTJCoreModule.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		DE7A2BB0BF0D4BC09FA1518F /* libRCTJCoreModule.a */ = {isa = PBXFileReference; name = "libRCTJCoreModule.a"; path = "libRCTJCoreModule.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		EED621C320144F029754DE3F /* RCTJPushModule.xcodeproj */ = {isa = PBXFileReference; name = "RCTJPushModule.xcodeproj"; path = "../node_modules/jpush-react-native/ios/RCTJPushModule.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		A1FF1FD9EE4B46E88349F49D /* libRCTJPushModule.a */ = {isa = PBXFileReference; name = "libRCTJPushModule.a"; path = "libRCTJPushModule.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		3B3F76B36EE84269A083EF71 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		C4B2C68580CF45859C9B576A /* UserNotifications.framework */ = {isa = PBXFileReference; name = "UserNotifications.framework"; path = "System/Library/Frameworks/UserNotifications.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		0B84DAF271F34B3EA0D90919 /* CoreTelephony.framework */ = {isa = PBXFileReference; name = "CoreTelephony.framework"; path = "System/Library/Frameworks/CoreTelephony.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		B790FBBD2D71488594B09AA1 /* Security.framework */ = {isa = PBXFileReference; name = "Security.framework"; path = "System/Library/Frameworks/Security.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		2BF3EE13AAE941E1B1FE7F22 /* CFNetwork.framework */ = {isa = PBXFileReference; name = "CFNetwork.framework"; path = "System/Library/Frameworks/CFNetwork.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		0D78C5848F684927961CA268 /* CoreFoundation.framework */ = {isa = PBXFileReference; name = "CoreFoundation.framework"; path = "System/Library/Frameworks/CoreFoundation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		ABC0BC5F3D4B4430BC7F03B9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		8B7BDFBBA7CD458AA1044898 /* Foundation.framework */ = {isa = PBXFileReference; name = "Foundation.framework"; path = "System/Library/Frameworks/Foundation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		54148E38CB064FD795D17634 /* UIKit.framework */ = {isa = PBXFileReference; name = "UIKit.framework"; path = "System/Library/Frameworks/UIKit.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		628EB63C305F4B8AA2E868D7 /* libresolv.tbd */ = {isa = PBXFileReference; name = "libresolv.tbd"; path = "usr/lib/libresolv.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		80CFDE165A44481FB0017379 /* CoreGraphics.framework */ = {isa = PBXFileReference; name = "CoreGraphics.framework"; path = "System/Library/Frameworks/CoreGraphics.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -383,6 +411,19 @@
 				028340A2349E44FBA8E91391 /* libthird-party.a in Frameworks */,
 				0024E2F04D534D888A126686 /* libdouble-conversion.a in Frameworks */,
 				D6D69B8F18A54CA2A16CAFC7 /* libRCTBaiduMap.a in Frameworks */,
+				6AD76E88FB2F496391ACC493 /* libRCTJCoreModule.a in Frameworks */,
+				AFAFCE89DA6A457FA39D84C3 /* libRCTJPushModule.a in Frameworks */,
+				CC91E02F3AC641B3A25DB8F4 /* libz.tbd in Frameworks */,
+				7147201BB373470B891BEB76 /* UserNotifications.framework in Frameworks */,
+				61C7C3FE659340ACB38F603E /* CoreTelephony.framework in Frameworks */,
+				B0B45EAE21E4479594582E11 /* Security.framework in Frameworks */,
+				2486F155CFEB4F38BBECCFEB /* CFNetwork.framework in Frameworks */,
+				4D3FC889162C4B7B8A9634DC /* CoreFoundation.framework in Frameworks */,
+				6ED6D4CA101D47EA9029DFE5 /* SystemConfiguration.framework in Frameworks */,
+				2022F18479D8408AB0525FDC /* Foundation.framework in Frameworks */,
+				DCE7DA0B23474612AAC84A48 /* UIKit.framework in Frameworks */,
+				56FF2B35EEDD473BB0A00D4F /* libresolv.tbd in Frameworks */,
+				9DDA28D5C49A48A990B85C9B /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +616,8 @@
 				CF3A513DF6444366948CB327 /* AlipayModule.xcodeproj */,
 				DA4296A7BCAC4A58A862D4AE /* RCTWeChat.xcodeproj */,
 				444EE28B3BA648479EF59E19 /* RCTBaiduMap.xcodeproj */,
+				8CA83FE48C574C019EE2AB74 /* RCTJCoreModule.xcodeproj */,
+				EED621C320144F029754DE3F /* RCTJPushModule.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -596,6 +639,7 @@
 				00E356EF1AD99517003FC87E /* ChargingPileAppTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				A8D3ADCABD404CD0BF96D453 /* Resources */,
+				E17F256F34BD486E9283F7B2 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -628,6 +672,25 @@
 			);
 			name = Resources;
 			sourceTree = "<group>";
+		};
+		E17F256F34BD486E9283F7B2 /* Frameworks */ = {
+			isa = "PBXGroup";
+			children = (
+				3B3F76B36EE84269A083EF71 /* libz.tbd */,
+				C4B2C68580CF45859C9B576A /* UserNotifications.framework */,
+				0B84DAF271F34B3EA0D90919 /* CoreTelephony.framework */,
+				B790FBBD2D71488594B09AA1 /* Security.framework */,
+				2BF3EE13AAE941E1B1FE7F22 /* CFNetwork.framework */,
+				0D78C5848F684927961CA268 /* CoreFoundation.framework */,
+				ABC0BC5F3D4B4430BC7F03B9 /* SystemConfiguration.framework */,
+				8B7BDFBBA7CD458AA1044898 /* Foundation.framework */,
+				54148E38CB064FD795D17634 /* UIKit.framework */,
+				628EB63C305F4B8AA2E868D7 /* libresolv.tbd */,
+				80CFDE165A44481FB0017379 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1182,12 +1245,16 @@
 					"$(SRCROOT)\..\node_modules\react-native-yunpeng-alipay\ios\AlipayModule/**",
 					"$(SRCROOT)\..\node_modules\react-native-wechat\ios",
 					"$(SRCROOT)\..\node_modules\react-native-baidu-map\ios\RCTBaiduMap/**",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 				);
 				INFOPLIST_FILE = ChargingPileAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1223,12 +1290,16 @@
 					"$(SRCROOT)\..\node_modules\react-native-yunpeng-alipay\ios\AlipayModule/**",
 					"$(SRCROOT)\..\node_modules\react-native-wechat\ios",
 					"$(SRCROOT)\..\node_modules\react-native-baidu-map\ios\RCTBaiduMap/**",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 				);
 				INFOPLIST_FILE = ChargingPileAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1265,6 +1336,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-yunpeng-alipay\ios\AlipayModule/**",
 					"$(SRCROOT)\..\node_modules\react-native-wechat\ios",
 					"$(SRCROOT)\..\node_modules\react-native-baidu-map\ios\RCTBaiduMap/**",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 				);
 				INFOPLIST_FILE = ChargingPileApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1292,6 +1365,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-yunpeng-alipay\ios\AlipayModule/**",
 					"$(SRCROOT)\..\node_modules\react-native-wechat\ios",
 					"$(SRCROOT)\..\node_modules\react-native-baidu-map\ios\RCTBaiduMap/**",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 				);
 				INFOPLIST_FILE = ChargingPileApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1325,11 +1400,15 @@
 					"$(SRCROOT)\..\node_modules\react-native-yunpeng-alipay\ios\AlipayModule/**",
 					"$(SRCROOT)\..\node_modules\react-native-wechat\ios",
 					"$(SRCROOT)\..\node_modules\react-native-baidu-map\ios\RCTBaiduMap/**",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 				);
 				INFOPLIST_FILE = "ChargingPileApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1374,11 +1453,15 @@
 					"$(SRCROOT)\..\node_modules\react-native-yunpeng-alipay\ios\AlipayModule/**",
 					"$(SRCROOT)\..\node_modules\react-native-wechat\ios",
 					"$(SRCROOT)\..\node_modules\react-native-baidu-map\ios\RCTBaiduMap/**",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 				);
 				INFOPLIST_FILE = "ChargingPileApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1429,6 +1512,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.ChargingPileApp-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1453,6 +1538,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

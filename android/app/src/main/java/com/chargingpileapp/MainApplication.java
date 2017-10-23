@@ -3,6 +3,7 @@ package com.chargingpileapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import cn.jpush.reactnativejpush.JPushPackage;
 import org.lovebing.reactnative.baidumap.BaiduMapPackage;
 import com.yunpeng.alipay.AlipayPackage;
 import com.theweflex.react.WeChatPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new JPushPackage(),
             new BaiduMapPackage(getApplicationContext()),
             new AlipayPackage(),
             new WeChatPackage(),
