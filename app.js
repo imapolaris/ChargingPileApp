@@ -36,7 +36,6 @@ class App extends Component{
     _registerJPushModule = ()=>{
         JPushModule.notifyJSDidLoad((resultCode)=>{
             if (resultCode === 0) {
-                alert('0');
             }
         });
         // 默认消息
