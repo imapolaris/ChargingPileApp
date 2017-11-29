@@ -25,6 +25,11 @@ import CPAListPage from "../../../CustomPages/ListPage/index";
 import CPAWelcomePage from "../../../CustomPages/WelcomePage/index";
 import CPASearchPage from "../../../CustomPages/SearchPage/index";
 import CPAWaitingChargingPage from "../../../CustomPages/WaitingChargingPage/index";
+import CPACollectPage from "../../../CustomPages/CollectPage/index";
+import CPABatteryDetectionPage, {CPABatteryDetectionReportPage} from "../../../CustomPages/BatteryDetectionPage/index";
+import CPAMyMessagePage from "../../../CustomPages/MyMessagePage/index";
+import CPAApplyForInvoicePage, {CPAInvoiceRecordPage} from "../../../CustomPages/ApplyForInvoicePage/index";
+import CPAFeedbackPage from "../../../CustomPages/FeedbackPage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -87,9 +92,18 @@ const CPAStackNavigator = StackNavigator(
         },
         ChargingRecords: {
             screen: CPAChargingRecordsPage,
-            navigationOptions: {
-                title: '充电记录',
-            }
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '充电记录',
+                    headerRight:(
+                        <NavButton label="申请发票"
+                                   onPress={() => {
+                                       navigation.navigate('ApplyForInvoice');
+                                   }}
+                        />
+                    ),
+                });
+            },
         },
         MySubscribe: {
             screen: CPAMySubscribePage,
@@ -126,6 +140,12 @@ const CPAStackNavigator = StackNavigator(
             navigationOptions: {
                 title: '关于我们'
             },
+        },
+        Feedback: {
+            screen: CPAFeedbackPage,
+            navigationOptions:{
+                title: '意见反馈'
+            }
         },
         Login: {
             screen: CPALoginPage,
@@ -164,6 +184,60 @@ const CPAStackNavigator = StackNavigator(
             screen: CPAWaitingChargingPage,
             navigationOptions: {
                 title: '正在充电'
+            }
+        },
+        Collect: {
+            screen: CPACollectPage,
+            navigationOptions: {
+                title: '我的收藏'
+            }
+        },
+        BatteryDetection: {
+            screen: CPABatteryDetectionPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '电池检测',
+                    headerRight:(
+                        <NavButton label="检测报告"
+                                   onPress={() => {
+                                       navigation.navigate('BatteryDetectionReport');
+                                   }}
+                        />
+                    ),
+                });
+            },
+        },
+        BatteryDetectionReport:{
+            screen: CPABatteryDetectionReportPage,
+            navigationOptions: {
+                title: '检测报告'
+            }
+        },
+        MyMessage: {
+            screen: CPAMyMessagePage,
+            navigationOptions: {
+                title: '我的消息'
+            }
+        },
+        ApplyForInvoice:{
+            screen: CPAApplyForInvoicePage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '申请发票',
+                    headerRight:(
+                        <NavButton label="开票历史"
+                                   onPress={() => {
+                                       navigation.navigate('InvoiceRecord');
+                                   }}
+                        />
+                    ),
+                });
+            },
+        },
+        InvoiceRecord:{
+            screen: CPAInvoiceRecordPage,
+            navigationOptions:{
+                title: '开票历史'
             }
         },
     },

@@ -1,12 +1,13 @@
 import {StyleSheet} from 'react-native';
 import colors from '../../Common/colors';
 
+const Size = 39;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
     infoContainer:{
-        height: 200,
+        height: 150,
         flexDirection: 'column',
         justifyContent: 'center',
     },
@@ -26,10 +27,10 @@ const styles = StyleSheet.create({
     },
     settings:{
         justifyContent: 'flex-start',
-        marginBottom: 10,
+        //marginBottom: 10,
         borderTopWidth: 0.5,
         borderTopColor: '#BBBBBB',
-        marginTop: 30,
+        marginTop: 10,
     },
     text: {
         fontSize: 18,
@@ -43,6 +44,28 @@ const styles = StyleSheet.create({
     },
     register:{
         color: '#397af8',
+    },
+    iconContainer: {
+        width: Size,
+        height: Size,
+        backgroundColor: colors.transparent,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 0.2,
+        borderColor: colors.transparent,
+    },
+    icon: {
+        position: "absolute",
+        backgroundColor: "transparent",
+        elevation: 4,
+    },
+    bell: {
+        justifyContent: "flex-start",
+        alignItems: 'flex-end',
+        bottom: 0,
+        left: 0,
+        right: 10,
+        top: 10,
     }
 });
 

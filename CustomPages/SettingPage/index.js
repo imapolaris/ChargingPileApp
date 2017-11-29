@@ -18,6 +18,11 @@ class CPASettingPage extends Component{
         navigate && navigate('AboutUs');
     };
 
+    _feedback = ()=>{
+        const {navigate} = this.props.navigation;
+        navigate && navigate('Feedback');
+    };
+
     // 退出登录
     _quitMe = () => {
         AppContext.logout();
@@ -41,6 +46,12 @@ class CPASettingPage extends Component{
                 icon:{name:'emotsmile', type:'simple-line-icon'},
                 callback:this._aboutUs,
             },
+            {
+                key:3,
+                title:'意见反馈',
+                icon:{name:'bubble', type:'simple-line-icon'},
+                callback:this._feedback,
+            }
         ];
 
         return (

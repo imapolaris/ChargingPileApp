@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {View, ScrollView, ImageBackground, Text, TouchableOpacity} from 'react-native';
+import {View, ScrollView, ImageBackground, Text, TouchableOpacity, TouchableHighlight} from 'react-native';
 import styles from './styles';
-import {List, ListItem, Avatar} from 'react-native-elements';
+import {List, ListItem, Avatar, Badge} from 'react-native-elements';
 import colors from "../../Common/colors";
 import {ToastAndroidBS} from "../../Common/functions";
+import {shadowStyle} from "../../Common/styles";
+import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons';
 
 class CPAMePage extends Component{
     // 构造
@@ -80,6 +82,11 @@ class CPAMePage extends Component{
         this._navigateTo('Wallet');
     };
 
+    // 我的收藏
+    _collect = ()=> {
+        this._navigateTo('Collect');
+    };
+
     // 充电记录
     _chargingRecords = () => {
         this._navigateTo('ChargingRecords');
@@ -88,6 +95,10 @@ class CPAMePage extends Component{
     // 我的预约
     _mySubscribe = () => {
         this._navigateTo('MySubscribe');
+    };
+
+    _battery = () => {
+        this._navigateTo('BatteryDetection');
     };
 
     // 设置
@@ -124,6 +135,25 @@ class CPAMePage extends Component{
         }
     };
 
+    _myMessage = ()=>{
+        this._navigateTo('MyMessage');
+    };
+
+    _renderBellIcon = () => {
+        return (
+            <View pointerEvents="box-none"
+                  style={[styles.icon, styles.bell, shadowStyle]}>
+                <TouchableHighlight activeOpacity={0.6}
+                                    style={[styles.iconContainer]}
+                                    onPress={this._myMessage}
+                                    underlayColor={colors.grey4} >
+                    <SimpleIcon name="bell"
+                                size={25} color={colors.tintColor2} />
+                </TouchableHighlight>
+            </View>
+        );
+    };
+
     render() {
         const list = [
             {
@@ -137,6 +167,11 @@ class CPAMePage extends Component{
                 callback: this._wallet,
             },
             {
+                title: '我的收藏',
+                icon: {name: 'heart', type: 'simple-line-icon'},
+                callback: this._collect,
+            },
+            {
                 title: '充电记录',
                 icon: {name:'list', type:'simple-line-icon'},
                 callback: this._chargingRecords,
@@ -146,6 +181,14 @@ class CPAMePage extends Component{
                 icon: {name:'pin', type:'simple-line-icon'},
                 callback: this._mySubscribe,
             },
+        ];
+
+        const battery = [
+            {
+                title: '电池检测',
+                icon: {name:'energy', type:'simple-line-icon'},
+                callback: this._battery,
+            }
         ];
 
         const settings = [
@@ -196,6 +239,10 @@ class CPAMePage extends Component{
                                     </View>
                             }
                         </View>
+
+                        {
+                            this.state.logon && this._renderBellIcon()
+                        }
                     </ImageBackground>
                 </View>
                 <ScrollView>
@@ -203,6 +250,20 @@ class CPAMePage extends Component{
                         <List style={styles.list}>
                             {
                                 list.map((item, i) => (
+                                    <ListItem key={i}
+                                              title={item.title}
+                                              leftIcon={item.icon}
+                                              containerStyle={styles.item}
+                                              underlayColor='#F3F3F3'
+                                              onPress={() => item.callback && item.callback()}
+                                    />
+                                ))
+                            }
+                        </List>
+
+                        <List style={styles.settings}>
+                            {
+                                battery.map((item, i) => (
                                     <ListItem key={i}
                                               title={item.title}
                                               leftIcon={item.icon}
