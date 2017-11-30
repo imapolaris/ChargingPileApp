@@ -8,6 +8,7 @@ import {createStore} from 'redux';
 import constants from './Common/constants';
 import {appInit} from "./Common/appContext";
 import colors from './Common/colors';
+import { NavigationActions } from 'react-navigation';
 
 import JPushModule from 'jpush-react-native';
 
@@ -30,7 +31,11 @@ class App extends Component{
         BackHandler.removeEventListener('hardwareBackPress', this._onBackAndroid);
 
         this._unRegisterJPushModule();
-        AppContext.clearListeners();
+        try{
+            AppContext.clearListeners();
+        } catch (ex){
+            console.log(ex);
+        }
     }
 
     _registerJPushModule = ()=>{
@@ -46,7 +51,12 @@ class App extends Component{
         // 点击通知
         JPushModule.addReceiveOpenNotificationListener((map)=>{
             console.log('Opening notification!');
-            console.log('map.extras: ' + map.key);
+            console.log('map.extras: ' + JSON.stringify(map));
+            console.log('alertContent:' + map.alertContent);
+
+            let url = JSON.parse(map.extras).url;
+            if (url !== null && url !== undefined && url !== '')
+                this._navigateToMessagePage(url);
         });
         // 自定义消息
         JPushModule.addReceiveCustomMsgListener((map)=>{
@@ -58,6 +68,17 @@ class App extends Component{
         JPushModule.removeOpenNotificationLaunchAppEventListener();
         JPushModule.removeReceiveCustomMsgListener();
         JPushModule.removeReceiveNotificationListener();
+    };
+
+    _navigateToMessagePage = (url)=>{
+
+        this._navigator && this._navigator.dispatch(
+            NavigationActions.navigate({
+                routeName: 'Notification',
+                params: {url: url},
+            })
+
+        );
     };
 
     _onBackAndroid = () => {
@@ -74,7 +95,7 @@ class App extends Component{
         return (
             <View style={styles.container}>
                 <StatusBar backgroundColor={colors.theme1} barStyle="light-content"/>
-                <CPAStackNavigator />
+                <CPAStackNavigator ref={self=>this._navigator=self} />
             </View>
         );
     }

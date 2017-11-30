@@ -30,6 +30,7 @@ import CPABatteryDetectionPage, {CPABatteryDetectionReportPage} from "../../../C
 import CPAMyMessagePage from "../../../CustomPages/MyMessagePage/index";
 import CPAApplyForInvoicePage, {CPAInvoiceRecordPage} from "../../../CustomPages/ApplyForInvoicePage/index";
 import CPAFeedbackPage from "../../../CustomPages/FeedbackPage/index";
+import CPANotificationPage from "../../../CustomPages/NotificationPage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -238,6 +239,12 @@ const CPAStackNavigator = StackNavigator(
             screen: CPAInvoiceRecordPage,
             navigationOptions:{
                 title: '开票历史'
+            }
+        },
+        Notification:{
+            screen: CPANotificationPage,
+            navigationOptions:{
+                title: '消息通知'
             }
         },
     },
