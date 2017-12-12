@@ -39,10 +39,12 @@ class App extends Component{
     }
 
     _registerJPushModule = ()=>{
-        JPushModule.notifyJSDidLoad((resultCode)=>{
-            if (resultCode === 0) {
-            }
-        });
+        if (Platform.OS === AndroidPlatform) {
+            JPushModule.notifyJSDidLoad((resultCode)=>{
+                if (resultCode === 0) {
+                }
+            });
+        }
 
         // 默认消息
         JPushModule.addReceiveNotificationListener((map)=>{
@@ -112,7 +114,10 @@ class App extends Component{
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar backgroundColor={colors.theme1} barStyle="light-content"/>
+                {
+                    Platform.OS === AndroidPlatform ? <StatusBar backgroundColor={colors.theme1} barStyle="light-content"/>
+                        : null
+                }
                 <CPAStackNavigator ref={self=>this._navigator=self} />
             </View>
         );
