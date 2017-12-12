@@ -16,3 +16,6 @@ export const AppStatus = {
 export const SearchHistoryCount = 10;
 
 global.AppStatus = AppStatus;
+
+export const AndroidPlatform = 'android';
+export const IOSPlatform = 'ios';

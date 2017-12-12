@@ -2,10 +2,10 @@ import './Common/appStorage';
 import './Common/appContext';
 
 import React, {Component} from 'react';
-import {StyleSheet, BackHandler, View, StatusBar} from 'react-native';
+import {StyleSheet, BackHandler, View, StatusBar, Platform} from 'react-native';
 import CPAStackNavigator from './CustomComponents/Navigators/CPAStackNavigator';
 import {createStore} from 'redux';
-import constants from './Common/constants';
+import constants, {AndroidPlatform, IOSPlatform} from './Common/constants';
 import {appInit} from "./Common/appContext";
 import colors from './Common/colors';
 import { NavigationActions } from 'react-navigation';
@@ -43,6 +43,7 @@ class App extends Component{
             if (resultCode === 0) {
             }
         });
+
         // 默认消息
         JPushModule.addReceiveNotificationListener((map)=>{
             console.log('alertContent: ' + map.alertContent);
@@ -62,12 +63,29 @@ class App extends Component{
         JPushModule.addReceiveCustomMsgListener((map)=>{
             console.log('message: ' + map.message)
         });
+
+        if (Platform.OS === IOSPlatform){
+            JPushModule.addOpenNotificationLaunchAppListener((notification)=>{
+
+            });
+        }
+
+        JPushModule.getRegistrationID((registrationId)=>{
+            console.log('getRegistrationID:'+registrationId);
+
+            // bind user id and registration id.
+            // TODO here.
+        });
     };
 
     _unRegisterJPushModule = ()=>{
         JPushModule.removeOpenNotificationLaunchAppEventListener();
         JPushModule.removeReceiveCustomMsgListener();
         JPushModule.removeReceiveNotificationListener();
+
+        if (Platform.OS === IOSPlatform){
+            JPushModule.removeOpenNotificationLaunchAppEventListener();
+        }
     };
 
     _navigateToMessagePage = (url)=>{

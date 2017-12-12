@@ -1,5 +1,6 @@
-import {Alert, ToastAndroid, Linking, PermissionsAndroid} from 'react-native';
+import {Alert, ToastAndroid, Linking, PermissionsAndroid, Platform} from 'react-native';
 import {Geolocation} from 'react-native-baidu-map';
+import {AndroidPlatform} from "./constants";
 
 
 /*
@@ -69,19 +70,23 @@ export function error2(msg, callback1, callback2) {
  * function ToastAndroid.show(...) wrapper.
  */
 export function ToastAndroidBS(message) {
-    ToastAndroid.show(message, ToastAndroid.BOTTOM, ToastAndroid.SHORT);
+    if (Platform.OS === AndroidPlatform)
+        ToastAndroid.show(message, ToastAndroid.BOTTOM, ToastAndroid.SHORT);
 }
 
 export function ToastAndroidBL(message) {
-    ToastAndroid.show(message, ToastAndroid.BOTTOM, ToastAndroid.LONG);
+    if (Platform.OS === AndroidPlatform)
+        ToastAndroid.show(message, ToastAndroid.BOTTOM, ToastAndroid.LONG);
 }
 
 export function ToastAndroidCS(message) {
-    ToastAndroid.show(message, ToastAndroid.CENTER, ToastAndroid.SHORT);
+    if (Platform.OS === AndroidPlatform)
+        ToastAndroid.show(message, ToastAndroid.CENTER, ToastAndroid.SHORT);
 }
 
 export function ToastAndroidCL(message) {
-    ToastAndroid.show(message, ToastAndroid.CENTER, ToastAndroid.LONG);
+    if (Platform.OS === AndroidPlatform)
+        ToastAndroid.show(message, ToastAndroid.CENTER, ToastAndroid.LONG);
 }
 
 /*
@@ -241,7 +246,36 @@ export function validSerialNumber(serialNumber) {
 * make a call
 * */
 export function makeCall(telephone) {
+    let uri = 'tel:'+telephone;
+    Linking.canOpenURL(uri)
+        .then(supported => {
+            if (!supported) {
+            }
+            else {
+                Linking.openURL(uri);
+            }
+        })
+        .catch(error=>{
+            throw new Error(error);
+        });
+}
 
+/*
+* send email
+* */
+export function sendEmail(email){
+    let uri = 'mailto:'+email;
+    Linking.canOpenURL(uri)
+        .then(supported => {
+            if (!supported) {
+            }
+            else {
+                Linking.openURL(uri);
+            }
+        })
+        .catch(error=>{
+            throw new Error(error);
+        });
 }
 
 /*
