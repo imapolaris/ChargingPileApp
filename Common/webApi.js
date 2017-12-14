@@ -1,16 +1,18 @@
 import {myFetch} from "./functions";
 
+const baseUrl = 'http://192.168.0.201/ChargingPileService/api/';
+
 const urls = {
-    messages: 'http://192.168.0.201/ChargingPileService/api/messages',
-    stations: 'http://192.168.0.201/ChargingPileService/api/stations',
-    stationDetails: 'http://192.168.0.201/ChargingPileService/api/stationDetails',
-    chargingPiles: 'http://192.168.0.201/ChargingPileService/api/chargingPiles',
-    chargingRecords: 'http://192.168.0.201/ChargingPileService/api/chargingRecords',
-    charging: 'http://192.168.0.201/ChargingPileService/api/charging',
-    subscribeRecords: 'http://192.168.0.201/ChargingPileService/api/subscribeRecords',
-    users: 'http://192.168.0.201/ChargingPileService/api/users',
-    payRecords: 'http://192.168.0.201/ChargingPileService/api/payRecords',
-    wallet: 'http://192.168.0.201/ChargingPileService/api/wallet',
+    messages: `${baseUrl}messages`,
+    stations: `${baseUrl}stations`,
+    stationDetails: `${baseUrl}stationDetails`,
+    chargingPiles: `${baseUrl}chargingPiles`,
+    chargingRecords: `${baseUrl}chargingRecords`,
+    charging: `${baseUrl}charging`,
+    subscribeRecords: `${baseUrl}subscribeRecords`,
+    users: `${baseUrl}users`,
+    payRecords: `${baseUrl}payRecords`,
+    wallet: `${baseUrl}wallet`,
 };
 
 const headers = {
