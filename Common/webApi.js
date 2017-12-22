@@ -221,3 +221,20 @@ export function makeOneCharge(userId, money, payWay) {
     let url = `${urls.wallet}/charge?userId=${userId}&money=${money}&payway=${payWay}`;
     return myFetch(url, GET, headers);
 }
+
+
+/*
+ * pay by ali app.
+ */
+export function aliPay() {
+    let url = `${urls.wallet}/alipay`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* pay by wechat app.
+* */
+export function wxPay() {
+    let url = `${urls.wallet}/wxpay`;
+    return myFetch(url, GET, headers);
+}

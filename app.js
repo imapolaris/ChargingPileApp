@@ -24,7 +24,7 @@ class App extends Component{
         this._registerJPushModule();
 
         // register app to wechat
-        WeChat.registerApp('wx7310a24d430a6967');
+        WeChat.registerApp('wx34361c2f73b68d16');
     }
 
     componentDidMount() {
