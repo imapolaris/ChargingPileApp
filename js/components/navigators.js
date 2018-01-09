@@ -27,6 +27,7 @@ import CPALocatingCityPage from "../pages/locatingcity";
 import CPASearchStationPage from "../pages/searchstation";
 import NavButton from "./navbutton";
 import {ScreenKey} from "../common/constants";
+import CPAPersonalInfoPage from "../pages/personalinfo";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -54,7 +55,6 @@ const CPAStackNavigator = StackNavigator(
                 title: '附近电站'
             }
         },
-
         StationInfo: {
             screen: CPAStationInfoPage,
             navigationOptions: {
@@ -86,6 +86,12 @@ const CPAStackNavigator = StackNavigator(
             screen: CPARegisterPage,
             navigationOptions: {
                 title: '重置密码'
+            }
+        },
+        PersonalInfo: {
+            screen: CPAPersonalInfoPage,
+            navigationOptions: {
+                title: '个人信息',
             }
         },
         MyMessage: {
@@ -161,11 +167,11 @@ const CPAStackNavigator = StackNavigator(
             }
         },
         SearchStation: {
-            screen: CPASearchStationPage,
-            navigationOptions: {
-                header: null
-            }
-        },
+        screen: CPASearchStationPage,
+        navigationOptions: {
+            header: null
+        }
+    },
         Filter: {
             screen: CPAFilterPage,
             navigationOptions: {

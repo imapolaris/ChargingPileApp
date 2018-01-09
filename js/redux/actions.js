@@ -1,9 +1,11 @@
 export const CHARGING_ACTION = 'CHARGING';
-export const SUBSCRIBE_Action = 'SUBSCRIBE';
+export const SUBSCRIBE_ACTION = 'SUBSCRIBE';
 
-export const LOGIN_ACTION = 'LOGIN';
-export const LOGOUT_ACTION = 'LOGOUT';
-export const REGISTER_ACTION = 'REGISTER';
+export const LOGIN_ACTION = 'LOGIN'; // 登录
+export const LOGOUT_ACTION = 'LOGOUT'; // 登出
+export const REGISTER_ACTION = 'REGISTER'; // 注册
+
+export const LOCATING_ACTION = 'LOCATING'; // 定位
 
 export function doLogin(phoneNumber, pwd, checkWay){
     return {
@@ -26,4 +28,22 @@ export function doRegister(phoneNumber, pwd){
         phoneNumber,
         pwd,
     };
+}
+
+import {Geolocation} from 'react-native-baidu-map';
+export function doLocating(data) {
+    return {
+        type: LOCATING_ACTION,
+        data
+    };
+}
+
+export function getCurrentPosition() {
+    return dispatch => Geolocation.getCurrentPosition()
+        .then(data=>{
+                dispatch(doLocating(data));
+            },
+            error=>{
+                throw new Error(error);
+            });
 }

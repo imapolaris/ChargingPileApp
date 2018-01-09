@@ -14,31 +14,29 @@ import CPAActionButton from "../components/actionbutton";
 import {IconType} from "../common/icons";
 import {Icon} from "react-native-elements";
 import WaitingNotice from "../components/waitingnotice";
+import {connect} from "react-redux";
+import {getCurrentPosition} from "../redux/actions";
 
+let position = null;
+let defaultCurrentPosition = {longitude:116.404185, latitude: 39.91491};  // 北京天安门的坐标
+const CountDown = 15 * 60; // 计时时间15分钟
 class CPAStationMapPage extends Component{
-    // 构造
     constructor(props) {
         super(props);
-        // 初始状态
         this.state = {
-            mapType: MapTypes.NORMAL,
-            zoom: 5,
-            center: {
-                longitude: 105.552500, // 中间点坐标
-                latitude: 34.322700,
-            },
-            trafficEnabled: false,
-            baiduHeatMapEnabled: false,
-            markers: [],
             subscribe: false,
-            // 计时时间
-            lastCountDownDate: null,
+            lastCountDownDate: null, // 计时时间
             countdown: 0,
             showtime: '',
             charging: false,
             station: null,
-            zoomControlsVisible: false,
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProps ...');
+        console.log(nextProps);
+        console.log('componentWillReceiveProps end ...');
     }
 
     _navigateTo = (screenKey) => {
@@ -47,24 +45,20 @@ class CPAStationMapPage extends Component{
     };
 
     _renderMapView = () => {
+        const {zoomControlsVisible, trafficEnabled, baiduHeatMapEnabled,
+            zoom, mapType, center, markers, marker, currentLocation, dispatch} = this.props;
+
         return (
             <View style={styles.container}>
                 <MapView
-                    zoomControlsVisible={this.state.zoomControlsVisible}
-                    trafficEnabled={this.state.trafficEnabled}
-                    baiduHeatMapEnabled={this.state.baiduHeatMapEnabled}
-                    zoom={this.state.zoom}
-                    mapType={this.state.mapType}
-                    center={this.state.center}
-                    marker={this.state.marker}
-                    markers={this.state.markers}
+                    {...this.props}
                     style={styles.map}
                     onMarkerClick={(e) => {
                         //this._showStationBriefInfo(e)
                     }}
                     onMapClick={(e) => {
                     }}
-                    /*onMapLoaded={this._currentLocation}*/ />
+                    onMapLoaded={currentLocation} />
 
                 <CPAActionButton icon={<Icon type={IconType.Ionicon} name="md-funnel" size={25} color={colors.green} />}
                                  onAction={()=>this._navigateTo(ScreenKey.Filter)} text="筛选" position={styles.filterButton} />
@@ -74,7 +68,7 @@ class CPAStationMapPage extends Component{
                                  onAction={()=>{}} text="路况" position={styles.trafficButton} />
 
                 <CPAActionButton icon={<Icon type={IconType.Ionicon} name="md-locate" size={25} color={colors.grey3}/>}
-                                 onAction={()=>{}} showText={false} position={styles.locateButton}
+                                 onAction={currentLocation} showText={false} position={styles.locateButton}
                                  containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle} />
                 <CPAActionButton icon={<Icon type={IconType.SimpleLineIcon} name="question" size={25} color={colors.grey3}/>}
                                  onAction={()=>{}} showText={false} position={styles.questionButton}
@@ -98,7 +92,26 @@ class CPAStationMapPage extends Component{
     }
 }
 
-export default CPAStationMapPage;
+function mapStateToProps(state) {
+    return {
+        zoomControlsVisible: state.zoomControlsVisible,
+        trafficEnabled: state.trafficEnabled,
+        baiduHeatMapEnabled: state.baiduHeatMapEnabled,
+        zoom: state.zoom,
+        mapType: state.mapType,
+        center: state.center,
+        markers: state.markers,
+        marker: state.marker,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        currentLocation: () => dispatch(getCurrentPosition())
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CPAStationMapPage);
 
 const Size = 39;
 const styles = StyleSheet.create({

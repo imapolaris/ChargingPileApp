@@ -19,6 +19,7 @@ export const ScreenKey = {
     Login: 'Login',
     Register: 'Register',
     ResetPwd: 'ResetPwd',
+    PersonalInfo: 'PersonalInfo',
     Wallet: 'Wallet',
     InvoiceInfo: 'InvoiceInfo',
     Collect: 'Collect',

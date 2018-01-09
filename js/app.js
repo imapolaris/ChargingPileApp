@@ -12,7 +12,6 @@ class Root extends Component{
     }
 }
 
-
 const store = configureStore();
 class App extends Component {
     render() {

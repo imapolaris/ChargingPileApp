@@ -9,16 +9,6 @@ import {ActiveOpacity, ScreenKey} from "../common/constants";
 import {IconType} from "../common/icons";
 
 class CPAMePage extends Component{
-    _checkPersonalInfo = () => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate(ScreenKey.Login);
-    };
-
-    _checkMyMessage = () => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate(ScreenKey.MyMessage);
-    };
-
     _navigateTo = (screenKey) => {
         const {navigate} = this.props.navigation;
         navigate && navigate(screenKey);
@@ -78,7 +68,7 @@ class CPAMePage extends Component{
                     <View style={styles.personalInfoContainer}>
                         <TouchableOpacity style={styles.textContainer}
                                           activeOpacity={ActiveOpacity}
-                                          onPress={this._checkPersonalInfo}>
+                                          onPress={()=>this._navigateTo(ScreenKey.PersonalInfo)}>
                             <Text style={styles.text}>
                                 登录 / 注册
                             </Text>
@@ -86,7 +76,7 @@ class CPAMePage extends Component{
 
                         <TouchableOpacity style={styles.bellContainer}
                                           activeOpacity={ActiveOpacity}
-                                          onPress={this._checkMyMessage}>
+                                          onPress={()=>this._navigateTo(ScreenKey.MyMessage)}>
                             <Icon type={IconType.SimpleLineIcon} name="bell" color={colors.tintColor2} size={20} />
                         </TouchableOpacity>
                     </View>

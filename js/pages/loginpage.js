@@ -7,6 +7,7 @@ import {Button} from "react-native-elements";
 import colors, {GPlaceholderTextColor} from "../common/colors";
 import {ScreenKey, screenWidth} from "../common/constants";
 import {textInputStyle} from "../common/styles";
+import {connect} from "react-redux";
 
 class CPALoginPage extends Component{
     constructor(props) {
@@ -93,7 +94,11 @@ class CPALoginPage extends Component{
     }
 }
 
-export default CPALoginPage;
+function select(state) {
+    return { };
+}
+
+export default connect(select)(CPALoginPage);
 
 CPALoginPage.propTypes = {
 
