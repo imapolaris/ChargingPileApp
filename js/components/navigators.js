@@ -23,6 +23,8 @@ import CPAMySubscribePage from "../pages/mysubscribe";
 import CPATestingReportPage from "../pages/testingreport";
 import CPABillingRecordsPage from "../pages/billingrecords";
 import CPAInvoiceInfoPage from "../pages/invoiceinfo";
+import CPALocatingCityPage from "../pages/locatingcity";
+import CPASearchStationPage from "../pages/searchstation";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -132,6 +134,18 @@ const CPAStackNavigator = StackNavigator(
             screen: CPAInvoiceInfoPage,
             navigationOptions: {
                 title: '发票信息',
+            }
+        },
+        LocatingCity: {
+            screen: CPALocatingCityPage,
+            navigationOptions: {
+                title: '城市列表',
+            }
+        },
+        SearchStation: {
+            screen: CPASearchStationPage,
+            navigationOptions: {
+                header: null
             }
         },
     },

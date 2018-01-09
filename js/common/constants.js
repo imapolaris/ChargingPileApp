@@ -30,6 +30,8 @@ export const ScreenKey = {
     Feedback: 'Feedback',
     MySubscribe: 'MySubscribe',
     BillingRecords: 'BillingRecords',
+    LocatingCity: 'LocatingCity',
+    SearchStation: 'SearchStation',
 };
 
 export const ActiveOpacity = 0.8;

@@ -11,32 +11,42 @@ import NavButton from "./navbutton";
 import {IconType} from "../common/icons";
 
 class CPASearchBar extends Component{
-    _toSearch = () => {
-        /*this.props.search &&
-        this.props.search();*/
-    };
-
     render() {
-        const {navToStationList} = this.props;
+        const {showLeftButton, showRightButton, leftButton, rightButton, navToLocatingCity, navToStationList, onSearch} = this.props;
 
         return (
             <Animated.View style={[styles.container, shadowStyle]}>
                 <View style={styles.appBar}>
-                    <NavButton label={'北京'}
-                               onNavAction={()=>{}}
-                               showIcon={true}
-                               icon={<Icon type={IconType.SimpleLineIcon} name="arrow-down" color={colors.white} size={15}/>} />
+                    {
+                        showLeftButton ?
+                            leftButton ?
+                                leftButton
+                                :
+                                <NavButton label={'北京'}
+                                           onNavAction={navToLocatingCity}
+                                           showIcon={true}
+                                           icon={<Icon type={IconType.SimpleLineIcon} name="arrow-down" color={colors.white} size={15}/>} />
+                            : null
+                    }
                     <SearchBar ref={self => this._search = self}
                                containerStyle={styles.search}
                                inputStyle={styles.searchInput}
                                lightTheme
                                round
                                placeholder='搜索...'
-                               onFocus={this._toSearch} />
-                    <NavButton onNavAction={navToStationList}
-                               showLabel={false}
-                               showIcon={true}
-                               icon={<Icon type={IconType.SimpleLineIcon} name="list" color={colors.white} />} />
+                               onFocus={onSearch}
+                               {...this.props}/>
+                    {
+                        showRightButton ?
+                            rightButton ?
+                                rightButton
+                                :
+                                <NavButton onNavAction={navToStationList}
+                                           showLabel={false}
+                                           showIcon={true}
+                                           icon={<Icon type={IconType.SimpleLineIcon} name="list" color={colors.white} />} />
+                            : null
+                    }
                 </View>
             </Animated.View>
         );
@@ -46,11 +56,14 @@ class CPASearchBar extends Component{
 export default CPASearchBar;
 
 CPASearchBar.propTypes = {
-    navToStationList: PropTypes.func.isRequired,
+    //navToLocatingCity: PropTypes.func.isRequired,
+    //navToStationList: PropTypes.func.isRequired,
+    onSearch: PropTypes.func.isRequired,
 };
 
 CPASearchBar.defaultProps = {
-
+    showLeftButton: true,
+    showRightButton: true,
 };
 
 

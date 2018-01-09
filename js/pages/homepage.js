@@ -3,8 +3,8 @@
 import React from 'react';
 import {TabNavigator} from "react-navigation";
 import colors from "../common/colors";
-import {SearchStationIcon, ChargingIcon, MessageIcon, MeIcon} from "../common/icons";
-import CPASearchStationPage from "./searchstation";
+import {StationMapIcon, ChargingIcon, MessageIcon, MeIcon} from "../common/icons";
+import CPAStationMapPage from "./stationmap";
 import CPAChargingPage from "./chargingpage";
 import CPAMessagePage from "./messagepage";
 import CPAMePage from "./mepage";
@@ -12,12 +12,12 @@ import CPAMePage from "./mepage";
 
 const CPAHomePage = TabNavigator(
     {
-        SearchStation: {
-            screen: CPASearchStationPage,
+        StationMap: {
+            screen: CPAStationMapPage,
             navigationOptions: {
                 title: '首页',
                 tabBarIcon: ({tintColor, focused}) => {
-                    return SearchStationIcon(tintColor, focused);
+                    return StationMapIcon(tintColor, focused);
                 }
             }
         },

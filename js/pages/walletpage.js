@@ -87,10 +87,10 @@ class CPAWalletPage extends Component{
 
                         <View style={styles.checkboxContainer}>
                             <CPARadioButton onChecked={()=>this._onPayWayChanged('zfb')} checked={this.state.zfbChecked}
-                                            image={<Image source={require('../assets/zfb.png')}/>}
+                                            image={<Image source={require('../assets/images/zfb.png')}/>}
                                             title="支付宝支付" style={{height: 50}}/>
                             <CPARadioButton onChecked={()=>this._onPayWayChanged('wx')} checked={this.state.wxChecked}
-                                            image={<Image source={require('../assets/wx.png')}/>}
+                                            image={<Image source={require('../assets/images/wx.png')}/>}
                                             title="微信支付"/>
                         </View>
                     </View>
