@@ -9,7 +9,7 @@ import colors from "../common/colors";
 import {Text} from "react-native";
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
 import CPALoginPage from "../pages/loginpage";
-import CPARegisterPage from "../pages/registerpage";
+import CPARegisterPage from "../pages/register";
 import CPAMyMessagePage from "../pages/mymessagepage";
 import CPAWalletPage from "../pages/walletpage";
 import CPASettingPage from "../pages/settingpage";
@@ -25,6 +25,8 @@ import CPABillingRecordsPage from "../pages/billingrecords";
 import CPAInvoiceInfoPage from "../pages/invoiceinfo";
 import CPALocatingCityPage from "../pages/locatingcity";
 import CPASearchStationPage from "../pages/searchstation";
+import NavButton from "./navbutton";
+import {ScreenKey} from "../common/constants";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -52,6 +54,7 @@ const CPAStackNavigator = StackNavigator(
                 title: '附近电站'
             }
         },
+
         StationInfo: {
             screen: CPAStationInfoPage,
             navigationOptions: {
@@ -60,14 +63,29 @@ const CPAStackNavigator = StackNavigator(
         },
         Login: {
             screen: CPALoginPage,
-            navigationOptions: {
-                title: '登录'
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '登录',
+                    headerRight:(
+                        <NavButton label="快速注册"
+                                   onNavAction={() => {
+                                       navigation.navigate(ScreenKey.Register);
+                                   }}
+                        />
+                    ),
+                })
             }
         },
         Register: {
             screen: CPARegisterPage,
             navigationOptions: {
-                title: '注册'
+                title: '注册用户'
+            }
+        },
+        ResetPwd: {
+            screen: CPARegisterPage,
+            navigationOptions: {
+                title: '重置密码'
             }
         },
         MyMessage: {
@@ -146,6 +164,12 @@ const CPAStackNavigator = StackNavigator(
             screen: CPASearchStationPage,
             navigationOptions: {
                 header: null
+            }
+        },
+        Filter: {
+            screen: CPAFilterPage,
+            navigationOptions: {
+                title: '过滤条件'
             }
         },
     },

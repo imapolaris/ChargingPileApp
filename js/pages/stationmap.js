@@ -67,7 +67,7 @@ class CPAStationMapPage extends Component{
                     /*onMapLoaded={this._currentLocation}*/ />
 
                 <CPAActionButton icon={<Icon type={IconType.Ionicon} name="md-funnel" size={25} color={colors.green} />}
-                                 onAction={()=>{}} text="筛选" position={styles.filterButton} />
+                                 onAction={()=>this._navigateTo(ScreenKey.Filter)} text="筛选" position={styles.filterButton} />
                 <CPAActionButton icon={<Icon type={IconType.Ionicon} name="md-heart" size={25} color={colors.red}/>}
                                  onAction={()=>this._navigateTo(ScreenKey.Collect)} text="收藏" position={styles.collectButton} />
                 <CPAActionButton icon={<Icon type={IconType.MaterialIcon} name="traffic" size={25} color={colors.grey3}/>}

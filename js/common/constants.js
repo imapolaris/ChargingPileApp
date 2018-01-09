@@ -18,6 +18,7 @@ export const ScreenKey = {
     StationInfo: 'StationInfo',
     Login: 'Login',
     Register: 'Register',
+    ResetPwd: 'ResetPwd',
     Wallet: 'Wallet',
     InvoiceInfo: 'InvoiceInfo',
     Collect: 'Collect',
@@ -32,6 +33,7 @@ export const ScreenKey = {
     BillingRecords: 'BillingRecords',
     LocatingCity: 'LocatingCity',
     SearchStation: 'SearchStation',
+    Filter: 'Filter',
 };
 
 export const ActiveOpacity = 0.8;

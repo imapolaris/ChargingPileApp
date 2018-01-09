@@ -5,7 +5,7 @@ import {StyleSheet, TextInput, TouchableOpacity, View, Text} from 'react-native'
 import PropTypes from 'prop-types';
 import {Button} from "react-native-elements";
 import colors, {GPlaceholderTextColor} from "../common/colors";
-import {screenWidth} from "../common/constants";
+import {ScreenKey, screenWidth} from "../common/constants";
 import {textInputStyle} from "../common/styles";
 
 class CPALoginPage extends Component{
@@ -16,6 +16,11 @@ class CPALoginPage extends Component{
             pwd: '',
         };
     }
+
+    _navigateTo = (screenKey) => {
+        const {navigate} = this.props.navigation;
+        navigate(screenKey);
+    };
 
     render() {
         return (
@@ -78,7 +83,7 @@ class CPALoginPage extends Component{
                     <TouchableOpacity style={styles.forgotPwdContainer}>
                         <Text textDecorationLine="underline"
                               style={styles.text}
-                              onPress={()=>{}} >
+                              onPress={()=>this._navigateTo(ScreenKey.ResetPwd)} >
                             忘记密码?
                         </Text>
                     </TouchableOpacity>
