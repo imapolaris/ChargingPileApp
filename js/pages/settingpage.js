@@ -15,27 +15,45 @@ class CPASettingPage extends Component {
         };
     }
 
+    _clearCache = () => {
+        alert('清空缓存');
+    };
+
+    _checkVersion = () => {
+        alert('检查版本');
+    };
+
     _navigateTo = (screenKey) => {
         const {navigate} = this.props.navigation;
         navigate && navigate(screenKey);
     };
 
     render() {
+        const system = [
+            {
+                title: '清除缓存',
+                rightTitle: '0.8MB',
+                action: this._clearCache,
+            },
+            {
+                title: '当前版本',
+                rightTitle: '0.1.1',
+                action: this._checkVersion,
+            },
+        ];
+
         const list = [
             {
                 title: '用户协议',
-                icon: {name: 'doc', type: 'simple-line-icon'},
                 screenKey: ScreenKey.UserAgreement,
             },
             {
                 title: '关于我们',
-                icon: {name: 'emotsmile', type: 'simple-line-icon'},
                 screenKey: ScreenKey.AboutUs,
             },
             {
                 title: '意见反馈',
-                icon: {name: 'bubble', type: 'simple-line-icon'},
-                screenKey: '',
+                screenKey: ScreenKey.Feedback,
             }
         ];
 
@@ -49,6 +67,18 @@ class CPASettingPage extends Component {
                               switchOnTintColor={colors.green}
                               switchThumbTintColor={colors.white}
                               containerStyle={styles.item}/>
+                </List>
+
+                <List style={styles.system}>
+                    {
+                        system.map((item, index) => (
+                            <ListItem key={index}
+                                      title={item.title}
+                                      containerStyle={styles.item}
+                                      onPress={item.action} hideChevron={true}
+                                      rightTitle={item.rightTitle} />
+                        ))
+                    }
                 </List>
 
                 <List style={styles.setting}>
@@ -84,6 +114,9 @@ const styles = StyleSheet.create({
     },
     list: {
         marginTop: 5,
+    },
+    system: {
+        marginTop: 15,
     },
     setting: {
         marginTop: 15,

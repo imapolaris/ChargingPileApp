@@ -4,22 +4,24 @@ import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types';
 
-class CPAFilterPage extends Component{
+class CPATestingReportPage extends Component{
     render() {
         return (
-            <View>
+            <View style={styles.container}>
 
             </View>
         );
     }
 }
 
-export default CPAFilterPage;
+export default CPATestingReportPage;
 
-CPAFilterPage.propTypes = {
+CPATestingReportPage.propTypes = {
 
 };
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+    }
 });

@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types';
 
-class CPAFilterPage extends Component{
+class CPABillingRecordsPage extends Component{
     render() {
         return (
             <View>
@@ -14,9 +14,9 @@ class CPAFilterPage extends Component{
     }
 }
 
-export default CPAFilterPage;
+export default CPABillingRecordsPage;
 
-CPAFilterPage.propTypes = {
+CPABillingRecordsPage.propTypes = {
 
 };
 

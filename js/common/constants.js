@@ -19,15 +19,17 @@ export const ScreenKey = {
     Login: 'Login',
     Register: 'Register',
     Wallet: 'Wallet',
-    Invoice: 'Invoice',
-    Bill: 'Bill',
+    InvoiceInfo: 'InvoiceInfo',
     Collect: 'Collect',
     Subscribe: 'Subscribe',
-    CheckReport: '',
+    TestingReport: 'TestingReport',
     Setting: 'Setting',
     MyMessage: 'MyMessage',
     UserAgreement: 'UserAgreement',
     AboutUs: 'AboutUs',
+    Feedback: 'Feedback',
+    MySubscribe: 'MySubscribe',
+    BillingRecords: 'BillingRecords',
 };
 
 export const ActiveOpacity = 0.8;

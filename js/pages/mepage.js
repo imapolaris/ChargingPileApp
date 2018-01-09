@@ -34,27 +34,27 @@ class CPAMePage extends Component{
             {
                 title: '发票',
                 icon: {name: 'md-checkmark', type: IconType.Ionicon, color: colors.yellow},
-                screenKey: '',
+                screenKey: ScreenKey.InvoiceInfo,
             },
             {
-                title: '账单',
+                title: '我的账单',
                 icon: {name: 'md-reorder', type: IconType.Ionicon, color: colors.blue},
-                screenKey: '',
+                screenKey: ScreenKey.BillingRecords,
             },
             {
                 title: '我的收藏',
                 icon: {name:'md-heart', type: IconType.Ionicon, color: colors.red},
-                screenKey: '',
+                screenKey: ScreenKey.Collect,
             },
             {
                 title: '我的预约',
                 icon: {name:'pin', type: IconType.SimpleLineIcon, color: colors.tintColor2},
-                screenKey: '',
+                screenKey: ScreenKey.MySubscribe,
             },
             {
                 title: '检测报告',
                 icon: {name:'md-paper', type: IconType.Ionicon, color: colors.greenyellow},
-                screenKey: '',
+                screenKey: ScreenKey.TestingReport,
             },
         ];
 

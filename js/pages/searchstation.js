@@ -41,9 +41,9 @@ class CPASearchStationPage extends Component{
         };
     }
 
-    _navToStationList = () => {
+    _navigateTo = (screenKey) => {
         const {navigate} = this.props.navigation;
-        navigate && navigate(ScreenKey.StationList);
+        navigate && navigate(screenKey);
     };
 
     _renderMapView = () => {
@@ -69,7 +69,7 @@ class CPASearchStationPage extends Component{
                 <CPAActionButton icon={<Icon type={IconType.Ionicon} name="md-funnel" size={25} color={colors.green} />}
                                  onAction={()=>{}} text="筛选" position={styles.filterButton} />
                 <CPAActionButton icon={<Icon type={IconType.Ionicon} name="md-heart" size={25} color={colors.red}/>}
-                                 onAction={()=>{}} text="收藏" position={styles.collectButton} />
+                                 onAction={()=>this._navigateTo(ScreenKey.Collect)} text="收藏" position={styles.collectButton} />
                 <CPAActionButton icon={<Icon type={IconType.MaterialIcon} name="traffic" size={25} color={colors.grey3}/>}
                                  onAction={()=>{}} text="路况" position={styles.trafficButton} />
 
@@ -86,7 +86,7 @@ class CPASearchStationPage extends Component{
     render() {
         return (
             <View style={styles.container}>
-                <CPASearchBar navToStationList={this._navToStationList} />
+                <CPASearchBar navToStationList={()=>this._navigateTo(ScreenKey.StationList)} />
 
                 {
                     this._renderMapView()

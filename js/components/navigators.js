@@ -16,6 +16,13 @@ import CPASettingPage from "../pages/settingpage";
 import CPAUserAgreementPage from "../pages/useragreement";
 import CPAAboutUsPage from "../pages/aboutus";
 import CPAStationListPage from "../pages/stationlist";
+import CPAFeedbackPage from "../pages/feedback";
+import CPAStationInfoPage from "../pages/stationinfo";
+import CPAFilterPage from "../pages/filterpage";
+import CPAMySubscribePage from "../pages/mysubscribe";
+import CPATestingReportPage from "../pages/testingreport";
+import CPABillingRecordsPage from "../pages/billingrecords";
+import CPAInvoiceInfoPage from "../pages/invoiceinfo";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -40,7 +47,13 @@ const CPAStackNavigator = StackNavigator(
         StationList: {
             screen: CPAStationListPage,
             navigationOptions: {
-                title: '电站列表'
+                title: '附近电站'
+            }
+        },
+        StationInfo: {
+            screen: CPAStationInfoPage,
+            navigationOptions: {
+                title: '电站信息'
             }
         },
         Login: {
@@ -67,6 +80,12 @@ const CPAStackNavigator = StackNavigator(
                 title: '钱包'
             }
         },
+        Collect: {
+            screen: CPAStationListPage,
+            navigationOptions: {
+                title: '收藏列表',
+            }
+        },
         Setting: {
             screen: CPASettingPage,
             navigationOptions: {
@@ -83,6 +102,36 @@ const CPAStackNavigator = StackNavigator(
             screen: CPAAboutUsPage,
             navigationOptions: {
                 title: '关于我们'
+            }
+        },
+        Feedback: {
+            screen: CPAFeedbackPage,
+            navigationOptions: {
+                title: '意见反馈'
+            }
+        },
+        MySubscribe: {
+            screen: CPAMySubscribePage,
+            navigationOptions: {
+                title: '我的预约'
+            }
+        },
+        TestingReport: {
+            screen: CPATestingReportPage,
+            navigationOptions: {
+                title: '检测报告'
+            }
+        },
+        BillingRecords: {
+            screen: CPABillingRecordsPage,
+            navigationOptions: {
+                title: '我的账单',
+            }
+        },
+        InvoiceInfo: {
+            screen: CPAInvoiceInfoPage,
+            navigationOptions: {
+                title: '发票信息',
             }
         },
     },

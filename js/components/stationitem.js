@@ -4,39 +4,45 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import PropTypes from 'prop-types';
 import colors from "../common/colors";
-import {Divider} from 'react-native-elements';
+import {Divider, Icon} from 'react-native-elements';
+import {IconType} from "../common/icons";
+import {ActiveOpacity} from "../common/constants";
 
 class StationItem extends Component{
     render() {
+        const {name, elecprice, numbers, address, onAction} = this.props;
+
         return (
             <TouchableOpacity style={styles.container}
-                              activeOpacity={0.6}
-                              onPress={() => this.props.gotoDetails && this.props.gotoDetails()}>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.title}>
-                        {this.props.title}
-                    </Text>
-                </View>
-                <Divider style={styles.divider} />
+                              activeOpacity={ActiveOpacity}
+                              onPress={onAction}>
+                <Text style={styles.name} numberOfLines={1}>
+                    {name}
+                </Text>
+                <Divider/>
                 <View style={styles.infoContainer}>
                     <View style={styles.infoLeftContainer}>
                         <Text style={styles.info}>
-                            空闲电桩：{this.props.numbers}
+                            <Text style={styles.elecprice}>{elecprice}</Text>  元/度
                         </Text>
-                        <Text style={styles.info}>
-                            {this.props.address}
+                        <Text style={[styles.info]}>
+                            直流电桩：{numbers}   交流电桩：{numbers}
+                        </Text>
+                        <Text style={[styles.info]} numberOfLines={1}>
+                            地址：{address}
                         </Text>
                     </View>
 
-                    <TouchableOpacity style={styles.infoRightContainer}
-                                      onPress={() => this.props.gotoMapNav && this.props.gotoMapNav()}
-                                      activeOpacity={0.9}>
-                        <Icon type={icons.Ionicon} name="md-navigate" size={18} color={colors.white} />
+                    <TouchableOpacity style={styles.navigateContainer}
+                                      onPress={()=>{}}
+                                      activeOpacity={ActiveOpacity}>
+                        <Icon type={IconType.Ionicon} name="md-navigate" size={20} color={colors.white} />
                         <Text style={styles.navigate}>
                             导航
                         </Text>
                     </TouchableOpacity>
                 </View>
+                <Divider style={styles.divider} />
             </TouchableOpacity>
         );
     }
@@ -45,26 +51,27 @@ class StationItem extends Component{
 export default StationItem;
 
 StationItem.propTypes = {
-
+    name: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    elecprice: PropTypes.number.isRequired,
+    onAction: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    titleContainer: {
+    name: {
+        fontSize: 18,
+        color: colors.primary1,
         paddingLeft: 15,
         paddingTop: 5,
         paddingBottom: 5,
-        //backgroundColor: colors.theme1,
-    },
-    title: {
-        fontSize: 18,
-        color: colors.primary1,
     },
     infoContainer: {
-        height: 80,
+        paddingTop: 10,
         paddingLeft: 15,
+        paddingBottom: 10,
         alignItems: 'center',
         justifyContent: 'flex-start',
         flexDirection: 'row',
@@ -72,17 +79,22 @@ const styles = StyleSheet.create({
     infoLeftContainer:{
         flex: 1,
     },
-    infoRightContainer: {
+    info: {
+        fontSize: 13,
+        color: colors.grey3,
+    },
+    elecprice: {
+        fontSize: 20,
+        color: colors.goldenrod,
+    },
+    navigateContainer: {
         width: 55,
         height: 55,
         backgroundColor: colors.primary1,
-        margin: 20,
+        marginRight: 20,
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    info: {
-        fontSize: 13,
     },
     navigate:{
         fontSize: 14,
@@ -90,5 +102,6 @@ const styles = StyleSheet.create({
     },
     divider: {
         backgroundColor: '#C3C3C3',
+        height: 2.5,
     }
 });

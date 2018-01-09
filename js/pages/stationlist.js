@@ -6,13 +6,41 @@ import PropTypes from 'prop-types';
 import colors from "../common/colors";
 import {ToastAndroidBS} from "../common/functions";
 import StationItem from "../components/stationitem";
+import {EmptyPlaceHolder} from "../components/emptyplaceholder";
+import SeparatorPlaceHolder from "../components/separatorplaceholder";
+import BottomPlaceHolder from "../components/bottomplaceholder";
+import {ScreenKey} from "../common/constants";
 
+const LoadingGreetings = '正在加载，请稍后...';
+const EmptyDataGreetings = '客官，方圆50公里的范围内都没有充电站啊！';
 class CPAStationListPage extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            stations: [],
-            refreshing: true,
+            stations: [
+                {
+                    key: 1,
+                    name: '北京市',
+                    address: '北京市',
+                    numbers: '1/11',
+                    elecprice: 1.08,
+                },
+                {
+                    key: 2,
+                    name: '滕州市',
+                    address: '滕州市',
+                    numbers: '2/3',
+                    elecprice: 2.0,
+                },
+                {
+                    key: 3,
+                    name: '上海市',
+                    address: '上海市',
+                    numbers: '1/3',
+                    elecprice: 1.35,
+                },
+            ],
+            refreshing: false,
         };
     }
 
@@ -31,7 +59,7 @@ class CPAStationListPage extends Component{
         }
 
         const {navigate} = this.props.navigation;
-        navigate('Details', {station: item});
+        navigate(ScreenKey.StationInfo, {station: item});
     };
 
     _onNavPress = (item) => {
@@ -48,23 +76,31 @@ class CPAStationListPage extends Component{
         return (
             <View style={styles.item}>
                 <StationItem key={item.key}
-                                 title={item.name}
-                                 numbers={item.numbers}
-                                 address={item.address}
-                                 gotoDetails={()=>this._onDetailsPress(item)}
-                                 gotoMapNav={()=>this._onNavPress(item)}
+                             name={item.name}
+                             numbers={item.numbers}
+                             address={item.address}
+                             elecprice={item.elecprice}
+                             onAction={() => this._onDetailsPress(item)}
+                             gotoMapNav={() => this._onNavPress(item)}
                 />
             </View>
         );
     };
 
-
-    _renderEmpty = () =>{
-        return renderEmpty(this.state.refreshing, EmptyDataGreetings);
+    _renderEmpty = () => {
+        return EmptyPlaceHolder(this.state.refreshing, LoadingGreetings, EmptyDataGreetings);
     };
 
-    _onRefresh = () =>{
-        this._requestNearbyStations();
+    _renderSeparator = () => {
+        return SeparatorPlaceHolder();
+    };
+
+    _renderBottom = () => {
+        return BottomPlaceHolder();
+    };
+
+    _onRefresh = () => {
+        //this._requestNearbyStations();
     };
 
     render() {
@@ -72,15 +108,15 @@ class CPAStationListPage extends Component{
             <View style={styles.container}>
                 <FlatList data={this.state.stations}
                           renderItem={this._renderItem}
-                          ItemSeparatorComponent={renderSeparator}
+                          ItemSeparatorComponent={this._renderSeparator()}
                           ListFooterComponent={
                               this.state.stations.length > 0 ?
-                                  renderBottom()
+                                  this._renderBottom()
                                   :
                                   null
                           }
                           style={styles.content}
-                          ListEmptyComponent={this._renderEmpty}
+                          ListEmptyComponent={this._renderEmpty()}
                           refreshing={this.state.refreshing}
                           onRefresh={this._onRefresh}
                 />
@@ -100,9 +136,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     content:{
-        marginTop: 5,
-        marginLeft: 5,
-        marginRight: 5,
+        margin: 5,
     },
     actionButtonIcon: {
         fontSize: 20,
@@ -111,27 +145,5 @@ const styles = StyleSheet.create({
     },
     item: {
         backgroundColor: colors.white,
-    },
-    separator: {
-        height: 10,
-    },
-    bottomContainer: {
-        height: 30,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    bottom: {
-        fontSize: 12,
-        color: colors.grey3,
-    },
-    emptyContainer: {
-        height: 250,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    empty: {
-        fontSize: 14,
-        color: colors.grey3,
     },
 });

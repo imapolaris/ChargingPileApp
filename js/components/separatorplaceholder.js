@@ -2,24 +2,19 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
-import PropTypes from 'prop-types';
 
-class CPAFilterPage extends Component{
+class SeparatorPlaceHolder extends Component{
     render() {
         return (
-            <View>
-
-            </View>
+            <View style={styles.separator} />
         );
     }
 }
 
-export default CPAFilterPage;
-
-CPAFilterPage.propTypes = {
-
-};
+export default SeparatorPlaceHolder;
 
 const styles = StyleSheet.create({
-
+    separator: {
+        height: 10,
+    },
 });

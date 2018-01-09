@@ -28,6 +28,8 @@ export default {
     red: '#ff0000',
     blue: '#00ffff',
     greenyellow: '#7FFF00',
+    gold: '#ffd700',
+    goldenrod:'#daa520',
 }
 
 /*

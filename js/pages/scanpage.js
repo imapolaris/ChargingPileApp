@@ -1,20 +1,20 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View, Animated} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, Animated, TextInput} from 'react-native';
 import PropTypes from 'prop-types';
 import Camera from 'react-native-camera';
 import {ActiveOpacity, screenWidth} from "../common/constants";
 import colors from "../common/colors";
-import {Icon, Divider} from "react-native-elements";
+import {Icon, Divider, Button} from "react-native-elements";
 import {IconType} from "../common/icons";
+import {textInputStyle} from "../common/styles";
 
-
+const SNCount = 10;
+const ScanInterval = 3000; // 扫描成功后，间隔3s允许再次处理
 class CPAScanPage extends Component {
-    // 构造
     constructor(props) {
         super(props);
-        // 初始状态
         this.state = {
             scanOrInput: 'scan',
             torchMode: Camera.constants.TorchMode.off,
@@ -28,10 +28,10 @@ class CPAScanPage extends Component {
     }
 
     componentDidMount() {
-        this._timer = setInterval(()=>{
+        this._timer = setInterval(() => {
             this._animatedValue.setValue(0);
             this._startScanStrip();
-        }, 5000+30); // 添加30ms的延迟
+        }, 5000 + 30); // 添加30ms的延迟
 
         this._startScanStrip();
     }
@@ -41,10 +41,16 @@ class CPAScanPage extends Component {
         this._scanTimer && clearTimeout(this._scanTimer);
     }
 
+    _switchView = (view) => {
+        this.setState({
+            scanOrInput: view,
+        })
+    };
+
     _startScanStrip = () => {
         Animated.sequence([
             Animated.timing(this._animatedValue, {
-                toValue: Size-4,
+                toValue: Size - 4,
                 duration: 2500,
             }),
             Animated.timing(this._animatedValue, {
@@ -60,7 +66,7 @@ class CPAScanPage extends Component {
                 <View style={styles.fillArea}/>
                 <View style={[styles.rectangle, {flexDirection: 'column'}]}>
                     <Animated.View pointerEvents="box-none"
-                                   style={[styles.scanStrip, {transform: [{translateY: this._animatedValue}]}]} >
+                                   style={[styles.scanStrip, {transform: [{translateY: this._animatedValue}]}]}>
                         <Divider style={styles.strip}/>
                     </Animated.View>
 
@@ -93,9 +99,43 @@ class CPAScanPage extends Component {
         );
     };
 
-    render() {
+    _renderInputView = () => {
         return (
-            <Camera ref={self=>this._scanner = self}
+            <View style={[styles.middleContainer, styles.upperContainer]}>
+                <TextInput underlineColorAndroid='transparent'
+                           placeholder='请输入充电桩编号'
+                           style={[styles.textInput, textInputStyle]}
+                           keyboardType='numeric'
+                           /*autoFocus={true}*/
+                           value={this.state.sn}
+                           onChangeText={(text) => {
+                               this.setState({
+                                   ...this.state,
+                                   sn: text,
+                               });
+                           }}
+                />
+                <View style={styles.buttonContainer}>
+                    <Button title="扫码充电"
+                            buttonStyle={styles.button}
+                            containerStyle={styles.leftButtonContainer}
+                            onPress={()=>this._switchView('scan')}/>
+                    <Button title="确定"
+                            buttonStyle={styles.button}
+                            containerStyle={styles.rightButtonContainer}
+                            onPress={this._onInputFinishedPress}
+                            disabled={this.state.sn.length < SNCount}
+                            disabledStyle={{backgroundColor: colors.grey3}}/>
+                </View>
+            </View>
+        );
+    };
+
+    render() {
+        const {scanOrInput} = this.state;
+
+        return (
+            <Camera ref={self => this._scanner = self}
                     torchMode={this.state.torchMode}
                     style={styles.camera}
                     onBarCodeRead={() => {
@@ -104,32 +144,45 @@ class CPAScanPage extends Component {
                 <View style={styles.container}>
                     <View style={[styles.fillArea, styles.textContainer]}>
                         <Text style={styles.text}>
-                            将二维码放入扫描框内，即可自动扫描！
+                            { scanOrInput === 'scan' ? '将二维码放入扫描框内，即可自动扫描！' : '请输入充电桩编号，然后点击确认按钮！'}
                         </Text>
                     </View>
 
                     {
-                        this._renderScanView()
+                        scanOrInput === 'scan' ?
+                            this._renderScanView()
+                            :
+                            this._renderInputView()
                     }
 
-                    <View style={[styles.fillArea, styles.scanContainer, styles.lowerContainer]}>
-                        <TouchableOpacity onPress={this._onInputSerialNumberButtonPress}
-                                          activeOpacity={ActiveOpacity} style={styles.leftContainer}>
-                            <Icon type={IconType.Ionicon} name="md-hand" size={28} color={colors.white} style={styles.icon} />
-                            <Text style={styles.buttonTitle}>
-                                输入编号
-                            </Text>
-                        </TouchableOpacity>
+                    <View style={[styles.fillArea, styles.lowerContainer]}>
+                        {
+                            scanOrInput === 'scan' ?
+                                <View style={styles.scanContainer}>
+                                    <TouchableOpacity onPress={()=>this._switchView('input')}
+                                                      activeOpacity={ActiveOpacity}
+                                                      style={styles.leftContainer}>
+                                        <Icon type={IconType.Ionicon} name="md-hand" size={28} color={colors.white}
+                                              style={styles.icon}/>
+                                        <Text style={styles.buttonTitle}>
+                                            输入编号
+                                        </Text>
+                                    </TouchableOpacity>
 
-                        <TouchableOpacity onPress={this._onLightPress}
-                                          activeOpacity={ActiveOpacity} style={styles.rightContainer}>
-                            <Icon type={IconType.Ionicon} name="md-flash" size={28}
-                                  color={this.state.torchMode === Camera.constants.TorchMode.off ? colors.white : colors.yellow}
-                                  style={styles.icon} />
-                            <Text style={styles.buttonTitle}>
-                                {this.state.torchMode ===  Camera.constants.TorchMode.off ? '打开手电筒' : '关闭手电筒'}
-                            </Text>
-                        </TouchableOpacity>
+                                    <TouchableOpacity onPress={this._onLightPress}
+                                                      activeOpacity={ActiveOpacity}
+                                                      style={styles.rightContainer}>
+                                        <Icon type={IconType.Ionicon} name="md-flash" size={28}
+                                              color={this.state.torchMode === Camera.constants.TorchMode.off ? colors.white : colors.yellow}
+                                              style={styles.icon}/>
+                                        <Text style={styles.buttonTitle}>
+                                            {this.state.torchMode === Camera.constants.TorchMode.off ? '打开手电筒' : '关闭手电筒'}
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                                :
+                                null
+                        }
                     </View>
                 </View>
             </Camera>
@@ -165,13 +218,14 @@ const styles = StyleSheet.create({
         height: Size,
         backgroundColor: colors.transparent,
     },
-    inputContainer: {
-        flex: 1,
-    },
     lowerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         width: screenWidth,
+    },
+    scanContainer: {
+        flex: 1,
+        flexDirection: 'row',
     },
     leftContainer: {
         flex: 1,
@@ -223,5 +277,32 @@ const styles = StyleSheet.create({
         backgroundColor: colors.secondary3,
         height: 20,
         width: 2,
+    },
+    upperContainer: {
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    buttonContainer:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 10,
+    },
+    textInput:{
+        borderWidth: 0.5,
+        borderColor: '#C3C3C3',
+        width: screenWidth-30,
+        alignSelf: 'center',
+    },
+    leftButtonContainer: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    rightButtonContainer: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    button: {
+        width: screenWidth/2-30,
     },
 });
