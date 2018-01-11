@@ -6,9 +6,7 @@ import PropTypes from 'prop-types';
 import colors from "../common/colors";
 import {ToastAndroidBS} from "../common/functions";
 import StationItem from "../components/stationitem";
-import {EmptyPlaceHolder} from "../components/emptyplaceholder";
-import SeparatorPlaceHolder from "../components/separatorplaceholder";
-import BottomPlaceHolder from "../components/bottomplaceholder";
+import {EmptyPlaceHolder, SeparatorPlaceHolder, BottomPlaceHolder} from "../components/placeholder";
 import {ScreenKey} from "../common/constants";
 
 const LoadingGreetings = '正在加载，请稍后...';

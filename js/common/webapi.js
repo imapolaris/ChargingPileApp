@@ -1,6 +1,6 @@
 import {myFetch} from "./functions";
 
-const baseUrl = 'http://39.104.66.176/ChargingPileService/api';
+const baseUrl = 'http://192.168.0.201/ChargingPileService/api';
 
 const urls = {
     messages: `${baseUrl}/messages`,
@@ -34,7 +34,7 @@ export function sendMessage(phoneNumbers){
 /*
  * get all the stations with brief info.
  **/
-export function getAllStationsWithBriefInfo() {
+export function getAllStationsWithBriefInfo(filter) {
     let url = urls.stations;
     return myFetch(url, GET, headers);
 }

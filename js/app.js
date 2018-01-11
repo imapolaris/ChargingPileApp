@@ -1,16 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
-import CPAStackNavigator from "./components/navigators";
 import {Provider} from 'react-redux';
 import configureStore from "./redux/configureStore";
-
-class Root extends Component{
-    render() {
-        return (
-            <CPAStackNavigator />
-        );
-    }
-}
+import Root from './root';
 
 const store = configureStore();
 class App extends Component {

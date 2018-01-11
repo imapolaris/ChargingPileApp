@@ -15,8 +15,8 @@ class CPAWalletPage extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            wxChecked: true,
-            zfbChecked: false,
+            wxChecked: false,
+            zfbChecked: true,
             money: 0,
             selectedIndex: -1,
             balance: 0,

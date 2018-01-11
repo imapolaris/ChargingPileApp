@@ -38,3 +38,8 @@ export const ScreenKey = {
 };
 
 export const ActiveOpacity = 0.8;
+
+/*
+ * 调用地图APP（百度、高德等）进行导航
+ */
+export const WhichMapApp = {bdMap: 'bdMap', gdMap:'gdMap'};

@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types';
-import {EmptyPlaceHolder} from "../components/emptyplaceholder";
+import {EmptyPlaceHolder} from "../components/placeholder";
 import SubscribeItem from "../components/subscribeitem";
 
 class CPAMySubscribePage extends Component{

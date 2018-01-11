@@ -10,10 +10,10 @@ import {ActiveOpacity} from "../common/constants";
 
 class StationItem extends Component{
     render() {
-        const {name, elecprice, numbers, address, onAction} = this.props;
+        const {name, elecprice, numbers, address, onAction, containerStyle} = this.props;
 
         return (
-            <TouchableOpacity style={styles.container}
+            <TouchableOpacity style={[styles.container, containerStyle]}
                               activeOpacity={ActiveOpacity}
                               onPress={onAction}>
                 <Text style={styles.name} numberOfLines={1}>
@@ -59,7 +59,7 @@ StationItem.propTypes = {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        //flex: 1,
     },
     name: {
         fontSize: 18,

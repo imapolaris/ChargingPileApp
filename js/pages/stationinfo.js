@@ -9,8 +9,7 @@ import {Divider, Icon} from "react-native-elements";
 import {ActiveOpacity} from "../common/constants";
 import KeyValPair from "../components/keyvalpair";
 import ChargingPileItem from "../components/chargingpileitem";
-import {EmptyPlaceHolder} from "../components/emptyplaceholder";
-import SeparatorPlaceHolder from "../components/separatorplaceholder";
+import {EmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
 import {TabNavigator} from "react-navigation";
 
 const LoadingGreetings = '正在加载，请稍后...';

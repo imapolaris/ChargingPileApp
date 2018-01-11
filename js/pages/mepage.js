@@ -21,11 +21,11 @@ class CPAMePage extends Component{
                 icon: {name:'wallet', type: IconType.SimpleLineIcon, color: 'brown'},
                 screenKey: ScreenKey.Wallet,
             },
-            {
+            /*{
                 title: '发票',
                 icon: {name: 'md-checkmark', type: IconType.Ionicon, color: colors.yellow},
                 screenKey: ScreenKey.InvoiceInfo,
-            },
+            },*/
             {
                 title: '我的账单',
                 icon: {name: 'md-reorder', type: IconType.Ionicon, color: colors.blue},
