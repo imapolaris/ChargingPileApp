@@ -133,8 +133,8 @@ class ChargingPileInfo extends Component{
                           renderItem={this._renderItem}
                           refreshing={this.state.refreshing}
                           onRefresh={this._onRefresh}
-                          ItemSeparatorComponent={this._renderSeparator()}
-                          ListEmptyComponent={this._renderEmpty()} />
+                          /*ItemSeparatorComponent={this._renderSeparator()}
+                          ListEmptyComponent={this._renderEmpty()}*/ />
             </ScrollView>
         );
     }
@@ -164,12 +164,12 @@ const CPAStationTabNavigator = TabNavigator(
                 title: '电桩',
             },
         },
-        Comment: {
+        /*Comment: {
             screen: CommentInfo,
             navigationOptions: {
                 title: '评论',
             }
-        }
+        }*/
     },
     {
         tabBarPosition: 'top',

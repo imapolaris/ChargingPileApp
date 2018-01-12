@@ -6,12 +6,10 @@ import {Icon} from "react-native-elements";
 import colors from "../common/colors";
 import {IconType} from "../common/icons";
 
-export class SeparatorPlaceHolder extends Component{
-    render() {
-        return (
-            <View style={styles.separator} />
-        );
-    }
+export function SeparatorPlaceHolder(){
+    return (
+        <View style={styles.separator} />
+    );
 }
 
 export function EmptyPlaceHolder(refreshing, LoadingGreetings, EmptyDataGreetings) {
@@ -25,16 +23,14 @@ export function EmptyPlaceHolder(refreshing, LoadingGreetings, EmptyDataGreeting
     );
 }
 
-export class BottomPlaceHolder extends Component{
-    render() {
-        return (
-            <View style={styles.bottomContainer}>
-                <Text style={styles.bottomText}>
-                    我是有底线的...
-                </Text>
-            </View>
-        );
-    }
+export function BottomPlaceHolder(){
+    return (
+        <View style={styles.bottomContainer}>
+            <Text style={styles.bottomText}>
+                我是有底线的...
+            </Text>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

@@ -35,6 +35,7 @@ export const ScreenKey = {
     LocatingCity: 'LocatingCity',
     SearchStation: 'SearchStation',
     Filter: 'Filter',
+    BatteryTesting: 'BatteryTesting',
 };
 
 export const ActiveOpacity = 0.8;

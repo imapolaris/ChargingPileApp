@@ -106,7 +106,7 @@ class CPAScanPage extends Component {
                            placeholder='请输入充电桩编号'
                            style={[styles.textInput, textInputStyle]}
                            keyboardType='numeric'
-                           /*autoFocus={true}*/
+                           autoFocus={true}
                            value={this.state.sn}
                            onChangeText={(text) => {
                                this.setState({
@@ -116,7 +116,7 @@ class CPAScanPage extends Component {
                            }}
                 />
                 <View style={styles.buttonContainer}>
-                    <Button title="扫码充电"
+                    <Button title="扫码"
                             buttonStyle={styles.button}
                             containerStyle={styles.leftButtonContainer}
                             onPress={()=>this._switchView('scan')}/>
@@ -286,12 +286,13 @@ const styles = StyleSheet.create({
     buttonContainer:{
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         marginTop: 10,
     },
     textInput:{
         borderWidth: 0.5,
         borderColor: '#C3C3C3',
-        width: screenWidth-30,
+        width: screenWidth-50,
         alignSelf: 'center',
     },
     leftButtonContainer: {
@@ -303,6 +304,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     button: {
-        width: screenWidth/2-30,
+        width: screenWidth/2-50,
     },
 });

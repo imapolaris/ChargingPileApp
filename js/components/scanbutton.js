@@ -11,22 +11,24 @@ import {shadowStyle} from "../common/styles";
 
 class ScanButton extends Component {
     render() {
+        const {containerStyle, onScan, btnStyle, icon, title} = this.props;
+
         return (
             <View style={styles.container}>
-                <View style={[styles.topContainer, shadowStyle, this.props.containerStyle]}>
-                    <TouchableOpacity onPress={this.props.onScan}
-                                      onLongPress={this.props.onScan}
-                                      style={[styles.button, this.props.btnStyle]}
+                <View style={[styles.topContainer, shadowStyle, containerStyle]}>
+                    <TouchableOpacity onPress={onScan}
+                                      onLongPress={onScan}
+                                      style={[styles.button, btnStyle]}
                                       activeOpacity={ActiveOpacity}>
                         {
-                            this.props.icon
+                            icon
                         }
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.bottomContainer}>
                     <Text style={styles.text}>
-                        {this.props.title}
+                        {title}
                     </Text>
                 </View>
             </View>

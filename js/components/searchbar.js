@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, Platform, Animated, View} from 'react-native';
+import {StyleSheet, Platform, Animated, View, Keyboard} from 'react-native';
 import PropTypes from 'prop-types';
 import colors from '../common/colors';
 import {IOSPlatform} from "../common/constants";
@@ -11,6 +11,14 @@ import NavButton from "./navbutton";
 import {IconType} from "../common/icons";
 
 class CPASearchBar extends Component{
+    _onFocused = () => {
+        this._search.blur();
+        Keyboard.dismiss();
+
+        const {onSearch} = this.props;
+        onSearch && onSearch();
+    };
+
     render() {
         const {showLeftButton, showRightButton, leftButton, rightButton, navToLocatingCity, navToStationList, onSearch} = this.props;
 
@@ -34,7 +42,7 @@ class CPASearchBar extends Component{
                                lightTheme
                                round
                                placeholder='搜索...'
-                               onFocus={onSearch}
+                               onFocus={this._onFocused}
                                {...this.props}/>
                     {
                         showRightButton ?

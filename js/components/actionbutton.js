@@ -11,20 +11,22 @@ import {shadowStyle} from "../common/styles";
 
 class ActionButton extends Component {
     render() {
+        const {position, containerStyle, btnStyle, onAction, icon, showText, text} = this.props;
+
         return (
-            <View style={[styles.container, this.props.position]}>
+            <View style={[styles.container, position]}>
                 <View pointerEvents="box-none"
-                      style={[styles.contentContainer, shadowStyle, this.props.containerStyle]}>
+                      style={[shadowStyle, styles.contentContainer, containerStyle]}>
                     <TouchableOpacity activeOpacity={ActiveOpacity}
-                                      style={[styles.btnContainer, this.props.btnStyle]}
-                                      onPress={this.props.onAction}>
+                                      style={[styles.button, btnStyle]}
+                                      onPress={onAction}>
                         {
-                            this.props.icon
+                            icon
                         }
                         {
-                            this.props.showText ?
+                            showText ?
                                 <Text style={styles.text}>
-                                    {this.props.text}
+                                    {text}
                                 </Text> : null
                         }
                     </TouchableOpacity>
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
         width: Size,
         height: Size,
     },
-    btnContainer: {
+    button: {
         flex: 1,
         backgroundColor: colors.white,
         alignItems: 'center',

@@ -19,6 +19,11 @@ class CPASearchStationPage extends Component{
         };
     }
 
+    _toCancel = () => {
+        const {goBack} = this.props.navigation;
+        goBack && goBack();
+    };
+
     _renderHistoryItem = ({item})=>{
         return (
             <TouchableOpacity

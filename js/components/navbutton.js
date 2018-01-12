@@ -42,7 +42,7 @@ class NavButton extends Component{
 export default NavButton;
 
 NavButton.propTypes = {
-    onNavAction: PropTypes.func.isRequired,
+    //onNavAction: PropTypes.func.isRequired,
 };
 
 NavButton.defaultProps = {

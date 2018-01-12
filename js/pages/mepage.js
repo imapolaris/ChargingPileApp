@@ -28,7 +28,7 @@ class CPAMePage extends Component{
             },*/
             {
                 title: '我的账单',
-                icon: {name: 'md-reorder', type: IconType.Ionicon, color: colors.blue},
+                icon: {name: 'md-reorder', type: IconType.Ionicon, color: colors.lightblue},
                 screenKey: ScreenKey.BillingRecords,
             },
             {

@@ -10,7 +10,7 @@ import {
 } from 'react-native-baidu-map';
 import colors from "../common/colors";
 import {ScreenKey} from "../common/constants";
-import CPAActionButton from "../components/actionbutton";
+import ActionButton from "../components/actionbutton";
 import {IconType} from "../common/icons";
 import {Icon} from "react-native-elements";
 import {connect} from "react-redux";
@@ -57,23 +57,23 @@ class CPAStationMapPage extends Component{
                     onMapClick={(e) => {}}
                     onMapLoaded={currentLocation} />
 
-                <CPAActionButton icon={<Icon type={IconType.Ionicon} name="md-funnel" size={25} color={colors.primary} />}
-                                 onAction={()=>this._navigateTo(ScreenKey.Filter)} text="筛选" position={styles.filterButton} />
-                <CPAActionButton icon={<Icon type={IconType.Ionicon} name="md-heart" size={25} color={colors.red}/>}
-                                 onAction={()=>this._navigateTo(ScreenKey.Collect)} text="收藏" position={styles.collectButton} />
-                <CPAActionButton icon={<Icon type={IconType.MaterialIcon} name="traffic" size={25} color={trafficEnabled ? colors.greenyellow : colors.grey3}/>}
+                <ActionButton icon={<Icon type={IconType.MaterialIcon} name="traffic" size={25} color={trafficEnabled ? colors.greenyellow : colors.grey3}/>}
                                  onAction={enableTraffic} text="路况" position={styles.trafficButton} />
+                <ActionButton icon={<Icon type={IconType.Ionicon} name="md-heart" size={25} color={colors.red}/>}
+                                 onAction={()=>this._navigateTo(ScreenKey.Collect)} text="收藏" position={styles.collectButton} />
+                {/*<ActionButton icon={<Icon type={IconType.Ionicon} name="md-funnel" size={25} color={colors.primary} />}
+                                 onAction={()=>this._navigateTo(ScreenKey.Filter)} text="筛选" position={styles.filterButton} />*/}
 
-                <CPAActionButton icon={<Icon type={IconType.Ionicon} name="md-locate" size={25} color={colors.grey3}/>}
+                <ActionButton icon={<Icon type={IconType.Ionicon} name="md-locate" size={25} color={colors.grey3}/>}
                                  onAction={currentLocation} showText={false} position={styles.locateButton}
                                  containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle} />
-                <CPAActionButton icon={<Icon type={IconType.Ionicon} name="md-help" size={25} color={colors.grey3}/>}
+                <ActionButton icon={<Icon type={IconType.Ionicon} name="md-help" size={25} color={colors.grey3}/>}
                                  onAction={()=>{}} showText={false} position={styles.questionButton}
                                  containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle} />
 
                 {
                     !isRefreshing && markers.length <= 0 ?
-                        <CPAActionButton icon={<Icon type={IconType.Ionicon} name="md-refresh" size={25} color={colors.grey3}/>}
+                        <ActionButton icon={<Icon type={IconType.Ionicon} name="md-refresh" size={25} color={colors.grey3}/>}
                                          onAction={()=>requestStationMarkers()} showText={false} position={styles.refreshButton}
                                          containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle} />
                         : null
@@ -83,7 +83,7 @@ class CPAStationMapPage extends Component{
                     latitude: 39.91491}} to={{longitude: 116.404185, // 中间点坐标
                     latitude: 40.01}} />*/}
 
-                <StationSelector visible={showStation} station={station} onAction={()=>{}} />
+                {/*<StationSelector visible={showStation} station={station} onAction={()=>{}} />*/}
             </View>
         );
     };
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 10,
-        top: 20,
+        top: 120,
     },
     collectButton: {
         justifyContent: "flex-start",
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 10,
-        top: 120,
+        top: 20,
     },
     locateButton: {
         justifyContent: "flex-end",

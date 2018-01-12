@@ -106,15 +106,15 @@ class CPAStationListPage extends Component{
             <View style={styles.container}>
                 <FlatList data={this.state.stations}
                           renderItem={this._renderItem}
-                          ItemSeparatorComponent={this._renderSeparator()}
-                          ListFooterComponent={
+                          /*ItemSeparatorComponent={this._renderSeparator()}*/
+                          /*ListFooterComponent={
                               this.state.stations.length > 0 ?
                                   this._renderBottom()
                                   :
                                   null
-                          }
+                          }*/
                           style={styles.content}
-                          ListEmptyComponent={this._renderEmpty()}
+                          /*ListEmptyComponent={this._renderEmpty()}*/
                           refreshing={this.state.refreshing}
                           onRefresh={this._onRefresh}
                 />

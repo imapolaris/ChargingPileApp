@@ -26,10 +26,12 @@ export default {
     transparent: 'transparent',
     green: '#00ff00',
     red: '#ff0000',
-    blue: '#00ffff',
+    lightblue: '#00ffff',
     greenyellow: '#7FFF00',
     gold: '#ffd700',
     goldenrod:'#daa520',
+    lightgreen: '#90ee90',
+    limegreen: '#32cd32',
 }
 
 /*

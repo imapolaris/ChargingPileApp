@@ -28,6 +28,7 @@ import CPASearchStationPage from "../pages/searchstation";
 import NavButton from "./navbutton";
 import {ScreenKey} from "../common/constants";
 import CPAPersonalInfoPage from "../pages/personalinfo";
+import {CPABatteryTestingPage} from "../pages/chargingpage";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -167,15 +168,21 @@ const CPAStackNavigator = StackNavigator(
             }
         },
         SearchStation: {
-        screen: CPASearchStationPage,
-        navigationOptions: {
-            header: null
-        }
-    },
+            screen: CPASearchStationPage,
+            navigationOptions: {
+                header: null
+            }
+        },
         Filter: {
             screen: CPAFilterPage,
             navigationOptions: {
                 title: '过滤条件'
+            }
+        },
+        BatteryTesting: {
+            screen: CPABatteryTestingPage,
+            navigationOptions: {
+                header: null
             }
         },
     },
