@@ -8,6 +8,11 @@ import NavButton from "../components/navbutton";
 import {Icon, SearchBar} from 'react-native-elements';
 import CPASearchBar from "../components/searchbar";
 import {IconType} from "../common/icons";
+import {ActiveOpacity, SearchHistoryCount} from "../common/constants";
+import {clearSearchHistoryStations, getSearchHistoryStations, updateSearchHistoryStations} from "../common/appstorage";
+import {getStationsByName} from "../common/webapi";
+import {connect} from "react-redux";
+import {doGeocode} from "../redux/actions";
 
 class CPASearchStationPage extends Component{
     constructor(props) {
@@ -19,10 +24,140 @@ class CPASearchStationPage extends Component{
         };
     }
 
+    componentDidMount() {
+        this._queryHistory();
+    }
+
     _toCancel = () => {
         const {goBack} = this.props.navigation;
         goBack && goBack();
     };
+
+    _startSearch = (text)=>{
+        if (this.state.searchState === false){
+            this.setState({
+                ...this.state,
+                searchState: true,
+            });
+        }
+
+        getStationsByName(text)
+            .then(ret=>{
+                if (ret !== null && ret !== undefined && ret.length > 0) {
+                    let data = ret.map((item, index)=>{
+                        return Object.assign({}, item, {key: index})
+                    });
+
+                    this.setState({
+                        ...this.state,
+                        searchResult: data
+                    });
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+            });
+    };
+
+    _searchLocationNameFinished = (locationName) => {
+        this._searchFinished({name: locationName, address: locationName});
+    };
+
+    _searchFinished = (station) => {
+        const {state, goBack} = this.props.navigation;
+
+        if (station !== null && station !== undefined) {
+            let searchRecord = Object.assign({}, station, {keyword: station.name});
+            this._updateSearchHistoryStations(searchRecord);
+            //state && state.params.callback(searchRecord);
+        }
+
+        //alert(JSON.stringify(station));
+        const {geocode} = this.props;
+        geocode && geocode(station.address);
+
+        goBack && goBack();
+    };
+
+    _updateSearchHistoryStations(searchRecord) {
+        try {
+            let data = [];
+            data.push(searchRecord);
+            let len = this.state.historyResult.length;
+            let {keyword} = searchRecord;
+            let j = 1;
+            for (let i = 0; i < len;) {
+                if (j >= SearchHistoryCount)
+                    break;
+                if (this.state.historyResult[i].keyword !== keyword) {
+                    data.push(this.state.historyResult[i]);
+                    j++;
+                }
+                i++;
+            }
+
+            updateSearchHistoryStations(data);
+        }
+        catch (ex) {
+            console.log(ex);
+        }
+    }
+
+    _queryHistory() {
+        getSearchHistoryStations()
+            .then(ret=>{
+                if (ret !== null && ret !== undefined && ret.length > 0) {
+                    let history = ret.map((item, index) => {
+                        return Object.assign({}, item, {key: index})
+                    });
+
+                    this.setState({
+                        ...this.state,
+                        historyResult: history,
+                    });
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+            });
+    };
+
+    _chooseStation = (station)=>{
+        this._searchFinished(station);
+    };
+
+    _clearOneHistory = (item)=>{
+        try {
+            let data = [];
+            let len = this.state.historyResult.length;
+            let {keyword} = item;
+            for (let i = 0; i < len; i++) {
+                if (this.state.historyResult[i].keyword !== keyword) {
+                    data.push(this.state.historyResult[i]);
+                }
+            }
+
+            this.setState({
+                ...this.state,
+                historyResult: data,
+            });
+
+            updateSearchHistoryStations(data);
+        }
+        catch (ex) {
+            console.log(ex);
+        }
+    };
+
+    _clearHistory = ()=>{
+        this.setState({
+            ...this.state,
+            searchState: true,
+        });
+
+        clearSearchHistoryStations();
+    };
+
 
     _renderHistoryItem = ({item})=>{
         return (
@@ -40,6 +175,7 @@ class CPASearchStationPage extends Component{
                     </View>
                 </View>
                 <TouchableOpacity style={styles.rowDataIcon}
+                                  activeOpacity={ActiveOpacity}
                                   onPress={()=>this._clearOneHistory(item)}>
                     <Icon type={IconType.Ionicon} name="md-trash" size={16} color={colors.secondary2} />
                 </TouchableOpacity>
@@ -136,13 +272,25 @@ class CPASearchStationPage extends Component{
     }
 }
 
-export default CPASearchStationPage;
+function mapStateToProps(state) {
+    return {
+
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        geocode: (city) => dispatch(doGeocode(city)),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CPASearchStationPage);
 
 CPASearchStationPage.propTypes = {
 
 };
 
-const SECTIONHEIGHT=30, ROWHEIGHT=40;
+const ROWHEIGHT=40;
 const styles = StyleSheet.create({
     container: {
         flex: 1,

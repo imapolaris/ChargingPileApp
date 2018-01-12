@@ -8,6 +8,8 @@ export const LOGOUT_ACTION = 'LOGOUT'; // 登出
 export const REGISTER_ACTION = 'REGISTER'; // 注册
 
 export const LOCATING_ACTION = 'LOCATING'; // 定位
+export const GEOCODE_COMPLETED_ACTION = 'GEOCODE_COMPLETED'; // 地理编码
+export const CHOOSE_CITY_COMPLETED_ACTION = 'CHOOSE_CITY_COMPLETED'; // 选择定位城市
 export const ENABLE_TRAFFIC_ACTION = 'ENABLE_TRAFFIC'; // 显示路况信息
 export const START_REQUEST_STATION_MARKERS_ACTION = 'START_REQUEST_STATION_MARKERS'; // 开始请求电站地图标识
 export const ERROR_REQUEST_STATION_MARKERS_ACTION = 'ERROR_REQUEST_STATION_MARKERS'; // 请求电站地图标识报错
@@ -50,10 +52,10 @@ export function doRegister(phoneNumber, pwd){
 }
 
 import {Geolocation} from 'react-native-baidu-map';
-function doLocating(currentPos) {
+function doLocating(position) {
     return {
         type: LOCATING_ACTION,
-        currentPos
+        position
     };
 }
 
@@ -65,6 +67,54 @@ export function getCurrentPosition() {
             error=>{
                 throw new Error(error);
             });
+}
+
+function geocodeCompleted(position){
+    return {
+        type: GEOCODE_COMPLETED_ACTION,
+        position,
+    }
+}
+
+export function doGeocode(city) {
+    return dispatch => {
+        dispatch(startRequestWeb());
+
+        Geolocation.geocode(city, city)
+            .then(position => {
+                if (position !== null && position !== undefined) {
+                    //ToastAndroidBS('无法解析该地址！');
+                    dispatch(geocodeCompleted({
+                        longitude: position.longitude,
+                        latitude: position.latitude,
+                        city: city,
+                    }));
+                }
+
+                dispatch(completeRequestWeb());
+            })
+            .catch(error => {
+                console.log(`cannot analyse the address, error: ${error}`);
+                //ToastAndroidBS('无法解析该地址！');
+
+                dispatch(completeRequestWeb());
+            });
+    }
+}
+
+function chooseCityCompleted(city) {
+    return {
+        type: CHOOSE_CITY_COMPLETED_ACTION,
+        city,
+    }
+}
+
+export function doChooseCity(city) {
+    return dispatch => {
+        dispatch(chooseCityCompleted(city));
+
+        dispatch(doGeocode(city));
+    }
 }
 
 export function doEnableTraffic() {

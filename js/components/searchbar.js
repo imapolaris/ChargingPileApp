@@ -20,7 +20,7 @@ class CPASearchBar extends Component{
     };
 
     render() {
-        const {showLeftButton, showRightButton, leftButton, rightButton, navToLocatingCity, navToStationList, onSearch} = this.props;
+        const {showLeftButton, showRightButton, leftButton, leftButtonLabel, rightButton, navToLocatingCity, navToStationList, onSearch} = this.props;
 
         return (
             <Animated.View style={[styles.container, shadowStyle]}>
@@ -30,7 +30,7 @@ class CPASearchBar extends Component{
                             leftButton ?
                                 leftButton
                                 :
-                                <NavButton label={'北京'}
+                                <NavButton label={leftButtonLabel || '北京'}
                                            onNavAction={navToLocatingCity}
                                            showIcon={true}
                                            icon={<Icon type={IconType.SimpleLineIcon} name="arrow-down" color={colors.white} size={15}/>} />
@@ -64,8 +64,6 @@ class CPASearchBar extends Component{
 export default CPASearchBar;
 
 CPASearchBar.propTypes = {
-    //navToLocatingCity: PropTypes.func.isRequired,
-    //navToStationList: PropTypes.func.isRequired,
     onSearch: PropTypes.func.isRequired,
 };
 

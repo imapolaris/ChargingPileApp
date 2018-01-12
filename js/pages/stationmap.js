@@ -17,17 +17,11 @@ import {connect} from "react-redux";
 import {doEnableTraffic, getCurrentPosition, doRequestStationMarkers, doRequestOneStationInfo} from "../redux/actions";
 import {MapSelector, StationSelector} from "../components/selector";
 
-let position = null;
-let defaultCurrentPosition = {longitude:116.404185, latitude: 39.91491};  // 北京天安门的坐标
-const CountDown = 15 * 60; // 计时时间15分钟
+
 class CPAStationMapPage extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            subscribe: false,
-            lastCountDownDate: null, // 计时时间
-            countdown: 0,
-            showtime: '',
             showStation: false,
         };
     }
@@ -57,7 +51,7 @@ class CPAStationMapPage extends Component{
                     onMapClick={(e) => {}}
                     onMapLoaded={currentLocation} />
 
-                <ActionButton icon={<Icon type={IconType.MaterialIcon} name="traffic" size={25} color={trafficEnabled ? colors.greenyellow : colors.grey3}/>}
+                <ActionButton icon={<Icon type={IconType.MaterialIcon} name="traffic" size={25} color={trafficEnabled ? colors.limegreen : colors.grey3}/>}
                                  onAction={enableTraffic} text="路况" position={styles.trafficButton} />
                 <ActionButton icon={<Icon type={IconType.Ionicon} name="md-heart" size={25} color={colors.red}/>}
                                  onAction={()=>this._navigateTo(ScreenKey.Collect)} text="收藏" position={styles.collectButton} />
@@ -89,9 +83,12 @@ class CPAStationMapPage extends Component{
     };
 
     render() {
+        const {city} = this.props;
+
         return (
             <View style={styles.container}>
-                <CPASearchBar onSearch={()=>this._navigateTo(ScreenKey.SearchStation)}
+                <CPASearchBar leftButtonLabel={city}
+                              onSearch={()=>this._navigateTo(ScreenKey.SearchStation)}
                               navToLocatingCity={()=>this._navigateTo(ScreenKey.LocatingCity)}
                               navToStationList={()=>this._navigateTo(ScreenKey.StationList)} />
 
@@ -114,6 +111,7 @@ function mapStateToProps(state) {
         markers: state.map.markers,
         station: state.map.station,
         isRefreshing: state.map.isRefreshing,
+        city: state.map.city,
     };
 }
 
@@ -192,4 +190,3 @@ const styles = StyleSheet.create({
         top: 0,
     }
 });
-

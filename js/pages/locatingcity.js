@@ -8,6 +8,8 @@ import {IconType} from "../common/icons";
 import {ActiveOpacity} from "../common/constants";
 import colors from "../common/colors";
 import CityList from "../components/citylist";
+import {connect} from "react-redux";
+import {doChooseCity, doGeocode, getCurrentPosition} from "../redux/actions";
 
 const hotCities1 = ['北京', '上海', '广州', '深圳'];
 const hotCities2 = ['厦门', '福建', '杭州', '天津'];
@@ -15,28 +17,43 @@ class CPALocatingCityPage extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            currentPosition: '',
-            recentlyCities: ['', '', ''],
-            searchState: false,
-            searchResult: [],
+
         };
     }
 
+    componentDidMount() {
+        const {locatingCity} = this.props;
+        if (locatingCity.length <= 0) {
+            const {currentLocation} = this.props;
+            currentLocation && currentLocation();
+        }
+    }
+
+    _onChooseCity = (city) => {
+        const {chooseCity} = this.props;
+        chooseCity && chooseCity(city);
+
+        const {goBack} = this.props.navigation;
+        goBack && goBack();
+    };
+
     render() {
+        const {locatingCity} = this.props;
+
         return (
             <View style={styles.container}>
                 <View style={styles.locationContainer}>
                     <Text style={styles.locationTitle}>当前定位城市</Text>
                     <View style={styles.locationCity}>
                         <Text style={styles.cityName}>
-                            北京
+                            {locatingCity || '正在定位...'}
                         </Text>
                         <Icon type={IconType.SimpleLineIcon} name="location-pin" color={colors.tintColor2} size={18} />
                     </View>
                 </View>
                 <Divider />
                 <View style={styles.hotCitiesContainer}>
-                    <Text style={[styles.title, {marginLeft:5}]}>热门城市</Text>
+                    <Text style={styles.title}>热门城市</Text>
 
                     <View style={styles.hotCities}>
                         {
@@ -44,9 +61,9 @@ class CPALocatingCityPage extends Component{
                                 <TouchableOpacity key={index}
                                                   activeOpacity={ActiveOpacity}
                                                   style={styles.hotCity}
-                                                  onPress={() => {}}>
+                                                  onPress={() => this._onChooseCity(item)}>
                                     <Text style={styles.hotCityName}>
-                                        {item.length > 3 ? item.substring(0, 3) + '..' : item}
+                                        {item}
                                     </Text>
                                 </TouchableOpacity>
                             )
@@ -58,9 +75,9 @@ class CPALocatingCityPage extends Component{
                                 <TouchableOpacity key={index}
                                                   activeOpacity={ActiveOpacity}
                                                   style={styles.hotCity}
-                                                  onPress={() => {}}>
+                                                  onPress={() => this._onChooseCity(item)}>
                                     <Text style={styles.hotCityName}>
-                                        {item.length > 3 ? item.substring(0, 3) + '..' : item}
+                                        {item}
                                     </Text>
                                 </TouchableOpacity>
                             )
@@ -69,16 +86,29 @@ class CPALocatingCityPage extends Component{
                     <Divider />
                 </View>
 
-                <View style={styles.allCitiesContainer}>
-                    <Text style={[styles.title, {marginLeft: 5}]}>全部城市</Text>
-                    <CityList />
+                <View>
+                    <Text style={styles.title}>全部城市</Text>
+                    <CityList onAction={this._onChooseCity} />
                 </View>
             </View>
         );
     }
 }
 
-export default CPALocatingCityPage;
+function mapStateToProps(state) {
+    return {
+        locatingCity: state.map.locatingCity,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        currentLocation: () => dispatch(getCurrentPosition()),
+        chooseCity: (city) => dispatch(doChooseCity(city)),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CPALocatingCityPage);
 
 CPALocatingCityPage.propTypes = {
 
@@ -104,7 +134,7 @@ const styles = StyleSheet.create({
     locationTitle: {
         flex: 1,
     },
-    cityName:{
+    cityName: {
         marginRight: 5,
         color: colors.primary1,
         fontSize: 16,
@@ -134,5 +164,6 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 15,
+        marginLeft: 5,
     },
 });

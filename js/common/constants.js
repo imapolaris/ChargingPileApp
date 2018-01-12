@@ -44,3 +44,12 @@ export const ActiveOpacity = 0.8;
  * 调用地图APP（百度、高德等）进行导航
  */
 export const WhichMapApp = {bdMap: 'bdMap', gdMap:'gdMap'};
+
+// 搜索历史缓存数量：10个
+export const SearchHistoryCount = 10;
+
+export default StorageKey = {
+    UserProfileKey: 'userProfile',
+    RecentVisitCitiesKey: 'recentVisitCities',
+    SearchHistoryStationsKey: 'searchHistoryStations',
+}
