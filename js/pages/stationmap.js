@@ -14,62 +14,65 @@ import ActionButton from "../components/actionbutton";
 import {IconType} from "../common/icons";
 import {Icon} from "react-native-elements";
 import {connect} from "react-redux";
-import {doEnableTraffic, getCurrentPosition, doRequestStationMarkers, doRequestOneStationInfo} from "../redux/actions";
+import {
+    doEnableTraffic, getCurrentPosition, doRequestStationMarkers, doRequestOneStationInfo,
+    doNav
+} from "../redux/actions";
 import {MapSelector, StationSelector} from "../components/selector";
 
 
 class CPAStationMapPage extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            showStation: false,
-        };
-    }
-
     componentDidMount() {
         const {requestStationMarkers} = this.props;
         requestStationMarkers && requestStationMarkers();
     }
 
-    _navigateTo = (screenKey) => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate(screenKey);
+    _showStationBriefInfo = (e) => {
+        const {requestOneStationInfo} = this.props;
+        requestOneStationInfo(e)
+            .then(ret=>{
+                this._stationSelector.show(true, ret.data);
+            })
     };
 
     _renderMapView = () => {
-        const {trafficEnabled, currentLocation, enableTraffic,
-                requestStationMarkers, requestOneStationInfo,
-                station, markers, isRefreshing} = this.props;
-        const {showStation} = this.state;
+        const {
+            trafficEnabled, currentLocation, enableTraffic,
+            requestStationMarkers,
+            station, markers, isRefreshing, nav
+        } = this.props;
 
         return (
             <View style={styles.container}>
                 <MapView
                     {...this.props}
                     style={styles.map}
-                    onMarkerClick={(e) => { requestOneStationInfo(e);this.setState({showStation:true}); }}
+                    onMarkerClick={(e) => {this._showStationBriefInfo(e)}}
                     onMapClick={(e) => {}}
-                    onMapLoaded={currentLocation} />
+                    onMapLoaded={currentLocation}/>
 
-                <ActionButton icon={<Icon type={IconType.MaterialIcon} name="traffic" size={25} color={trafficEnabled ? colors.limegreen : colors.grey3}/>}
-                                 onAction={enableTraffic} text="路况" position={styles.trafficButton} />
+                <ActionButton icon={<Icon type={IconType.MaterialIcon} name="traffic" size={25}
+                                          color={trafficEnabled ? colors.limegreen : colors.grey3}/>}
+                              onAction={enableTraffic} text="路况" position={styles.trafficButton}/>
                 <ActionButton icon={<Icon type={IconType.Ionicon} name="md-heart" size={25} color={colors.red}/>}
-                                 onAction={()=>this._navigateTo(ScreenKey.Collect)} text="收藏" position={styles.collectButton} />
+                              onAction={() => nav && nav(ScreenKey.Collect)} text="收藏" position={styles.collectButton}/>
                 {/*<ActionButton icon={<Icon type={IconType.Ionicon} name="md-funnel" size={25} color={colors.primary} />}
                                  onAction={()=>this._navigateTo(ScreenKey.Filter)} text="筛选" position={styles.filterButton} />*/}
 
                 <ActionButton icon={<Icon type={IconType.Ionicon} name="md-locate" size={25} color={colors.grey3}/>}
-                                 onAction={currentLocation} showText={false} position={styles.locateButton}
-                                 containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle} />
+                              onAction={currentLocation} showText={false} position={styles.locateButton}
+                              containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle}/>
                 <ActionButton icon={<Icon type={IconType.Ionicon} name="md-help" size={25} color={colors.grey3}/>}
-                                 onAction={()=>{}} showText={false} position={styles.questionButton}
-                                 containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle} />
+                              onAction={() => {
+                              }} showText={false} position={styles.questionButton}
+                              containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle}/>
 
                 {
                     !isRefreshing && markers.length <= 0 ?
-                        <ActionButton icon={<Icon type={IconType.Ionicon} name="md-refresh" size={25} color={colors.grey3}/>}
-                                         onAction={()=>requestStationMarkers()} showText={false} position={styles.refreshButton}
-                                         containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle} />
+                        <ActionButton
+                            icon={<Icon type={IconType.Ionicon} name="md-refresh" size={25} color={colors.grey3}/>}
+                            onAction={() => requestStationMarkers()} showText={false} position={styles.refreshButton}
+                            containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle}/>
                         : null
                 }
 
@@ -77,20 +80,20 @@ class CPAStationMapPage extends Component{
                     latitude: 39.91491}} to={{longitude: 116.404185, // 中间点坐标
                     latitude: 40.01}} />*/}
 
-                {/*<StationSelector visible={showStation} station={station} onAction={()=>{}} />*/}
+                <StationSelector ref={self=>this._stationSelector=self} onAction={() => {alert('test')}}/>
             </View>
         );
     };
 
     render() {
-        const {city} = this.props;
+        const {city, nav} = this.props;
 
         return (
             <View style={styles.container}>
                 <CPASearchBar leftButtonLabel={city}
-                              onSearch={()=>this._navigateTo(ScreenKey.SearchStation)}
-                              navToLocatingCity={()=>this._navigateTo(ScreenKey.LocatingCity)}
-                              navToStationList={()=>this._navigateTo(ScreenKey.StationList)} />
+                              onSearch={()=>nav && nav(ScreenKey.SearchStation)}
+                              navToLocatingCity={()=>nav && nav(ScreenKey.LocatingCity)}
+                              navToStationList={()=>nav && nav(ScreenKey.StationList)} />
 
                 {
                     this._renderMapView()
@@ -121,6 +124,7 @@ function mapDispatchToProps(dispatch) {
         enableTraffic: () => dispatch(doEnableTraffic()),
         requestStationMarkers: () => dispatch(doRequestStationMarkers()),
         requestOneStationInfo: (e) => dispatch(doRequestOneStationInfo(e)),
+        nav: (screenKey) => dispatch(doNav(screenKey)),
     };
 }
 

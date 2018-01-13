@@ -1,4 +1,4 @@
-import {getAllStationsWithBriefInfo, getSingleStation, login} from "../common/webapi";
+import {changePwd, getAllStationsWithBriefInfo, getSingleStation, login} from "../common/webapi";
 
 export const CHARGING_ACTION = 'CHARGING';
 export const SUBSCRIBE_ACTION = 'SUBSCRIBE';
@@ -7,6 +7,7 @@ export const LOGIN_SUCCESS_ACTION = 'LOGIN_SUCCESS'; // 登录成功
 export const LOGIN_FAILED_ACTION = 'LOGIN_FAILED'; // 登录失败
 export const LOGOUT_ACTION = 'LOGOUT'; // 登出
 export const REGISTER_ACTION = 'REGISTER'; // 注册
+export const RESET_PWD_ACTION = 'RESET_PWD'; // 重置密码
 
 export const LOCATING_ACTION = 'LOCATING'; // 定位
 export const GEOCODE_COMPLETED_ACTION = 'GEOCODE_COMPLETED'; // 地理编码
@@ -76,7 +77,7 @@ export function doLogin(phoneNumber, pwd, checkWay){
 export function doLogout(){
     return dispatch => {
         dispatch({type: LOGOUT_ACTION});
-        dispatch(doBack());
+        //dispatch(doBack());
     };
 }
 
@@ -86,6 +87,32 @@ export function doRegister(phoneNumber, pwd){
         phoneNumber,
         pwd,
     };
+}
+
+export function doResetPwd(oldPwd, newPwd) {
+    return (dispatch, getState) => {
+        const {userId} = getState().user;
+        let data = {id: userId, password: oldPwd, newpassword: newPwd};
+
+        dispatch(startRequestWeb());
+        changePwd(data)
+            .then(ret=>{
+                dispatch(completeRequestWeb());
+
+                if (ret.result === true) {
+                    //ToastAndroidBS('密码修改成功，请使用新密码重新登录！');
+
+
+                    dispatch(doBack());
+                } else {
+                    //ToastAndroidBS(ret.message);
+                }
+            })
+            .catch(error=>{
+                dispatch(completeRequestWeb());
+                console.log(error);
+            });
+    }
 }
 
 import {Geolocation} from 'react-native-baidu-map';
@@ -227,11 +254,13 @@ export function doRequestOneStationInfo(e) {
 
     return dispatch => {
         dispatch(startRequestWeb());
-        getSingleStation(id)
+        return getSingleStation(id)
             .then(data=>{
+                dispatch(completeRequestWeb());
+
                 dispatch(receiveOneStationInfo(data));
 
-                dispatch(completeRequestWeb());
+                return data;
             })
             .catch(error=>{
                 dispatch(completeRequestWeb());
@@ -333,6 +362,7 @@ export function doNav(screenKey) {
     return (dispatch, getState) => {
         switch (screenKey) {
             case ScreenKey.PersonalInfo:
+            case ScreenKey.MyMessage:
             case ScreenKey.Wallet:
             case ScreenKey.BillingRecords:
             case ScreenKey.Collect:

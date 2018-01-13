@@ -4,10 +4,10 @@ import React, {Component} from 'react';
 import {StyleSheet, TextInput, TouchableOpacity, View, Text, Keyboard} from 'react-native';
 import {Button} from "react-native-elements";
 import colors, {GPlaceholderTextColor} from "../common/colors";
-import {ScreenKey, screenWidth} from "../common/constants";
+import {ActiveOpacity, ScreenKey, screenWidth} from "../common/constants";
 import {textInputStyle} from "../common/styles";
 import {connect} from "react-redux";
-import {doLogin} from "../redux/actions";
+import {doLogin, doNav} from "../redux/actions";
 
 class CPALoginPage extends Component{
     constructor(props) {
@@ -26,13 +26,9 @@ class CPALoginPage extends Component{
         login && login(phoneNumber, pwd);
     };
 
-    _navigateTo = (screenKey) => {
-        const {navigate} = this.props.navigation;
-        navigate(screenKey);
-    };
-
     render() {
         const {phoneNumber, pwd} = this.state;
+        const {nav} = this.props;
 
         return (
             <View style={styles.container}>
@@ -51,7 +47,6 @@ class CPALoginPage extends Component{
                                value={phoneNumber}
                                onChangeText={(text)=>{
                                    this.setState({
-                                       ...this.state,
                                        phoneNumber: text,
                                    });
                                }}
@@ -65,7 +60,6 @@ class CPALoginPage extends Component{
                                value={pwd}
                                onChangeText={(text)=>{
                                    this.setState({
-                                       ...this.state,
                                        pwd: text,
                                    });
                                }}
@@ -91,10 +85,11 @@ class CPALoginPage extends Component{
                         </Text>
                     </TouchableOpacity>*/}
 
-                    <TouchableOpacity style={styles.forgotPwdContainer}>
+                    <TouchableOpacity style={styles.forgotPwdContainer}
+                                      activeOpacity={ActiveOpacity}
+                                      onPress={()=>nav && nav(ScreenKey.ResetPwd)}>
                         <Text textDecorationLine="underline"
-                              style={styles.text}
-                              onPress={()=>this._navigateTo(ScreenKey.ResetPwd)} >
+                              style={styles.text}>
                             忘记密码?
                         </Text>
                     </TouchableOpacity>
@@ -107,6 +102,7 @@ class CPALoginPage extends Component{
 function mapDispatchToProps(dispatch) {
     return {
         login: (phoneNumber, pwd, checkWay) => dispatch(doLogin(phoneNumber, pwd, checkWay)),
+        nav: (screenKey) => dispatch(doNav(screenKey)),
     };
 }
 
@@ -148,7 +144,6 @@ const styles = StyleSheet.create({
         width: screenWidth-20,
     },
     shortCutContainer: {
-
         flexDirection: 'row',
     },
     quickLoginContainer: {

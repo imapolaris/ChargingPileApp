@@ -195,7 +195,12 @@ export class StationSelector extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            visible: this.props.visible,
+            visible: false,
+            station: {
+                name:'',
+                address: '',
+                elecPrice: 0,
+            }
         };
     }
 
@@ -209,13 +214,21 @@ export class StationSelector extends Component{
         onAction && onAction();
     };
 
+    show(visible: Boolean, station: Object) {
+        this.setState({
+            visible,
+            station
+        });
+    }
+
     render() {
-        const {visible, name, address, elecPrice} = this.props.station;
+        const {visible} = this.state;
+        const {name, address, elecPrice} = this.state.station;
 
         return (
             <Modal animationType={'slide'}
                    transparent={true}
-                   visible={false}
+                   visible={visible}
                    onShow={() => {}}
                    onRequestClose={() => {}}>
 

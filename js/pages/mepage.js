@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     text: {
-        fontSize: 18,
+        fontSize: 17,
         color: colors.white,
     },
     bellContainer: {

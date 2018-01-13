@@ -29,15 +29,16 @@ import NavButton from "./navbutton";
 import {ScreenKey} from "../common/constants";
 import CPAPersonalInfoPage from "../pages/personalinfo";
 import CPABatteryTestingPage from "../pages/batterytesting";
+import CPAResetPwdPage from '../pages/resetpwd';
 
 const CPAStackNavigator = StackNavigator(
     {
-        Welcome: {
+        /*Welcome: {
             screen: CPAWelcomePage,
             navigationOptions: {
                 header: null,
             },
-        },
+        },*/
         Home: {
             screen: CPAHomePage,
             navigationOptions: {
@@ -84,7 +85,7 @@ const CPAStackNavigator = StackNavigator(
             }
         },
         ResetPwd: {
-            screen: CPARegisterPage,
+            screen: CPAResetPwdPage,
             navigationOptions: {
                 title: '重置密码'
             }
