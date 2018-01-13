@@ -2,18 +2,14 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, View, ScrollView, TouchableOpacity, Text} from 'react-native';
-import PropTypes from 'prop-types';
 import {Avatar, Icon, List, ListItem} from 'react-native-elements';
 import colors from "../common/colors";
 import {ActiveOpacity, ScreenKey} from "../common/constants";
 import {IconType} from "../common/icons";
+import {connect} from "react-redux";
+import {doNav} from "../redux/actions";
 
 class CPAMePage extends Component{
-    _navigateTo = (screenKey) => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate(screenKey);
-    };
-
     render() {
         const list = [
             {
@@ -56,6 +52,8 @@ class CPAMePage extends Component{
             }
         ];
 
+        const {logined, nickname, nav} = this.props;
+
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.titleContainer}>
@@ -68,15 +66,19 @@ class CPAMePage extends Component{
                     <View style={styles.personalInfoContainer}>
                         <TouchableOpacity style={styles.textContainer}
                                           activeOpacity={ActiveOpacity}
-                                          onPress={()=>this._navigateTo(ScreenKey.PersonalInfo)}>
+                                          onPress={()=>{
+                                              nav(ScreenKey.PersonalInfo);
+                                          }}>
                             <Text style={styles.text}>
-                                登录 / 注册
+                                {
+                                    logined ? nickname : '登录 / 注册'
+                                }
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.bellContainer}
                                           activeOpacity={ActiveOpacity}
-                                          onPress={()=>this._navigateTo(ScreenKey.MyMessage)}>
+                                          onPress={()=>nav(ScreenKey.MyMessage)}>
                             <Icon type={IconType.SimpleLineIcon} name="bell" color={colors.tintColor2} size={20} />
                         </TouchableOpacity>
                     </View>
@@ -90,7 +92,7 @@ class CPAMePage extends Component{
                                       leftIcon={item.icon}
                                       containerStyle={styles.itemContainer}
                                       underlayColor='#F3F3F3'
-                                      onPress={() => {this._navigateTo(item.screenKey)}}
+                                      onPress={() => {nav(item.screenKey)}}
                             />
                         ))
                     }
@@ -104,7 +106,7 @@ class CPAMePage extends Component{
                                       leftIcon={item.icon}
                                       containerStyle={styles.itemContainer}
                                       underlayColor='#F3F3F3'
-                                      onPress={() => {this._navigateTo(item.screenKey)}}
+                                      onPress={() => {nav(item.screenKey)}}
                             />
                         ))
                     }
@@ -114,12 +116,21 @@ class CPAMePage extends Component{
     }
 }
 
-export default CPAMePage;
+function mapStateToProps(state) {
+    return {
+        logined: state.user.logined,
+        nickname: state.user.nickname,
+    }
+}
 
+function mapDispatchToProps(dispatch) {
+    return {
+        nav: (screenKey) => dispatch(doNav(screenKey)),
+    }
+}
 
-CPAMePage.propTypes = {
+export default connect(mapStateToProps, mapDispatchToProps)(CPAMePage);
 
-};
 
 const styles = StyleSheet.create({
     container: {
@@ -148,7 +159,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     text: {
-        fontSize: 16,
+        fontSize: 18,
         color: colors.white,
     },
     bellContainer: {

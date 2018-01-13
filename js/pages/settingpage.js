@@ -2,10 +2,11 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
-import PropTypes from 'prop-types';
 import colors from "../common/colors";
 import {Button, List, ListItem} from "react-native-elements";
 import {ScreenKey} from "../common/constants";
+import {connect} from "react-redux";
+import {doLogout, doNav} from "../redux/actions";
 
 class CPASettingPage extends Component {
     constructor(props) {
@@ -24,17 +25,22 @@ class CPASettingPage extends Component {
     };
 
     _navigateTo = (screenKey) => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate(screenKey);
+        const {nav} = this.props;
+        nav && nav(screenKey);
+    };
+
+    _quitMe = () => {
+        const {logout} = this.props;
+        logout && logout();
     };
 
     render() {
         const system = [
-            {
+            /*{
                 title: '清除缓存',
                 rightTitle: '0.8MB',
                 action: this._clearCache,
-            },
+            },*/
             {
                 title: '当前版本',
                 rightTitle: '0.1.1',
@@ -56,6 +62,8 @@ class CPASettingPage extends Component {
                 screenKey: ScreenKey.Feedback,
             }
         ];
+
+        const {logined} = this.props;
 
         return (
             <View style={styles.container}>
@@ -95,18 +103,29 @@ class CPASettingPage extends Component {
                 <View style={styles.buttonContainer}>
                     <Button title="退出登录"
                             onPress={this._quitMe}
-                            style={styles.button}/>
+                            style={styles.button}
+                            disabled={!logined}
+                            disabledStyle={styles.disabled} />
                 </View>
             </View>
         );
     }
 }
 
-export default CPASettingPage;
+function mapStateToProps(state) {
+    return {
+        logined: state.user.logined,
+    };
+}
 
-CPASettingPage.propTypes = {
+function mapDispatchToProps(dispatch) {
+    return {
+        logout: () => dispatch(doLogout()),
+        nav: (screenKey) => dispatch(doNav(screenKey)),
+    }
+}
 
-};
+export default connect(mapStateToProps, mapDispatchToProps)(CPASettingPage);
 
 const styles = StyleSheet.create({
     container: {
@@ -129,5 +148,8 @@ const styles = StyleSheet.create({
     },
     button: {
 
+    },
+    disabled: {
+        backgroundColor: colors.grey3,
     },
 });

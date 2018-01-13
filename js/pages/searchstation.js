@@ -1,11 +1,10 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, View, Animated, FlatList, Text, TouchableOpacity} from 'react-native';
-import PropTypes from 'prop-types';
+import {StyleSheet, View, FlatList, Text, TouchableOpacity} from 'react-native';
 import colors from "../common/colors";
 import NavButton from "../components/navbutton";
-import {Icon, SearchBar} from 'react-native-elements';
+import {Icon} from 'react-native-elements';
 import CPASearchBar from "../components/searchbar";
 import {IconType} from "../common/icons";
 import {ActiveOpacity, SearchHistoryCount} from "../common/constants";
@@ -35,23 +34,17 @@ class CPASearchStationPage extends Component{
 
     _startSearch = (text)=>{
         if (this.state.searchState === false){
-            this.setState({
-                ...this.state,
-                searchState: true,
-            });
+            this.setState({searchState: true});
         }
 
         getStationsByName(text)
-            .then(ret=>{
-                if (ret !== null && ret !== undefined && ret.length > 0) {
-                    let data = ret.map((item, index)=>{
+            .then(data=>{
+                if (data !== null && data !== undefined && data.length > 0) {
+                    let data = data.map((item, index)=>{
                         return Object.assign({}, item, {key: index})
                     });
 
-                    this.setState({
-                        ...this.state,
-                        searchResult: data
-                    });
+                    this.setState({searchResult: data});
                 }
             })
             .catch(err=>{
@@ -64,18 +57,15 @@ class CPASearchStationPage extends Component{
     };
 
     _searchFinished = (station) => {
-        const {state, goBack} = this.props.navigation;
-
         if (station !== null && station !== undefined) {
             let searchRecord = Object.assign({}, station, {keyword: station.name});
             this._updateSearchHistoryStations(searchRecord);
-            //state && state.params.callback(searchRecord);
+
+            const {geocode} = this.props;
+            geocode && geocode(station.address);
         }
 
-        //alert(JSON.stringify(station));
-        const {geocode} = this.props;
-        geocode && geocode(station.address);
-
+        const {goBack} = this.props.navigation;
         goBack && goBack();
     };
 
@@ -105,16 +95,13 @@ class CPASearchStationPage extends Component{
 
     _queryHistory() {
         getSearchHistoryStations()
-            .then(ret=>{
-                if (ret !== null && ret !== undefined && ret.length > 0) {
-                    let history = ret.map((item, index) => {
+            .then(data=>{
+                if (data !== null && data !== undefined && data.length > 0) {
+                    let history = data.map((item, index) => {
                         return Object.assign({}, item, {key: index})
                     });
 
-                    this.setState({
-                        ...this.state,
-                        historyResult: history,
-                    });
+                    this.setState({historyResult: history});
                 }
             })
             .catch(err=>{
@@ -137,10 +124,7 @@ class CPASearchStationPage extends Component{
                 }
             }
 
-            this.setState({
-                ...this.state,
-                historyResult: data,
-            });
+            this.setState({historyResult: data});
 
             updateSearchHistoryStations(data);
         }
@@ -150,10 +134,7 @@ class CPASearchStationPage extends Component{
     };
 
     _clearHistory = ()=>{
-        this.setState({
-            ...this.state,
-            searchState: true,
-        });
+        this.setState({searchState: true});
 
         clearSearchHistoryStations();
     };
@@ -161,18 +142,14 @@ class CPASearchStationPage extends Component{
 
     _renderHistoryItem = ({item})=>{
         return (
-            <TouchableOpacity
-                key={item.key}
-                style={[styles.item, {flexDirection: 'row'}]}
-                onPress={()=>{
-                    this._chooseStation(item)
-                }}>
+            <TouchableOpacity key={item.key}
+                              activeOpacity={ActiveOpacity}
+                              style={[styles.item, {flexDirection: 'row'}]}
+                              onPress={()=>{this._chooseStation(item)}}>
                 <View style={styles.rowData}>
-                    <View style={styles.rowDataKey}>
-                        <Text style={styles.rowDataText}>
-                            {item.name}
-                        </Text>
-                    </View>
+                    <Text style={styles.rowDataText}>
+                        {item.name}
+                    </Text>
                 </View>
                 <TouchableOpacity style={styles.rowDataIcon}
                                   activeOpacity={ActiveOpacity}
@@ -273,9 +250,7 @@ class CPASearchStationPage extends Component{
 }
 
 function mapStateToProps(state) {
-    return {
-
-    };
+    return state;
 }
 
 function mapDispatchToProps(dispatch) {
@@ -285,10 +260,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CPASearchStationPage);
-
-CPASearchStationPage.propTypes = {
-
-};
 
 const ROWHEIGHT=40;
 const styles = StyleSheet.create({
@@ -327,16 +298,12 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     rowData:{
-        borderBottomColor:'#faf0e6',
-        borderBottomWidth:0.5,
-        justifyContent: 'center',
         flex: 1,
         flexDirection: 'row',
-    },
-    rowDataKey: {
-        flex: 1,
-        alignItems:'flex-start',
-        justifyContent: 'center',
+        alignItems:'center',
+        justifyContent: 'flex-start',
+        borderBottomColor:'#faf0e6',
+        borderBottomWidth:0.5,
     },
     rowDataIcon: {
         justifyContent: 'center',

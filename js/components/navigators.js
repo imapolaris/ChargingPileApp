@@ -28,16 +28,16 @@ import CPASearchStationPage from "../pages/searchstation";
 import NavButton from "./navbutton";
 import {ScreenKey} from "../common/constants";
 import CPAPersonalInfoPage from "../pages/personalinfo";
-import {CPABatteryTestingPage} from "../pages/chargingpage";
+import CPABatteryTestingPage from "../pages/batterytesting";
 
 const CPAStackNavigator = StackNavigator(
     {
-        /*Welcome: {
+        Welcome: {
             screen: CPAWelcomePage,
             navigationOptions: {
                 header: null,
             },
-        },*/
+        },
         Home: {
             screen: CPAHomePage,
             navigationOptions: {

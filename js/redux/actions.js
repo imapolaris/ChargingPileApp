@@ -1,9 +1,10 @@
-import {getAllStationsWithBriefInfo, getSingleStation} from "../common/webapi";
+import {getAllStationsWithBriefInfo, getSingleStation, login} from "../common/webapi";
 
 export const CHARGING_ACTION = 'CHARGING';
 export const SUBSCRIBE_ACTION = 'SUBSCRIBE';
 
-export const LOGIN_ACTION = 'LOGIN'; // 登录
+export const LOGIN_SUCCESS_ACTION = 'LOGIN_SUCCESS'; // 登录成功
+export const LOGIN_FAILED_ACTION = 'LOGIN_FAILED'; // 登录失败
 export const LOGOUT_ACTION = 'LOGOUT'; // 登出
 export const REGISTER_ACTION = 'REGISTER'; // 注册
 
@@ -28,18 +29,54 @@ export const QUERY_WALLET_INFO_COMPLETED_ACTION = 'QUERY_WALLET_INFO_COMPLETED';
 export const PAY_BY_WX_COMPLETED_ACTION = 'PAY_BY_WX_COMPLETED'; // 微信充值
 export const PAY_BY_ZFB_COMPLETED_ACTION = 'PAY_BY_ZFB_COMPLETED'; // 支付宝充值
 
-export function doLogin(phoneNumber, pwd, checkWay){
+function loginSuccess(data) {
     return {
-        type: LOGIN_ACTION,
-        phoneNumber,
-        pwd,
-        checkWay,
+        type: LOGIN_SUCCESS_ACTION,
+        id: data.id,
+        nickname: data.nickname,
+    }
+}
+
+function loginFailed() {
+    return {
+        type: LOGIN_FAILED_ACTION,
+    }
+}
+
+export function doLogin(phoneNumber, pwd, checkWay){
+    return dispatch => {
+        dispatch(startRequestWeb());
+
+        login(phoneNumber, pwd)
+            .then(ret=>{
+                dispatch(completeRequestWeb());
+
+                if (ret.result === true) {
+                    // 登录成功
+                    // ToastAndroidBS(`登录成功！`);
+
+                    dispatch(loginSuccess(ret.data));
+                    dispatch(doBack());
+                } else {
+                    // 登录失败
+                    // ToastAndroidBS(ret.message);
+
+                    dispatch(loginFailed());
+                }
+            })
+            .catch(error=>{
+                console.log(error);
+                //ToastAndroidBS('登录失败:'+error);
+
+                dispatch(completeRequestWeb());
+            });
     };
 }
 
 export function doLogout(){
-    return {
-        type: LOGOUT_ACTION
+    return dispatch => {
+        dispatch({type: LOGOUT_ACTION});
+        dispatch(doBack());
     };
 }
 
@@ -52,6 +89,8 @@ export function doRegister(phoneNumber, pwd){
 }
 
 import {Geolocation} from 'react-native-baidu-map';
+import {ScreenKey} from "../common/constants";
+import {NavigationActions} from "react-navigation";
 function doLocating(position) {
     return {
         type: LOCATING_ACTION,
@@ -288,4 +327,37 @@ function payByZfbCompleted(money) {
 
 export function doPayByZfb(money) {
 
+}
+
+export function doNav(screenKey) {
+    return (dispatch, getState) => {
+        switch (screenKey) {
+            case ScreenKey.PersonalInfo:
+            case ScreenKey.Wallet:
+            case ScreenKey.BillingRecords:
+            case ScreenKey.Collect:
+            case ScreenKey.MySubscribe:
+            case ScreenKey.TestingReport:
+            case ScreenKey.Scan:
+                const {logined} = getState().user;
+                if (logined) {
+                    dispatch(NavigationActions.navigate({routeName: screenKey}));
+                } else {
+                    dispatch(NavigationActions.navigate({routeName: ScreenKey.Login}))
+                }
+                break;
+            default:
+                dispatch(NavigationActions.navigate({routeName: screenKey}));
+        }
+    };
+}
+
+export function doBack(key) {
+    return dispatch => {
+        if (key !== null){
+            dispatch(NavigationActions.back({key}))
+        } else {
+            dispatch(NavigationActions.back());
+        }
+    }
 }

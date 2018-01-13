@@ -1,13 +1,13 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, TextInput, TouchableOpacity, View, Text} from 'react-native';
-import PropTypes from 'prop-types';
+import {StyleSheet, TextInput, TouchableOpacity, View, Text, Keyboard} from 'react-native';
 import {Button} from "react-native-elements";
 import colors, {GPlaceholderTextColor} from "../common/colors";
 import {ScreenKey, screenWidth} from "../common/constants";
 import {textInputStyle} from "../common/styles";
 import {connect} from "react-redux";
+import {doLogin} from "../redux/actions";
 
 class CPALoginPage extends Component{
     constructor(props) {
@@ -18,12 +18,22 @@ class CPALoginPage extends Component{
         };
     }
 
+    _login = () => {
+        Keyboard.dismiss();
+
+        const {phoneNumber, pwd} = this.state;
+        const {login} = this.props;
+        login && login(phoneNumber, pwd);
+    };
+
     _navigateTo = (screenKey) => {
         const {navigate} = this.props.navigation;
         navigate(screenKey);
     };
 
     render() {
+        const {phoneNumber, pwd} = this.state;
+
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
@@ -38,7 +48,7 @@ class CPALoginPage extends Component{
                                style={[styles.textInput, textInputStyle]}
                                underlineColorAndroid='transparent'
                                keyboardType={'numeric'}
-                               value={this.state.phoneNumber}
+                               value={phoneNumber}
                                onChangeText={(text)=>{
                                    this.setState({
                                        ...this.state,
@@ -52,7 +62,7 @@ class CPALoginPage extends Component{
                                secureTextEntry={true}
                                style={[styles.textInput, textInputStyle]}
                                underlineColorAndroid='transparent'
-                               value={this.state.pwd}
+                               value={pwd}
                                onChangeText={(text)=>{
                                    this.setState({
                                        ...this.state,
@@ -68,18 +78,18 @@ class CPALoginPage extends Component{
                     <Button buttonStyle={styles.button}
                             title="登录"
                             onPress={this._login}
-                            disabled={this.state.phoneNumber.length <= 0 || this.state.pwd.length <= 0}
+                            disabled={phoneNumber.length <= 0 || pwd.length <= 0}
                             disabledStyle={styles.disabled} />
                 </View>
 
                 <View style={styles.shortCutContainer}>
-                    <TouchableOpacity style={styles.quickLoginContainer}>
+                    {/*<TouchableOpacity style={styles.quickLoginContainer}>
                         <Text textDecorationLine="underline"
                               style={styles.text}
                               onPress={this._quickLogin} >
                             短信验证码登录
                         </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>*/}
 
                     <TouchableOpacity style={styles.forgotPwdContainer}>
                         <Text textDecorationLine="underline"
@@ -94,15 +104,14 @@ class CPALoginPage extends Component{
     }
 }
 
-function select(state) {
-    return { };
+function mapDispatchToProps(dispatch) {
+    return {
+        login: (phoneNumber, pwd, checkWay) => dispatch(doLogin(phoneNumber, pwd, checkWay)),
+    };
 }
 
-export default connect(select)(CPALoginPage);
+export default connect((state)=>{return state},mapDispatchToProps)(CPALoginPage);
 
-CPALoginPage.propTypes = {
-
-};
 
 const styles = StyleSheet.create({
     container: {

@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: '#c3c3c3',
         height: 100,
+        textAlignVertical: 'top',
     },
     text: {
         margin: 5,

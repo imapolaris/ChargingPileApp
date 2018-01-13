@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
-import PropTypes from 'prop-types';
 import colors from "../common/colors";
 
 class CPAActiveIndicator extends Component{
@@ -31,10 +30,6 @@ class CPAActiveIndicator extends Component{
 }
 
 export default CPAActiveIndicator;
-
-CPAActiveIndicator.propTypes = {
-
-};
 
 CPAActiveIndicator.defaultProps = {
     showLabel: true,

@@ -9,8 +9,10 @@ import {ScreenKey} from "../common/constants";
 import Banner from "../components/banner";
 import ActionButton from "../components/actionbutton";
 import {IconType} from "../common/icons";
+import {connect} from "react-redux";
+import {doNav} from "../redux/actions";
 
-export default class CPAChargingPage extends Component{
+class CPAChargingPage extends Component{
     static propTypes = {
         totalCostMoney: PropTypes.number.isRequired,
         totalTime: PropTypes.number.isRequired,
@@ -26,13 +28,13 @@ export default class CPAChargingPage extends Component{
     };
 
     _startCharging = () => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate(ScreenKey.Scan);
+        const {nav} = this.props;
+        nav && nav(ScreenKey.Scan);
     };
 
     _startBatteryTesting = () => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate(ScreenKey.BatteryTesting);
+        const {nav} = this.props;
+        nav && nav(ScreenKey.BatteryTesting);
     };
 
     render() {
@@ -74,62 +76,19 @@ export default class CPAChargingPage extends Component{
     }
 }
 
+export function mapStateToProps(state) {
+    return state;
+}
 
-export class CPABatteryTestingPage extends Component {
-    _back = () => {
-        const {goBack} = this.props.navigation;
-        goBack && goBack();
-    };
-
-    _startBatteryTesting = () => {
-        const {navigate} = this.props.navigation;
-        navigate && navigate(ScreenKey.Scan);
-    };
-
-    render() {
-        const {totalTestingCostMoney, totalTestingTime, totalTestingElec, totalTestingNumberOfTimes} = this.props;
-
-        return (
-            <View style={styles.container}>
-                <View style={styles.chargingInfoContainer}>
-                    <View style={styles.chargingInfoTopContainer}>
-                        <KeyValPair title='总检测金额(元)'
-                                    val={totalTestingCostMoney}
-                                    titleStyle={styles.titleStyle1} valueStyle={styles.valueStyle1}/>
-                    </View>
-                    <View style={styles.chargingInfoBottomContainer}>
-                        <KeyValPair title='电池寿命(小时)'
-                                    val={totalTestingTime}
-                                    containerStyle={styles.itemContainer}/>
-                        <Divider style={styles.divider}/>
-                        <KeyValPair title='检测问题(个)'
-                                    val={totalTestingElec}
-                                    containerStyle={styles.itemContainer}/>
-                        <Divider style={styles.divider}/>
-                        <KeyValPair title='总检测次数(次)'
-                                    val={totalTestingNumberOfTimes}
-                                    containerStyle={styles.itemContainer}/>
-                    </View>
-                </View>
-
-                <View style={styles.chargingActionContainer}>
-                    <CPAScanButton title='扫码检测'
-                                   onScan={this._startBatteryTesting}
-                                   btnStyle={styles.testingBtnStyle} />
-                </View>
-
-                <ActionButton showText={false}
-                              icon={<Icon type={IconType.Ionicon} name="md-close" size={20} color={colors.grey}/>}
-                              onAction={this._back}
-                              position={styles.closePosition}
-                              containerStyle={styles.closeContainerStyle}
-                              btnStyle={styles.closeBtnStyle}/>
-            </View>
-        );
+export function mapDispatchToProps(dispatch) {
+    return {
+        nav: (screenKey) => dispatch(doNav(screenKey)),
     }
 }
 
-const styles = StyleSheet.create({
+export default connect(mapStateToProps, mapDispatchToProps)(CPAChargingPage);
+
+export const styles = StyleSheet.create({
     container: {
         flex: 1,
     },

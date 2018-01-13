@@ -3,7 +3,8 @@ import {View, Animated, Text, StyleSheet} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import {NavigationActions} from 'react-navigation';
 import colors from '../common/colors';
-import {screenWidth} from "../common/constants";
+import {ActiveOpacity, screenWidth} from "../common/constants";
+import {connect} from "react-redux";
 
 class CPAWelcomePage extends Component{
     componentWillMount() {
@@ -29,6 +30,7 @@ class CPAWelcomePage extends Component{
             duration: 1000,
         }).start();
 
+        console.log(this.props);
         this._timer = setTimeout(() => {
             const resetAction = NavigationActions.reset({
                 index: 0,
@@ -65,13 +67,12 @@ class CPAWelcomePage extends Component{
         return (
             <View style={styles.container}>
                 <Animated.View style={[styles.wholeContainer, {backgroundColor: interpolatedColorAnimation}]}>
-                    <Animated.View style={[styles.logoContainer,
-                        {transform: [{translateX: interpolatedMovingXAnimation}]}]}>
+                    <Animated.View style={[styles.logoContainer, {transform: [{translateX: interpolatedMovingXAnimation}]}]}>
                         <Animated.View style={[styles.logo, {transform: [{rotate: interpolatedRotateAnimation}]}]}>
                             <Avatar width={130} height={130}
                                     rounded
                                     onPress={this._changeAvatar}
-                                    activeOpacity={0.7}
+                                    activeOpacity={ActiveOpacity}
                                     source={require('../../Resources/Images/homebk.png')}
                             />
                         </Animated.View>
@@ -85,7 +86,7 @@ class CPAWelcomePage extends Component{
                             北京索英电气技术有限公司
                             {'\r\n'}
                             <Text>
-                                CopyRight©2002-2017
+                                CopyRight©2002-2018
                             </Text>
                         </Text>
                     </View>
