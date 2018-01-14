@@ -51,8 +51,7 @@ class CPAStationMapPage extends Component{
                     onMapClick={(e) => {}}
                     onMapLoaded={currentLocation}/>
 
-                <ActionButton icon={<Icon type={IconType.MaterialIcon} name="traffic" size={25}
-                                          color={trafficEnabled ? colors.limegreen : colors.grey3}/>}
+                <ActionButton icon={<Icon type={IconType.MaterialIcon} name="traffic" size={25} color={trafficEnabled ? colors.limegreen : colors.grey3}/>}
                               onAction={enableTraffic} text="路况" position={styles.trafficButton}/>
                 <ActionButton icon={<Icon type={IconType.Ionicon} name="md-heart" size={25} color={colors.red}/>}
                               onAction={() => nav && nav(ScreenKey.Collect)} text="收藏" position={styles.collectButton}/>
@@ -78,7 +77,7 @@ class CPAStationMapPage extends Component{
                     latitude: 39.91491}} to={{longitude: 116.404185, // 中间点坐标
                     latitude: 40.01}} />*/}
 
-                {/*<StationSelector ref={self=>this._stationSelector=self} onAction={() => {alert('test')}}/>*/}
+                <StationSelector ref={self=>this._stationSelector=self} onAction={() => {alert('test')}}/>
             </View>
         );
     };
@@ -139,7 +138,6 @@ const styles = StyleSheet.create({
     actionButtonContainer: {
         height: 35,
         width: 35,
-        backgroundColor: colors.transparent,
     },
     actionButtonStyle: {
         borderRadius: 35/2,

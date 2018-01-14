@@ -14,9 +14,8 @@ class ActionButton extends Component {
         const {position, containerStyle, btnStyle, onAction, icon, showText, text} = this.props;
 
         return (
-            <View style={[styles.container, position]}>
-                <View pointerEvents="box-none"
-                      style={[shadowStyle, styles.contentContainer, containerStyle]}>
+            <View style={[styles.container, position]} pointerEvents="box-none">
+                <View style={[shadowStyle, styles.contentContainer, containerStyle]}>
                     <TouchableOpacity activeOpacity={ActiveOpacity}
                                       style={[styles.button, btnStyle]}
                                       onPress={onAction}>
@@ -25,7 +24,7 @@ class ActionButton extends Component {
                         }
                         {
                             showText ?
-                                <Text style={styles.text} adjustsFontSizeToFit={false}>
+                                <Text style={styles.text}>
                                     {text}
                                 </Text> : null
                         }

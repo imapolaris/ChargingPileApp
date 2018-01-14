@@ -129,8 +129,6 @@ const styles = StyleSheet.create({
         color: colors.theme1,
     },
     textInput:{
-        borderWidth: 0.5,
-        borderColor: '#C3C3C3',
         marginTop: 10,
         fontSize: 15,
     },

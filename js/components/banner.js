@@ -14,9 +14,8 @@ class Banner extends Component{
         const {label, onAction, position, containerStyle, btnStyle, textStyle} = this.props;
 
         return (
-            <View style={[styles.container, position]}>
-                <View pointerEvents='box-none'
-                      style={[shadowStyle, styles.contentContainer, containerStyle]}>
+            <View style={[styles.container, position]} pointerEvents='box-none'>
+                <View style={[shadowStyle, styles.contentContainer, containerStyle]}>
                     <View style={styles.leftContainer}>
                         <Text style={[styles.text, textStyle]}>
                             {label}
