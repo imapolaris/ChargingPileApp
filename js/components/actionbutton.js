@@ -25,7 +25,7 @@ class ActionButton extends Component {
                         }
                         {
                             showText ?
-                                <Text style={styles.text}>
+                                <Text style={styles.text} adjustsFontSizeToFit={false}>
                                     {text}
                                 </Text> : null
                         }
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         position: "absolute",
+        backgroundColor: colors.transparent,
     },
     contentContainer: {
         width: Size,

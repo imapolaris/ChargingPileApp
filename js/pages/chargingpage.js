@@ -5,7 +5,7 @@ import {Divider, Icon} from 'react-native-elements';
 import colors from "../common/colors";
 import CPAScanButton from "../components/scanbutton";
 import KeyValPair from "../components/keyvalpair";
-import {ScreenKey} from "../common/constants";
+import {ScreenKey, STATUSBAR_HEIGHT} from "../common/constants";
 import Banner from "../components/banner";
 import ActionButton from "../components/actionbutton";
 import {IconType} from "../common/icons";
@@ -91,9 +91,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(CPAChargingPage);
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+
     },
     chargingInfoContainer: {
-        height: 200,
+        height: 200+STATUSBAR_HEIGHT,
+        paddingTop: STATUSBAR_HEIGHT,
         backgroundColor: colors.theme1,
     },
     chargingInfoTopContainer: {
@@ -139,7 +141,7 @@ export const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 10,
-        top: 10,
+        top: 10+STATUSBAR_HEIGHT,
     },
     closeContainerStyle: {
         width: 30,

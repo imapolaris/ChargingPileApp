@@ -18,7 +18,7 @@ class NavButton extends Component{
                     showLabel ?
                         <Text style={[styles.text, textStyle]}
                               numberOfLines={1}
-                              adjustsFontSizeToFit={true}
+                              adjustsFontSizeToFit={false}
                               allowFontScaling={true} >
                             {label}
                         </Text>

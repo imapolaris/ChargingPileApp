@@ -2,7 +2,7 @@ export const AndroidPlatform = 'android';
 export const IOSPlatform = 'ios';
 
 import React from 'react';
-import {Dimensions} from 'react-native';
+import {Dimensions, Platform} from 'react-native';
 
 export const screenWidth = Dimensions.get('window').width;
 export const screenHeight = Dimensions.get('window').height;
@@ -39,6 +39,9 @@ export const ScreenKey = {
 };
 
 export const ActiveOpacity = 0.8;
+
+export const APPBAR_HEIGHT = Platform.OS === IOSPlatform ? 44 : 56;
+export const STATUSBAR_HEIGHT = Platform.OS === IOSPlatform ? 20 : 0;
 
 /*
  * 调用地图APP（百度、高德等）进行导航

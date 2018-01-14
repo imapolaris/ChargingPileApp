@@ -5,6 +5,8 @@ import CPAStackNavigator from "./components/navigators";
 import WaitingNotice from "./components/waitingnotice";
 import {addNavigationHelpers, NavigationActions} from 'react-navigation';
 import PropTypes from 'prop-types';
+import {IOSPlatform} from "./common/constants";
+import colors from "./common/colors";
 
 class Root extends Component{
     componentDidMount() {

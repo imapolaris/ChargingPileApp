@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ScrollView} from 'react-native';
 import CPASearchBar from "../components/searchbar";
 import {
     MapView,
@@ -63,10 +63,8 @@ class CPAStationMapPage extends Component{
                               onAction={currentLocation} showText={false} position={styles.locateButton}
                               containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle}/>
                 <ActionButton icon={<Icon type={IconType.Ionicon} name="md-help" size={25} color={colors.grey3}/>}
-                              onAction={() => {
-                              }} showText={false} position={styles.questionButton}
+                              onAction={() => {}} showText={false} position={styles.questionButton}
                               containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle}/>
-
                 {
                     !isRefreshing && markers.length <= 0 ?
                         <ActionButton
@@ -80,7 +78,7 @@ class CPAStationMapPage extends Component{
                     latitude: 39.91491}} to={{longitude: 116.404185, // 中间点坐标
                     latitude: 40.01}} />*/}
 
-                <StationSelector ref={self=>this._stationSelector=self} onAction={() => {alert('test')}}/>
+                {/*<StationSelector ref={self=>this._stationSelector=self} onAction={() => {alert('test')}}/>*/}
             </View>
         );
     };
@@ -141,6 +139,7 @@ const styles = StyleSheet.create({
     actionButtonContainer: {
         height: 35,
         width: 35,
+        backgroundColor: colors.transparent,
     },
     actionButtonStyle: {
         borderRadius: 35/2,

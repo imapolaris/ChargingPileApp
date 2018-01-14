@@ -1,11 +1,11 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, Platform} from 'react-native';
 import PropTypes from 'prop-types';
 import {Divider, Icon} from "react-native-elements";
 import {IconType} from "../common/icons";
-import {ActiveOpacity} from "../common/constants";
+import {ActiveOpacity, IOSPlatform} from "../common/constants";
 import colors from "../common/colors";
 import CityList from "../components/citylist";
 import {connect} from "react-redux";
@@ -45,7 +45,7 @@ class CPALocatingCityPage extends Component{
                 <View style={styles.locationContainer}>
                     <Text style={styles.locationTitle}>当前定位城市</Text>
                     <View style={styles.locationCity}>
-                        <Text style={styles.cityName}>
+                        <Text style={styles.cityName} adjustsFontSizeToFit={false}>
                             {locatingCity || '正在定位...'}
                         </Text>
                         <Icon type={IconType.SimpleLineIcon} name="location-pin" color={colors.tintColor2} size={18} />
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     hotCity: {
-        borderWidth: 0.5,
+        borderWidth: Platform.OS === IOSPlatform ? 0 : 0.1,
         borderColor: 'grey',
         width: 75,
         height: 35,

@@ -199,6 +199,8 @@ const CPAStackNavigator = StackNavigator(
                 color: colors.white,
             },
             headerRight:<Text/>,
+
+            headerBackTitle: null,
         },
         transitionConfig: () => ({
             screenInterpolator: CardStackStyleInterpolator.forHorizontal,

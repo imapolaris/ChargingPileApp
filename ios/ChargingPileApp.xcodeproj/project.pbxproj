@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		0024E2F04D534D888A126686 /* libdouble-conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6264F7260AA4657B7C50485 /* libdouble-conversion.a */; };
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
@@ -19,7 +20,6 @@
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -73,6 +73,7 @@
 		AFAFCE89DA6A457FA39D84C3 /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FF1FD9EE4B46E88349F49D /* libRCTJPushModule.a */; };
 		B0B45EAE21E4479594582E11 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B790FBBD2D71488594B09AA1 /* Security.framework */; };
 		B8868DDCFC304D7D818EAF8C /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5414825C41DA459C87AEFEB4 /* Foundation.ttf */; };
+		BCD56DD6E4DC403D92112E52 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05E3B33F026540D8968385DB /* libRNFS.a */; };
 		BCFDBED57371496180FB9AB3 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08E0A3EDCA5C4F2A950E4EAD /* MaterialCommunityIcons.ttf */; };
 		CC91E02F3AC641B3A25DB8F4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B3F76B36EE84269A083EF71 /* libz.tbd */; };
 		CE2E75221F3140C8A20D3028 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1EF1781008C4A51B576C2DA /* Entypo.ttf */; };
@@ -83,7 +84,6 @@
 		E26526C393A64A6C8422DE30 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4C9EE432B084BE8ABB418AF /* SimpleLineIcons.ttf */; };
 		E5C4A967D91E4171B107EAA7 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4E0E4DF663C47989E7BCF00 /* MaterialIcons.ttf */; };
 		F85CC908D81C49CD87931666 /* libyoga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2350F0EAF0E548CF995F5640 /* libyoga.a */; };
-		BCD56DD6E4DC403D92112E52 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05E3B33F026540D8968385DB /* libRNFS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -353,6 +353,20 @@
 			remoteGlobalIDString = 6212E9B41F3990DC00BDF51A;
 			remoteInfo = RCTJCoreModule;
 		};
+		76CF5B1D200B17C500E5CF3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B03C7B62EF4143F29DF5D7F3 /* RNFS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F12AFB9B1ADAF8F800E0535D;
+			remoteInfo = RNFS;
+		};
+		76CF5B1F200B17C500E5CF3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B03C7B62EF4143F29DF5D7F3 /* RNFS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6456441F1EB8DA9100672408;
+			remoteInfo = "RNFS-tvOS";
+		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
@@ -379,6 +393,7 @@
 		00E356EE1AD99517003FC87E /* ChargingPileAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChargingPileAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ChargingPileAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargingPileAppTests.m; sourceTree = "<group>"; };
+		05E3B33F026540D8968385DB /* libRNFS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFS.a; sourceTree = "<group>"; };
 		08E0A3EDCA5C4F2A950E4EAD /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		0B84DAF271F34B3EA0D90919 /* CoreTelephony.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		0D78C5848F684927961CA268 /* CoreFoundation.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -388,7 +403,6 @@
 		13B07F961A680F5B00A75B9A /* ChargingPileApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChargingPileApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ChargingPileApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ChargingPileApp/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ChargingPileApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ChargingPileApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ChargingPileApp/main.m; sourceTree = "<group>"; };
@@ -436,6 +450,7 @@
 		A1FF1FD9EE4B46E88349F49D /* libRCTJPushModule.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTJPushModule.a; sourceTree = "<group>"; };
 		A6264F7260AA4657B7C50485 /* libdouble-conversion.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libdouble-conversion.a"; sourceTree = "<group>"; };
 		ABC0BC5F3D4B4430BC7F03B9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B03C7B62EF4143F29DF5D7F3 /* RNFS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
 		B1EF1781008C4A51B576C2DA /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		B790FBBD2D71488594B09AA1 /* Security.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B9B09B1470944B7483C69DB9 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
@@ -450,8 +465,6 @@
 		E75CAA3E80EF43E5909F38BE /* libAlipayModule.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAlipayModule.a; sourceTree = "<group>"; };
 		EED621C320144F029754DE3F /* RCTJPushModule.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTJPushModule.xcodeproj; path = "../node_modules/jpush-react-native/ios/RCTJPushModule.xcodeproj"; sourceTree = "<group>"; };
 		F0FA00AF00F248E29E96B87D /* libReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReact.a; sourceTree = "<group>"; };
-		B03C7B62EF4143F29DF5D7F3 /* RNFS.xcodeproj */ = {isa = PBXFileReference; name = "RNFS.xcodeproj"; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		05E3B33F026540D8968385DB /* libRNFS.a */ = {isa = PBXFileReference; name = "libRNFS.a"; path = "libRNFS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -630,7 +643,6 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = ChargingPileApp;
@@ -696,6 +708,7 @@
 				E728E436A79A402480576E78 /* libRCTBaiduMap.a */,
 				DE7A2BB0BF0D4BC09FA1518F /* libRCTJCoreModule.a */,
 				A1FF1FD9EE4B46E88349F49D /* libRCTJPushModule.a */,
+				05E3B33F026540D8968385DB /* libRNFS.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -745,6 +758,15 @@
 			isa = PBXGroup;
 			children = (
 				76B6513B1FDF66010037DFCE /* libRCTBaiduMap.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		76CF5AF5200B17C500E5CF3C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76CF5B1E200B17C500E5CF3C /* libRNFS.a */,
+				76CF5B20200B17C500E5CF3C /* libRNFS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1057,6 +1079,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 76CF5AF5200B17C500E5CF3C /* Products */;
+					ProjectRef = B03C7B62EF4143F29DF5D7F3 /* RNFS.xcodeproj */;
+				},
+				{
 					ProductGroup = 7624E3571F546AE3006E551B /* Products */;
 					ProjectRef = 833BCADBEFDC4A2486A2B686 /* RNImagePicker.xcodeproj */;
 				},
@@ -1328,6 +1354,20 @@
 			remoteRef = 76B6513D1FDF66010037DFCE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		76CF5B1E200B17C500E5CF3C /* libRNFS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFS.a;
+			remoteRef = 76CF5B1D200B17C500E5CF3C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		76CF5B20200B17C500E5CF3C /* libRNFS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFS.a;
+			remoteRef = 76CF5B1F200B17C500E5CF3C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1357,7 +1397,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				766D269C1FDF7EA60029D23F /* mapapi.bundle in Resources */,
 				CE2E75221F3140C8A20D3028 /* Entypo.ttf in Resources */,
 				A6905B6CD69249F791F18379 /* EvilIcons.ttf in Resources */,
@@ -1470,18 +1509,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13B07FB21A68108700A75B9A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = ChargingPileApp;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1502,7 +1529,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-baidu-mapiosRCTBaiduMap/**",
 					"$(SRCROOT)..\node_modulesjcore-react-nativeiosRCTJCoreModule",
 					"$(SRCROOT)..\node_modulesjpush-react-nativeiosRCTJPushModule",
-					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)..\node_modules\neact-native-fs/**",
 				);
 				INFOPLIST_FILE = ChargingPileAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1549,7 +1576,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-baidu-mapiosRCTBaiduMap/**",
 					"$(SRCROOT)..\node_modulesjcore-react-nativeiosRCTJCoreModule",
 					"$(SRCROOT)..\node_modulesjpush-react-nativeiosRCTJPushModule",
-					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)..\node_modules\neact-native-fs/**",
 				);
 				INFOPLIST_FILE = ChargingPileAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1615,10 +1642,10 @@
 					"ode_modulesjpush-react-nativeiosRCTJPushModule/**",
 					"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule",
 					"$(SRCROOT)/../node_modules/react-native-baidu-map/ios/RCTBaiduMap",
-					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)..\node_modules\neact-native-fs/**",
 				);
 				INFOPLIST_FILE = ChargingPileApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1665,10 +1692,10 @@
 					"ode_modulesjpush-react-nativeiosRCTJPushModule/**",
 					"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule",
 					"$(SRCROOT)/../node_modules/react-native-baidu-map/ios/RCTBaiduMap",
-					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)..\node_modules\neact-native-fs/**",
 				);
 				INFOPLIST_FILE = ChargingPileApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1703,7 +1730,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-baidu-mapiosRCTBaiduMap/**",
 					"$(SRCROOT)..\node_modulesjcore-react-nativeiosRCTJCoreModule",
 					"$(SRCROOT)..\node_modulesjpush-react-nativeiosRCTJPushModule",
-					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)..\node_modules\neact-native-fs/**",
 				);
 				INFOPLIST_FILE = "ChargingPileApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1758,7 +1785,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-baidu-mapiosRCTBaiduMap/**",
 					"$(SRCROOT)..\node_modulesjcore-react-nativeiosRCTJCoreModule",
 					"$(SRCROOT)..\node_modulesjpush-react-nativeiosRCTJPushModule",
-					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)..\node_modules\neact-native-fs/**",
 				);
 				INFOPLIST_FILE = "ChargingPileApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1901,7 +1928,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1936,7 +1963,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

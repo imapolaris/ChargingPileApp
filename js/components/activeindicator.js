@@ -1,8 +1,9 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, View, Platform} from 'react-native';
 import colors from "../common/colors";
+import {IOSPlatform} from "../common/constants";
 
 class CPAActiveIndicator extends Component{
     render() {
@@ -12,7 +13,7 @@ class CPAActiveIndicator extends Component{
             <View style={[styles.container, containerStyle]}>
                 <ActivityIndicator
                     animating={animating}
-                    size={60}
+                    size={Platform.OS === IOSPlatform ? 1 : 60}
                     color={colors.white}
                 />
 

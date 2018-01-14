@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, ScrollView, TouchableOpacity, Text} from 'react-native';
 import {Avatar, Icon, List, ListItem} from 'react-native-elements';
 import colors from "../common/colors";
-import {ActiveOpacity, ScreenKey} from "../common/constants";
+import {ActiveOpacity, ScreenKey, STATUSBAR_HEIGHT} from "../common/constants";
 import {IconType} from "../common/icons";
 import {connect} from "react-redux";
 import {doNav} from "../redux/actions";
@@ -145,10 +145,11 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         flexDirection: 'row',
-        height: 80,
+        height: 80+STATUSBAR_HEIGHT,
         backgroundColor: colors.theme1,
         alignItems: 'center',
         paddingLeft: 10,
+        paddingTop: STATUSBAR_HEIGHT,
     },
     personalInfoContainer: {
         flex: 1,

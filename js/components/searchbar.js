@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Platform, Animated, View, Keyboard} from 'react-native';
 import PropTypes from 'prop-types';
 import colors from '../common/colors';
-import {IOSPlatform} from "../common/constants";
+import {APPBAR_HEIGHT, IOSPlatform, STATUSBAR_HEIGHT} from "../common/constants";
 import {Icon, SearchBar} from 'react-native-elements';
 import {shadowStyle} from "../common/styles";
 import NavButton from "./navbutton";
@@ -73,12 +73,11 @@ CPASearchBar.defaultProps = {
 };
 
 
-const APPBAR_HEIGHT = Platform.OS === IOSPlatform ? 44 : 56;
-const STATUSBAR_HEIGHT = Platform.OS === IOSPlatform ? 20 : 0;
+
 const styles = StyleSheet.create({
     container: {
         paddingTop: STATUSBAR_HEIGHT,
-        backgroundColor: Platform.OS === IOSPlatform ? '#EFEFF2' : '#FFF',
+        backgroundColor: Platform.OS === IOSPlatform ? colors.theme1 : '#FFF', // ios default: '#EFEFF2'
         height: STATUSBAR_HEIGHT + APPBAR_HEIGHT,
     },
     appBar: {
