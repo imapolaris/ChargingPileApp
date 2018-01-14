@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-start',
     },
-    avatarContainer:{
+    titleContainer:{
         alignItems: 'center',
         marginTop: 10,
         marginBottom: 10,

@@ -11,6 +11,7 @@ import colors from './Common/colors';
 import { NavigationActions } from 'react-navigation';
 
 import JPushModule from 'jpush-react-native';
+import * as WeChat from 'react-native-wechat';
 
 let lastBackPressed = 0;
 /*let store = createStore(null);*/
@@ -21,6 +22,9 @@ class App extends Component{
         appInit();
 
         this._registerJPushModule();
+
+        // register app to wechat
+        WeChat.registerApp('wx7310a24d430a6967');
     }
 
     componentDidMount() {

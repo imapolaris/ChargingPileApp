@@ -73,7 +73,7 @@ class CPALoginPage extends Component{
         return (
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
-                    <View style={styles.avatarContainer}>
+                    <View style={styles.titleContainer}>
                         <Text style={styles.WelcomeTitle}>
                             欢迎登录
                         </Text>

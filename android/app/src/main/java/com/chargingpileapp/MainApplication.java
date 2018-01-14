@@ -3,6 +3,7 @@ package com.chargingpileapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnfs.RNFSPackage;
 import cn.jpush.reactnativejpush.JPushPackage;
 import org.lovebing.reactnative.baidumap.BaiduMapPackage;
 import com.yunpeng.alipay.AlipayPackage;
@@ -32,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFSPackage(),
             new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG),
             new BaiduMapPackage(getApplicationContext()),
             new AlipayPackage(),

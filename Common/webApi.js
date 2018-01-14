@@ -1,16 +1,18 @@
 import {myFetch} from "./functions";
 
+const baseUrl = 'http://39.104.66.176/ChargingPileService/api/';
+
 const urls = {
-    messages: 'http://192.168.0.201/ChargingPileService/api/messages',
-    stations: 'http://192.168.0.201/ChargingPileService/api/stations',
-    stationDetails: 'http://192.168.0.201/ChargingPileService/api/stationDetails',
-    chargingPiles: 'http://192.168.0.201/ChargingPileService/api/chargingPiles',
-    chargingRecords: 'http://192.168.0.201/ChargingPileService/api/chargingRecords',
-    charging: 'http://192.168.0.201/ChargingPileService/api/charging',
-    subscribeRecords: 'http://192.168.0.201/ChargingPileService/api/subscribeRecords',
-    users: 'http://192.168.0.201/ChargingPileService/api/users',
-    payRecords: 'http://192.168.0.201/ChargingPileService/api/payRecords',
-    wallet: 'http://192.168.0.201/ChargingPileService/api/wallet',
+    messages: `${baseUrl}messages`,
+    stations: `${baseUrl}stations`,
+    stationDetails: `${baseUrl}stationDetails`,
+    chargingPiles: `${baseUrl}chargingPiles`,
+    chargingRecords: `${baseUrl}chargingRecords`,
+    charging: `${baseUrl}charging`,
+    subscribeRecords: `${baseUrl}subscribeRecords`,
+    users: `${baseUrl}users`,
+    payRecords: `${baseUrl}payRecords`,
+    wallet: `${baseUrl}wallet`,
 };
 
 const headers = {
@@ -217,5 +219,22 @@ export function getWalletBalance(userId) {
 * */
 export function makeOneCharge(userId, money, payWay) {
     let url = `${urls.wallet}/charge?userId=${userId}&money=${money}&payway=${payWay}`;
+    return myFetch(url, GET, headers);
+}
+
+
+/*
+ * pay by ali app.
+ */
+export function aliPay() {
+    let url = `${urls.wallet}/alipay`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* pay by wechat app.
+* */
+export function wxPay() {
+    let url = `${urls.wallet}/wxpay`;
     return myFetch(url, GET, headers);
 }

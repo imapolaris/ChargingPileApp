@@ -16,6 +16,7 @@ class CPASettingPage extends Component{
     _aboutUs = () => {
         const {navigate} = this.props.navigation;
         navigate && navigate('AboutUs');
+        //navigate && navigate('Share');
     };
 
     _feedback = ()=>{

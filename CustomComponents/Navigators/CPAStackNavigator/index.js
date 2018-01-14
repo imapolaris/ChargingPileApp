@@ -31,6 +31,7 @@ import CPAMyMessagePage from "../../../CustomPages/MyMessagePage/index";
 import CPAApplyForInvoicePage, {CPAInvoiceRecordPage} from "../../../CustomPages/ApplyForInvoicePage/index";
 import CPAFeedbackPage from "../../../CustomPages/FeedbackPage/index";
 import CPANotificationPage from "../../../CustomPages/NotificationPage/index";
+import CPASharePage from "../../../CustomPages/SharePage/index";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -245,6 +246,12 @@ const CPAStackNavigator = StackNavigator(
             screen: CPANotificationPage,
             navigationOptions:{
                 title: '消息通知'
+            }
+        },
+        Share: {
+            screen: CPASharePage,
+            navigationOptions:{
+                title: '分享'
             }
         },
     },
