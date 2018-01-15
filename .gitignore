@@ -53,3 +53,11 @@ fastlane/Preview.html
 fastlane/screenshots
 
 !/js/
+!/node_modules/react-native-baidu-map/android/src/main/java/org/lovebing/reactnative/baidumap/BaiduMapViewManager.java
+!/node_modules/react-native-baidu-map/android/src/main/java/org/lovebing/reactnative/baidumap/BaiduMapPackage.java
+!/node_modules/react-native-elements/src/input/Search.js
+!/node_modules/react-native-elements/src/buttons/Button.js
+!/node_modules/react-native-yunpeng-alipay/android/src/main/java/com/yunpeng/alipay/AlipayPackage.java
+!/node_modules/react-native-yunpeng-alipay/android/src/main/java/com/yunpeng/alipay/AlipayModule.java
+!/node_modules/react-navigation/src/addNavigationHelpers.js
+!/node_modules/react-navigation/src/views/Header.js
