@@ -203,7 +203,7 @@ const CPAStackNavigator = StackNavigator(
             headerBackTitle: null,
         },
         transitionConfig: () => ({
-            screenInterpolator: CardStackStyleInterpolator.forHorizontal,
+            screenInterpolator: CardStackStyleInterpolator.forVertical,
         })
     }
 );

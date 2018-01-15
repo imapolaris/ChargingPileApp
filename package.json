@@ -8,10 +8,12 @@
 		"test": "jest"
 	},
 	"dependencies": {
-		"jcore-react-native": "^1.1.8-beta2",
-		"jpush-react-native": "^2.1.0",
+		"jcore-react-native": "^1.2.3",
+		"jest-haste-map": "^22.0.6",
+		"jpush-react-native": "^2.1.7",
 		"prop-types": "latest",
 		"react": "16.0.0-alpha.12",
+		"react-devtools-core": "^3.0.0",
 		"react-native": "0.47.1",
 		"react-native-action-button": "^2.7.2",
 		"react-native-baidu-map": "^0.6.0",
