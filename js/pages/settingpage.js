@@ -7,6 +7,7 @@ import {Button, List, ListItem} from "react-native-elements";
 import {ScreenKey} from "../common/constants";
 import {connect} from "react-redux";
 import {doLogout, doNav} from "../redux/actions";
+import {doSwitchMessageNotice} from "../redux/systemactions";
 
 class CPASettingPage extends Component {
     constructor(props) {
@@ -63,7 +64,7 @@ class CPASettingPage extends Component {
             }
         ];
 
-        const {logined} = this.props;
+        const {logined, notice, switchMessageNotice} = this.props;
 
         return (
             <View style={styles.container}>
@@ -71,10 +72,11 @@ class CPASettingPage extends Component {
                     <ListItem title={'新消息提醒'}
                               hideChevron={true}
                               switchButton={true}
-                              switched={this.state.notice}
+                              switched={notice}
                               switchOnTintColor={colors.green}
                               switchThumbTintColor={colors.white}
-                              containerStyle={styles.item}/>
+                              containerStyle={styles.item}
+                              onSwitch={(e) => {switchMessageNotice && switchMessageNotice(e)}}/>
                 </List>
 
                 <List style={styles.system}>
@@ -115,6 +117,7 @@ class CPASettingPage extends Component {
 function mapStateToProps(state) {
     return {
         logined: state.user.logined,
+        notice: state.system.notice,
     };
 }
 
@@ -122,6 +125,7 @@ function mapDispatchToProps(dispatch) {
     return {
         logout: () => dispatch(doLogout()),
         nav: (screenKey) => dispatch(doNav(screenKey)),
+        switchMessageNotice: (notice) => dispatch(doSwitchMessageNotice(notice)),
     }
 }
 

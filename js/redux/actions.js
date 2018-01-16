@@ -1,10 +1,18 @@
 import {
     aliPay,
-    changePwd, getAllStationsWithBriefInfo, getSingleStation, getWalletBalance, login, makeOneCharge,
-    makeOneSubscribe, wxPay
+    changePwd,
+    getAllStationsWithBriefInfo,
+    getSingleStation,
+    getWalletBalance,
+    login,
+    makeOneCharge,
+    wxPay
 } from "../common/webapi";
 import * as WeChat from 'react-native-wechat';
 import Alipay from 'react-native-yunpeng-alipay';
+import {Geolocation} from 'react-native-baidu-map';
+import {ScreenKey} from "../common/constants";
+import {NavigationActions} from "react-navigation";
 
 export const CHARGING_ACTION = 'CHARGING';
 export const SUBSCRIBE_ACTION = 'SUBSCRIBE';
@@ -27,10 +35,10 @@ export const RECEIVE_ONE_STATION_INFO_ACTION = 'RECEIVE_ONE_STATION_INFO'; // �
 export const START_REQUEST_WEB_ACTION = 'START_REQUEST_WEB';
 export const COMPLETE_REQUEST_WEB_ACTION = 'COMPLETE_REQUEST_WEB';
 
-export const STAT_CACHE_COMPLETED_ACTION = 'STAT_CACHE_COMPLETED'; // 统计系统缓存
-export const CLEAR_CACHE_COMPLETED_ACTION = 'CLEAR_CACHE_COMPLETED'; // 清除缓存完成
-export const CHECK_VERSION_COMPLETED_ACTION = 'CHECK_VERSION_COMPLETED_ACTION'; // 检查软件版本
-export const MESSAGE_NOTICE_SWITCH_ACTION = 'MESSAGE_NOTICE_SWITCH'; // 新消息提醒开关
+ // 统计系统缓存
+ // 清除缓存完成
+ // 检查软件版本
+ // 新消息提醒开关
 
 export const QUERY_WALLET_INFO_COMPLETED_ACTION = 'QUERY_WALLET_INFO_COMPLETED'; // 查询钱包信息
 export const PAY_BY_WX_COMPLETED_ACTION = 'PAY_BY_WX_COMPLETED'; // 微信充值
@@ -121,9 +129,6 @@ export function doResetPwd(oldPwd, newPwd) {
     }
 }
 
-import {Geolocation} from 'react-native-baidu-map';
-import {ScreenKey} from "../common/constants";
-import {NavigationActions} from "react-navigation";
 function doLocating(position) {
     return {
         type: LOCATING_ACTION,
@@ -286,49 +291,6 @@ function completeRequestWeb() {
     return {
         type: COMPLETE_REQUEST_WEB_ACTION,
     };
-}
-
-function switchMessageNoticeCompleted(notice){
-    return {
-        type: MESSAGE_NOTICE_SWITCH_ACTION,
-        notice
-    };
-}
-
-export function doSwitchMessageNotice(notice) {
-
-}
-
-function statCacheCompleted(cache){
-    return {
-        type: STAT_CACHE_COMPLETED_ACTION,
-        cache
-    };
-}
-
-export function doStatCache(){
-
-}
-
-function clearCacheCompleted(){
-    return {
-        type: CLEAR_CACHE_COMPLETED_ACTION,
-    };
-}
-
-export function doClearCache() {
-
-}
-
-function checkVersionCompleted(version){
-    return {
-        type: CHECK_VERSION_COMPLETED_ACTION,
-        version
-    };
-}
-
-export function doCheckVersion(){
-
 }
 
 function queryWalletInfoCompleted(data) {
