@@ -40,6 +40,7 @@ yarn-error.log
 buck-out/
 \.buckd/
 *.keystore
+!/android/app/my-release-key.keystore
 
 # fastlane
 #
@@ -61,3 +62,4 @@ fastlane/screenshots
 !/node_modules/react-native-yunpeng-alipay/android/src/main/java/com/yunpeng/alipay/AlipayModule.java
 !/node_modules/react-navigation/src/addNavigationHelpers.js
 !/node_modules/react-navigation/src/views/Header.js
+!/node_modules/react-native-yunpeng-alipay/android/libs/alipaySdk-20170922.jar

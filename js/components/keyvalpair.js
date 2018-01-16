@@ -7,18 +7,16 @@ import {screenWidth} from "../common/constants";
 
 class KeyValPair extends Component{
     render() {
-        const {horizontal} = this.props;
+        const {horizontal, containerStyle, title, titleStyle, val, valueStyle} = this.props;
 
         return (
-            <View style={[styles.container, this.props.containerStyle,
-                            horizontal ? styles.containerHorizontal : null]}>
+            <View style={[styles.container, horizontal ? styles.containerHorizontal : null, containerStyle]}>
                 <View style={horizontal ? styles.infoContainerHorizontal : styles.infoContainerVertical}>
-                    <Text style={[styles.text, styles.titleStyle, this.props.titleStyle,
-                                    horizontal ? styles.titleStyleHorizontal : null]}>
-                        {this.props.title}
+                    <Text style={[styles.text, styles.titleStyle, horizontal ? styles.titleStyleHorizontal : null, titleStyle]}>
+                        {title}
                     </Text>
-                    <Text style={[styles.text, styles.valueStyle, this.props.valueStyle]}>
-                        {this.props.val}
+                    <Text style={[styles.text, styles.valueStyle, valueStyle]}>
+                        {val}
                     </Text>
                 </View>
                 {

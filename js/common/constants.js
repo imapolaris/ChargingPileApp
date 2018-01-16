@@ -56,3 +56,6 @@ export default StorageKey = {
     RecentVisitCitiesKey: 'recentVisitCities',
     SearchHistoryStationsKey: 'searchHistoryStations',
 }
+
+export const WxAppId = 'wx7310a24d430a6967';
+export const WxAppSecret = 'd8bbddf8af5db6f7a96dd214a37fa813';

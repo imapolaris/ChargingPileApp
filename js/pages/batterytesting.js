@@ -11,6 +11,13 @@ import {connect} from "react-redux";
 import {styles, mapDispatchToProps, mapStateToProps} from './chargingpage';
 
 class CPABatteryTestingPage extends Component {
+    static defaultProps = {
+        totalTestingCostMoney: 0,
+        totalTestingTime: 0,
+        totalTestingElec: 0,
+        totalTestingNumberOfTimes: 0,
+    };
+
     _back = () => {
         const {goBack} = this.props.navigation;
         goBack && goBack();

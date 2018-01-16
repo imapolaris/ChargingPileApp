@@ -5,10 +5,10 @@ export function wallet(state={
 }, action){
     switch (action.type) {
         case QUERY_WALLET_INFO_COMPLETED_ACTION:
-            return Object.assign({}, state);
+            return Object.assign({}, state, {balance: action.data});
         case PAY_BY_WX_COMPLETED_ACTION:
         case PAY_BY_ZFB_COMPLETED_ACTION:
-            return Object.assign({}, state, {balance: state.balance+action.money});
+            return Object.assign({}, state, {balance: action.money});
         default:
             return state;
     }

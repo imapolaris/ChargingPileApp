@@ -1,6 +1,7 @@
 import {myFetch} from "./functions";
 
 const baseUrl = 'http://39.104.66.176/ChargingPileService/api';
+//const baseUrl = 'http://192.168.0.201/ChargingPileService/api';
 
 const urls = {
     messages: `${baseUrl}/messages`,

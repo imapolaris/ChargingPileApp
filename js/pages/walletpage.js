@@ -2,12 +2,13 @@
 
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import PropTypes from 'prop-types';
 import {Button} from 'react-native-elements';
 import {ActiveOpacity, screenWidth} from "../common/constants";
 import colors from "../common/colors";
 import CPARadioButton from "../components/radiobutton";
 import KeyValPair from "../components/keyvalpair";
+import {connect} from "react-redux";
+import {doPayByWx, doPayByZfb, doQueryWalletInfo} from "../redux/actions";
 
 const Moneys1 = [{key: 0, val:500}, {key: 1, val:200}, {key: 2, val:100}];
 const Moneys2 = [{key: 3, val:50}, {key: 4, val:20}, {key: 5, val:10}];
@@ -19,8 +20,12 @@ class CPAWalletPage extends Component{
             zfbChecked: true,
             money: 0,
             selectedIndex: -1,
-            balance: 0,
         };
+    }
+
+    componentDidMount() {
+        const {queryWalletInfo} = this.props;
+        queryWalletInfo && queryWalletInfo();
     }
 
     _onPayWayChanged = (payWay) => {
@@ -37,19 +42,33 @@ class CPAWalletPage extends Component{
         }
     };
 
+    _onCharge = () => {
+        let {money, wxChecked} = this.state;
+        const {payByWx, payByZfb} = this.props;
+
+        money = 0.01;
+        console.log(`money:${money}`);
+        if (wxChecked) {
+            payByWx && payByWx(money);
+        } else {
+            payByZfb && payByZfb(money);
+        }
+    };
+
     _renderItem = (item)=>{
+        const {selectedIndex} = this.state;
+
         return (
             <TouchableOpacity key={item.key}
-                              style={[styles.moneyItem, this.state.selectedIndex === item.key ? styles.chargeMoneyItem : null]}
+                              style={[styles.moneyItem, selectedIndex === item.key ? styles.chargeMoneyItem : null]}
                               activeOpacity={ActiveOpacity}
                               onPress={()=>{
                                   this.setState({
-                                      ...this.state,
                                       selectedIndex: item.key,
                                       money: item.val,
                                   });
                               }}>
-                <Text style={[styles.moneyItemText, this.state.selectedIndex === item.key ? styles.chargeMoneyItemText : null]}>
+                <Text style={[styles.moneyItemText, selectedIndex === item.key ? styles.chargeMoneyItemText : null]}>
                     {item.val} 元
                 </Text>
             </TouchableOpacity>
@@ -57,11 +76,14 @@ class CPAWalletPage extends Component{
     };
 
     render() {
+        const {balance} = this.props;
+
         return (
             <View style={styles.container}>
                 <View style={styles.balanceContainer}>
-                    <KeyValPair title="余额(元)" val={this.state.balance}
-                                titleStyle={styles.label} valueStyle={styles.money} />
+                    <KeyValPair title="余额(元)" val={balance}
+                                titleStyle={styles.label}
+                                valueStyle={styles.money} />
                 </View>
 
                 <View style={styles.payContainer}>
@@ -98,10 +120,9 @@ class CPAWalletPage extends Component{
                     <View style={styles.submitButtonContainer}>
                         <Button title="充值"
                                 buttonStyle={styles.submitButton}
-                                onPress={this._onSubmit}
+                                onPress={this._onCharge}
                                 disabledStyle={{backgroundColor: colors.grey3}}
-                                disabled={this.state.money <= 0}
-                        />
+                                disabled={this.state.money <= 0} />
                     </View>
                 </View>
             </View>
@@ -109,11 +130,21 @@ class CPAWalletPage extends Component{
     }
 }
 
-export default CPAWalletPage;
+function mapStateToProps(state) {
+    return {
+        balance: state.wallet.balance,
+    }
+}
 
-CPAWalletPage.propTypes = {
+function mapDispatchToProps(dispatch) {
+    return {
+        queryWalletInfo: () => dispatch(doQueryWalletInfo()),
+        payByWx: (money) => dispatch(doPayByWx(money)),
+        payByZfb: (money) => dispatch(doPayByZfb(money)),
+    }
+}
 
-};
+export default connect(mapStateToProps, mapDispatchToProps)(CPAWalletPage);
 
 const styles = StyleSheet.create({
     container:{

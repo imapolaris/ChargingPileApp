@@ -5,17 +5,33 @@ import CPAStackNavigator from "./components/navigators";
 import WaitingNotice from "./components/waitingnotice";
 import {addNavigationHelpers, NavigationActions} from 'react-navigation';
 import PropTypes from 'prop-types';
-import {IOSPlatform} from "./common/constants";
-import colors from "./common/colors";
+import * as WeChat from 'react-native-wechat';
+import {WxAppId} from "./common/constants";
 
 class Root extends Component{
+    componentWillMount() {
+        this._registerWeChat();
+    }
+
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this._onBackPress);
     }
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this._onBackPress);
+
+        WeChat.removeAllListeners();
     }
+
+    _registerWeChat = () => {
+        WeChat.registerApp(WxAppId);
+
+        WeChat.addListener('PayReq.Resp', this._payResp);
+    };
+
+    _payResp = (response) => {
+        alert(JSON.stringify(response));
+    };
 
     _onBackPress = () => {
         const { dispatch, nav } = this.props;

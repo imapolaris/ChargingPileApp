@@ -30,6 +30,7 @@ import {ScreenKey} from "../common/constants";
 import CPAPersonalInfoPage from "../pages/personalinfo";
 import CPABatteryTestingPage from "../pages/batterytesting";
 import CPAResetPwdPage from '../pages/resetpwd';
+import CPAInChargingPage from "../pages/incharging";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -186,6 +187,12 @@ const CPAStackNavigator = StackNavigator(
                 header: null
             }
         },
+        InCharging: {
+            screen: CPAInChargingPage,
+            navigationOptions: {
+                header: null
+            }
+        },
     },
     {
         navigationOptions: {
@@ -203,7 +210,7 @@ const CPAStackNavigator = StackNavigator(
             headerBackTitle: null,
         },
         transitionConfig: () => ({
-            screenInterpolator: CardStackStyleInterpolator.forVertical,
+            screenInterpolator: CardStackStyleInterpolator.forHorizontal,
         })
     }
 );
