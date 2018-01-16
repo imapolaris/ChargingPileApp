@@ -5,7 +5,7 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 import colors, {GPlaceholderTextColor} from "../common/colors";
 import {Button} from "react-native-elements";
 import {textInputStyle} from "../common/styles";
-import {doResetPwd} from "../redux/actions";
+import {doResetPwd} from "../redux/useractions";
 import {connect} from "react-redux";
 
 class CPAResetPwdPage extends Component{

@@ -8,7 +8,8 @@ import colors from "../common/colors";
 import CPARadioButton from "../components/radiobutton";
 import KeyValPair from "../components/keyvalpair";
 import {connect} from "react-redux";
-import {doPayByWx, doPayByZfb, doQueryWalletInfo} from "../redux/actions";
+import {doPayByZfb} from "../redux/walletactions";
+import {doPayByWx, doQueryWalletInfo} from "../redux/walletactions";
 
 const Moneys1 = [{key: 0, val:500}, {key: 1, val:200}, {key: 2, val:100}];
 const Moneys2 = [{key: 3, val:50}, {key: 4, val:20}, {key: 5, val:10}];

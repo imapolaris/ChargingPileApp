@@ -7,7 +7,7 @@ import colors from "../common/colors";
 import {ActiveOpacity, ScreenKey, STATUSBAR_HEIGHT} from "../common/constants";
 import {IconType} from "../common/icons";
 import {connect} from "react-redux";
-import {doNav} from "../redux/actions";
+import {doNav} from "../redux/navactions";
 
 class CPAMePage extends Component{
     render() {

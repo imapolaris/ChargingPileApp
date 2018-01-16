@@ -10,7 +10,7 @@ import Banner from "../components/banner";
 import ActionButton from "../components/actionbutton";
 import {IconType} from "../common/icons";
 import {connect} from "react-redux";
-import {doNav} from "../redux/actions";
+import {doNav} from "../redux/navactions";
 
 class CPAChargingPage extends Component{
     static propTypes = {

@@ -6,8 +6,9 @@ import colors from "../common/colors";
 import {Button, List, ListItem} from "react-native-elements";
 import {ScreenKey} from "../common/constants";
 import {connect} from "react-redux";
-import {doLogout, doNav} from "../redux/actions";
+import {doNav} from "../redux/navactions";
 import {doSwitchMessageNotice} from "../redux/systemactions";
+import {doLogout} from "../redux/useractions";
 
 class CPASettingPage extends Component {
     constructor(props) {

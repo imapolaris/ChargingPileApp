@@ -1,4 +1,5 @@
-import {LOGIN_FAILED_ACTION, LOGIN_SUCCESS_ACTION, LOGOUT_ACTION, REGISTER_ACTION} from "./actions";
+import {REGISTER_ACTION} from "./useractions";
+import {LOGIN_FAILED_ACTION, LOGIN_SUCCESS_ACTION, LOGOUT_ACTION} from "./useractions";
 
 export function user(state={
     logined: false,

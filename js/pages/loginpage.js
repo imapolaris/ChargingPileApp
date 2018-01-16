@@ -7,7 +7,8 @@ import colors, {GPlaceholderTextColor} from "../common/colors";
 import {ActiveOpacity, ScreenKey, screenWidth} from "../common/constants";
 import {textInputStyle} from "../common/styles";
 import {connect} from "react-redux";
-import {doLogin, doNav} from "../redux/actions";
+import {doNav} from "../redux/navactions";
+import {doLogin} from "../redux/useractions";
 
 class CPALoginPage extends Component{
     constructor(props) {

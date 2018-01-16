@@ -1,4 +1,5 @@
-import {PAY_BY_WX_COMPLETED_ACTION, PAY_BY_ZFB_COMPLETED_ACTION, QUERY_WALLET_INFO_COMPLETED_ACTION} from "./actions";
+import {PAY_BY_ZFB_COMPLETED_ACTION} from "./walletactions";
+import {PAY_BY_WX_COMPLETED_ACTION, QUERY_WALLET_INFO_COMPLETED_ACTION} from "./walletactions";
 
 export function wallet(state={
     balance: 0.0,

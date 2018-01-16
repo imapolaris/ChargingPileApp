@@ -5,7 +5,7 @@ import {
     MAP_NAVIGATION_ACTION,
     RECEIVE_ONE_STATION_INFO_ACTION,
     RECEIVE_STATION_MARKERS_ACTION, START_REQUEST_STATION_MARKERS_ACTION
-} from "./actions";
+} from "./mapactions";
 
 export function map(state={
     mapType: MapTypes.NORMAL,

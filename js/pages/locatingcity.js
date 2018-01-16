@@ -9,7 +9,7 @@ import {ActiveOpacity, IOSPlatform} from "../common/constants";
 import colors from "../common/colors";
 import CityList from "../components/citylist";
 import {connect} from "react-redux";
-import {doChooseCity, doGeocode, getCurrentPosition} from "../redux/actions";
+import {doChooseCity, doGeocode, getCurrentPosition} from "../redux/mapactions";
 
 const hotCities1 = ['北京', '上海', '广州', '深圳'];
 const hotCities2 = ['厦门', '福建', '杭州', '天津'];

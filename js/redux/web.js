@@ -1,4 +1,5 @@
-import {COMPLETE_REQUEST_WEB_ACTION, START_REQUEST_WEB_ACTION} from "./actions";
+import {COMPLETE_REQUEST_WEB_ACTION} from "./webactions";
+import {START_REQUEST_WEB_ACTION} from "./webactions";
 
 export function web(state={
     isFetching: false,

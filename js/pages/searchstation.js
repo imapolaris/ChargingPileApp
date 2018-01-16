@@ -11,7 +11,7 @@ import {ActiveOpacity, SearchHistoryCount} from "../common/constants";
 import {clearSearchHistoryStations, getSearchHistoryStations, updateSearchHistoryStations} from "../common/appstorage";
 import {getStationsByName} from "../common/webapi";
 import {connect} from "react-redux";
-import {doGeocode} from "../redux/actions";
+import {doGeocode} from "../redux/mapactions";
 
 class CPASearchStationPage extends Component{
     constructor(props) {

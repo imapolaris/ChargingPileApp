@@ -15,10 +15,9 @@ import {IconType} from "../common/icons";
 import {Icon} from "react-native-elements";
 import {connect} from "react-redux";
 import {
-    doEnableTraffic, getCurrentPosition, doRequestStationMarkers, doRequestOneStationInfo,
-    doNav
-} from "../redux/actions";
+    doEnableTraffic, getCurrentPosition, doRequestStationMarkers, doRequestOneStationInfo} from "../redux/mapactions";
 import {MapSelector, StationSelector} from "../components/selector";
+import {doNav} from "../redux/navactions";
 
 
 class CPAStationMapPage extends Component{
