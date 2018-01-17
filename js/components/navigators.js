@@ -31,6 +31,8 @@ import CPAPersonalInfoPage from "../pages/personalinfo";
 import CPABatteryTestingPage from "../pages/batterytesting";
 import CPAResetPwdPage from '../pages/resetpwd';
 import CPAInChargingPage from "../pages/incharging";
+import CPAVehicleInfoPage from "../pages/vehicleinfo";
+import CPAAddAddressPage from "../pages/addaddress";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -191,6 +193,18 @@ const CPAStackNavigator = StackNavigator(
             screen: CPAInChargingPage,
             navigationOptions: {
                 header: null
+            }
+        },
+        VehicleInfo: {
+            screen: CPAVehicleInfoPage,
+            navigationOptions: {
+                title: '车辆信息',
+            }
+        },
+        AddAddress: {
+            screen: CPAAddAddressPage,
+            navigationOptions: {
+                title: '新增地址',
             }
         },
     },

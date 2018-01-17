@@ -14,12 +14,11 @@ class Selector extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            visible: this.props.visible,
+            visible: false,
         };
     }
 
     static propTypes = {
-        visible: PropTypes.bool.isRequired,
         title: PropTypes.string.isRequired,
         entityList: PropTypes.arrayOf(PropTypes.shape({
             name: PropTypes.string.isRequired,
@@ -76,7 +75,7 @@ class Selector extends Component{
                                               onPress={this._hide}/>
                     }
 
-                    <View style={styles.content}>
+                    <View style={styles.contentContainer}>
                         <View style={styles.content}>
                             <View style={styles.titleContainer}>
                                 <Text style={styles.titleText}>{title}</Text>
@@ -94,6 +93,10 @@ class Selector extends Component{
                 </View>
             </Modal>
         );
+    }
+
+    show = () => {
+        this.setState({visible: true})
     }
 }
 
@@ -144,6 +147,10 @@ export class MapSelector extends Component{
 }
 
 export class AvatarSelector extends Component {
+    static propTypes = {
+        onResponse: PropTypes.func.isRequired,
+    };
+
     _changeAvatar = (i) => {
         switch (i){
             case 0:
@@ -175,19 +182,21 @@ export class AvatarSelector extends Component {
             // You can also display the image using data:
             let source = { uri: 'data:image/jpeg;base64,' + response.data };
 
-            /*this.setState({
-                avatarSource: source
-            });*/
+            const {onResponse} = this.props;
+            onResponse && onResponse(source);
         }
     };
 
     render() {
         const selections = [{name:"拍照"}, {name:"从手机相册选择"}];
-        const {visible} = this.props;
 
         return (
-            <Selector visible={visible} title="选择头像" entityList={selections} onAction={this._changeAvatar} />
+            <Selector ref={self=>this._selector=self} title="选择头像" entityList={selections} onAction={this._changeAvatar} />
         );
+    }
+
+    show = () => {
+        this._selector.show();
     }
 }
 
@@ -278,6 +287,10 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         borderRadius: 5,
+    },
+    contentContainer: {
+        alignItems: 'center',
+        justifyContent: 'flex-end'
     },
     content: {
         backgroundColor: '#fff',

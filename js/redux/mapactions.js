@@ -1,5 +1,6 @@
 import {getAllStationsWithBriefInfo, getSingleStation} from "../common/webapi";
 import {Geolocation} from 'react-native-baidu-map';
+import {completeRequestWeb, startRequestWeb} from "./webactions";
 
 export const LOCATING_ACTION = 'LOCATING'; // 定位
 export const GEOCODE_COMPLETED_ACTION = 'GEOCODE_COMPLETED'; // 地理编码
@@ -37,11 +38,11 @@ function geocodeCompleted(position){
 
 export function doGeocode(city) {
     return dispatch => {
-        //dispatch(startRequestWeb());
+        dispatch(startRequestWeb());
 
         Geolocation.geocode(city, city)
             .then(position => {
-                //dispatch(completeRequestWeb());
+                dispatch(completeRequestWeb());
 
                 if (position !== null && position !== undefined) {
                     //ToastAndroidBS('无法解析该地址！');
@@ -56,7 +57,7 @@ export function doGeocode(city) {
                 console.log(`cannot analyse the address, error: ${error}`);
                 //ToastAndroidBS('无法解析该地址！');
 
-                //dispatch(completeRequestWeb());
+                dispatch(completeRequestWeb());
             });
     }
 }
@@ -146,17 +147,17 @@ export function doRequestOneStationInfo(e) {
     let id = info[0];
 
     return dispatch => {
-        //dispatch(startRequestWeb());
+        dispatch(startRequestWeb());
         return getSingleStation(id)
             .then(data=>{
-                //dispatch(completeRequestWeb());
+                dispatch(completeRequestWeb());
 
                 dispatch(receiveOneStationInfo(data));
 
                 return data;
             })
             .catch(error=>{
-                //dispatch(completeRequestWeb());
+                dispatch(completeRequestWeb());
                 console.log(error);
                 throw new Error(error);
             });

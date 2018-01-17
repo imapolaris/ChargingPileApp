@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {StyleSheet, TextInput, TouchableOpacity, View, Text, Keyboard} from 'react-native';
 import {Button} from "react-native-elements";
 import colors, {GPlaceholderTextColor} from "../common/colors";
-import {ActiveOpacity, ScreenKey, screenWidth} from "../common/constants";
+import {ActiveOpacity, ScreenKey, screenWidth, UserCategory} from "../common/constants";
 import {textInputStyle} from "../common/styles";
 import {connect} from "react-redux";
 import {doNav} from "../redux/navactions";
@@ -16,19 +16,29 @@ class CPALoginPage extends Component{
         this.state = {
             phoneNumber: '',
             pwd: '',
+            userCategory: UserCategory.Personal,
         };
     }
 
     _login = () => {
         Keyboard.dismiss();
 
-        const {phoneNumber, pwd} = this.state;
+        const {phoneNumber, pwd, userCategory} = this.state;
         const {login} = this.props;
-        login && login(phoneNumber, pwd);
+        login && login(phoneNumber, pwd, userCategory);
+    };
+
+    _switchGroup = () => {
+        const {userCategory} = this.state;
+        if (userCategory === UserCategory.Personal) {
+            this.setState({userCategory: UserCategory.Group});
+        } else {
+            this.setState({userCategory: UserCategory.Personal});
+        }
     };
 
     render() {
-        const {phoneNumber, pwd} = this.state;
+        const {phoneNumber, pwd, userCategory} = this.state;
         const {nav} = this.props;
 
         return (
@@ -36,7 +46,7 @@ class CPALoginPage extends Component{
                 <View style={styles.infoContainer}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.WelcomeTitle}>
-                            欢迎登录
+                            {userCategory === UserCategory.Personal ? '个人用户登录' : '集团用户登录'}
                         </Text>
                     </View>
 
@@ -78,13 +88,13 @@ class CPALoginPage extends Component{
                 </View>
 
                 <View style={styles.shortCutContainer}>
-                    {/*<TouchableOpacity style={styles.quickLoginContainer}>
+                    <TouchableOpacity style={styles.quickLoginContainer}>
                         <Text textDecorationLine="underline"
                               style={styles.text}
-                              onPress={this._quickLogin} >
-                            短信验证码登录
+                              onPress={this._switchGroup} >
+                            {userCategory === UserCategory.Group ? '个人用户登录' : '集团用户登录'}
                         </Text>
-                    </TouchableOpacity>*/}
+                    </TouchableOpacity>
 
                     <TouchableOpacity style={styles.forgotPwdContainer}
                                       activeOpacity={ActiveOpacity}
@@ -159,7 +169,7 @@ const styles = StyleSheet.create({
     },
     text:{
         marginTop: 15,
-        color: '#00FFFF',
+        color: colors.theme1,
         fontSize: 15,
     },
     disabled: {

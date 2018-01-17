@@ -38,6 +38,11 @@ class CPAMePage extends Component{
                 screenKey: ScreenKey.MySubscribe,
             },
             {
+                title: '车辆信息',
+                icon: {name:'md-car', type: IconType.Ionicon, color: colors.goldenrod},
+                screenKey: ScreenKey.VehicleInfo,
+            },
+            {
                 title: '检测报告',
                 icon: {name:'md-paper', type: IconType.Ionicon, color: colors.greenyellow},
                 screenKey: ScreenKey.TestingReport,
@@ -52,7 +57,7 @@ class CPAMePage extends Component{
             }
         ];
 
-        const {logined, nickname, nav} = this.props;
+        const {logined, nickname, avatar, nav} = this.props;
 
         return (
             <ScrollView style={styles.container}>
@@ -61,7 +66,9 @@ class CPAMePage extends Component{
                             height={60}
                             rounded
                             activeOpacity={ActiveOpacity}
-                            icon={{name: 'user-o', type: IconType.FAIcon, color: colors.yellow, size: 45}} />
+                            icon={{name: 'user-o', type: IconType.FAIcon, color: colors.yellow, size: 45}}
+                            source={avatar}
+                    />
 
                     <View style={styles.personalInfoContainer}>
                         <TouchableOpacity style={styles.textContainer}
@@ -120,6 +127,7 @@ function mapStateToProps(state) {
     return {
         logined: state.user.logined,
         nickname: state.user.nickname,
+        avatar: state.user.avatar,
     }
 }
 

@@ -41,6 +41,11 @@ class CPAStationMapPage extends Component{
             station, markers, isRefreshing, nav
         } = this.props;
 
+        const actionButtonStyle = {
+            containerStyle: styles.actionButtonContainer,
+            btnStyle: styles.actionButtonStyle,
+        };
+
         return (
             <View style={styles.container}>
                 <MapView
@@ -59,16 +64,16 @@ class CPAStationMapPage extends Component{
 
                 <ActionButton icon={<Icon type={IconType.Ionicon} name="md-locate" size={25} color={colors.grey3}/>}
                               onAction={currentLocation} showText={false} position={styles.locateButton}
-                              containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle}/>
+                              {...actionButtonStyle}/>
                 <ActionButton icon={<Icon type={IconType.Ionicon} name="md-help" size={25} color={colors.grey3}/>}
                               onAction={() => {}} showText={false} position={styles.questionButton}
-                              containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle}/>
+                              {...actionButtonStyle}/>
                 {
                     !isRefreshing && markers.length <= 0 ?
                         <ActionButton
                             icon={<Icon type={IconType.Ionicon} name="md-refresh" size={25} color={colors.grey3}/>}
                             onAction={() => requestStationMarkers()} showText={false} position={styles.refreshButton}
-                            containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle}/>
+                            {...actionButtonStyle}/>
                         : null
                 }
 

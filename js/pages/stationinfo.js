@@ -211,10 +211,6 @@ class CPAStationInfoPage extends Component{
 
 export default CPAStationInfoPage;
 
-CPAStationInfoPage.propTypes = {
-
-};
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,

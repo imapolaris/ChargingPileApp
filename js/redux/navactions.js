@@ -12,6 +12,7 @@ export function doNav(screenKey) {
             case ScreenKey.MySubscribe:
             case ScreenKey.TestingReport:
             case ScreenKey.Scan:
+            case ScreenKey.VehicleInfo:
                 const {logined} = getState().user;
                 if (logined) {
                     dispatch(NavigationActions.navigate({routeName: screenKey}));

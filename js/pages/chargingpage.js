@@ -135,6 +135,14 @@ export const styles = StyleSheet.create({
     bannerBtnStyle: {
         backgroundColor: colors.limegreen,
     },
+    questionPosition: {
+        justifyContent: "flex-start",
+        alignItems: 'flex-start',
+        bottom: 0,
+        left: 10,
+        right: 0,
+        top: 10+STATUSBAR_HEIGHT,
+    },
     closePosition: {
         justifyContent: "flex-start",
         alignItems: 'flex-end',
@@ -143,12 +151,12 @@ export const styles = StyleSheet.create({
         right: 10,
         top: 10+STATUSBAR_HEIGHT,
     },
-    closeContainerStyle: {
+    actionButtonContainerStyle: {
         width: 30,
         height: 30,
     },
-    closeBtnStyle: {
-        backgroundColor: 'rgba(0,0,0,0.25)',
+    actionButtonStyle: {
+        backgroundColor: 'rgba(0,0,0,0.1)',
         borderRadius: 15,
     },
     testingBtnStyle: {

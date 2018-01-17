@@ -36,6 +36,8 @@ export const ScreenKey = {
     SearchStation: 'SearchStation',
     Filter: 'Filter',
     BatteryTesting: 'BatteryTesting',
+    VehicleInfo: 'VehicleInfo',
+    AddAddress: 'AddAddress',
 };
 
 export const ActiveOpacity = 0.8;
@@ -59,3 +61,14 @@ export default StorageKey = {
 
 export const WxAppId = 'wx7310a24d430a6967';
 export const WxAppSecret = 'd8bbddf8af5db6f7a96dd214a37fa813';
+
+export const AppStatus = {
+    Normal: 'normal',
+    Subscribe: 'subscribe',
+    Charging: 'charging',
+};
+
+export const UserCategory = {
+    Personal: 0, // 个人用户
+    Group: 1, // 集团用户
+};

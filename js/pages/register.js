@@ -34,7 +34,6 @@ class CPARegisterPage extends Component {
                                value={this.state.phoneNumber}
                                onChangeText={(text) => {
                                    this.setState({
-                                       ...this.state,
                                        phoneNumber: text,
                                    })
                                }}/>
@@ -46,7 +45,6 @@ class CPARegisterPage extends Component {
                                    value={this.state.vCode}
                                    onChangeText={(text) => {
                                        this.setState({
-                                           ...this.state,
                                            vCode: text,
                                        })
                                    }}
@@ -67,7 +65,6 @@ class CPARegisterPage extends Component {
                                value={this.state.pwd}
                                onChangeText={(text) => {
                                    this.setState({
-                                       ...this.state,
                                        pwd: text,
                                    })
                                }}
@@ -151,7 +148,7 @@ const styles = StyleSheet.create({
     },
     text: {
         marginTop: 15,
-        color: '#00FFFF',
+        color: colors.theme1,
         fontSize: 15,
     },
     userAgreementContainer: {
