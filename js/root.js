@@ -43,14 +43,14 @@ class Root extends Component{
     };
 
     render() {
-        const {isFetching, dispatch, nav} = this.props;
+        const {isFetching, waitingLabel, dispatch, nav} = this.props;
         console.log(nav);
 
         return (
             <View style={styles.container}>
                 <CPAStackNavigator navigation={addNavigationHelpers({dispatch, state:nav})} />
 
-                <WaitingNotice visible={isFetching}/>
+                <WaitingNotice visible={isFetching} label={waitingLabel} />
             </View>
         );
     }
@@ -64,6 +64,7 @@ Root.propTypes = {
 function mapStateToProps(state) {
     return {
         isFetching: state.web.isFetching,
+        waitingLabel: state.web.waitingLabel,
         nav: state.nav,
     }
 }

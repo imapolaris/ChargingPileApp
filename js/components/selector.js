@@ -101,10 +101,13 @@ class Selector extends Component{
 }
 
 export class MapSelector extends Component{
-    static propTypes = {
-        from: PropTypes.object.isRequired,
-        to: PropTypes.object.isRequired,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            from: null,
+            to: null,
+        };
+    }
 
     _mapNavigation = (i) => {
         let theMap = 'cp:cancel';
@@ -119,7 +122,7 @@ export class MapSelector extends Component{
                 break;
         }
 
-        const {from, to} = this.props;
+        const {from, to} = this.state;
         if (theMap !== 'cp:cancel') {
             if (to === null || to === undefined)
             {
@@ -138,11 +141,15 @@ export class MapSelector extends Component{
 
     render() {
         const selections = [{name:"百度地图"}, {name:"高德地图"}];
-        const {visible} = this.props;
 
         return (
-            <Selector visible={visible} title="选择导航地图" entityList={selections} onAction={this._mapNavigation} />
+            <Selector ref={self=>this._selector=self} title="选择导航地图" entityList={selections} onAction={this._mapNavigation} />
         );
+    }
+
+    show = (from, to) => {
+        this.setState({from, to});
+        this._selector.show();
     }
 }
 
@@ -223,6 +230,10 @@ export class StationSelector extends Component{
         onAction && onAction();
     };
 
+    _beforeMapNavigate = () => {
+        this._hide();
+    };
+
     show(visible: Boolean, station: Object) {
         this.setState({
             visible,
@@ -250,7 +261,8 @@ export class StationSelector extends Component{
                                      name={name}
                                      address={address}
                                      elecprice={elecPrice}
-                                     onAction={this._action}/>
+                                     onAction={this._action}
+                                     beforeMapNavigate={this._beforeMapNavigate} />
                     </View>
                 </View>
             </Modal>

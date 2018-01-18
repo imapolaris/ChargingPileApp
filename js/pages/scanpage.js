@@ -3,11 +3,13 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View, Animated, TextInput, Vibration, Keyboard} from 'react-native';
 import Camera from 'react-native-camera';
-import {ActiveOpacity, screenWidth} from "../common/constants";
+import {ActiveOpacity, ScreenKey, screenWidth} from "../common/constants";
 import colors from "../common/colors";
 import {Icon, Divider, Button} from "react-native-elements";
 import {IconType} from "../common/icons";
 import {textInputStyle} from "../common/styles";
+import {connect} from "react-redux";
+import {doNav} from "../redux/navactions";
 
 const SNCount = 10;
 const ScanInterval = 3000; // 扫描成功后，间隔3s允许再次处理
@@ -107,8 +109,10 @@ class CPAScanPage extends Component {
         Keyboard.dismiss();
 
         let {sn} = this.state;
-        alert(sn);
         //this._startCharging(sn);
+
+        const {nav} = this.props;
+        nav && nav(ScreenKey.InCharging)
     };
 
     _renderScanView = () => {
@@ -168,7 +172,7 @@ class CPAScanPage extends Component {
                            }}
                 />
                 <View style={styles.buttonContainer}>
-                    <Button title="扫码"
+                    <Button title="返回扫码"
                             buttonStyle={styles.button}
                             onPress={()=>this._switchView('scan')}/>
                     <Button title="确定"
@@ -239,11 +243,19 @@ class CPAScanPage extends Component {
     }
 }
 
-export default CPAScanPage;
+function mapDispatchToProps(dispatch) {
+    return {
+        nav: (screenKey) => dispatch(doNav(screenKey)),
+    }
+}
 
-CPAScanPage.PropTypes = {
+function mapStateToProps(state) {
+    return {
 
-};
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CPAScanPage);
 
 const Size = 250;
 const styles = StyleSheet.create({

@@ -33,6 +33,7 @@ import CPAResetPwdPage from '../pages/resetpwd';
 import CPAInChargingPage from "../pages/incharging";
 import CPAVehicleInfoPage from "../pages/vehicleinfo";
 import CPAAddAddressPage from "../pages/addaddress";
+import CPAChargingBillingPage from "../pages/chargingbilling";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -192,7 +193,7 @@ const CPAStackNavigator = StackNavigator(
         InCharging: {
             screen: CPAInChargingPage,
             navigationOptions: {
-                header: null
+                title: '正在充电'
             }
         },
         VehicleInfo: {
@@ -205,6 +206,12 @@ const CPAStackNavigator = StackNavigator(
             screen: CPAAddAddressPage,
             navigationOptions: {
                 title: '新增地址',
+            }
+        },
+        ChargingBilling: {
+            screen: CPAChargingBillingPage,
+            navigationOptions: {
+                title: '充电账单',
             }
         },
     },

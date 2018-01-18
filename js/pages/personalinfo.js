@@ -36,15 +36,11 @@ class CPAPersonalInfoPage extends Component {
         const {nav} = this.props;
         const list = [
             {
-                title: '住址',
+                title: '收货地址',
                 val: address || ' ',
                 //icon: {name: 'md-home', type: IconType.Ionicon, color: colors.grey3},
                 screenKey: ScreenKey.AddAddress,
             },
-            /*{
-                title: '收货地址',
-                screenKey: '',
-            },*/
         ];
 
         return (
@@ -78,7 +74,7 @@ class CPAPersonalInfoPage extends Component {
                                   containerStyle={styles.item}/>
                     </List>
 
-                    <List>
+                    {/*<List>
                         {
                             list.map((item, i) => (
                                 <ListItem key={i}
@@ -90,7 +86,7 @@ class CPAPersonalInfoPage extends Component {
                                 />
                             ))
                         }
-                    </List>
+                    </List>*/}
                 </View>
 
                 <Button title="确认修改"

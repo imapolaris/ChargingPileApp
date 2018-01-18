@@ -69,22 +69,22 @@ export function error2(msg, callback1, callback2) {
 /*
  * function ToastAndroid.show(...) wrapper.
  */
-export function ToastAndroidBS(message) {
+export function ToastBS(message) {
     if (Platform.OS === AndroidPlatform)
         ToastAndroid.show(message, ToastAndroid.BOTTOM, ToastAndroid.SHORT);
 }
 
-export function ToastAndroidBL(message) {
+export function ToastBL(message) {
     if (Platform.OS === AndroidPlatform)
         ToastAndroid.show(message, ToastAndroid.BOTTOM, ToastAndroid.LONG);
 }
 
-export function ToastAndroidCS(message) {
+export function ToastCS(message) {
     if (Platform.OS === AndroidPlatform)
         ToastAndroid.show(message, ToastAndroid.CENTER, ToastAndroid.SHORT);
 }
 
-export function ToastAndroidCL(message) {
+export function ToastCL(message) {
     if (Platform.OS === AndroidPlatform)
         ToastAndroid.show(message, ToastAndroid.CENTER, ToastAndroid.LONG);
 }

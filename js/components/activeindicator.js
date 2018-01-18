@@ -13,7 +13,7 @@ class CPAActiveIndicator extends Component{
             <View style={[styles.container, containerStyle]}>
                 <ActivityIndicator
                     animating={animating}
-                    size={Platform.OS === IOSPlatform ? 1 : 60}
+                    size={Platform.OS === IOSPlatform ? 1 : 50}
                     color={colors.white}
                 />
 
@@ -35,23 +35,22 @@ export default CPAActiveIndicator;
 CPAActiveIndicator.defaultProps = {
     showLabel: true,
     animating: true,
-    label: '正在加载，请稍后...',
 };
 
 const styles = StyleSheet.create({
     container: {
         height: 100,
-        width: 250,
-        flexDirection: 'row',
+        width: 150,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'rgba(0,0,0, 1)',
-        padding: 10,
+        padding: 5,
         borderRadius: 10,
     },
     label: {
+        flex: 1,
         fontSize: 15,
         color: colors.white,
-        marginLeft: 15,
+        marginTop: 10,
     }
 });

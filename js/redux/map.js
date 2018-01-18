@@ -19,10 +19,9 @@ export function map(state={
     zoomControlsVisible: false,
     markers: [],
     currentPos: {
-        longitude: 116.404185, // 中间点坐标
+        longitude: 116.404185, // 当前坐标
         latitude: 39.91491,
     },
-    station: {},
     isRefreshing: false,
     city: '北京',
     locatingCity: '',
@@ -51,8 +50,6 @@ export function map(state={
             return Object.assign({}, state, {markers: action.stations, isRefreshing: false});
         case ERROR_REQUEST_STATION_MARKERS_ACTION:
             return Object.assign({}, state, {isRefreshing: false});
-        case RECEIVE_ONE_STATION_INFO_ACTION:
-            return Object.assign({}, state, {station: action.station.data});
         default:
             return state;
     }

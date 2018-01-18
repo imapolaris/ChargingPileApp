@@ -6,13 +6,15 @@ import KeyValPair from "../components/keyvalpair";
 import {CircularProgress} from 'react-native-circular-progress';
 import {Button} from "react-native-elements";
 import colors from "../common/colors";
-import {screenWidth} from "../common/constants";
+import {ScreenKey, screenWidth} from "../common/constants";
 import {connect} from "react-redux";
 import {doFinishCharging, doQueryChargingRealtimeInfo} from "../redux/chargingactions";
+import {doNav} from "../redux/navactions";
 
 class CPAInChargingPage extends Component {
     render() {
-        const {progress, soc, costMoney, chargingElec, costTime, restTime, voltage, electric} = this.props;
+        const {progress, soc, costMoney, chargingElec,
+            costTime, restTime, voltage, electric, nav} = this.props;
         const kvstyles = {
             containerStyle: styles.containerStyle,
             titleStyle: styles.titleStyle,
@@ -21,20 +23,25 @@ class CPAInChargingPage extends Component {
 
         return (
             <View style={styles.container}>
-                <CircularProgress size={200}
+                <CircularProgress size={180}
                                   width={10}
                                   prefill={0}
                                   fill={progress}
                                   rotation={0}
                                   style={styles.progress}
-                                  tintColor={colors.primary1}
+                                  tintColor={colors.theme1}
                                   backgroundColor={colors.grey3}
                                   linecap="round">
                     {
                         (fill) => (
-                            <Text style={styles.progressText}>
-                                {fill} %
-                            </Text>
+                            <View style={styles.progressContentContainer}>
+                                <Text style={styles.progressText}>
+                                    {fill} %
+                                </Text>
+                                <Text>
+                                    充电进度
+                                </Text>
+                            </View>
                         )
                     }
                 </CircularProgress>
@@ -61,7 +68,7 @@ class CPAInChargingPage extends Component {
                     <Button title="结束充电"
                             buttonStyle={styles.button}
                             onPress={() => {
-                                alert('结束充电')
+                                nav && nav(ScreenKey.ChargingBilling);
                             }}/>
                 </View>
             </View>
@@ -86,6 +93,7 @@ function mapDispatchToProps(dispatch) {
     return {
         queryChargingRealtimeInfo: () => dispatch(doQueryChargingRealtimeInfo()),
         finishCharging: () => dispatch(doFinishCharging()),
+        nav: (screenKey) => dispatch(doNav(screenKey)),
     }
 }
 
@@ -112,6 +120,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    progressContentContainer: {
+        alignItems: 'center',
+    },
     progressText: {
         fontSize: 36,
         color: colors.theme1,
@@ -123,7 +134,7 @@ const styles = StyleSheet.create({
     titleStyle: {
         fontSize: 16,
         minWidth: 90,
-        color: colors.grey2,
+        color: colors.grey3,
     },
     valStyle: {
         color: colors.limegreen,

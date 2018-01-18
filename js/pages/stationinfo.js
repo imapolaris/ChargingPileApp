@@ -11,6 +11,7 @@ import KeyValPair from "../components/keyvalpair";
 import ChargingPileItem from "../components/chargingpileitem";
 import {EmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
 import {TabNavigator} from "react-navigation";
+import MapNavButton from "../components/mapnavbutton";
 
 const LoadingGreetings = '正在加载，请稍后...';
 const EmptyDataGreetings = '客官，没有找到电桩啊！';
@@ -41,14 +42,8 @@ class StationInfo extends Component{
                             {station && station.address}
                         </Text>
                     </View>
-                    <TouchableOpacity style={styles.stationAddressRightContainer}
-                                      onPress={this._mapNavigation}
-                                      activeOpacity={ActiveOpacity}>
-                        <Icon type={IconType.Ionicon} name="md-navigate" size={20} color={colors.white} />
-                        <Text style={styles.navigate}>
-                            导航
-                        </Text>
-                    </TouchableOpacity>
+
+                    <MapNavButton address={station.address} buttonStyle={styles.mapNavButton} />
                 </View>
                 <View style={styles.stationInfoContainer}>
                     <KeyValPair horizontal={true} title="电价"
@@ -246,14 +241,9 @@ const styles = StyleSheet.create({
     stationAddressLeftContainer: {
         flex: 1,
     },
-    stationAddressRightContainer: {
+    mapNavButton: {
         width: 60,
         height: 60,
-        backgroundColor: colors.primary1,
-        margin: 20,
-        borderRadius: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     stationInfoContainer: {
         flex: 1,
@@ -269,10 +259,6 @@ const styles = StyleSheet.create({
     address: {
         fontSize: 15,
         color: colors.grey3,
-    },
-    navigate:{
-        fontSize: 14,
-        color: colors.white,
     },
     info: {
         fontSize: 15,

@@ -38,6 +38,8 @@ export const ScreenKey = {
     BatteryTesting: 'BatteryTesting',
     VehicleInfo: 'VehicleInfo',
     AddAddress: 'AddAddress',
+    InCharging: 'InCharging',
+    ChargingBilling: 'ChargingBilling',
 };
 
 export const ActiveOpacity = 0.8;

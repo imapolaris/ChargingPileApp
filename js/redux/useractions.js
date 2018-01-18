@@ -1,6 +1,7 @@
 import {changePwd, login, updateUserProfile} from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doBack} from "./navactions";
+import {ToastBS} from "../common/functions";
 
 export const LOGIN_SUCCESS_ACTION = 'LOGIN_SUCCESS'; // 登录成功
 export const LOGIN_FAILED_ACTION = 'LOGIN_FAILED'; // 登录失败
@@ -20,36 +21,30 @@ function loginSuccess(data) {
     }
 }
 
-function loginFailed() {
-    return {
-        type: LOGIN_FAILED_ACTION,
-    }
-}
-
 export function doLogin(phoneNumber, pwd, userCategory) {
     return dispatch => {
-        dispatch(startRequestWeb());
+        dispatch(startRequestWeb('正在登录...'));
 
         login(phoneNumber, pwd)
             .then(ret => {
                 dispatch(completeRequestWeb());
 
                 if (ret.result === true) {
-                    // 登录成功
-                    // ToastAndroidBS(`登录成功！`);
+                    ToastBS(`登录成功！`);
 
                     dispatch(loginSuccess(ret.data));
                     dispatch(doBack());
                 } else {
-                    // 登录失败
-                    // ToastAndroidBS(ret.message);
+                    ToastBS(ret.message);
 
-                    dispatch(loginFailed());
+                    dispatch({
+                        type: LOGIN_FAILED_ACTION,
+                    });
                 }
             })
             .catch(error => {
                 console.log(error);
-                //ToastAndroidBS('登录失败:'+error);
+                ToastBS('登录失败:' + error);
 
                 dispatch(completeRequestWeb());
             });
@@ -59,7 +54,8 @@ export function doLogin(phoneNumber, pwd, userCategory) {
 export function doLogout() {
     return dispatch => {
         dispatch({type: LOGOUT_ACTION});
-        //dispatch(doBack());
+        ToastBS('已退出登录');
+        dispatch(doBack());
     };
 }
 
@@ -97,19 +93,11 @@ export function doResetPwd(oldPwd, newPwd) {
     }
 }
 
-function queryPersonalInfoCompleted(data) {
-    return {
-        type: QUERY_PERSONAL_INFO_ACTION,
-        data,
-    }
-}
-
 export function doSavePersonalInfo(data) {
     return (dispatch, getState) => {
-        dispatch(startRequestWeb());
+        dispatch(startRequestWeb('正在保存...'));
         const {userId} = getState().user;
         const personal = Object.assign({}, data, {id: userId, gender: '男', avatar: JSON.stringify(data.avatar)});
-        //alert(JSON.stringify(personal))
         updateUserProfile(personal)
             .then(ret=>{
                 dispatch(completeRequestWeb());
@@ -119,12 +107,16 @@ export function doSavePersonalInfo(data) {
                         type: UPDATE_PERSONAL_INFO_ACTION,
                         data: Object.assign({}, personal, {avatar: JSON.parse(personal.avatar)}),
                     });
+                    ToastBS('保存成功！');
+
+                    dispatch(doBack());
                 } else {
-                    alert(ret.message);
+                    ToastBS(`保存失败: ${ret.message}`)
                 }
             })
             .catch(err=>{
                 console.log(err);
+                ToastBS('保存失败...');
                 dispatch(completeRequestWeb());
             })
     }

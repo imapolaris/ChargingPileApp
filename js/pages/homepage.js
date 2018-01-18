@@ -24,7 +24,7 @@ const CPAHomePage = TabNavigator(
         Charging: {
             screen: CPAChargingPage,
             navigationOptions: {
-                title: '扫码',
+                title: '充电',
                 tabBarIcon: ({tintColor, focused}) => {
                     return ChargingIcon(tintColor, focused);
                 }

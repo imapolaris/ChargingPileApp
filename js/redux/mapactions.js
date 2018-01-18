@@ -9,7 +9,6 @@ export const ENABLE_TRAFFIC_ACTION = 'ENABLE_TRAFFIC'; // 显示路况信息
 export const START_REQUEST_STATION_MARKERS_ACTION = 'START_REQUEST_STATION_MARKERS'; // 开始请求电站地图标识
 export const ERROR_REQUEST_STATION_MARKERS_ACTION = 'ERROR_REQUEST_STATION_MARKERS'; // 请求电站地图标识报错
 export const RECEIVE_STATION_MARKERS_ACTION = 'RECEIVE_STATION_MARKERS'; // 电站地图标识
-export const RECEIVE_ONE_STATION_INFO_ACTION = 'RECEIVE_ONE_STATION_INFO'; // 一个电站
 
 
 function doLocating(position) {
@@ -129,13 +128,6 @@ export function doRequestStationMarkers(filter) {
     }
 }
 
-function receiveOneStationInfo(station) {
-    return {
-        type: RECEIVE_ONE_STATION_INFO_ACTION,
-        station
-    }
-}
-
 export function doRequestOneStationInfo(e) {
     if (e === null || e === undefined) return;
 
@@ -151,8 +143,6 @@ export function doRequestOneStationInfo(e) {
         return getSingleStation(id)
             .then(data=>{
                 dispatch(completeRequestWeb());
-
-                dispatch(receiveOneStationInfo(data));
 
                 return data;
             })

@@ -7,10 +7,11 @@ import colors from "../common/colors";
 import {Divider, Icon} from 'react-native-elements';
 import {IconType} from "../common/icons";
 import {ActiveOpacity} from "../common/constants";
+import MapNavButton from "./mapnavbutton";
 
 class StationItem extends Component{
     render() {
-        const {name, elecprice, numbers, address, onAction, containerStyle} = this.props;
+        const {name, elecprice, numbers, address, onAction, containerStyle, beforeMapNavigate} = this.props;
 
         return (
             <TouchableOpacity style={[styles.container, containerStyle]}
@@ -33,14 +34,7 @@ class StationItem extends Component{
                         </Text>
                     </View>
 
-                    <TouchableOpacity style={styles.navigateContainer}
-                                      onPress={()=>{}}
-                                      activeOpacity={ActiveOpacity}>
-                        <Icon type={IconType.Ionicon} name="md-navigate" size={20} color={colors.white} />
-                        <Text style={styles.navigate}>
-                            导航
-                        </Text>
-                    </TouchableOpacity>
+                    <MapNavButton address={address} beforeMapNavigate={beforeMapNavigate} />
                 </View>
                 <Divider style={styles.divider} />
             </TouchableOpacity>

@@ -41,7 +41,7 @@ function finishBatteryTestingCompleted() {
         type: FINISH_BATTERYTESTING_ACTION,
     }
 }
-w
+
 export function doFinishBatteryTesting() {
 
 }
