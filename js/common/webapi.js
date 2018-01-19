@@ -14,6 +14,7 @@ const urls = {
     users: `${baseUrl}/users`,
     payRecords: `${baseUrl}/payRecords`,
     wallet: `${baseUrl}/wallet`,
+    batterytesting: `${baseUrl}/batterytesting`,
 };
 
 const headers = {
@@ -130,6 +131,14 @@ export function stopCharging(serialNumber) {
 * */
 export function getChargingStatus(serialNumber) {
     let url = `${urls.charging}/status/${serialNumber}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* start battery testing.
+* */
+export function startBatteryTesting(serialNumber) {
+    let url = `${urls.batterytesting}/start/${serialNumber}`;
     return myFetch(url, GET, headers);
 }
 

@@ -68,6 +68,7 @@ export const AppStatus = {
     Normal: 'normal',
     Subscribe: 'subscribe',
     Charging: 'charging',
+    BatteryTesting: 'batterytesting',
 };
 
 export const UserCategory = {

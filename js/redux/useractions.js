@@ -2,6 +2,7 @@ import {changePwd, login, updateUserProfile} from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doBack} from "./navactions";
 import {ToastBS} from "../common/functions";
+import {doQueryChargingInfo} from "./chargingactions";
 
 export const LOGIN_SUCCESS_ACTION = 'LOGIN_SUCCESS'; // 登录成功
 export const LOGIN_FAILED_ACTION = 'LOGIN_FAILED'; // 登录失败
@@ -34,6 +35,9 @@ export function doLogin(phoneNumber, pwd, userCategory) {
 
                     dispatch(loginSuccess(ret.data));
                     dispatch(doBack());
+
+                    // 查询用户充电统计信息
+                    dispatch(doQueryChargingInfo());
                 } else {
                     ToastBS(ret.message);
 

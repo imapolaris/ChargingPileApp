@@ -10,8 +10,16 @@ function queryBatteryTestingInfoCompleted(data) {
     }
 }
 
-function doQueryBatteryTestingInfo() {
+export function doQueryBatteryTestingInfo() {
     return (dispatch, getState) => {
+        const {userId} = getState().user;
+
+
+    }
+}
+
+export function startScan() {
+    return dispatch => {
 
     }
 }

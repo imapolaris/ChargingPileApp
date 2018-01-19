@@ -11,6 +11,7 @@ import ActionButton from "../components/actionbutton";
 import {IconType} from "../common/icons";
 import {connect} from "react-redux";
 import {doNav} from "../redux/navactions";
+import {doQueryChargingInfo, doStartCharging, doStartScan} from "../redux/chargingactions";
 
 class CPAChargingPage extends Component{
     static propTypes = {
@@ -27,7 +28,11 @@ class CPAChargingPage extends Component{
         totalNumberOfTimes: 0,
     };
 
-    _startCharging = () => {
+    componentDidMount() {
+
+    }
+
+    _startScan = () => {
         const {nav} = this.props;
         nav && nav(ScreenKey.Scan);
     };
@@ -64,7 +69,7 @@ class CPAChargingPage extends Component{
                 </View>
 
                 <View style={styles.chargingActionContainer}>
-                    <CPAScanButton onScan={this._startCharging} />
+                    <CPAScanButton onScan={this._startScan} />
 
                     <Banner label="去给电池做个检测吧！"
                             onAction={this._startBatteryTesting}
@@ -77,11 +82,19 @@ class CPAChargingPage extends Component{
 }
 
 export function mapStateToProps(state) {
-    return state;
+    return {
+        balance: state.wallet.balance,
+        totalCostMoney: state.charging.totalCostMoney,
+        totalTime: state.charging.totalTime,
+        totalElec: state.charging.totalElec,
+        totalNumberOfTimes: state.charging.totalNumberOfTimes,
+    };
 }
 
 export function mapDispatchToProps(dispatch) {
     return {
+        queryChargingInfo: () => dispatch(doQueryChargingInfo()),
+        startScan: (sn) => dispatch(doStartScan()),
         nav: (screenKey) => dispatch(doNav(screenKey)),
     }
 }

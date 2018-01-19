@@ -42,7 +42,7 @@ const CPAHomePage = TabNavigator(
         Me: {
             screen: CPAMePage,
             navigationOptions: {
-                title: '账户',
+                title: '我的',
                 tabBarIcon: ({tintColor, focused}) => {
                     return MeIcon(tintColor, focused);
                 }

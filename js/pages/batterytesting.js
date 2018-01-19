@@ -5,10 +5,11 @@ import CPAScanButton from "../components/scanbutton";
 import KeyValPair from "../components/keyvalpair";
 import {ScreenKey} from "../common/constants";
 import {connect} from "react-redux";
-import {styles, mapDispatchToProps, mapStateToProps} from './chargingpage';
+import {styles} from './chargingpage';
 import Information from "../components/information";
 import {CloseButton, QuestionButton} from "../components/circlebutton";
 import colors from "../common/colors";
+import {doQueryBatteryTestingInfo, startScan} from "../redux/batterytestingactions";
 
 class CPABatteryTestingPage extends Component {
     static defaultProps = {
@@ -17,6 +18,11 @@ class CPABatteryTestingPage extends Component {
         totalTestingElec: 0,
         totalTestingNumberOfTimes: 0,
     };
+
+    componentDidMount() {
+        const {queryBatteryTestingInfo} = this.props;
+        queryBatteryTestingInfo && queryBatteryTestingInfo();
+    }
 
     _showInfo = () => {
         this._information.show();
@@ -27,7 +33,7 @@ class CPABatteryTestingPage extends Component {
         goBack && goBack();
     };
 
-    _startBatteryTesting = () => {
+    _startScan = () => {
         const {nav} = this.props;
         nav && nav(ScreenKey.Scan);
     };
@@ -80,7 +86,7 @@ class CPABatteryTestingPage extends Component {
 
                 <View style={styles.chargingActionContainer}>
                     <CPAScanButton title='扫码检测'
-                                   onScan={this._startBatteryTesting}
+                                   onScan={this._startScan}
                                    btnStyle={styles.testingBtnStyle}/>
                 </View>
 
@@ -93,6 +99,17 @@ class CPABatteryTestingPage extends Component {
             </View>
         );
     }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        queryBatteryTestingInfo: () => dispatch(doQueryBatteryTestingInfo()),
+        startScan: () => dispatch(startScan()),
+    }
+}
+
+function mapStateToProps(state) {
+    return state;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CPABatteryTestingPage);

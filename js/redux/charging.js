@@ -4,6 +4,11 @@ import {
 } from "./chargingactions";
 
 export function charging(state={
+    totalCostMoney: 0,
+    totalCostTime: 0,
+    totalChargingElec: 0,
+    totalChargingCount: 0,
+
     progress: 30,
     soc: 30.08,
     costMoney: 20.05,
@@ -15,7 +20,9 @@ export function charging(state={
 }, action) {
     switch (action.type) {
         case QUERY_CHARGING_INFO_ACTION:
-            return Object.assign({}, state);
+            return Object.assign({}, state, {
+
+            });
         case START_CHARGING_ACTION:
             return Object.assign({}, state);
         case QUERY_CHARGING_REALTIME_INFO_ACTION:
