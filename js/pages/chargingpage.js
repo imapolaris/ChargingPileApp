@@ -7,7 +7,6 @@ import ScanButton from "../components/scanbutton";
 import KeyValPair from "../components/keyvalpair";
 import {AppStatus, ScreenKey, STATUSBAR_HEIGHT} from "../common/constants";
 import Banner from "../components/banner";
-import ActionButton from "../components/actionbutton";
 import {IconType} from "../common/icons";
 import {connect} from "react-redux";
 import {doNav} from "../redux/navactions";

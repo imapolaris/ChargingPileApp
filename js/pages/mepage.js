@@ -32,11 +32,11 @@ class CPAMePage extends Component{
                 icon: {name:'md-heart', type: IconType.Ionicon, color: colors.red},
                 screenKey: ScreenKey.Collect,
             },
-            {
+            /*{
                 title: '我的预约',
                 icon: {name:'pin', type: IconType.SimpleLineIcon, color: colors.tintColor2},
                 screenKey: ScreenKey.MySubscribe,
-            },
+            },*/
             {
                 title: '车辆信息',
                 icon: {name:'md-car', type: IconType.Ionicon, color: colors.goldenrod},

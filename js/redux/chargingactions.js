@@ -1,4 +1,4 @@
-import {prompt, ToastBL, ToastBS} from "../common/functions";
+import {ToastBS} from "../common/functions";
 import {startCharging} from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doChangeAppStatus} from "./appactions";
@@ -68,12 +68,12 @@ export function doStartCharging(sn) {
                     dispatch(doBack());
                     dispatch(doNav(ScreenKey.InCharging));
                 } else {
-                    ToastBL(`启动充电失败：${ret.message}`);
+                    ToastB(`启动充电失败：${ret.message}`);
                 }
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());
-                ToastBL(`启动充电失败：${err}`);
+                ToastBS(`启动充电失败：${err}`);
             });
     }
 }

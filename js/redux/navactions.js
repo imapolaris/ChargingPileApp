@@ -1,5 +1,6 @@
 import {ScreenKey} from "../common/constants";
 import {NavigationActions} from "react-navigation";
+import {ToastBL} from "../common/functions";
 
 export const GO_BACK_ACTION = 'GO_BACK';
 
@@ -19,6 +20,7 @@ export function doNav(screenKey, params) {
                 if (logined) {
                     dispatch(NavigationActions.navigate({routeName: screenKey, params}));
                 } else {
+                    ToastBL('请先登录！');
                     dispatch(NavigationActions.navigate({routeName: ScreenKey.Login}))
                 }
                 break;

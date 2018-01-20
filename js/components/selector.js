@@ -5,10 +5,12 @@ import {Modal, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import PropTypes from 'prop-types';
 import {ActiveOpacity, screenWidth, WhichMapApp} from "../common/constants";
 import colors from "../common/colors";
-import {Divider} from "react-native-elements";
+import {Divider, Icon} from "react-native-elements";
 import {gotoNavigation} from "../common/functions";
 import {selectFromLibrary, takePicture} from "./avatarpicker";
-import StationItem from "./stationitem";
+import {shadowStyle} from "../common/styles";
+import KeyValPair from "./keyvalpair";
+import {IconType} from "../common/icons";
 
 class Selector extends Component{
     constructor(props) {
@@ -75,8 +77,8 @@ class Selector extends Component{
                                               onPress={this._hide}/>
                     }
 
-                    <View style={styles.contentContainer}>
-                        <View style={styles.content}>
+                    <View style={[styles.contentContainer, shadowStyle]}>
+                        <View style={[styles.content]}>
                             <View style={styles.titleContainer}>
                                 <Text style={styles.titleText}>{title}</Text>
                             </View>
@@ -216,7 +218,8 @@ export class StationSelector extends Component{
                 name:'',
                 address: '',
                 elecPrice: 0,
-            }
+            },
+            callback: null,
         };
     }
 
@@ -224,26 +227,27 @@ export class StationSelector extends Component{
         this.setState({visible: false});
     };
 
-    _action = () => {
-        this._hide();
-        const {onAction} = this.props;
-        onAction && onAction();
-    };
-
-    _beforeMapNavigate = () => {
-        this._hide();
-    };
-
-    show(visible: Boolean, station: Object) {
+    show(station: Object, callback) {
         this.setState({
-            visible,
-            station
+            visible: true,
+            station,
+            callback
         });
     }
 
+    _showMapNavigator = () => {
+        this._hide();
+
+        const {address} = this.props;
+        const {callback} = this.state;
+        callback && callback(address);
+    };
+
     render() {
         const {visible} = this.state;
-        const {name, address, elecPrice} = this.state.station;
+        const {name, address, elecPrice, numbers} = this.state.station;
+        const {onAction, containerStyle} = this.props;
+        const kvStyle = {containerStyle: styles.containerStyle, titleStyle: styles.titleStyle, valueStyle: styles.valueStyle};
 
         return (
             <Modal animationType={'slide'}
@@ -256,14 +260,43 @@ export class StationSelector extends Component{
                     <TouchableOpacity style={styles.placeholder}
                                       onPress={this._hide}/>
 
-                    <View style={styles.content}>
-                        <StationItem containerStyle={styles.stationItemContainerStyle}
-                                     name={name}
-                                     address={address}
-                                     elecprice={elecPrice}
-                                     onAction={this._action}
-                                     beforeMapNavigate={this._beforeMapNavigate} />
+                    <View style={[styles.content, shadowStyle]}>
+                        <TouchableOpacity style={[styles.station, containerStyle]}
+                                          activeOpacity={ActiveOpacity}
+                                          onPress={onAction}>
+                            <Text style={styles.name} numberOfLines={1}>
+                                {name}
+                            </Text>
+                            <Divider/>
+                            <View style={styles.infoContainer}>
+                                <KeyValPair horizontal={true} title="电价：" val={`${elecPrice} 元`}
+                                            {...kvStyle} />
+                                <View style={{flexDirection: 'row'}}>
+                                    <KeyValPair horizontal={true} title="直流：" val={numbers}
+                                                {...kvStyle} />
+
+                                    <KeyValPair horizontal={true} title="交流：" val={numbers}
+                                                {...kvStyle} />
+                                </View>
+                            </View>
+                            <Text style={styles.address} numberOfLines={2}>
+                                地址：{address}
+                            </Text>
+                        </TouchableOpacity>
                     </View>
+                </View>
+
+                <View style={styles.navigateContainer} pointerEvents="box-none">
+                    <TouchableOpacity style={styles.navigateBtn}
+                                      onPress={this._showMapNavigator}
+                                      activeOpacity={ActiveOpacity}>
+                        <Icon type={IconType.Ionicon} name="md-navigate" size={20} color={colors.white} />
+                        <Text style={styles.navigateBtnText}>
+                            导航
+                        </Text>
+
+
+                    </TouchableOpacity>
                 </View>
             </Modal>
         );
@@ -275,7 +308,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-end',
-        backgroundColor: "rgba(0,0,0,0.4)",
+        backgroundColor: "rgba(0,0,0,0)",
     },
     placeholder: {
         flex: 1,
@@ -291,7 +324,7 @@ const styles = StyleSheet.create({
     },
     titleText: {
         color: "#999999",
-        fontSize: 14,
+        fontSize: 16,
     },
     button: {
         height: 57,
@@ -301,6 +334,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     contentContainer: {
+        borderWidth: 0.1,
+        borderColor: '#c3c3c3',
         alignItems: 'center',
         justifyContent: 'flex-end'
     },
@@ -313,6 +348,8 @@ const styles = StyleSheet.create({
         width:screenWidth,
         alignSelf:'center',
         marginTop:8,
+        borderWidth:0.1,
+        borderColor: '#c3c3c3',
     },
     cancelButtonText: {
         fontSize: 17,
@@ -325,6 +362,8 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         borderBottomLeftRadius: 5,
         borderBottomRightRadius: 5,
+        borderWidth: 0.1,
+        borderColor: '#c3c3c3',
     },
     itemButton: {
         flex: 1,
@@ -344,4 +383,54 @@ const styles = StyleSheet.create({
         height: 120,
         backgroundColor: colors.white,
     },
+    station: {
+        height: 200,
+
+        paddingLeft: 15,
+        paddingRight: 15,
+    },
+    name: {
+        fontSize: 18,
+        color: colors.primary1,
+        paddingTop: 15,
+        paddingBottom: 15,
+    },
+    infoContainer: {
+        flex: 1,
+    },
+    navigateContainer: {
+        position: "absolute",
+        justifyContent: "flex-end",
+        alignItems: 'flex-end',
+        bottom: 170,
+        left: 10,
+        right: 10,
+        top: 0,
+    },
+    navigateBtn: {
+        width: 55,
+        height: 55,
+        backgroundColor: colors.primary1,
+        marginRight: 20,
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    navigateBtnText:{
+        fontSize: 14,
+        color: colors.white,
+    },
+    titleStyle: {
+        color: colors.grey3,
+        width: 50,
+    },
+    valueStyle: {
+        color: colors.grey3
+    },
+    address: {
+        fontSize: 16,
+        paddingTop: 10,
+        paddingBottom: 10,
+        color: colors.grey3,
+    }
 });

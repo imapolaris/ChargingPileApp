@@ -15,10 +15,8 @@ class MapNavButton extends Component{
     };
 
     _showMapNavigator = () => {
-        const {address, beforeMapNavigate} = this.props;
-
+        const {address} = this.props;
         this._mapSelector.show(null, address);
-        beforeMapNavigate && beforeMapNavigate();
     };
 
     render() {

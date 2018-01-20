@@ -30,7 +30,9 @@ class CPAStationMapPage extends Component{
         const {requestOneStationInfo} = this.props;
         requestOneStationInfo(e)
             .then(ret=>{
-                this._stationSelector.show(true, ret.data);
+                this._stationSelector.show(ret.data, (address)=>{
+                    this._mapSelector.show(null, address);
+                });
             })
     };
 
@@ -38,7 +40,7 @@ class CPAStationMapPage extends Component{
         const {
             trafficEnabled, currentLocation, enableTraffic,
             requestStationMarkers,
-            station, markers, isRefreshing, nav
+            markers, isRefreshing, nav
         } = this.props;
 
         const actionButtonStyle = {
@@ -99,6 +101,8 @@ class CPAStationMapPage extends Component{
                 {
                     this._renderMapView()
                 }
+
+                <MapSelector ref={self=>this._mapSelector=self} />
             </View>
         );
     }

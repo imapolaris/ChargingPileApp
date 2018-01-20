@@ -1,6 +1,7 @@
 import {getAllStationsWithBriefInfo, getSingleStation} from "../common/webapi";
 import {Geolocation} from 'react-native-baidu-map';
 import {completeRequestWeb, startRequestWeb} from "./webactions";
+import {ToastBS} from "../common/functions";
 
 export const LOCATING_ACTION = 'LOCATING'; // 定位
 export const GEOCODE_COMPLETED_ACTION = 'GEOCODE_COMPLETED'; // 地理编码
@@ -20,12 +21,12 @@ function doLocating(position) {
 
 export function getCurrentPosition() {
     return dispatch => Geolocation.getCurrentPosition()
-        .then(data=>{
-                dispatch(doLocating(data));
-            },
-            error=>{
-                throw new Error(error);
-            });
+        .then(data => {
+            dispatch(doLocating(data));
+        })
+        .catch(err => {
+            ToastBS(`error: ${err}`);
+        });
 }
 
 function geocodeCompleted(position){
@@ -43,20 +44,22 @@ export function doGeocode(city) {
             .then(position => {
                 dispatch(completeRequestWeb());
 
-                if (position !== null && position !== undefined) {
-                    //ToastAndroidBS('无法解析该地址！');
+                const {longitude, latitude} = position;
+                if ((longitude !== null && longitude !== undefined)
+                        && (latitude !== null && latitude !== undefined)) {
                     dispatch(geocodeCompleted({
-                        longitude: position.longitude,
-                        latitude: position.latitude,
+                        longitude: longitude,
+                        latitude: latitude,
                         city: city,
                     }));
+                } else {
+                    ToastBS('无法解析该地址！');
                 }
             })
             .catch(error => {
-                console.log(`cannot analyse the address, error: ${error}`);
-                //ToastAndroidBS('无法解析该地址！');
-
                 dispatch(completeRequestWeb());
+                console.log(`error: ${error}`);
+                ToastBS(`error: ${error}`);
             });
     }
 }
@@ -121,9 +124,8 @@ export function doRequestStationMarkers(filter) {
             })
             .catch(error=>{
                 dispatch(errorRequestStationMarkers());
-
                 console.log(error);
-                throw new Error(error);
+                ToastBS(`error: ${error}`);
             });
     }
 }
@@ -133,7 +135,7 @@ export function doRequestOneStationInfo(e) {
 
     let info = e.title.split(',');
     if (info.length <= 1) {
-        //prompt('信息错误！');
+        ToastBS('无法请求该电站信息！');
         return;
     }
     let id = info[0];
@@ -149,7 +151,7 @@ export function doRequestOneStationInfo(e) {
             .catch(error=>{
                 dispatch(completeRequestWeb());
                 console.log(error);
-                throw new Error(error);
+                ToastBS(`error: ${error}`);
             });
     }
 }

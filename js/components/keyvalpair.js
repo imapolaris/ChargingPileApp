@@ -7,7 +7,7 @@ import {screenWidth} from "../common/constants";
 
 class KeyValPair extends Component{
     render() {
-        const {horizontal, containerStyle, title, titleStyle, val, valueStyle, showDivider} = this.props;
+        const {horizontal, containerStyle, title, titleStyle, val, valueStyle, showDivider, lines} = this.props;
 
         return (
             <View style={[styles.container, horizontal ? styles.containerHorizontal : null, containerStyle]}>
@@ -15,7 +15,7 @@ class KeyValPair extends Component{
                     <Text style={[styles.text, styles.titleStyle, horizontal ? styles.titleStyleHorizontal : null, titleStyle]}>
                         {title}
                     </Text>
-                    <Text style={[styles.text, styles.valueStyle, valueStyle]}>
+                    <Text style={[styles.text, styles.valueStyle, valueStyle]} numberOfLines={lines}>
                         {val}
                     </Text>
                 </View>
@@ -39,6 +39,7 @@ KeyValPair.defaultProps = {
     title: '标题',
     val: '内容',
     showDivider: true,
+    lines: 1,
 };
 
 const styles = StyleSheet.create({
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     },
     titleStyleHorizontal: {
         fontSize: 16,
-        minWidth: 100,
+        width: 100,
     },
     valueStyle: {
         fontSize: 16,

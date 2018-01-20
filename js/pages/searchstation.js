@@ -12,6 +12,7 @@ import {clearSearchHistoryStations, getSearchHistoryStations, updateSearchHistor
 import {getStationsByName} from "../common/webapi";
 import {connect} from "react-redux";
 import {doGeocode} from "../redux/mapactions";
+import {doBack} from "../redux/navactions";
 
 class CPASearchStationPage extends Component{
     constructor(props) {
@@ -65,8 +66,8 @@ class CPASearchStationPage extends Component{
             geocode && geocode(station.address);
         }
 
-        const {goBack} = this.props.navigation;
-        goBack && goBack();
+        const {back} = this.props;
+        back && back();
     };
 
     _updateSearchHistoryStations(searchRecord) {
@@ -256,6 +257,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         geocode: (city) => dispatch(doGeocode(city)),
+        back: () => dispatch(doBack()),
     };
 }
 
