@@ -1,8 +1,9 @@
-import {prompt, ToastBS} from "../common/functions";
+import {prompt, ToastBL, ToastBS} from "../common/functions";
 import {startCharging} from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doChangeAppStatus} from "./appactions";
-import {AppStatus} from "../common/constants";
+import {AppStatus, ScanAction, ScreenKey} from "../common/constants";
+import {doBack, doNav} from "./navactions";
 
 export const QUERY_CHARGING_INFO_ACTION = 'CHARGING_INFO';
 export const START_CHARGING_ACTION = 'START_CHARGING';
@@ -28,8 +29,21 @@ export function doQueryChargingInfo() {
     }
 }
 
-export function doStartScan() {
+export function doStartScanCharging() {
+    return (dispatch, getState) => {
+        /*const {balance} = getState().wallet;
+        if (balance <= 0) {
+            prompt('余额不足，请先充值！');
+            return;
+        }*/
 
+        /*if (balance <= 20) {
+            prompt('余额较低，请注意！');
+            return;
+        }*/
+
+        dispatch(doNav(ScreenKey.Scan, {action: ScanAction.Charging}));
+    }
 }
 
 function startChargingCompleted() {
@@ -39,18 +53,7 @@ function startChargingCompleted() {
 }
 
 export function doStartCharging(sn) {
-    return (dispatch, getState) => {
-        const {balance} = getState().wallet;
-        if (balance <= 0) {
-            prompt('余额不足，请先充值！');
-            return;
-        }
-
-        /*if (balance <= 20) {
-            prompt('余额较低，请注意！');
-            return;
-        }*/
-
+    return (dispatch) => {
         dispatch(startRequestWeb('启动充电中，请稍后！'));
         startCharging(sn)
             .then(ret=>{
@@ -61,13 +64,16 @@ export function doStartCharging(sn) {
 
                     // app充电中
                     dispatch(doChangeAppStatus(AppStatus.Charging));
+
+                    dispatch(doBack());
+                    dispatch(doNav(ScreenKey.InCharging));
                 } else {
-                    ToastBS(`启动充电失败：${ret.message}`);
+                    ToastBL(`启动充电失败：${ret.message}`);
                 }
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());
-                ToastBS(`启动充电失败：${err}`);
+                ToastBL(`启动充电失败：${err}`);
             });
     }
 }
@@ -89,5 +95,11 @@ function finishChargingCompleted() {
 }
 
 export function doFinishCharging() {
+    return (dispatch, getState) => {
+        //dispatch(startRequestWeb());
+        dispatch(doChangeAppStatus(AppStatus.Normal));
 
+        dispatch(doBack());
+        dispatch(doNav(ScreenKey.ChargingBilling));
+    }
 }

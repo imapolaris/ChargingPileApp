@@ -75,3 +75,8 @@ export const UserCategory = {
     Personal: 0, // 个人用户
     Group: 1, // 集团用户
 };
+
+export const ScanAction = {
+    Charging: 0,
+    BatteryTesting: 1,
+};

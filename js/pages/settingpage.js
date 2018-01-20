@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 import colors from "../common/colors";
 import {Button, List, ListItem} from "react-native-elements";
-import {ScreenKey} from "../common/constants";
+import {AppStatus, ScreenKey} from "../common/constants";
 import {connect} from "react-redux";
 import {doNav} from "../redux/navactions";
 import {doSwitchMessageNotice} from "../redux/systemactions";
@@ -65,7 +65,7 @@ class CPASettingPage extends Component {
             }
         ];
 
-        const {logined, notice, switchMessageNotice} = this.props;
+        const {logined, notice, switchMessageNotice, appStatus} = this.props;
 
         return (
             <View style={styles.container}>
@@ -103,13 +103,17 @@ class CPASettingPage extends Component {
                     }
                 </List>
 
-                <View style={styles.buttonContainer}>
-                    <Button title="退出登录"
-                            onPress={this._quitMe}
-                            style={styles.button}
-                            disabled={!logined}
-                            disabledStyle={styles.disabled} />
-                </View>
+                {
+                    appStatus === AppStatus.Normal ?
+                        <View style={styles.buttonContainer}>
+                            <Button title="退出登录"
+                                    onPress={this._quitMe}
+                                    style={styles.button}
+                                    disabled={!logined}
+                                    disabledStyle={styles.disabled} />
+                        </View>
+                        : null
+                }
             </View>
         );
     }
@@ -119,6 +123,7 @@ function mapStateToProps(state) {
     return {
         logined: state.user.logined,
         notice: state.system.notice,
+        appStatus: state.app.status,
     };
 }
 

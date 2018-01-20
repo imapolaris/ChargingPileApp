@@ -44,7 +44,6 @@ class Root extends Component{
 
     render() {
         const {isFetching, waitingLabel, dispatch, nav} = this.props;
-        console.log(nav);
 
         return (
             <View style={styles.container}>

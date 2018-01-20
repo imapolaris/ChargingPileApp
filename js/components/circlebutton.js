@@ -18,7 +18,7 @@ export class CloseButton extends Component {
 
         return (
             <ActionButton showText={false}
-                          icon={<Icon type={IconType.Ionicon} name="md-close" size={24} color={buttonColor || colors.grey}/>}
+                          icon={<Icon type={IconType.Ionicon} name="md-close" size={22} color={buttonColor || colors.grey}/>}
                           onAction={onAction}
                           position={position}
                           containerStyle={styles.actionButtonContainerStyle}
@@ -37,7 +37,7 @@ export class QuestionButton extends Component {
 
         return (
             <ActionButton showText={false}
-                          icon={<Icon type={IconType.Ionicon} name="md-help" size={24} color={colors.grey}/>}
+                          icon={<Icon type={IconType.Ionicon} name="md-help" size={22} color={colors.grey}/>}
                           onAction={onAction}
                           position={position}
                           containerStyle={styles.actionButtonContainerStyle}

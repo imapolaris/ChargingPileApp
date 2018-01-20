@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Divider} from 'react-native-elements';
-import CPAScanButton from "../components/scanbutton";
+import ScanButton from "../components/scanbutton";
 import KeyValPair from "../components/keyvalpair";
-import {ScreenKey} from "../common/constants";
 import {connect} from "react-redux";
 import {styles} from './chargingpage';
 import Information from "../components/information";
 import {CloseButton, QuestionButton} from "../components/circlebutton";
 import colors from "../common/colors";
-import {doQueryBatteryTestingInfo, startScan} from "../redux/batterytestingactions";
+import {doQueryBatteryTestingInfo, startScanBatteryTesting} from "../redux/batterytestingactions";
+import {doBack} from "../redux/navactions";
 
 class CPABatteryTestingPage extends Component {
     static defaultProps = {
@@ -29,13 +29,8 @@ class CPABatteryTestingPage extends Component {
     };
 
     _back = () => {
-        const {goBack} = this.props.navigation;
-        goBack && goBack();
-    };
-
-    _startScan = () => {
-        const {nav} = this.props;
-        nav && nav(ScreenKey.Scan);
+        const {back} = this.props;
+        back && back();
     };
 
     _renderFlowInfo = () => {
@@ -57,7 +52,8 @@ class CPABatteryTestingPage extends Component {
     render() {
         const {
             totalTestingCostMoney, totalTestingTime,
-            totalTestingElec, totalTestingNumberOfTimes
+            totalTestingElec, totalTestingNumberOfTimes,
+            startScan,
         } = this.props;
 
 
@@ -85,8 +81,8 @@ class CPABatteryTestingPage extends Component {
                 </View>
 
                 <View style={styles.chargingActionContainer}>
-                    <CPAScanButton title='扫码检测'
-                                   onScan={this._startScan}
+                    <ScanButton title='扫码检测'
+                                   onAction={()=>startScan && startScan()}
                                    btnStyle={styles.testingBtnStyle}/>
                 </View>
 
@@ -104,7 +100,8 @@ class CPABatteryTestingPage extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         queryBatteryTestingInfo: () => dispatch(doQueryBatteryTestingInfo()),
-        startScan: () => dispatch(startScan()),
+        startScan: () => dispatch(startScanBatteryTesting()),
+        back: () => dispatch(doBack()),
     }
 }
 

@@ -6,7 +6,7 @@ export function app(state={
 }, action) {
     switch (action.type) {
         case ON_APP_STATUS_CHANGED_ACTION:
-            return Object.assign({}, state, action.status);
+            return Object.assign({}, state, {status: action.status});
         default:
             return state;
     }

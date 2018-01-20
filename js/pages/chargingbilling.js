@@ -5,10 +5,13 @@ import {StyleSheet, Text, View} from 'react-native';
 import KeyValPair from "../components/keyvalpair";
 import colors from "../common/colors";
 import {Button} from "react-native-elements";
+import {connect} from "react-redux";
+import {doBack} from "../redux/navactions";
 
 class CPAChargingBillingPage extends Component{
     render() {
         const kvStyle = {containerStyle: styles.kvContainerStyle, titleStyle: styles.titleStyle, valueStyle: styles.valueStyle};
+        const {back} = this.props;
 
         return (
             <View style={styles.container}>
@@ -25,13 +28,19 @@ class CPAChargingBillingPage extends Component{
                 <Button title="确认"
                         buttonStyle={styles.button}
                         containerViewStyle={styles.buttonContainer}
-                        onPress={()=>alert('ok')} />
+                        onPress={()=>back && back()} />
             </View>
         );
     }
 }
 
-export default CPAChargingBillingPage;
+function mapDispatchToProps(dispatch) {
+    return {
+        back: (screenKey) => dispatch(doBack()),
+    }
+}
+
+export default connect((state)=>state, mapDispatchToProps)(CPAChargingBillingPage);
 
 const styles = StyleSheet.create({
     container: {

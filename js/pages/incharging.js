@@ -6,15 +6,14 @@ import KeyValPair from "../components/keyvalpair";
 import {CircularProgress} from 'react-native-circular-progress';
 import {Button} from "react-native-elements";
 import colors from "../common/colors";
-import {ScreenKey, screenWidth} from "../common/constants";
+import {screenWidth} from "../common/constants";
 import {connect} from "react-redux";
-import {doFinishCharging, doQueryChargingRealtimeInfo} from "../redux/chargingactions";
-import {doNav} from "../redux/navactions";
+import {doFinishCharging} from "../redux/chargingactions";
 
 class CPAInChargingPage extends Component {
     render() {
         const {progress, soc, costMoney, chargingElec,
-            costTime, restTime, voltage, electric, nav} = this.props;
+            costTime, restTime, voltage, electric, finishCharging} = this.props;
         const kvstyles = {
             containerStyle: styles.containerStyle,
             titleStyle: styles.titleStyle,
@@ -67,9 +66,7 @@ class CPAInChargingPage extends Component {
                 <View style={styles.buttonContainer}>
                     <Button title="结束充电"
                             buttonStyle={styles.button}
-                            onPress={() => {
-                                nav && nav(ScreenKey.ChargingBilling);
-                            }}/>
+                            onPress={() => {finishCharging && finishCharging()}}/>
                 </View>
             </View>
         );
@@ -91,9 +88,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        queryChargingRealtimeInfo: () => dispatch(doQueryChargingRealtimeInfo()),
         finishCharging: () => dispatch(doFinishCharging()),
-        nav: (screenKey) => dispatch(doNav(screenKey)),
     }
 }
 

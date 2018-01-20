@@ -40,7 +40,7 @@ CPAActiveIndicator.defaultProps = {
 const styles = StyleSheet.create({
     container: {
         height: 100,
-        width: 150,
+        width: 180,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'rgba(0,0,0, 1)',
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     },
     label: {
         flex: 1,
-        fontSize: 15,
+        fontSize: 14,
         color: colors.white,
         marginTop: 10,
     }

@@ -26,7 +26,7 @@ import CPAInvoiceInfoPage from "../pages/invoiceinfo";
 import CPALocatingCityPage from "../pages/locatingcity";
 import CPASearchStationPage from "../pages/searchstation";
 import NavButton from "./navbutton";
-import {ScreenKey} from "../common/constants";
+import {ScanAction, ScreenKey} from "../common/constants";
 import CPAPersonalInfoPage from "../pages/personalinfo";
 import CPABatteryTestingPage from "../pages/batterytesting";
 import CPAResetPwdPage from '../pages/resetpwd';
@@ -51,9 +51,9 @@ const CPAStackNavigator = StackNavigator(
         },
         Scan: {
             screen: CPAScanPage,
-            navigationOptions: {
-                title: '扫码'
-            }
+            navigationOptions: ({navigation}) => ({
+                title: '扫码' + (navigation.state.params.action === ScanAction.Charging ? '充电' : '检测'),
+            }),
         },
         StationList: {
             screen: CPAStationListPage,

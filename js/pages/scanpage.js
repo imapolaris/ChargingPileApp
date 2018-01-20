@@ -3,13 +3,15 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View, Animated, TextInput, Vibration, Keyboard} from 'react-native';
 import Camera from 'react-native-camera';
-import {ActiveOpacity, ScreenKey, screenWidth} from "../common/constants";
+import {ActiveOpacity, ScanAction, screenWidth} from "../common/constants";
 import colors from "../common/colors";
 import {Icon, Divider, Button} from "react-native-elements";
 import {IconType} from "../common/icons";
 import {textInputStyle} from "../common/styles";
 import {connect} from "react-redux";
-import {doNav} from "../redux/navactions";
+import {doStartCharging} from "../redux/chargingactions";
+import {validSerialNumber} from "../common/functions";
+import {doStartBatteryTesting} from "../redux/batterytestingactions";
 
 const SNCount = 10;
 const ScanInterval = 3000; // 扫描成功后，间隔3s允许再次处理
@@ -21,6 +23,7 @@ class CPAScanPage extends Component {
             torchMode: Camera.constants.TorchMode.off,
             sn: '',
             scanning: false,
+            action: 0,
         };
     }
 
@@ -29,6 +32,10 @@ class CPAScanPage extends Component {
     }
 
     componentDidMount() {
+        this.setState({
+            action: this.props.navigation.state.params.action
+        });
+
         this._timer = setInterval(() => {
             this._animatedValue.setValue(0);
             this._startScanStrip();
@@ -77,7 +84,9 @@ class CPAScanPage extends Component {
     };
 
     _onScanCompleted = (e) => {
-        if (!this.state.scanning) {
+        const {scanning} = this.state;
+
+        if (!scanning) {
             this._onScanningStatusChanged(true);
 
             try {
@@ -89,7 +98,7 @@ class CPAScanPage extends Component {
 
                 // verify the serial number.
                 if (/*validSerialNumber(sn)*/true) {
-                    //this._startCharging(sn);
+                    this._startAction(sn);
                 } else {
                     //prompt('编号不正确！');
                 }
@@ -109,10 +118,18 @@ class CPAScanPage extends Component {
         Keyboard.dismiss();
 
         let {sn} = this.state;
-        //this._startCharging(sn);
+        this._startAction(sn);
+    };
 
-        const {nav} = this.props;
-        nav && nav(ScreenKey.InCharging)
+    _startAction = (sn) => {
+        const {action} = this.state;
+        if (action === ScanAction.Charging) {
+            const {startCharging} = this.props;
+            startCharging && startCharging(sn);
+        } else {
+            const {startBatteryTesting} = this.props;
+            startBatteryTesting && startBatteryTesting(sn);
+        }
     };
 
     _renderScanView = () => {
@@ -245,7 +262,8 @@ class CPAScanPage extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        nav: (screenKey) => dispatch(doNav(screenKey)),
+        startCharging: (sn) => dispatch(doStartCharging(sn)),
+        startBatteryTesting: (sn) => dispatch(doStartBatteryTesting(sn)),
     }
 }
 
