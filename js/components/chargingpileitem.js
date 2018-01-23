@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     },
     info: {
         fontSize: 14,
+        paddingTop: 3,
     },
     divider: {
         backgroundColor: '#C3C3C3',

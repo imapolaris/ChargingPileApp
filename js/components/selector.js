@@ -238,9 +238,8 @@ export class StationSelector extends Component{
     _showMapNavigator = () => {
         this._hide();
 
-        const {address} = this.props;
-        const {callback} = this.state;
-        callback && callback(address);
+        const {station, callback} = this.state;
+        callback && callback({longitude: station.longitude, latitude: station.latitude});
     };
 
     render() {
@@ -255,7 +254,6 @@ export class StationSelector extends Component{
                    visible={visible}
                    onShow={() => {}}
                    onRequestClose={() => {}}>
-
                 <View style={styles.container}>
                     <TouchableOpacity style={styles.placeholder}
                                       onPress={this._hide}/>
@@ -294,8 +292,6 @@ export class StationSelector extends Component{
                         <Text style={styles.navigateBtnText}>
                             导航
                         </Text>
-
-
                     </TouchableOpacity>
                 </View>
             </Modal>

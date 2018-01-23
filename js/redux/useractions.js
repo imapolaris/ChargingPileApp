@@ -37,7 +37,7 @@ export function doLogin(phoneNumber, pwd, userCategory) {
                     dispatch(doBack());
 
                     // 查询用户充电统计信息
-                    dispatch(doQueryChargingInfo());
+                    // dispatch(doQueryChargingInfo());
                 } else {
                     ToastBS(ret.message);
 

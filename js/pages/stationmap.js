@@ -1,12 +1,10 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, View, ScrollView} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import CPASearchBar from "../components/searchbar";
 import {
     MapView,
-    MapTypes,
-    Geolocation
 } from 'react-native-baidu-map';
 import colors from "../common/colors";
 import {ScreenKey} from "../common/constants";
@@ -14,8 +12,7 @@ import ActionButton from "../components/actionbutton";
 import {IconType} from "../common/icons";
 import {Icon} from "react-native-elements";
 import {connect} from "react-redux";
-import {
-    doEnableTraffic, getCurrentPosition, doRequestStationMarkers, doRequestOneStationInfo} from "../redux/mapactions";
+import {doEnableTraffic, getCurrentPosition, doRequestStationMarkers, doRequestOneStationInfo} from "../redux/mapactions";
 import {MapSelector, StationSelector} from "../components/selector";
 import {doNav} from "../redux/navactions";
 

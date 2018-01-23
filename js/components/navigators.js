@@ -17,7 +17,7 @@ import CPAUserAgreementPage from "../pages/useragreement";
 import CPAAboutUsPage from "../pages/aboutus";
 import CPAStationListPage from "../pages/stationlist";
 import CPAFeedbackPage from "../pages/feedback";
-import CPAStationInfoPage from "../pages/stationinfo";
+import CPAStationInfoPage from "../pages/stationnavigator";
 import CPAFilterPage from "../pages/filterpage";
 import CPAMySubscribePage from "../pages/mysubscribe";
 import CPATestingReportPage from "../pages/testingreport";

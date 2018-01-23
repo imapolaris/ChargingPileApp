@@ -9,7 +9,7 @@ import {
 
 export function map(state={
     mapType: MapTypes.NORMAL,
-    zoom: 15,
+    zoom: 13,
     center: {
         longitude: 116.404185, // 中间点坐标
         latitude: 39.91491,

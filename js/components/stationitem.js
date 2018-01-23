@@ -74,8 +74,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     info: {
-        fontSize: 13,
+        fontSize: 14,
         color: colors.grey3,
+        paddingTop: 3,
     },
     elecprice: {
         fontSize: 20,
