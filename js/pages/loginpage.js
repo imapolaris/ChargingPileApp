@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {StyleSheet, TextInput, TouchableOpacity, View, Text, Keyboard} from 'react-native';
 import {Button} from "react-native-elements";
 import colors, {GPlaceholderTextColor} from "../common/colors";
-import {ActiveOpacity, ScreenKey, screenWidth, UserCategory} from "../common/constants";
+import {ActiveOpacity, ScreenKey, screenWidth, UserAction, UserCategory} from "../common/constants";
 import {textInputStyle} from "../common/styles";
 import {connect} from "react-redux";
 import {doNav} from "../redux/navactions";
@@ -98,7 +98,7 @@ class CPALoginPage extends Component{
 
                     <TouchableOpacity style={styles.forgotPwdContainer}
                                       activeOpacity={ActiveOpacity}
-                                      onPress={()=>nav && nav(ScreenKey.ResetPwd)}>
+                                      onPress={()=>nav && nav(ScreenKey.ResetPwd, {action: UserAction.ResetPwd})}>
                         <Text textDecorationLine="underline"
                               style={styles.text}>
                             忘记密码?
@@ -113,7 +113,7 @@ class CPALoginPage extends Component{
 function mapDispatchToProps(dispatch) {
     return {
         login: (phoneNumber, pwd, checkWay) => dispatch(doLogin(phoneNumber, pwd, checkWay)),
-        nav: (screenKey) => dispatch(doNav(screenKey)),
+        nav: (screenKey, params) => dispatch(doNav(screenKey, params)),
     };
 }
 

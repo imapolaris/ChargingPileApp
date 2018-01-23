@@ -80,3 +80,8 @@ export const ScanAction = {
     Charging: 0,
     BatteryTesting: 1,
 };
+
+export const UserAction = {
+    Register: 0,
+    ResetPwd: 1,
+};

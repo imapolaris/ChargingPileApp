@@ -3,9 +3,6 @@ import {GO_BACK_ACTION} from "./navactions";
 import {StateUtils} from 'react-navigation';
 
 export function nav(state, action) {
-    console.log(action);
-    console.log(state);
-
     let nextState = null;
     switch (action.type) {
         case GO_BACK_ACTION:

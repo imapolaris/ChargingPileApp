@@ -2,6 +2,7 @@ import {getAllStationsWithBriefInfo, getSingleStation} from "../common/webapi";
 import {Geolocation} from 'react-native-baidu-map';
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {ToastBS} from "../common/functions";
+import {doBack} from "./navactions";
 
 export const LOCATING_ACTION = 'LOCATING'; // 定位
 export const GEOCODE_COMPLETED_ACTION = 'GEOCODE_COMPLETED'; // 地理编码
@@ -76,6 +77,7 @@ export function doChooseCity(city) {
         dispatch(chooseCityCompleted(city));
 
         dispatch(doGeocode(city));
+        dispatch(doBack());
     }
 }
 

@@ -68,7 +68,7 @@ export function doStartCharging(sn) {
                     dispatch(doBack());
                     dispatch(doNav(ScreenKey.InCharging));
                 } else {
-                    ToastB(`启动充电失败：${ret.message}`);
+                    ToastBS(`启动充电失败：${ret.message}`);
                 }
             })
             .catch(err=>{

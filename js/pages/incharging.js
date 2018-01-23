@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     },
     titleStyle: {
         fontSize: 16,
-        minWidth: 90,
+        width: 80,
         color: colors.grey3,
     },
     valStyle: {

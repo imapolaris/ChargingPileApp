@@ -1,7 +1,7 @@
-import {changePwd, login, updateUserProfile} from "../common/webapi";
+import {changePwd, login, register, resetPwd, sendMessage, updateUserProfile} from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doBack} from "./navactions";
-import {ToastBS} from "../common/functions";
+import {ToastBL, ToastBS} from "../common/functions";
 import {doQueryChargingInfo} from "./chargingactions";
 
 export const LOGIN_SUCCESS_ACTION = 'LOGIN_SUCCESS'; // 登录成功
@@ -63,15 +63,96 @@ export function doLogout() {
     };
 }
 
-export function doRegister(phoneNumber, pwd) {
-    return {
-        type: REGISTER_ACTION,
-        phoneNumber,
-        pwd,
+export function doRegister(phoneNumber, vcode, pwd) {
+    if (!validateInput(phoneNumber, vcode, pwd))
+        return;
+
+    return dispatch => {
+        dispatch(startRequestWeb('正在提交信息，请稍等...'));
+
+        register(phoneNumber, vcode, pwd)
+            .then(ret=>{
+                dispatch(completeRequestWeb());
+
+                if (ret.result === true) {
+                    ToastBS('注册成功，请登录！');
+                } else {
+                    ToastBS(`注册失败: ${ret.message}`);
+                }
+            })
+            .catch(err=>{
+                dispatch(completeRequestWeb());
+                console.log(err);
+                ToastBS(`注册失败: ${err}`);
+            })
     };
 }
 
-export function doResetPwd(oldPwd, newPwd) {
+export function doResetPwd(phoneNumber, vcode, pwd) {
+    if (!validateInput(phoneNumber, vcode, pwd))
+        return;
+
+    return dispatch => {
+        dispatch(startRequestWeb('正在提交信息，请稍等...'));
+
+        resetPwd(phoneNumber, vcode, pwd)
+            .then(ret=>{
+                dispatch(completeRequestWeb());
+
+                if (ret.result === true) {
+                    ToastBS('重置密码成功，请登录！');
+                } else {
+                    ToastBS(`重置密码失败: ${ret.message}`);
+                }
+            })
+            .catch(err=>{
+                dispatch(completeRequestWeb());
+                console.log(err);
+                ToastBS(`重置密码失败: ${err}`);
+            })
+    };
+}
+
+function validateInput(phoneNumber, vCode, pwd){
+    if (phoneNumber.length <= 0 || !validatePhoneNumber(phoneNumber)) {
+        ToastBL('手机号不正确！');
+        return false;
+    }
+
+    if (vCode.length !== 6) {
+        ToastBL('验证码不正确！');
+        return false;
+    }
+
+    if (pwd.length <= 0) {
+        ToastBL('密码不能为空！');
+        return false;
+    }
+
+    return true;
+}
+
+export function doGetVcode(phoneNumber) {
+    return dispatch => {
+        return sendMessage(phoneNumber)
+            .then(ret=>{
+                if (ret.result){
+                    ToastBS('已获取验证码');
+                } else {
+                    ToastBS(`${ret.message}`);
+                }
+
+                return ret.result;
+            })
+            .catch(err=>{
+                ToastBS(`获取验证码失败：${err}`);
+                console.log(err);
+                return false;
+            })
+    }
+}
+
+export function doChangePwd(oldPwd, newPwd) {
     return (dispatch, getState) => {
         const {userId} = getState().user;
         let data = {id: userId, password: oldPwd, newpassword: newPwd};

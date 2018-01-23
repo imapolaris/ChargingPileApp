@@ -26,7 +26,7 @@ import CPAInvoiceInfoPage from "../pages/invoiceinfo";
 import CPALocatingCityPage from "../pages/locatingcity";
 import CPASearchStationPage from "../pages/searchstation";
 import NavButton from "./navbutton";
-import {ScanAction, ScreenKey} from "../common/constants";
+import {ScanAction, ScreenKey, UserAction} from "../common/constants";
 import CPAPersonalInfoPage from "../pages/personalinfo";
 import CPABatteryTestingPage from "../pages/batterytesting";
 import CPAResetPwdPage from '../pages/resetpwd';
@@ -75,7 +75,7 @@ const CPAStackNavigator = StackNavigator(
                     headerRight:(
                         <NavButton label="快速注册"
                                    onNavAction={() => {
-                                       navigation.navigate(ScreenKey.Register);
+                                       navigation.navigate(ScreenKey.Register, {action: UserAction.Register});
                                    }}
                         />
                     ),
@@ -89,7 +89,7 @@ const CPAStackNavigator = StackNavigator(
             }
         },
         ResetPwd: {
-            screen: CPAResetPwdPage,
+            screen: CPARegisterPage,
             navigationOptions: {
                 title: '重置密码'
             }

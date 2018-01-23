@@ -20,7 +20,8 @@ export function doNav(screenKey, params) {
                 if (logined) {
                     dispatch(NavigationActions.navigate({routeName: screenKey, params}));
                 } else {
-                    ToastBL('请先登录！');
+                    if (screenKey !== ScreenKey.PersonalInfo)
+                        ToastBL('请先登录！');
                     dispatch(NavigationActions.navigate({routeName: ScreenKey.Login}))
                 }
                 break;
