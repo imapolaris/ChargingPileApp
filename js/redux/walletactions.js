@@ -1,6 +1,7 @@
 import {aliPay, getWalletBalance, makeOneCharge, wxPay} from "../common/webapi";
 import * as WeChat from "react-native-wechat";
 import Alipay from "react-native-yunpeng-alipay";
+import {completeRequestWeb, startRequestWeb} from "./webactions";
 
 export const QUERY_WALLET_INFO_COMPLETED_ACTION = 'QUERY_WALLET_INFO_COMPLETED';// 查询钱包信息
 export const PAY_BY_WX_COMPLETED_ACTION = 'PAY_BY_WX_COMPLETED';// 微信充值
@@ -15,11 +16,11 @@ function queryWalletInfoCompleted(data) {
 
 export function doQueryWalletInfo() {
     return (dispatch, getState) => {
-        //dispatch(startRequestWeb());
+        dispatch(startRequestWeb('正在加载钱包信息...'));
         const {userId} = getState().user;
         getWalletBalance(userId)
             .then(ret => {
-                //dispatch(completeRequestWeb());
+                dispatch(completeRequestWeb());
                 if (ret.result === true) {
                     dispatch(queryWalletInfoCompleted(ret.data));
                 } else {
@@ -28,7 +29,7 @@ export function doQueryWalletInfo() {
             })
             .catch(error => {
                 console.log(error);
-                //dispatch(completeRequestWeb());
+                dispatch(completeRequestWeb());
             });
     }
 }

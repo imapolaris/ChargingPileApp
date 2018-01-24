@@ -18,7 +18,7 @@ export const ScreenKey = {
     StationInfo: 'StationInfo',
     Login: 'Login',
     Register: 'Register',
-    ResetPwd: 'ResetPwd',
+    ChangePwd: 'ChangePwd',
     PersonalInfo: 'PersonalInfo',
     Wallet: 'Wallet',
     InvoiceInfo: 'InvoiceInfo',
@@ -42,7 +42,7 @@ export const ScreenKey = {
     ChargingBilling: 'ChargingBilling',
 };
 
-export const ActiveOpacity = 0.8;
+export const ActiveOpacity = 0.6;
 
 export const APPBAR_HEIGHT = Platform.OS === IOSPlatform ? 44 : 56;
 export const STATUSBAR_HEIGHT = Platform.OS === IOSPlatform ? 20 : 0;

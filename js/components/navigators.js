@@ -29,11 +29,11 @@ import NavButton from "./navbutton";
 import {ScanAction, ScreenKey, UserAction} from "../common/constants";
 import CPAPersonalInfoPage from "../pages/personalinfo";
 import CPABatteryTestingPage from "../pages/batterytesting";
-import CPAResetPwdPage from '../pages/resetpwd';
 import CPAInChargingPage from "../pages/incharging";
 import CPAVehicleInfoPage from "../pages/vehicleinfo";
 import CPAAddAddressPage from "../pages/addaddress";
 import CPAChargingBillingPage from "../pages/chargingbilling";
+import CPAMyCollectPage from '../pages/mycollect';
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -113,7 +113,7 @@ const CPAStackNavigator = StackNavigator(
             }
         },
         Collect: {
-            screen: CPAStationListPage,
+            screen: CPAMyCollectPage,
             navigationOptions: {
                 title: '收藏列表',
             }

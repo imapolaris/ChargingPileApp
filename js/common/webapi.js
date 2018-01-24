@@ -71,6 +71,14 @@ export function getNearbyStations(position) {
 }
 
 /*
+* query collect stations by user id.
+* */
+export function getCollectStations(userId) {
+    let url = `${urls.stations}/collect`;
+    return myFetch(url, GET, headers);
+}
+
+/*
 * query the details of the station by id.
 * */
 export function getStationDetails(stationId) {
@@ -139,6 +147,14 @@ export function getChargingStatus(serialNumber) {
 * */
 export function startBatteryTesting(serialNumber) {
     let url = `${urls.batterytesting}/start/${serialNumber}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* query battery testing records.
+* */
+export function getBatteryTestingRecords(userId) {
+    let url = `${urls.batterytesting}/records/${userId}`;
     return myFetch(url, GET, headers);
 }
 

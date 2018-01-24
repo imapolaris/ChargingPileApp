@@ -69,3 +69,26 @@ export function doQueryStationChargingPiles(stationId) {
             })
     }
 }
+
+export function doQueryCollectStations() {
+    return (dispatch, getState) => {
+        const {userId} = getState().user;
+
+        dispatch(startRequestWeb());
+        const {currentPos} = getState().map;
+        return getNearbyStations(currentPos)
+            .then(ret=>{
+                dispatch(completeRequestWeb());
+
+                if (ret && ret.length>0)
+                    return ret.map((item, index)=>Object.assign({}, item, {key: index}));
+                else
+                    return ret;
+            })
+            .catch(err=>{
+                dispatch(completeRequestWeb());
+                console.log(err);
+                ToastBS(`error: ${err}`);
+            })
+    }
+}

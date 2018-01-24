@@ -8,7 +8,7 @@ import {textInputStyle} from "../common/styles";
 import {doResetPwd} from "../redux/useractions";
 import {connect} from "react-redux";
 
-class CPAResetPwdPage extends Component{
+class CPAChangePwdPage extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -114,7 +114,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CPAResetPwdPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CPAChangePwdPage);
 
 const styles = StyleSheet.create({
     container: {
