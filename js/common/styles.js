@@ -23,8 +23,6 @@ export const textInputStyle = {
 };
 
 export const maskStyle = {
-    backgroundColor: "#000000",
-    opacity: 0.6,
     position: "absolute",
     width: screenWidth,
     height: screenHeight,

@@ -81,6 +81,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(StationInfo);
 const styles = StyleSheet.create({
     station: {
         flex: 1,
+        paddingTop: 3,
     },
     stationPicContainer: {
         height: 150,

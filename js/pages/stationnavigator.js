@@ -41,7 +41,7 @@ const CPAStationTabNavigator = TabNavigator(
                 flexDirection:'row',
                 backgroundColor: colors.white,
                 marginBottom: 1,
-                height: 45,
+                height: 40,
             },
             style: {
                 backgroundColor: colors.white,

@@ -6,7 +6,6 @@ import {Divider} from "react-native-elements";
 import {connect} from "react-redux";
 import {doQueryStationChargingPiles} from "../redux/stationactions";
 
-const LoadingGreetings = '正在加载，请稍后...';
 const EmptyDataGreetings = '客官，没有找到电桩啊！';
 class ChargingPileInfo extends Component{
     constructor(props) {
@@ -32,7 +31,7 @@ class ChargingPileInfo extends Component{
     };
 
     _renderEmpty = () => {
-        return EmptyPlaceHolder(this.state.refreshing, LoadingGreetings, EmptyDataGreetings);
+        return EmptyPlaceHolder(EmptyDataGreetings);
     };
 
     _renderItem = ({item}) => {
@@ -73,5 +72,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(ChargingPileInfo);
 const styles = StyleSheet.create({
     chargingPile: {
         flex: 1,
+        paddingTop: 3,
     },
 });

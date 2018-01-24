@@ -9,8 +9,7 @@ import {EmptyPlaceHolder} from "../components/placeholder";
 import {connect} from "react-redux";
 import {doQueryNearbyStations, doSelectOneStation} from "../redux/stationactions";
 
-const LoadingGreetings = '正在加载，请稍后...';
-const EmptyDataGreetings = '客官，方圆50公里的范围内都没有充电站啊！';
+const EmptyDataGreetings = '客官，方圆50公里的范围内都没有找到充电站啊！';
 class CPAStationListPage extends Component{
     constructor(props) {
         super(props);
@@ -34,7 +33,7 @@ class CPAStationListPage extends Component{
     };
 
     _onSelectOneStation = (item) => {
-        if (item === null || item === undefined){
+        if (!item){
             ToastBS('电站信息错误，无法查看详情！');
             return;
         }
@@ -50,7 +49,8 @@ class CPAStationListPage extends Component{
                              name={item.name}
                              numbers={item.numbers}
                              address={item.address}
-                             elecprice={item.elecprice}
+                             elecprice={0}
+                             destination={{longitude: item.longitude, latitude: item.latitude}}
                              onAction={() => this._onSelectOneStation(item)}
                 />
             </View>
@@ -58,7 +58,7 @@ class CPAStationListPage extends Component{
     };
 
     _renderEmpty = () => {
-        return EmptyPlaceHolder(this.state.refreshing, LoadingGreetings, EmptyDataGreetings);
+        return EmptyPlaceHolder(EmptyDataGreetings);
     };
 
     render() {

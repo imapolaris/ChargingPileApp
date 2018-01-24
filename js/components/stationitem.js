@@ -11,7 +11,7 @@ import MapNavButton from "./mapnavbutton";
 
 class StationItem extends Component{
     render() {
-        const {name, elecprice, numbers, address, onAction, containerStyle, beforeMapNavigate} = this.props;
+        const {name, elecprice, numbers, address, onAction, containerStyle, destination} = this.props;
 
         return (
             <TouchableOpacity style={[styles.container, containerStyle]}
@@ -34,7 +34,7 @@ class StationItem extends Component{
                         </Text>
                     </View>
 
-                    <MapNavButton address={address} beforeMapNavigate={beforeMapNavigate} />
+                    <MapNavButton address={destination} />
                 </View>
                 <Divider style={styles.divider} />
             </TouchableOpacity>

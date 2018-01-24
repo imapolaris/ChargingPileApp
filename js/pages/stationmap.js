@@ -76,11 +76,8 @@ class CPAStationMapPage extends Component{
                         : null
                 }
 
-                {/*<MapSelector visible={true} from={{longitude: 116.404185, // 中间点坐标
-                    latitude: 39.91491}} to={{longitude: 116.404185, // 中间点坐标
-                    latitude: 40.01}} />*/}
-
-                <StationSelector ref={self=>this._stationSelector=self} onAction={() => {alert('test')}}/>
+                <StationSelector ref={self=>this._stationSelector=self}
+                                 onAction={(id) => nav && nav(ScreenKey.StationInfo, {stationId: id})}/>
             </View>
         );
     };
@@ -126,7 +123,7 @@ function mapDispatchToProps(dispatch) {
         enableTraffic: () => dispatch(doEnableTraffic()),
         requestStationMarkers: () => dispatch(doRequestStationMarkers()),
         requestOneStationInfo: (e) => dispatch(doRequestOneStationInfo(e)),
-        nav: (screenKey) => dispatch(doNav(screenKey)),
+        nav: (screenKey, params) => dispatch(doNav(screenKey, params)),
     };
 }
 

@@ -11,7 +11,7 @@ import {ActiveOpacity} from "../common/constants";
 
 class MapNavButton extends Component{
     static propTypes = {
-        address: PropTypes.string.isRequired,
+        address: PropTypes.object.isRequired,
     };
 
     _showMapNavigator = () => {

@@ -244,7 +244,7 @@ export class StationSelector extends Component{
 
     render() {
         const {visible} = this.state;
-        const {name, address, elecPrice, numbers} = this.state.station;
+        const {id, name, address, elecPrice, numbers} = this.state.station;
         const {onAction, containerStyle} = this.props;
         const kvStyle = {containerStyle: styles.containerStyle, titleStyle: styles.titleStyle, valueStyle: styles.valueStyle};
 
@@ -261,7 +261,10 @@ export class StationSelector extends Component{
                     <View style={[styles.content, shadowStyle]}>
                         <TouchableOpacity style={[styles.station, containerStyle]}
                                           activeOpacity={ActiveOpacity}
-                                          onPress={onAction}>
+                                          onPress={()=>{
+                                              this._hide();
+                                              onAction && onAction(id);
+                                          }}>
                             <Text style={styles.name} numberOfLines={1}>
                                 {name}
                             </Text>

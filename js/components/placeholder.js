@@ -12,13 +12,13 @@ export function SeparatorPlaceHolder(){
     );
 }
 
-export function EmptyPlaceHolder(refreshing, LoadingGreetings, EmptyDataGreetings) {
+export function EmptyPlaceHolder(EmptyDataGreetings) {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>
-                {refreshing ? LoadingGreetings : EmptyDataGreetings}
+                {EmptyDataGreetings}
             </Text>
-            <Icon type={IconType.Ionicon} name={refreshing ? "md-happy" : "md-sad"} size={20} color={colors.tintColor} />
+            <Icon type={IconType.Ionicon} name="md-sad" size={20} color={colors.tintColor} />
         </View>
     );
 }

@@ -95,6 +95,7 @@ class CPAScanPage extends Component {
                 Vibration.vibrate();
 
                 let sn = e.data;
+                alert(`充电桩编号：${sn}`);
 
                 // verify the serial number.
                 if (/*validSerialNumber(sn)*/true) {

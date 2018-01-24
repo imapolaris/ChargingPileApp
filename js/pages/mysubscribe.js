@@ -20,7 +20,7 @@ class CPAMySubscribePage extends Component{
     };
 
     _renderEmpty = ()=>{
-        return EmptyPlaceHolder(this.state.refreshing, '', '没有找到预约记录...');
+        return EmptyPlaceHolder('没有找到预约记录...');
     };
 
     _renderItem = ({item}) => {
