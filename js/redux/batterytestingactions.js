@@ -1,24 +1,30 @@
 import {doBack, doNav} from "./navactions";
 import {AppStatus, ScanAction, ScreenKey} from "../common/constants";
 import {doChangeAppStatus} from "./appactions";
+import {getBatteryTestingRecords} from "../common/webapi";
+import {completeRequestWeb, startRequestWeb} from "./webactions";
+import {ToastBS} from "../common/functions";
 
 export const QUERY_BATTERYTESTING_INFO_ACTION = 'BATTERYTESTING_INFO';
 export const START_BATTERYTESTING_ACTION = 'START_BATTERYTESTING';
 export const QUERY_BATTERYTESTING_PROCESS_ACTION = 'QUERY_BATTERYTESTING_PROCESS';
 export const FINISH_BATTERYTESTING_ACTION = 'FINISH_BATTERYTESTING';
 
-function queryBatteryTestingInfoCompleted(data) {
-    return {
-        type: QUERY_BATTERYTESTING_INFO_ACTION,
-        data
-    }
-}
-
 export function doQueryBatteryTestingInfo() {
     return (dispatch, getState) => {
         const {userId} = getState().user;
 
-
+        dispatch(startRequestWeb());
+        return getBatteryTestingRecords(userId)
+            .then(ret=>{
+                dispatch(completeRequestWeb());
+                return ret;
+            })
+            .catch(err=>{
+                dispatch(completeRequestWeb());
+                ToastBS(`${err}`);
+                console.log(err);
+            })
     }
 }
 

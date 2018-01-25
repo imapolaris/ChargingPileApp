@@ -34,6 +34,7 @@ import CPAVehicleInfoPage from "../pages/vehicleinfo";
 import CPAAddAddressPage from "../pages/addaddress";
 import CPAChargingBillingPage from "../pages/chargingbilling";
 import CPAMyCollectPage from '../pages/mycollect';
+import CPANotificationPage from "../pages/notification";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -212,6 +213,12 @@ const CPAStackNavigator = StackNavigator(
             screen: CPAChargingBillingPage,
             navigationOptions: {
                 title: '充电账单',
+            }
+        },
+        Notification: {
+            screen: CPANotificationPage,
+            navigationOptions: {
+                title: '通知消息',
             }
         },
     },

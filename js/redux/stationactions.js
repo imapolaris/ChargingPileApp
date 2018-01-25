@@ -1,4 +1,4 @@
-import {getChargingPiles, getNearbyStations, getStationDetails} from "../common/webapi";
+import {getChargingPiles, getCollectStations, getNearbyStations, getStationDetails} from "../common/webapi";
 import {ToastBS} from "../common/functions";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doNav} from "./navactions";
@@ -73,10 +73,8 @@ export function doQueryStationChargingPiles(stationId) {
 export function doQueryCollectStations() {
     return (dispatch, getState) => {
         const {userId} = getState().user;
-
         dispatch(startRequestWeb());
-        const {currentPos} = getState().map;
-        return getNearbyStations(currentPos)
+        return getCollectStations(userId)
             .then(ret=>{
                 dispatch(completeRequestWeb());
 

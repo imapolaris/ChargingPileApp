@@ -1,36 +1,92 @@
+'use strict';
+
 import React, {Component} from 'react';
-import {StyleSheet, View, BackHandler} from 'react-native';
+import {StyleSheet, View, BackHandler, Platform} from 'react-native';
 import {connect} from 'react-redux';
 import CPAStackNavigator from "./components/navigators";
 import WaitingNotice from "./components/waitingnotice";
 import {addNavigationHelpers, NavigationActions} from 'react-navigation';
 import PropTypes from 'prop-types';
 import * as WeChat from 'react-native-wechat';
-import {WxAppId} from "./common/constants";
+import {AndroidPlatform, IOSPlatform, ScreenKey, WxAppId} from "./common/constants";
+import JPushModule from "jpush-react-native";
+import {doNav} from "./redux/navactions";
 
 class Root extends Component{
-    componentWillMount() {
-        this._registerWeChat();
-    }
-
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this._onBackPress);
+
+        this._registerWeChat();
+        this._registerJPushModule();
     }
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this._onBackPress);
 
-        WeChat.removeAllListeners();
+        this._unRegisterWeChat();
+        this._unRegisterJPushModule();
     }
 
     _registerWeChat = () => {
         WeChat.registerApp(WxAppId);
-
         WeChat.addListener('PayReq.Resp', this._payResp);
+    };
+
+    _unRegisterWeChat = () => {
+        WeChat.removeAllListeners();
     };
 
     _payResp = (response) => {
         alert(JSON.stringify(response));
+    };
+
+    _registerJPushModule = ()=>{
+        // 默认消息
+        JPushModule.addReceiveNotificationListener((map)=>{
+            console.log('alertContent: ' + map.alertContent);
+            console.log('extras: ' + map.extras);
+        });
+        // 点击通知
+        JPushModule.addReceiveOpenNotificationListener((map)=>{
+            console.log('Opening notification!');
+            console.log('map.extras: ' + JSON.stringify(map));
+            console.log('alertContent:' + map.alertContent);
+
+            let url = JSON.parse(map.extras).url;
+            if (url) {
+                const {dispatch} = this.props;
+                dispatch(doNav(ScreenKey.Notification, {url: url}));
+            }
+        });
+        // 自定义消息
+        JPushModule.addReceiveCustomMsgListener((map)=>{
+            console.log('message: ' + map.message)
+        });
+
+        JPushModule.getRegistrationID((registrationId)=>{
+            console.log('registrationID:'+registrationId);
+        });
+
+        if (Platform.OS === AndroidPlatform) {
+            JPushModule.notifyJSDidLoad((resultCode)=>{
+                if (resultCode === 0) {}
+            });
+        }
+        if (Platform.OS === IOSPlatform){
+            JPushModule.addOpenNotificationLaunchAppListener((notification)=>{
+
+            });
+        }
+    };
+
+    _unRegisterJPushModule = ()=>{
+        JPushModule.removeOpenNotificationLaunchAppEventListener();
+        JPushModule.removeReceiveCustomMsgListener();
+        JPushModule.removeReceiveNotificationListener();
+
+        if (Platform.OS === IOSPlatform){
+            JPushModule.removeOpenNotificationLaunchAppEventListener();
+        }
     };
 
     _onBackPress = () => {

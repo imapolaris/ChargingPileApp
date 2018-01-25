@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, WebView} from 'react-native';
 
-class CPAMessagePage extends Component{
+class CPANewsPage extends Component{
     render() {
         return (
             <View style={styles.container}>
@@ -13,7 +13,7 @@ class CPAMessagePage extends Component{
     }
 }
 
-export default CPAMessagePage;
+export default CPANewsPage;
 
 const styles = StyleSheet.create({
     container: {

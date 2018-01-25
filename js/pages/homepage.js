@@ -3,11 +3,11 @@
 import React from 'react';
 import {TabNavigator} from "react-navigation";
 import colors from "../common/colors";
-import {StationMapIcon, ChargingIcon, MessageIcon, MeIcon} from "../common/icons";
+import {StationMapIcon, ChargingIcon, NewsIcon, MeIcon} from "../common/icons";
 import CPAStationMapPage from "./stationmap";
 import CPAChargingPage from "./chargingpage";
-import CPAMessagePage from "./messagepage";
 import CPAMePage from "./mepage";
+import CPANewsPage from "./newspage";
 
 
 const CPAHomePage = TabNavigator(
@@ -31,11 +31,11 @@ const CPAHomePage = TabNavigator(
             }
         },
         Message: {
-            screen: CPAMessagePage,
+            screen: CPANewsPage,
             navigationOptions: {
                 title: '资讯',
                 tabBarIcon: ({tintColor, focused}) => {
-                    return MessageIcon(tintColor, focused);
+                    return NewsIcon(tintColor, focused);
                 }
             }
         },

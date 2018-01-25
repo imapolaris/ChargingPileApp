@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         flex: 1,
+        justifyContent: 'center',
     },
     text: {
         fontSize: 17,
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
     },
     bellContainer: {
         alignItems: 'flex-end',
-        paddingRight: 20,
+        padding:20,
     },
     settings:{
         borderTopWidth: 0.5,

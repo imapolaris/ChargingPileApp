@@ -1,7 +1,7 @@
 import {myFetch} from "./functions";
 
-const baseUrl = 'http://39.104.66.176/ChargingPileService/api';
-//const baseUrl = 'http://192.168.0.201/ChargingPileService/api';
+//const baseUrl = 'http://39.104.66.176/ChargingPileService/api';
+const baseUrl = 'http://192.168.0.201/ChargingPileService/api';
 
 const urls = {
     messages: `${baseUrl}/messages`,
@@ -225,6 +225,14 @@ export function changePwd(user) {
 }
 
 /*
+* query my messages.
+* */
+export function getMyMessages(userId) {
+    let url = `${urls.users}/${userId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
 * query pay records by user id.
 * */
 export function getPayRecords(userId) {
@@ -241,15 +249,6 @@ export function getWalletBalance(userId) {
 }
 
 /*
-* make one charge.
-* */
-export function makeOneCharge(userId, money, payWay) {
-    let url = `${urls.wallet}/charge?userId=${userId}&money=${money}&payway=${payWay}`;
-    return myFetch(url, GET, headers);
-}
-
-
-/*
  * pay by ali app.
  */
 export function aliPay() {
@@ -262,5 +261,13 @@ export function aliPay() {
 * */
 export function wxPay() {
     let url = `${urls.wallet}/wxpay`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* make one charge.
+* */
+export function makeOneCharge(userId, money, payWay) {
+    let url = `${urls.wallet}/charge?userId=${userId}&money=${money}&payway=${payWay}`;
     return myFetch(url, GET, headers);
 }

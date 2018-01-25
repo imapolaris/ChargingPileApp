@@ -40,6 +40,7 @@ export const ScreenKey = {
     AddAddress: 'AddAddress',
     InCharging: 'InCharging',
     ChargingBilling: 'ChargingBilling',
+    Notification: 'Notification',
 };
 
 export const ActiveOpacity = 0.6;
