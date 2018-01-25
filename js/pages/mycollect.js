@@ -44,30 +44,26 @@ class CPAMyCollectPage extends Component{
 
     _renderItem = ({item}) => {
         return (
-            <View style={styles.item}>
-                <StationItem key={item.key}
-                             name={item.name}
-                             numbers={item.numbers}
-                             address={item.address}
-                             elecprice={0}
-                             destination={{longitude: item.longitude, latitude: item.latitude}}
-                             onAction={() => this._onSelectOneStation(item)}
-                />
-            </View>
+            <StationItem key={item.key}
+                         name={item.name}
+                         numbers={item.numbers}
+                         address={item.address}
+                         elecprice={0}
+                         destination={{longitude: item.longitude, latitude: item.latitude}}
+                         onAction={() => this._onSelectOneStation(item)}
+            />
         );
     };
 
-    _renderEmpty = () => {
-        return EmptyPlaceHolder(EmptyDataGreetings);
-    };
-
     render() {
+        const {stations} = this.state;
+
         return (
             <View style={styles.container}>
-                <FlatList data={this.state.stations}
+                <FlatList data={stations}
                           renderItem={this._renderItem}
                           style={styles.content}
-                          ListEmptyComponent={this._renderEmpty()} />
+                          ListEmptyComponent={EmptyPlaceHolder(EmptyDataGreetings)} />
             </View>
         );
     }
@@ -80,7 +76,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect((state)=>state, mapDispatchToProps)(CPAMyCollectPage);
+export default connect(state=>state, mapDispatchToProps)(CPAMyCollectPage);
 
 const styles = StyleSheet.create({
     container:{

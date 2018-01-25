@@ -7,6 +7,7 @@ import {wallet} from "./wallet";
 import {charging} from "./charging";
 import {system} from "./system";
 import {app} from "./app";
+import {vehicle} from "./vehicle";
 
 const rootReducer = combineReducers({
     nav,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     charging,
     system,
     app,
+    vehicle,
 });
 
 export default rootReducer;

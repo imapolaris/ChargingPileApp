@@ -35,6 +35,7 @@ import CPAAddAddressPage from "../pages/addaddress";
 import CPAChargingBillingPage from "../pages/chargingbilling";
 import CPAMyCollectPage from '../pages/mycollect';
 import CPANotificationPage from "../pages/notification";
+import CPAAddVehiclePage from "../pages/addvehicle";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -199,8 +200,22 @@ const CPAStackNavigator = StackNavigator(
         },
         VehicleInfo: {
             screen: CPAVehicleInfoPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '车辆信息',
+                    headerRight: (
+                        <NavButton label="添加车辆"
+                                   onNavAction={() => {
+                                       navigation.navigate(ScreenKey.AddVehicle);
+                                   }} />
+                    ),
+                });
+            }
+        },
+        AddVehicle: {
+            screen: CPAAddVehiclePage,
             navigationOptions: {
-                title: '车辆信息',
+                title: '添加车辆',
             }
         },
         AddAddress: {

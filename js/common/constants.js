@@ -37,6 +37,7 @@ export const ScreenKey = {
     Filter: 'Filter',
     BatteryTesting: 'BatteryTesting',
     VehicleInfo: 'VehicleInfo',
+    AddVehicle: 'AddVehicle',
     AddAddress: 'AddAddress',
     InCharging: 'InCharging',
     ChargingBilling: 'ChargingBilling',

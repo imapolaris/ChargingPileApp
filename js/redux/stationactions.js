@@ -72,8 +72,8 @@ export function doQueryStationChargingPiles(stationId) {
 
 export function doQueryCollectStations() {
     return (dispatch, getState) => {
-        const {userId} = getState().user;
         dispatch(startRequestWeb());
+        const {userId} = getState().user;
         return getCollectStations(userId)
             .then(ret=>{
                 dispatch(completeRequestWeb());
@@ -86,7 +86,7 @@ export function doQueryCollectStations() {
             .catch(err=>{
                 dispatch(completeRequestWeb());
                 console.log(err);
-                ToastBS(`error: ${err}`);
+                ToastBS(`${err}`);
             })
     }
 }

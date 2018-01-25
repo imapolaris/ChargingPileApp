@@ -74,7 +74,7 @@ export function getNearbyStations(position) {
 * query collect stations by user id.
 * */
 export function getCollectStations(userId) {
-    let url = `${urls.stations}/collect`;
+    let url = `${urls.stations}/collect/${userId}`;
     return myFetch(url, GET, headers);
 }
 
@@ -116,6 +116,30 @@ export function getChargingRecords(userId) {
 export function getSubscribeRecords(userId) {
     let url = `${urls.subscribeRecords}/${userId}`;
     return myFetch(url, GET, headers);
+}
+
+/*
+* query all the vehicles of mine.
+* */
+export function getVehicleInfo(userId) {
+    let url = `${urls.users}/vehicle/${userId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* delete one vehicle.
+* */
+export function delOneVehicle(vehicleId) {
+    let url = `${urls.users}/vehicle/${vehicleId}`;
+    return myFetch(url, POST, headers);
+}
+
+/*
+* add one vehicle.
+* */
+export function addOneVehicle(vehicle) {
+    let url = `${urls.users}/vehicle`;
+    return myFetch(url, POST, headers, vehicle);
 }
 
 /*
