@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0024E2F04D534D888A126686 /* libdouble-conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6264F7260AA4657B7C50485 /* libdouble-conversion.a */; };
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
@@ -84,6 +83,7 @@
 		E26526C393A64A6C8422DE30 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4C9EE432B084BE8ABB418AF /* SimpleLineIcons.ttf */; };
 		E5C4A967D91E4171B107EAA7 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4E0E4DF663C47989E7BCF00 /* MaterialIcons.ttf */; };
 		F85CC908D81C49CD87931666 /* libyoga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2350F0EAF0E548CF995F5640 /* libyoga.a */; };
+		CCA685B30BB94A0FB3A537AC /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B4197139640493392AE23CF /* libRCTBEEPickerManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -465,6 +465,8 @@
 		E75CAA3E80EF43E5909F38BE /* libAlipayModule.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAlipayModule.a; sourceTree = "<group>"; };
 		EED621C320144F029754DE3F /* RCTJPushModule.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTJPushModule.xcodeproj; path = "../node_modules/jpush-react-native/ios/RCTJPushModule.xcodeproj"; sourceTree = "<group>"; };
 		F0FA00AF00F248E29E96B87D /* libReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReact.a; sourceTree = "<group>"; };
+		7CDCAA9C174F4F8BBC77FB05 /* RCTBEEPickerManager.xcodeproj */ = {isa = PBXFileReference; name = "RCTBEEPickerManager.xcodeproj"; path = "../node_modules/react-native-picker/ios/RCTBEEPickerManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		3B4197139640493392AE23CF /* libRCTBEEPickerManager.a */ = {isa = PBXFileReference; name = "libRCTBEEPickerManager.a"; path = "libRCTBEEPickerManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -529,6 +531,7 @@
 				56FF2B35EEDD473BB0A00D4F /* libresolv.tbd in Frameworks */,
 				9DDA28D5C49A48A990B85C9B /* CoreGraphics.framework in Frameworks */,
 				BCD56DD6E4DC403D92112E52 /* libRNFS.a in Frameworks */,
+				CCA685B30BB94A0FB3A537AC /* libRCTBEEPickerManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,6 +806,7 @@
 				8CA83FE48C574C019EE2AB74 /* RCTJCoreModule.xcodeproj */,
 				EED621C320144F029754DE3F /* RCTJPushModule.xcodeproj */,
 				B03C7B62EF4143F29DF5D7F3 /* RNFS.xcodeproj */,
+				7CDCAA9C174F4F8BBC77FB05 /* RCTBEEPickerManager.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1530,12 +1534,14 @@
 					"$(SRCROOT)..\node_modulesjcore-react-nativeiosRCTJCoreModule",
 					"$(SRCROOT)..\node_modulesjpush-react-nativeiosRCTJPushModule",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)\..\node_modules\react-native-picker\ios\RCTBEEPickerManager",
 				);
 				INFOPLIST_FILE = ChargingPileAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1577,12 +1583,14 @@
 					"$(SRCROOT)..\node_modulesjcore-react-nativeiosRCTJCoreModule",
 					"$(SRCROOT)..\node_modulesjpush-react-nativeiosRCTJPushModule",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)\..\node_modules\react-native-picker\ios\RCTBEEPickerManager",
 				);
 				INFOPLIST_FILE = ChargingPileAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1643,6 +1651,7 @@
 					"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule",
 					"$(SRCROOT)/../node_modules/react-native-baidu-map/ios/RCTBaiduMap",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)\..\node_modules\react-native-picker\ios\RCTBEEPickerManager",
 				);
 				INFOPLIST_FILE = ChargingPileApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
@@ -1693,6 +1702,7 @@
 					"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule",
 					"$(SRCROOT)/../node_modules/react-native-baidu-map/ios/RCTBaiduMap",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)\..\node_modules\react-native-picker\ios\RCTBEEPickerManager",
 				);
 				INFOPLIST_FILE = ChargingPileApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
@@ -1731,11 +1741,13 @@
 					"$(SRCROOT)..\node_modulesjcore-react-nativeiosRCTJCoreModule",
 					"$(SRCROOT)..\node_modulesjpush-react-nativeiosRCTJPushModule",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)\..\node_modules\react-native-picker\ios\RCTBEEPickerManager",
 				);
 				INFOPLIST_FILE = "ChargingPileApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1786,11 +1798,13 @@
 					"$(SRCROOT)..\node_modulesjcore-react-nativeiosRCTJCoreModule",
 					"$(SRCROOT)..\node_modulesjpush-react-nativeiosRCTJPushModule",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)\..\node_modules\react-native-picker\ios\RCTBEEPickerManager",
 				);
 				INFOPLIST_FILE = "ChargingPileApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1847,6 +1861,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.ChargingPileApp-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1871,6 +1886,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
