@@ -6,6 +6,7 @@ import {Button} from "react-native-elements";
 import colors from "../common/colors";
 import Picker from 'react-native-picker';
 import provinces from '../assets/data/provinces';
+import letters from '../assets/data/letters';
 
 class CPAAddVehiclePage extends Component{
     constructor(props) {
@@ -13,17 +14,46 @@ class CPAAddVehiclePage extends Component{
         this.state = {
             vehicleModel: '',
             vehicleNo: '',
+            data: [],
         };
     }
 
-    _showVehicleNoPicker = () => {
-        let data = [];
-        for(var i=0;i<100;i++){
-            data.push(i);
+    componentWillMount() {
+        let allProvinces = [];
+        for (let i = 0; i < provinces.length; ++i) {
+            let province = provinces[i];
+            allProvinces.push(province.name);
         }
+
+        this.setState({
+            data: [allProvinces, letters]
+        });
+    }
+
+    componentWillUnmount() {
+        Picker.hide();
+    }
+
+    _showVehicleNoPicker = () => {
+        const {data} = this.state;
+
         Picker.init({
             pickerData: data,
-            //selectedValue: [59]
+            pickerConfirmBtnColor: [77, 160, 255, 1],
+            pickerCancelBtnColor: [77, 160, 255, 1],
+            pickerConfirmBtnText: '完成',
+            pickerCancelBtnText: '取消',
+            pickerTitleText: '车牌号',
+            pickerFontSize: 18,
+            pickerRowHeight: 24,
+            wheelFlex: [1, 1],
+            pickerBg: [255, 255, 255, 1],
+            selectedValue: ['北京市 (京)', 'A'],
+            onPickerConfirm: (data) => {
+                let result = provinces.find(item=>item.name === data[0]).shortname;
+                result += data[1];
+                alert(result);
+            },
         });
         Picker.show();
     };
