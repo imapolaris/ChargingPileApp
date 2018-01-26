@@ -183,6 +183,14 @@ export function getBatteryTestingRecords(userId) {
 }
 
 /*
+* query detail of the battery testing report by id.
+* */
+export function getBatteryTestingReportDetail(reportId) {
+    let url = `${urls.batterytesting}/records/detail/${reportId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
 * login the app.
 * */
 export function login(phoneNumber, pwd) {

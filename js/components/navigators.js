@@ -36,15 +36,16 @@ import CPAChargingBillingPage from "../pages/chargingbilling";
 import CPAMyCollectPage from '../pages/mycollect';
 import CPANotificationPage from "../pages/notification";
 import CPAAddVehiclePage from "../pages/addvehicle";
+import CPATestingReportDetailPage from '../pages/testingreportdetail';
 
 const CPAStackNavigator = StackNavigator(
     {
-        /*Welcome: {
+        Welcome: {
             screen: CPAWelcomePage,
             navigationOptions: {
                 header: null,
             },
-        },*/
+        },
         Home: {
             screen: CPAHomePage,
             navigationOptions: {
@@ -150,12 +151,6 @@ const CPAStackNavigator = StackNavigator(
                 title: '我的预约'
             }
         },
-        TestingReport: {
-            screen: CPATestingReportPage,
-            navigationOptions: {
-                title: '检测报告'
-            }
-        },
         BillingRecords: {
             screen: CPABillingRecordsPage,
             navigationOptions: {
@@ -190,6 +185,18 @@ const CPAStackNavigator = StackNavigator(
             screen: CPABatteryTestingPage,
             navigationOptions: {
                 header: null
+            }
+        },
+        TestingReport: {
+            screen: CPATestingReportPage,
+            navigationOptions: {
+                title: '检测报告'
+            }
+        },
+        TestingReportDetail: {
+            screen: CPATestingReportDetailPage,
+            navigationOptions: {
+                title: '报告详情'
             }
         },
         InCharging: {
@@ -238,6 +245,7 @@ const CPAStackNavigator = StackNavigator(
         },
     },
     {
+        //initialRouteName: 'Welcome',
         navigationOptions: {
             gesturesEnabled: true,
             headerTitleStyle: {

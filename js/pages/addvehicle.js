@@ -17,8 +17,13 @@ class CPAAddVehiclePage extends Component{
     }
 
     _showVehicleNoPicker = () => {
+        let data = [];
+        for(var i=0;i<100;i++){
+            data.push(i);
+        }
         Picker.init({
-            pickerData: provinces,
+            pickerData: data,
+            //selectedValue: [59]
         });
         Picker.show();
     };

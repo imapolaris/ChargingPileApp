@@ -2,31 +2,39 @@
 
 import React, {Component} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import PropTypes from 'prop-types';
 import TestingReportItem from "../components/testingreportitem";
 import {connect} from "react-redux";
-import {EmptyPlaceHolder} from "../components/placeholder";
+import {EmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
 import {doQueryBatteryTestingInfo} from "../redux/batterytestingactions";
+import {ScreenKey} from "../common/constants";
+import {doNav} from "../redux/navactions";
 
 class CPATestingReportPage extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            reports: [],
+            reports: [
+                {key:1, id: '1'},
+                {key:2, id: '2'},
+                {key:3, id: '3'},
+            ],
         };
     }
 
     componentDidMount() {
-        const {queryBatteryTestingInfo} = this.props;
+        /*const {queryBatteryTestingInfo} = this.props;
         queryBatteryTestingInfo()
             .then(ret=>{
                 this.setState({reports: ret});
-            })
+            })*/
     }
 
     _renderItem = ({item}) => {
+        const {nav} = this.props;
+
         return (
-            <TestingReportItem/>
+            <TestingReportItem key={item.key}
+                               onAction={()=>{nav && nav(ScreenKey.TestingReportDetail, {reportId: item.id})}}/>
         );
     };
 
@@ -37,7 +45,8 @@ class CPATestingReportPage extends Component{
             <View style={styles.container}>
                 <FlatList data={reports}
                           renderItem={this._renderItem}
-                          ListEmptyComponent={EmptyPlaceHolder('没有发现检测报告！')} />
+                          ListEmptyComponent={EmptyPlaceHolder('没有发现检测报告！')}
+                          ItemSeparatorComponent={SeparatorPlaceHolder} />
             </View>
         );
     }
@@ -46,6 +55,7 @@ class CPATestingReportPage extends Component{
 function mapDispatchToProps(dispatch) {
     return {
         queryBatteryTestingInfo: () => dispatch(doQueryBatteryTestingInfo()),
+        nav: (screenKey, params) => dispatch(doNav(screenKey, params)),
     }
 }
 
@@ -54,5 +64,6 @@ export default connect(state=>state, mapDispatchToProps)(CPATestingReportPage);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    }
+        margin: 5,
+    },
 });

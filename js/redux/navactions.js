@@ -2,6 +2,7 @@ import {ScreenKey} from "../common/constants";
 import {NavigationActions} from "react-navigation";
 import {ToastBL} from "../common/functions";
 
+export const LOAD_WELCOME_PAGE_ACTION = 'LOAD_WELCOME_PAGE';
 export const GO_BACK_ACTION = 'GO_BACK';
 
 export function doNav(screenKey, params) {
@@ -41,5 +42,17 @@ export function doBack(screenKey) {
         } else {
             dispatch(NavigationActions.back());
         }
+    }
+}
+
+export function doLoadHomePage() {
+    return dispatch => {
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({routeName: ScreenKey.Home})
+            ]
+        });
+        dispatch(resetAction);
     }
 }

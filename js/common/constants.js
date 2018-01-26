@@ -24,7 +24,6 @@ export const ScreenKey = {
     InvoiceInfo: 'InvoiceInfo',
     Collect: 'Collect',
     Subscribe: 'Subscribe',
-    TestingReport: 'TestingReport',
     Setting: 'Setting',
     MyMessage: 'MyMessage',
     UserAgreement: 'UserAgreement',
@@ -35,11 +34,16 @@ export const ScreenKey = {
     LocatingCity: 'LocatingCity',
     SearchStation: 'SearchStation',
     Filter: 'Filter',
+
     BatteryTesting: 'BatteryTesting',
+    TestingReport: 'TestingReport',
+    TestingReportDetail: 'TestingReportDetail',
+
     VehicleInfo: 'VehicleInfo',
     AddVehicle: 'AddVehicle',
     AddAddress: 'AddAddress',
     InCharging: 'InCharging',
+
     ChargingBilling: 'ChargingBilling',
     Notification: 'Notification',
 };

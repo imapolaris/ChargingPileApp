@@ -28,6 +28,10 @@ export function doQueryBatteryTestingInfo() {
     }
 }
 
+export function doQueryBatteryTestingReportDetail(reportId) {
+
+}
+
 export function startScanBatteryTesting() {
     return dispatch => {
         dispatch(doNav(ScreenKey.Scan, {action: ScanAction.BatteryTesting}));
