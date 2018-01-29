@@ -5,7 +5,7 @@ import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types';
 import {Button} from 'react-native-elements';
 import {screenWidth} from "../common/constants";
-import {EmptyPlaceHolder} from "../components/placeholder";
+import {EmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
 import Vehicle from "../components/vehicle";
 import {connect} from "react-redux";
 import {doDelOneVehicle, doQueryVehicleInfo} from "../redux/vehicleactions";
@@ -48,7 +48,8 @@ class CPAVehicleInfoPage extends Component{
             <View style={styles.container}>
                 <FlatList data={vehicles}
                           renderItem={this._renderItem}
-                          ListEmptyComponent={EmptyPlaceHolder('快添加一辆汽车信息吧！')} />
+                          ListEmptyComponent={EmptyPlaceHolder('快添加一辆汽车信息吧！')}
+                          ItemSeparatorComponent={SeparatorPlaceHolder} />
             </View>
         );
     }

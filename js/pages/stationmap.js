@@ -64,9 +64,9 @@ class CPAStationMapPage extends Component{
                 <ActionButton icon={<Icon type={IconType.Ionicon} name="md-locate" size={25} color={colors.grey3}/>}
                               onAction={currentLocation} showText={false} position={styles.locateButton}
                               {...actionButtonStyle}/>
-                <ActionButton icon={<Icon type={IconType.Ionicon} name="md-help" size={25} color={colors.grey3}/>}
+                {/*<ActionButton icon={<Icon type={IconType.Ionicon} name="md-help" size={25} color={colors.grey3}/>}
                               onAction={() => {}} showText={false} position={styles.questionButton}
-                              {...actionButtonStyle}/>
+                              {...actionButtonStyle}/>*/}
                 {
                     !isRefreshing && markers.length <= 0 ?
                         <ActionButton
@@ -185,9 +185,10 @@ const styles = StyleSheet.create({
         top: 0,
     },
     refreshButton: {
+        //bottom: 110,
         justifyContent: "flex-end",
         alignItems: 'flex-start',
-        bottom: 110,
+        bottom: 65,
         left: 10,
         right: 0,
         top: 0,

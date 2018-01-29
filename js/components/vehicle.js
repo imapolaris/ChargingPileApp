@@ -77,9 +77,10 @@ const styles = StyleSheet.create({
     },
     delBtn: {
         padding: 10,
+        paddingLeft: 20, //temp
     },
     dividerH: {
-        height: 3,
+        //height: 3,
         backgroundColor: colors.grey4,
     },
     dividerV: {

@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         color: colors.grey3,
     },
     separator: {
-        height: 10,
+        height: 5,
     },
     bottomContainer: {
         height: 30,

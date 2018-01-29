@@ -115,7 +115,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(CPAChargingPage);
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
     chargingInfoContainer: {
         height: 200+STATUSBAR_HEIGHT,
@@ -124,6 +123,7 @@ export const styles = StyleSheet.create({
     },
     chargingInfoTopContainer: {
         flex: 6,
+        justifyContent: 'center',
     },
     chargingInfoBottomContainer: {
         flex: 4,
@@ -131,6 +131,7 @@ export const styles = StyleSheet.create({
     },
     itemContainer: {
         flex: 1,
+        justifyContent: 'center',
     },
     chargingActionContainer: {
         flex: 1,

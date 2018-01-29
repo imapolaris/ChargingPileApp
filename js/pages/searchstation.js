@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
     },
     rowDataIcon: {
         justifyContent: 'center',
-        marginLeft: 10,
+        marginLeft: 15,
     },
     stationItem: {
         flexDirection: 'row',

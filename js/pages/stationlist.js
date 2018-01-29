@@ -5,7 +5,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import colors from "../common/colors";
 import {ToastBS} from "../common/functions";
 import StationItem from "../components/stationitem";
-import {EmptyPlaceHolder} from "../components/placeholder";
+import {EmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
 import {connect} from "react-redux";
 import {doQueryNearbyStations, doSelectOneStation} from "../redux/stationactions";
 
@@ -57,24 +57,17 @@ class CPAStationListPage extends Component{
         );
     };
 
-    _renderEmpty = () => {
-        return EmptyPlaceHolder(EmptyDataGreetings);
-    };
-
     render() {
         return (
             <View style={styles.container}>
                 <FlatList data={this.state.stations}
                           renderItem={this._renderItem}
                           style={styles.content}
-                          ListEmptyComponent={this._renderEmpty()} />
+                          ListEmptyComponent={EmptyPlaceHolder(EmptyDataGreetings)}
+                          ItemSeparatorComponent={SeparatorPlaceHolder} />
             </View>
         );
     }
-}
-
-function mapStateToProps(state) {
-    return state;
 }
 
 function mapDispatchToProps(dispatch) {
@@ -84,7 +77,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CPAStationListPage);
+export default connect(state=>state, mapDispatchToProps)(CPAStationListPage);
 
 const styles = StyleSheet.create({
     container:{
