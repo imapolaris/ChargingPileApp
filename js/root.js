@@ -11,13 +11,18 @@ import * as WeChat from 'react-native-wechat';
 import {AndroidPlatform, IOSPlatform, ScreenKey, WxAppId} from "./common/constants";
 import JPushModule from "jpush-react-native";
 import {doNav} from "./redux/navactions";
+import {ToastBS} from "./common/functions";
 
+let lastBackPressed;
 class Root extends Component{
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this._onBackPress);
 
         this._registerWeChat();
         this._registerJPushModule();
+
+        let d = new Date();
+        lastBackPressed = d.setTime(d.getMilliseconds()-2500);
     }
 
     componentWillUnmount() {
@@ -92,7 +97,13 @@ class Root extends Component{
     _onBackPress = () => {
         const { dispatch, nav } = this.props;
         if (nav.index === 0) {
-            return false;
+            let now = new Date().getTime();
+            if (now - lastBackPressed < 2500) {
+                return false;
+            }
+            lastBackPressed = now;
+            ToastBS('再点一次，退出应用！');
+            return true;
         }
         dispatch(NavigationActions.back());
         return true;

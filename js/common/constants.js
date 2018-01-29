@@ -16,10 +16,13 @@ export const ScreenKey = {
     Scan: 'Scan',
     StationList: 'StationList',
     StationInfo: 'StationInfo',
+
     Login: 'Login',
     Register: 'Register',
     ChangePwd: 'ChangePwd',
     PersonalInfo: 'PersonalInfo',
+    ResetPwd: 'ResetPwd',
+
     Wallet: 'Wallet',
     InvoiceInfo: 'InvoiceInfo',
     Collect: 'Collect',

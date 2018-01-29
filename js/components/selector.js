@@ -246,7 +246,7 @@ export class StationSelector extends Component{
         const {visible} = this.state;
         const {id, name, address, elecPrice, numbers} = this.state.station;
         const {onAction, containerStyle} = this.props;
-        const kvStyle = {containerStyle: styles.containerStyle, titleStyle: styles.titleStyle, valueStyle: styles.valueStyle};
+        const kvStyle = {titleStyle: styles.titleStyle, valueStyle: styles.valueStyle};
 
         return (
             <Modal animationType={'slide'}
@@ -384,7 +384,6 @@ const styles = StyleSheet.create({
     },
     station: {
         height: 200,
-
         paddingLeft: 15,
         paddingRight: 15,
     },
@@ -395,13 +394,13 @@ const styles = StyleSheet.create({
         paddingBottom: 15,
     },
     infoContainer: {
-        flex: 1,
+        //flex: 1,
     },
     navigateContainer: {
         position: "absolute",
         justifyContent: "flex-end",
         alignItems: 'flex-end',
-        bottom: 170,
+        bottom: 175,
         left: 10,
         right: 10,
         top: 0,
@@ -427,9 +426,11 @@ const styles = StyleSheet.create({
         color: colors.grey3
     },
     address: {
+        flex: 1,
         fontSize: 16,
         paddingTop: 10,
         paddingBottom: 10,
         color: colors.grey3,
+        textAlignVertical: 'center',
     }
 });
