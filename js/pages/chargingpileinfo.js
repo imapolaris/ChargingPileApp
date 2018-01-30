@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {EmptyPlaceHolder} from "../components/placeholder";
+import {EmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
 import ChargingPileItem from "../components/chargingpileitem";
 import {FlatList, ScrollView, StyleSheet} from "react-native";
 import {Divider} from "react-native-elements";
@@ -51,7 +51,8 @@ class ChargingPileInfo extends Component{
                 <Divider />
                 <FlatList data={this.state.chargingPiles}
                           renderItem={this._renderItem}
-                          ListEmptyComponent={this._renderEmpty()} />
+                          ListEmptyComponent={this._renderEmpty()}
+                          ItemSeparatorComponent={SeparatorPlaceHolder} />
             </ScrollView>
         );
     }

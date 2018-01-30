@@ -72,13 +72,15 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: colors.grey2,
         marginLeft: 30,
-        minWidth: 100,
+        width: 100,
     },
     valueStyle: {
         color: colors.primary1,
         fontSize: 18,
         flex: 1,
         textAlign: 'center',
+        marginLeft: 5,
+        marginRight: 5,
     },
     buttonContainer: {
         marginTop: 30,

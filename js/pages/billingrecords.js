@@ -34,7 +34,7 @@ const CPABillingTabNavigator = TabNavigator(
             tabStyle:{
                 flexDirection:'row',
                 marginBottom: 1,
-                height: 45,
+                height: 40,
             },
             style: {
                 backgroundColor: colors.white,
