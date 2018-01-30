@@ -54,6 +54,7 @@
 		7147201BB373470B891BEB76 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4B2C68580CF45859C9B576A /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7624E3881F546E38006E551B /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7624E3781F546AE3006E551B /* libRNImagePicker.a */; };
 		76354DF0202013DE00A0F809 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B651241FDF66010037DFCE /* libRCTWeChat.a */; };
+		76354EAE202053ED00A0F809 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76354E682020517700A0F809 /* libART.a */; };
 		766D26941FDF7E4D0029D23F /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 766D268D1FDF7E4C0029D23F /* BaiduMapAPI_Base.framework */; };
 		766D26951FDF7E4D0029D23F /* BaiduMapAPI_Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 766D268E1FDF7E4C0029D23F /* BaiduMapAPI_Cloud.framework */; };
 		766D26961FDF7E4D0029D23F /* BaiduMapAPI_Location.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 766D268F1FDF7E4C0029D23F /* BaiduMapAPI_Location.framework */; };
@@ -313,6 +314,34 @@
 			remoteGlobalIDString = 17D41E551D7EE0CA0031415E;
 			remoteInfo = RCTBEEPickerManager;
 		};
+		76354E672020517700A0F809 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76354E612020517700A0F809 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = ART;
+		};
+		76354E692020517700A0F809 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76354E612020517700A0F809 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 323A12871E5F266B004975B8;
+			remoteInfo = "ART-tvOS";
+		};
+		76354EAA2020526200A0F809 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76354EA52020526200A0F809 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = ART;
+		};
+		76354EAC2020526200A0F809 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76354EA52020526200A0F809 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 323A12871E5F266B004975B8;
+			remoteInfo = "ART-tvOS";
+		};
 		76B651081FDF66010037DFCE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CF3A513DF6444366948CB327 /* AlipayModule.xcodeproj */;
@@ -433,6 +462,8 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		628EB63C305F4B8AA2E868D7 /* libresolv.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		6348BB19379A4961AEECA944 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		76354E612020517700A0F809 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
+		76354EA52020526200A0F809 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ART.xcodeproj; sourceTree = "<group>"; };
 		766D268C1FDF72630029D23F /* ChargingPileApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ChargingPileApp.entitlements; path = ChargingPileApp/ChargingPileApp.entitlements; sourceTree = "<group>"; };
 		766D268D1FDF7E4C0029D23F /* BaiduMapAPI_Base.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Base.framework; path = "../node_modules/react-native-baidu-map/ios/lib/BaiduMapAPI_Base.framework"; sourceTree = "<group>"; };
 		766D268E1FDF7E4C0029D23F /* BaiduMapAPI_Cloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Cloud.framework; path = "../node_modules/react-native-baidu-map/ios/lib/BaiduMapAPI_Cloud.framework"; sourceTree = "<group>"; };
@@ -492,6 +523,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76354EAE202053ED00A0F809 /* libART.a in Frameworks */,
 				76354DF0202013DE00A0F809 /* libRCTWeChat.a in Frameworks */,
 				766D26A61FDF83CE0029D23F /* libstdc++.6.0.9.tbd in Frameworks */,
 				61C7C3FE659340ACB38F603E /* CoreTelephony.framework in Frameworks */,
@@ -713,6 +745,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		76354E622020517700A0F809 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76354E682020517700A0F809 /* libART.a */,
+				76354E6A2020517700A0F809 /* libART-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		76354EA62020526200A0F809 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76354EAB2020526200A0F809 /* libART.a */,
+				76354EAD2020526200A0F809 /* libART-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		766026091FDF9EB3006D7A4F /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -805,6 +855,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				76354EA52020526200A0F809 /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -886,6 +937,7 @@
 		E17F256F34BD486E9283F7B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				76354E612020517700A0F809 /* ART.xcodeproj */,
 				766D26A51FDF83CE0029D23F /* libstdc++.6.0.9.tbd */,
 				766D26A31FDF83BC0029D23F /* libsqlite3.0.tbd */,
 				766D26A11FDF838D0029D23F /* OpenGLES.framework */,
@@ -1036,6 +1088,14 @@
 				{
 					ProductGroup = 76B651051FDF66010037DFCE /* Products */;
 					ProjectRef = CF3A513DF6444366948CB327 /* AlipayModule.xcodeproj */;
+				},
+				{
+					ProductGroup = 76354E622020517700A0F809 /* Products */;
+					ProjectRef = 76354E612020517700A0F809 /* ART.xcodeproj */;
+				},
+				{
+					ProductGroup = 76354EA62020526200A0F809 /* Products */;
+					ProjectRef = 76354EA52020526200A0F809 /* ART.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -1337,6 +1397,34 @@
 			fileType = archive.ar;
 			path = libRCTBEEPickerManager.a;
 			remoteRef = 76354DEE201FFF5100A0F809 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		76354E682020517700A0F809 /* libART.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libART.a;
+			remoteRef = 76354E672020517700A0F809 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		76354E6A2020517700A0F809 /* libART-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libART-tvOS.a";
+			remoteRef = 76354E692020517700A0F809 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		76354EAB2020526200A0F809 /* libART.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libART.a;
+			remoteRef = 76354EAA2020526200A0F809 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		76354EAD2020526200A0F809 /* libART-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libART-tvOS.a";
+			remoteRef = 76354EAC2020526200A0F809 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		76B651091FDF66010037DFCE /* libAlipayModule.a */ = {
