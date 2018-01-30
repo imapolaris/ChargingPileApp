@@ -1,6 +1,7 @@
 import {myFetch} from "./functions";
 
-const baseUrl = 'http://39.104.66.176/ChargingPileService/api';
+//const baseUrl = 'http://39.104.66.176/ChargingPileService/api';
+const baseUrl = 'http://192.168.0.201/ChargingPileService/api';
 
 const urls = {
     messages: `${baseUrl}/messages`,
@@ -13,6 +14,7 @@ const urls = {
     users: `${baseUrl}/users`,
     payRecords: `${baseUrl}/payRecords`,
     wallet: `${baseUrl}/wallet`,
+    batterytesting: `${baseUrl}/batterytesting`,
 };
 
 const headers = {
@@ -69,6 +71,14 @@ export function getNearbyStations(position) {
 }
 
 /*
+* query collect stations by user id.
+* */
+export function getCollectStations(userId) {
+    let url = `${urls.stations}/collect/${userId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
 * query the details of the station by id.
 * */
 export function getStationDetails(stationId) {
@@ -109,6 +119,30 @@ export function getSubscribeRecords(userId) {
 }
 
 /*
+* query all the vehicles of mine.
+* */
+export function getVehicleInfo(userId) {
+    let url = `${urls.users}/vehicle/${userId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* delete one vehicle.
+* */
+export function delOneVehicle(vehicleId) {
+    let url = `${urls.users}/vehicle/${vehicleId}`;
+    return myFetch(url, POST, headers);
+}
+
+/*
+* add one vehicle.
+* */
+export function addOneVehicle(vehicle) {
+    let url = `${urls.users}/vehicle`;
+    return myFetch(url, POST, headers, vehicle);
+}
+
+/*
 * start charging after scan the qrcode or input serial number.
 * */
 export function startCharging(serialNumber) {
@@ -129,6 +163,30 @@ export function stopCharging(serialNumber) {
 * */
 export function getChargingStatus(serialNumber) {
     let url = `${urls.charging}/status/${serialNumber}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* start battery testing.
+* */
+export function startBatteryTesting(serialNumber) {
+    let url = `${urls.batterytesting}/start/${serialNumber}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* query battery testing records.
+* */
+export function getBatteryTestingRecords(userId) {
+    let url = `${urls.batterytesting}/records/${userId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* query detail of the battery testing report by id.
+* */
+export function getBatteryTestingReportDetail(reportId) {
+    let url = `${urls.batterytesting}/records/detail/${reportId}`;
     return myFetch(url, GET, headers);
 }
 
@@ -199,6 +257,14 @@ export function changePwd(user) {
 }
 
 /*
+* query my messages.
+* */
+export function getMyMessages(userId) {
+    let url = `${urls.users}/${userId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
 * query pay records by user id.
 * */
 export function getPayRecords(userId) {
@@ -215,15 +281,6 @@ export function getWalletBalance(userId) {
 }
 
 /*
-* make one charge.
-* */
-export function makeOneCharge(userId, money, payWay) {
-    let url = `${urls.wallet}/charge?userId=${userId}&money=${money}&payway=${payWay}`;
-    return myFetch(url, GET, headers);
-}
-
-
-/*
  * pay by ali app.
  */
 export function aliPay() {
@@ -236,5 +293,13 @@ export function aliPay() {
 * */
 export function wxPay() {
     let url = `${urls.wallet}/wxpay`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* make one charge.
+* */
+export function makeOneCharge(userId, money, payWay) {
+    let url = `${urls.wallet}/charge?userId=${userId}&money=${money}&payway=${payWay}`;
     return myFetch(url, GET, headers);
 }

@@ -7,22 +7,20 @@ import {screenWidth} from "../common/constants";
 
 class KeyValPair extends Component{
     render() {
-        const {horizontal} = this.props;
+        const {horizontal, containerStyle, title, titleStyle, val, valueStyle, showDivider, lines} = this.props;
 
         return (
-            <View style={[styles.container, this.props.containerStyle,
-                            horizontal ? styles.containerHorizontal : null]}>
+            <View style={[styles.container, horizontal ? styles.containerHorizontal : null, containerStyle]}>
                 <View style={horizontal ? styles.infoContainerHorizontal : styles.infoContainerVertical}>
-                    <Text style={[styles.text, styles.titleStyle, this.props.titleStyle,
-                                    horizontal ? styles.titleStyleHorizontal : null]}>
-                        {this.props.title}
+                    <Text style={[styles.text, styles.titleStyle, horizontal ? styles.titleStyleHorizontal : null, titleStyle]}>
+                        {title}
                     </Text>
-                    <Text style={[styles.text, styles.valueStyle, this.props.valueStyle]}>
-                        {this.props.val}
+                    <Text style={[styles.text, styles.valueStyle, valueStyle]} numberOfLines={lines}>
+                        {val}
                     </Text>
                 </View>
                 {
-                    horizontal ? <Divider style={{width: screenWidth}} /> : null
+                    horizontal && showDivider ? <Divider style={{width: screenWidth}} /> : null
                 }
             </View>
         );
@@ -40,11 +38,12 @@ KeyValPair.defaultProps = {
     horizontal: false,
     title: '标题',
     val: '内容',
+    showDivider: true,
+    lines: 1,
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: colors.transparent,
@@ -68,7 +67,7 @@ const styles = StyleSheet.create({
     },
     titleStyleHorizontal: {
         fontSize: 16,
-        minWidth: 100,
+        width: 100,
     },
     valueStyle: {
         fontSize: 16,

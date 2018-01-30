@@ -7,7 +7,7 @@ import colors from "../common/colors";
 import {ActiveOpacity, ScreenKey, STATUSBAR_HEIGHT} from "../common/constants";
 import {IconType} from "../common/icons";
 import {connect} from "react-redux";
-import {doNav} from "../redux/actions";
+import {doNav} from "../redux/navactions";
 
 class CPAMePage extends Component{
     render() {
@@ -32,10 +32,15 @@ class CPAMePage extends Component{
                 icon: {name:'md-heart', type: IconType.Ionicon, color: colors.red},
                 screenKey: ScreenKey.Collect,
             },
-            {
+            /*{
                 title: '我的预约',
                 icon: {name:'pin', type: IconType.SimpleLineIcon, color: colors.tintColor2},
                 screenKey: ScreenKey.MySubscribe,
+            },*/
+            {
+                title: '车辆信息',
+                icon: {name:'md-car', type: IconType.Ionicon, color: colors.goldenrod},
+                screenKey: ScreenKey.VehicleInfo,
             },
             {
                 title: '检测报告',
@@ -52,7 +57,7 @@ class CPAMePage extends Component{
             }
         ];
 
-        const {logined, nickname, nav} = this.props;
+        const {logined, nickname, avatar, nav} = this.props;
 
         return (
             <ScrollView style={styles.container}>
@@ -61,7 +66,9 @@ class CPAMePage extends Component{
                             height={60}
                             rounded
                             activeOpacity={ActiveOpacity}
-                            icon={{name: 'user-o', type: IconType.FAIcon, color: colors.yellow, size: 45}} />
+                            icon={{name: 'user-o', type: IconType.FAIcon, color: colors.yellow, size: 45}}
+                            source={avatar}
+                    />
 
                     <View style={styles.personalInfoContainer}>
                         <TouchableOpacity style={styles.textContainer}
@@ -120,6 +127,7 @@ function mapStateToProps(state) {
     return {
         logined: state.user.logined,
         nickname: state.user.nickname,
+        avatar: state.user.avatar,
     }
 }
 
@@ -158,6 +166,7 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         flex: 1,
+        justifyContent: 'center',
     },
     text: {
         fontSize: 17,
@@ -165,7 +174,7 @@ const styles = StyleSheet.create({
     },
     bellContainer: {
         alignItems: 'flex-end',
-        paddingRight: 20,
+        padding:20,
     },
     settings:{
         borderTopWidth: 0.5,

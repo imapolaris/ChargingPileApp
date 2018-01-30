@@ -1,8 +1,6 @@
 
 import {
-    CHECK_VERSION_COMPLETED_ACTION, CLEAR_CACHE_COMPLETED_ACTION,
-    MESSAGE_NOTICE_SWITCH_ACTION
-} from "./actions";
+    MESSAGE_NOTICE_SWITCH_ACTION,CHECK_VERSION_COMPLETED_ACTION, CLEAR_CACHE_COMPLETED_ACTION} from "./systemactions";
 
 export function system(state={
     cache: '0MB',

@@ -1,25 +1,25 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View, Platform} from 'react-native';
 import PropTypes from 'prop-types';
 import {IconType} from "../common/icons";
 import colors from "../common/colors";
-import {ActiveOpacity} from "../common/constants";
+import {ActiveOpacity, AndroidPlatform} from "../common/constants";
 import {Icon} from "react-native-elements";
 
 class RadioButton extends Component{
     render() {
+        const {style, image, title} = this.props;
+
         return (
-            <TouchableOpacity style={[styles.container, {...this.props.style}]}
+            <TouchableOpacity style={[styles.container, {...style}]}
                               onPress={this.props.onChecked}
                               activeOpacity={ActiveOpacity}>
                 <View style={styles.titleContainer}>
-                    {
-                        this.props.image
-                    }
+                    {image}
                     <Text style={styles.text}>
-                        {this.props.title}
+                        {title}
                     </Text>
                 </View>
 
@@ -27,7 +27,7 @@ class RadioButton extends Component{
                       name={this.props.checked ? 'md-radio-button-on' : 'md-radio-button-off'}
                       size={30}
                       color={colors.grey3}
-                      style={styles.icon} />
+                      style={styles.icon}/>
             </TouchableOpacity>
         );
     }
@@ -52,11 +52,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: colors.white,
         alignItems: 'center',
+        borderColor: '#c3c3c3',
+        borderWidth: Platform.OS === AndroidPlatform ? 0.2 : 0,
     },
     titleContainer: {
         flex: 1,
         flexDirection: 'row',
         paddingLeft: 15,
+        alignItems: 'center',
     },
     text: {
         fontSize: 16,

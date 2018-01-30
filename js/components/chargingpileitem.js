@@ -36,14 +36,14 @@ class ChargingPileItem extends Component{
                             类型：{pileType}
                         </Text>
                     </View>
-                    <TouchableOpacity style={styles.infoRightContainer}
+                    {/*<TouchableOpacity style={styles.infoRightContainer}
                                       activeOpacity={ActiveOpacity}
                                       onPress={onSubscribe}>
                         <Icon type={IconType.Ionicon} name="md-checkmark" size={20} color={colors.white} />
                         <Text style={styles.buttonText}>
                             预约
                         </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>*/}
                 </View>
                 <Divider style={styles.divider} />
             </View>
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     },
     info: {
         fontSize: 14,
+        paddingTop: 3,
     },
     divider: {
         backgroundColor: '#C3C3C3',

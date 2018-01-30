@@ -1,10 +1,12 @@
+'use strict';
+
 import React, {Component} from 'react';
 import {View, Animated, Text, StyleSheet} from 'react-native';
 import {Avatar} from 'react-native-elements';
-import {NavigationActions} from 'react-navigation';
 import colors from '../common/colors';
 import {ActiveOpacity, screenWidth} from "../common/constants";
 import {connect} from "react-redux";
+import {doLoadHomePage} from "../redux/navactions";
 
 class CPAWelcomePage extends Component{
     componentWillMount() {
@@ -19,37 +21,31 @@ class CPAWelcomePage extends Component{
             duration: 1000,
         }).start();
 
-        Animated.timing(this._animatedRotateValue, {
-            toValue: 100,
-            delay: 1000,
-            duration: 1000,
-        }).start();
-
         Animated.timing(this._animatedMovingValue, {
             toValue: 100,
-            duration: 1000,
+            duration: 1500,
         }).start();
 
-        console.log(this.props);
-        this._timer = setTimeout(() => {
-            const resetAction = NavigationActions.reset({
-                index: 0,
-                actions: [
-                    NavigationActions.navigate({routeName: 'Home'})
-                ]
-            });
-            this.props.navigation.dispatch(resetAction);
-        }, 2000);
+        Animated.timing(this._animatedRotateValue, {
+            toValue: 100,
+            delay: 1500,
+            duration: 1500,
+        }).start(()=>{
+            this._timer = setTimeout(() => {
+                const {loadWelcomePage} = this.props;
+                loadWelcomePage();
+            }, 1000);
+        });
     }
 
     componentWillUpdate() {
-        clearTimeout(this._timer);
+        this._timer && clearTimeout(this._timer);
     }
 
     render() {
         let interpolatedColorAnimation = this._animatedColorValue.interpolate({
             inputRange: [0, 100],
-            outputRange: ['#000000', colors.theme1]
+            outputRange: ['rgba(0,0,0,0.3)', colors.theme1]
         });
 
         let interpolatedRotateAnimation = this._animatedRotateValue.interpolate({
@@ -96,7 +92,13 @@ class CPAWelcomePage extends Component{
     }
 }
 
-export default CPAWelcomePage;
+function mapDispatchToProps(dispatch) {
+    return {
+        loadWelcomePage: () => dispatch(doLoadHomePage()),
+    }
+}
+
+export default connect(state=>state, mapDispatchToProps)(CPAWelcomePage);
 
 const styles = StyleSheet.create({
     container: {

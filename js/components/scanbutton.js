@@ -11,13 +11,13 @@ import {shadowStyle} from "../common/styles";
 
 class ScanButton extends Component {
     render() {
-        const {containerStyle, onScan, btnStyle, icon, title} = this.props;
+        const {containerStyle, onAction, btnStyle, icon, title} = this.props;
 
         return (
             <View style={styles.container}>
                 <View style={[styles.topContainer, shadowStyle, containerStyle]}>
-                    <TouchableOpacity onPress={onScan}
-                                      onLongPress={onScan}
+                    <TouchableOpacity onPress={onAction}
+                                      onLongPress={onAction}
                                       style={[styles.button, btnStyle]}
                                       activeOpacity={ActiveOpacity}>
                         {
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+        alignItems: 'center',
     },
     topContainer: {
         alignItems: 'center',

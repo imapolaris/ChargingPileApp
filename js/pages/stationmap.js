@@ -1,12 +1,10 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, View, ScrollView} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import CPASearchBar from "../components/searchbar";
 import {
     MapView,
-    MapTypes,
-    Geolocation
 } from 'react-native-baidu-map';
 import colors from "../common/colors";
 import {ScreenKey} from "../common/constants";
@@ -14,11 +12,9 @@ import ActionButton from "../components/actionbutton";
 import {IconType} from "../common/icons";
 import {Icon} from "react-native-elements";
 import {connect} from "react-redux";
-import {
-    doEnableTraffic, getCurrentPosition, doRequestStationMarkers, doRequestOneStationInfo,
-    doNav
-} from "../redux/actions";
+import {doEnableTraffic, getCurrentPosition, doRequestStationMarkers, doRequestOneStationInfo} from "../redux/mapactions";
 import {MapSelector, StationSelector} from "../components/selector";
+import {doNav} from "../redux/navactions";
 
 
 class CPAStationMapPage extends Component{
@@ -31,7 +27,9 @@ class CPAStationMapPage extends Component{
         const {requestOneStationInfo} = this.props;
         requestOneStationInfo(e)
             .then(ret=>{
-                this._stationSelector.show(true, ret.data);
+                this._stationSelector.show(ret.data, (address)=>{
+                    this._mapSelector.show(null, address);
+                });
             })
     };
 
@@ -39,8 +37,13 @@ class CPAStationMapPage extends Component{
         const {
             trafficEnabled, currentLocation, enableTraffic,
             requestStationMarkers,
-            station, markers, isRefreshing, nav
+            markers, isRefreshing, nav
         } = this.props;
+
+        const actionButtonStyle = {
+            containerStyle: styles.actionButtonContainer,
+            btnStyle: styles.actionButtonStyle,
+        };
 
         return (
             <View style={styles.container}>
@@ -60,24 +63,21 @@ class CPAStationMapPage extends Component{
 
                 <ActionButton icon={<Icon type={IconType.Ionicon} name="md-locate" size={25} color={colors.grey3}/>}
                               onAction={currentLocation} showText={false} position={styles.locateButton}
-                              containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle}/>
-                <ActionButton icon={<Icon type={IconType.Ionicon} name="md-help" size={25} color={colors.grey3}/>}
+                              {...actionButtonStyle}/>
+                {/*<ActionButton icon={<Icon type={IconType.Ionicon} name="md-help" size={25} color={colors.grey3}/>}
                               onAction={() => {}} showText={false} position={styles.questionButton}
-                              containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle}/>
+                              {...actionButtonStyle}/>*/}
                 {
                     !isRefreshing && markers.length <= 0 ?
                         <ActionButton
                             icon={<Icon type={IconType.Ionicon} name="md-refresh" size={25} color={colors.grey3}/>}
                             onAction={() => requestStationMarkers()} showText={false} position={styles.refreshButton}
-                            containerStyle={styles.actionButtonContainer} btnStyle={styles.actionButtonStyle}/>
+                            {...actionButtonStyle}/>
                         : null
                 }
 
-                {/*<MapSelector visible={true} from={{longitude: 116.404185, // 中间点坐标
-                    latitude: 39.91491}} to={{longitude: 116.404185, // 中间点坐标
-                    latitude: 40.01}} />*/}
-
-                <StationSelector ref={self=>this._stationSelector=self} onAction={() => {alert('test')}}/>
+                <StationSelector ref={self=>this._stationSelector=self}
+                                 onAction={(id) => nav && nav(ScreenKey.StationInfo, {stationId: id})}/>
             </View>
         );
     };
@@ -95,6 +95,8 @@ class CPAStationMapPage extends Component{
                 {
                     this._renderMapView()
                 }
+
+                <MapSelector ref={self=>this._mapSelector=self} />
             </View>
         );
     }
@@ -121,7 +123,7 @@ function mapDispatchToProps(dispatch) {
         enableTraffic: () => dispatch(doEnableTraffic()),
         requestStationMarkers: () => dispatch(doRequestStationMarkers()),
         requestOneStationInfo: (e) => dispatch(doRequestOneStationInfo(e)),
-        nav: (screenKey) => dispatch(doNav(screenKey)),
+        nav: (screenKey, params) => dispatch(doNav(screenKey, params)),
     };
 }
 
@@ -183,9 +185,10 @@ const styles = StyleSheet.create({
         top: 0,
     },
     refreshButton: {
+        //bottom: 110,
         justifyContent: "flex-end",
         alignItems: 'flex-start',
-        bottom: 110,
+        bottom: 65,
         left: 10,
         right: 0,
         top: 0,

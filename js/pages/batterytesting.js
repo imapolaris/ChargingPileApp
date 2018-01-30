@@ -1,28 +1,61 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
-import {Divider, Icon} from 'react-native-elements';
-import colors from "../common/colors";
-import CPAScanButton from "../components/scanbutton";
+import {Text, View, StyleSheet} from 'react-native';
+import {Divider} from 'react-native-elements';
+import ScanButton from "../components/scanbutton";
 import KeyValPair from "../components/keyvalpair";
-import {ScreenKey} from "../common/constants";
-import ActionButton from "../components/actionbutton";
-import {IconType} from "../common/icons";
 import {connect} from "react-redux";
-import {styles, mapDispatchToProps, mapStateToProps} from './chargingpage';
+import {styles} from './chargingpage';
+import Information from "../components/information";
+import {CloseButton, QuestionButton} from "../components/circlebutton";
+import colors from "../common/colors";
+import {doQueryBatteryTestingInfo, startScanBatteryTesting} from "../redux/batterytestingactions";
+import {doBack} from "../redux/navactions";
 
 class CPABatteryTestingPage extends Component {
-    _back = () => {
-        const {goBack} = this.props.navigation;
-        goBack && goBack();
+    static defaultProps = {
+        totalTestingCostMoney: 0,
+        totalTestingTime: 0,
+        totalTestingElec: 0,
+        totalTestingNumberOfTimes: 0,
     };
 
-    _startBatteryTesting = () => {
-        const {nav} = this.props;
-        nav && nav(ScreenKey.Scan);
+    componentDidMount() {
+        const {queryBatteryTestingInfo} = this.props;
+        queryBatteryTestingInfo && queryBatteryTestingInfo();
+    }
+
+    _showInfo = () => {
+        this._information.show();
+    };
+
+    _back = () => {
+        const {back} = this.props;
+        back && back();
+    };
+
+    _renderFlowInfo = () => {
+        return (
+            <View style={flowStyles.infoContainer}>
+                <Text style={flowStyles.text}>
+                    a)	首先确保车辆SOC小于30%；{'\r\n'}
+                    b)	车辆关闭电源，静置1小时；{'\r\n'}
+                    c)	连接充电枪与车辆充电底座，启动充电，在输出电流前记录电池端最高单体电压U0；{'\r\n'}
+                    d)	车辆电池系统充电至100%SOC；{'\r\n'}
+                    e)	根据安时积分法算出累计充电容量C0；{'\r\n'}
+                    f)	使用图1-图3的SOC_OCV曲线表，基于U0值，估算初始SOC值S；{'\r\n'}
+                    g)	根据公式C0/（1-S），计算电池系统容量C。
+                </Text>
+            </View>
+        )
     };
 
     render() {
-        const {totalTestingCostMoney, totalTestingTime, totalTestingElec, totalTestingNumberOfTimes} = this.props;
+        const {
+            totalTestingCostMoney, totalTestingTime,
+            totalTestingElec, totalTestingNumberOfTimes,
+            startScan,
+        } = this.props;
+
 
         return (
             <View style={styles.container}>
@@ -48,20 +81,47 @@ class CPABatteryTestingPage extends Component {
                 </View>
 
                 <View style={styles.chargingActionContainer}>
-                    <CPAScanButton title='扫码检测'
-                                   onScan={this._startBatteryTesting}
-                                   btnStyle={styles.testingBtnStyle} />
+                    <ScanButton title='扫码检测'
+                                   onAction={()=>startScan && startScan()}
+                                   btnStyle={styles.testingBtnStyle}/>
                 </View>
 
-                <ActionButton showText={false}
-                              icon={<Icon type={IconType.Ionicon} name="md-close" size={20} color={colors.grey}/>}
-                              onAction={this._back}
-                              position={styles.closePosition}
-                              containerStyle={styles.closeContainerStyle}
-                              btnStyle={styles.closeBtnStyle}/>
+                <QuestionButton onAction={this._showInfo} position={styles.questionPosition}/>
+                <CloseButton onAction={this._back} position={styles.closePosition}/>
+
+                <Information ref={self => this._information = self}>
+                    {this._renderFlowInfo()}
+                </Information>
             </View>
         );
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return {
+        queryBatteryTestingInfo: () => dispatch(doQueryBatteryTestingInfo()),
+        startScan: () => dispatch(startScanBatteryTesting()),
+        back: () => dispatch(doBack()),
+    }
+}
+
+function mapStateToProps(state) {
+    return state;
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(CPABatteryTestingPage);
+
+const flowStyles = StyleSheet.create({
+    infoContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 40,
+        marginRight: 40,
+    },
+    text: {
+        fontSize: 16,
+        color: colors.white,
+        lineHeight: 30,
+    }
+});

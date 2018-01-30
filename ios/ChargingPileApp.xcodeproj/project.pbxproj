@@ -26,6 +26,7 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		2022F18479D8408AB0525FDC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7BDFBBA7CD458AA1044898 /* Foundation.framework */; };
 		2486F155CFEB4F38BBECCFEB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF3EE13AAE941E1B1FE7F22 /* CFNetwork.framework */; };
+		2659D44E3D2B4DCA8C61C892 /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2EFBDA83A745D28A7225A5 /* libRCTBEEPickerManager.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -52,6 +53,7 @@
 		70F6ED507AA04353BC6E088B /* libAlipayModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E75CAA3E80EF43E5909F38BE /* libAlipayModule.a */; };
 		7147201BB373470B891BEB76 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4B2C68580CF45859C9B576A /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7624E3881F546E38006E551B /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7624E3781F546AE3006E551B /* libRNImagePicker.a */; };
+		76354DF0202013DE00A0F809 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B651241FDF66010037DFCE /* libRCTWeChat.a */; };
 		766D26941FDF7E4D0029D23F /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 766D268D1FDF7E4C0029D23F /* BaiduMapAPI_Base.framework */; };
 		766D26951FDF7E4D0029D23F /* BaiduMapAPI_Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 766D268E1FDF7E4C0029D23F /* BaiduMapAPI_Cloud.framework */; };
 		766D26961FDF7E4D0029D23F /* BaiduMapAPI_Location.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 766D268F1FDF7E4C0029D23F /* BaiduMapAPI_Location.framework */; };
@@ -304,6 +306,13 @@
 			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
 			remoteInfo = RNImagePicker;
 		};
+		76354DEE201FFF5100A0F809 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C92C0A74E900446DA32B4914 /* RCTBEEPickerManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 17D41E551D7EE0CA0031415E;
+			remoteInfo = RCTBEEPickerManager;
+		};
 		76B651081FDF66010037DFCE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CF3A513DF6444366948CB327 /* AlipayModule.xcodeproj */;
@@ -412,6 +421,7 @@
 		2D02E47B1E0B4A5D006451C7 /* ChargingPileApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChargingPileApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ChargingPileApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ChargingPileApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B3F76B36EE84269A083EF71 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		3F2EFBDA83A745D28A7225A5 /* libRCTBEEPickerManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTBEEPickerManager.a; sourceTree = "<group>"; };
 		43E50BAE85C54C1C8CE644FC /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		444EE28B3BA648479EF59E19 /* RCTBaiduMap.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTBaiduMap.xcodeproj; path = "../node_modules/react-native-baidu-map/ios/RCTBaiduMap.xcodeproj"; sourceTree = "<group>"; };
 		4E1754018F854707BB8B7CA2 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -457,6 +467,7 @@
 		BC9743A7A1784657830B2920 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		C4B2C68580CF45859C9B576A /* UserNotifications.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		C4C9EE432B084BE8ABB418AF /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		C92C0A74E900446DA32B4914 /* RCTBEEPickerManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTBEEPickerManager.xcodeproj; path = "../node_modules/react-native-picker/ios/RCTBEEPickerManager.xcodeproj"; sourceTree = "<group>"; };
 		CF3A513DF6444366948CB327 /* AlipayModule.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AlipayModule.xcodeproj; path = "../node_modules/react-native-yunpeng-alipay/ios/AlipayModule.xcodeproj"; sourceTree = "<group>"; };
 		D4E0E4DF663C47989E7BCF00 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		DA4296A7BCAC4A58A862D4AE /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTWeChat.xcodeproj; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; };
@@ -481,6 +492,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76354DF0202013DE00A0F809 /* libRCTWeChat.a in Frameworks */,
 				766D26A61FDF83CE0029D23F /* libstdc++.6.0.9.tbd in Frameworks */,
 				61C7C3FE659340ACB38F603E /* CoreTelephony.framework in Frameworks */,
 				766D26A41FDF83BC0029D23F /* libsqlite3.0.tbd in Frameworks */,
@@ -529,6 +541,7 @@
 				56FF2B35EEDD473BB0A00D4F /* libresolv.tbd in Frameworks */,
 				9DDA28D5C49A48A990B85C9B /* CoreGraphics.framework in Frameworks */,
 				BCD56DD6E4DC403D92112E52 /* libRNFS.a in Frameworks */,
+				2659D44E3D2B4DCA8C61C892 /* libRCTBEEPickerManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,6 +705,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		76354DEB201FFF5100A0F809 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76354DEF201FFF5100A0F809 /* libRCTBEEPickerManager.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		766026091FDF9EB3006D7A4F /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -709,6 +730,7 @@
 				DE7A2BB0BF0D4BC09FA1518F /* libRCTJCoreModule.a */,
 				A1FF1FD9EE4B46E88349F49D /* libRCTJPushModule.a */,
 				05E3B33F026540D8968385DB /* libRNFS.a */,
+				3F2EFBDA83A745D28A7225A5 /* libRCTBEEPickerManager.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -803,6 +825,7 @@
 				8CA83FE48C574C019EE2AB74 /* RCTJCoreModule.xcodeproj */,
 				EED621C320144F029754DE3F /* RCTJPushModule.xcodeproj */,
 				B03C7B62EF4143F29DF5D7F3 /* RNFS.xcodeproj */,
+				C92C0A74E900446DA32B4914 /* RCTBEEPickerManager.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1025,6 +1048,10 @@
 				{
 					ProductGroup = 76B651371FDF66010037DFCE /* Products */;
 					ProjectRef = 444EE28B3BA648479EF59E19 /* RCTBaiduMap.xcodeproj */;
+				},
+				{
+					ProductGroup = 76354DEB201FFF5100A0F809 /* Products */;
+					ProjectRef = C92C0A74E900446DA32B4914 /* RCTBEEPickerManager.xcodeproj */;
 				},
 				{
 					ProductGroup = 76B650FF1FDF66010037DFCE /* Products */;
@@ -1305,6 +1332,13 @@
 			remoteRef = 7624E3771F546AE3006E551B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		76354DEF201FFF5100A0F809 /* libRCTBEEPickerManager.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTBEEPickerManager.a;
+			remoteRef = 76354DEE201FFF5100A0F809 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		76B651091FDF66010037DFCE /* libAlipayModule.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1530,12 +1564,14 @@
 					"$(SRCROOT)..\node_modulesjcore-react-nativeiosRCTJCoreModule",
 					"$(SRCROOT)..\node_modulesjpush-react-nativeiosRCTJPushModule",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager",
 				);
 				INFOPLIST_FILE = ChargingPileAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1577,12 +1613,14 @@
 					"$(SRCROOT)..\node_modulesjcore-react-nativeiosRCTJCoreModule",
 					"$(SRCROOT)..\node_modulesjpush-react-nativeiosRCTJPushModule",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager",
 				);
 				INFOPLIST_FILE = ChargingPileAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1643,6 +1681,7 @@
 					"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule",
 					"$(SRCROOT)/../node_modules/react-native-baidu-map/ios/RCTBaiduMap",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager",
 				);
 				INFOPLIST_FILE = ChargingPileApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
@@ -1693,6 +1732,7 @@
 					"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule",
 					"$(SRCROOT)/../node_modules/react-native-baidu-map/ios/RCTBaiduMap",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager",
 				);
 				INFOPLIST_FILE = ChargingPileApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
@@ -1731,11 +1771,13 @@
 					"$(SRCROOT)..\node_modulesjcore-react-nativeiosRCTJCoreModule",
 					"$(SRCROOT)..\node_modulesjpush-react-nativeiosRCTJPushModule",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager",
 				);
 				INFOPLIST_FILE = "ChargingPileApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1786,11 +1828,13 @@
 					"$(SRCROOT)..\node_modulesjcore-react-nativeiosRCTJCoreModule",
 					"$(SRCROOT)..\node_modulesjpush-react-nativeiosRCTJPushModule",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager",
 				);
 				INFOPLIST_FILE = "ChargingPileApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1847,6 +1891,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.ChargingPileApp-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1871,6 +1916,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

@@ -17,7 +17,7 @@ import CPAUserAgreementPage from "../pages/useragreement";
 import CPAAboutUsPage from "../pages/aboutus";
 import CPAStationListPage from "../pages/stationlist";
 import CPAFeedbackPage from "../pages/feedback";
-import CPAStationInfoPage from "../pages/stationinfo";
+import CPAStationInfoPage from "../pages/stationnavigator";
 import CPAFilterPage from "../pages/filterpage";
 import CPAMySubscribePage from "../pages/mysubscribe";
 import CPATestingReportPage from "../pages/testingreport";
@@ -26,19 +26,26 @@ import CPAInvoiceInfoPage from "../pages/invoiceinfo";
 import CPALocatingCityPage from "../pages/locatingcity";
 import CPASearchStationPage from "../pages/searchstation";
 import NavButton from "./navbutton";
-import {ScreenKey} from "../common/constants";
+import {ScanAction, ScreenKey, UserAction} from "../common/constants";
 import CPAPersonalInfoPage from "../pages/personalinfo";
 import CPABatteryTestingPage from "../pages/batterytesting";
-import CPAResetPwdPage from '../pages/resetpwd';
+import CPAInChargingPage from "../pages/incharging";
+import CPAVehicleInfoPage from "../pages/vehicleinfo";
+import CPAAddAddressPage from "../pages/addaddress";
+import CPAChargingBillingPage from "../pages/chargingbilling";
+import CPAMyCollectPage from '../pages/mycollect';
+import CPANotificationPage from "../pages/notification";
+import CPAAddVehiclePage from "../pages/addvehicle";
+import CPATestingReportDetailPage from '../pages/testingreportdetail';
 
 const CPAStackNavigator = StackNavigator(
     {
-        /*Welcome: {
+        Welcome: {
             screen: CPAWelcomePage,
             navigationOptions: {
                 header: null,
             },
-        },*/
+        },
         Home: {
             screen: CPAHomePage,
             navigationOptions: {
@@ -47,9 +54,9 @@ const CPAStackNavigator = StackNavigator(
         },
         Scan: {
             screen: CPAScanPage,
-            navigationOptions: {
-                title: '扫码'
-            }
+            navigationOptions: ({navigation}) => ({
+                title: '扫码' + (navigation.state.params.action === ScanAction.Charging ? '充电' : '检测'),
+            }),
         },
         StationList: {
             screen: CPAStationListPage,
@@ -71,7 +78,7 @@ const CPAStackNavigator = StackNavigator(
                     headerRight:(
                         <NavButton label="快速注册"
                                    onNavAction={() => {
-                                       navigation.navigate(ScreenKey.Register);
+                                       navigation.navigate(ScreenKey.Register, {action: UserAction.Register});
                                    }}
                         />
                     ),
@@ -85,7 +92,7 @@ const CPAStackNavigator = StackNavigator(
             }
         },
         ResetPwd: {
-            screen: CPAResetPwdPage,
+            screen: CPARegisterPage,
             navigationOptions: {
                 title: '重置密码'
             }
@@ -109,7 +116,7 @@ const CPAStackNavigator = StackNavigator(
             }
         },
         Collect: {
-            screen: CPAStationListPage,
+            screen: CPAMyCollectPage,
             navigationOptions: {
                 title: '收藏列表',
             }
@@ -142,12 +149,6 @@ const CPAStackNavigator = StackNavigator(
             screen: CPAMySubscribePage,
             navigationOptions: {
                 title: '我的预约'
-            }
-        },
-        TestingReport: {
-            screen: CPATestingReportPage,
-            navigationOptions: {
-                title: '检测报告'
             }
         },
         BillingRecords: {
@@ -186,8 +187,65 @@ const CPAStackNavigator = StackNavigator(
                 header: null
             }
         },
+        TestingReport: {
+            screen: CPATestingReportPage,
+            navigationOptions: {
+                title: '检测报告'
+            }
+        },
+        TestingReportDetail: {
+            screen: CPATestingReportDetailPage,
+            navigationOptions: {
+                title: '报告详情'
+            }
+        },
+        InCharging: {
+            screen: CPAInChargingPage,
+            navigationOptions: {
+                title: '正在充电'
+            }
+        },
+        VehicleInfo: {
+            screen: CPAVehicleInfoPage,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '车辆信息',
+                    headerRight: (
+                        <NavButton label="添加车辆"
+                                   onNavAction={() => {
+                                       navigation.navigate(ScreenKey.AddVehicle);
+                                   }} />
+                    ),
+                });
+            }
+        },
+        AddVehicle: {
+            screen: CPAAddVehiclePage,
+            navigationOptions: {
+                title: '添加车辆',
+            }
+        },
+        AddAddress: {
+            screen: CPAAddAddressPage,
+            navigationOptions: {
+                title: '新增地址',
+            }
+        },
+        ChargingBilling: {
+            screen: CPAChargingBillingPage,
+            navigationOptions: {
+                title: '充电账单',
+            }
+        },
+        Notification: {
+            screen: CPANotificationPage,
+            navigationOptions: {
+                title: '通知消息',
+            }
+        },
     },
     {
+        //initialRouteName: 'Welcome',
         navigationOptions: {
             gesturesEnabled: true,
             headerTitleStyle: {

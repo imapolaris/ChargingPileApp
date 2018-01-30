@@ -2,28 +2,20 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View, Platform} from 'react-native';
-import PropTypes from 'prop-types';
 import {Divider, Icon} from "react-native-elements";
 import {IconType} from "../common/icons";
 import {ActiveOpacity, IOSPlatform} from "../common/constants";
 import colors from "../common/colors";
 import CityList from "../components/citylist";
 import {connect} from "react-redux";
-import {doChooseCity, doGeocode, getCurrentPosition} from "../redux/actions";
+import {doChooseCity, getCurrentPosition} from "../redux/mapactions";
 
 const hotCities1 = ['北京', '上海', '广州', '深圳'];
 const hotCities2 = ['厦门', '福建', '杭州', '天津'];
 class CPALocatingCityPage extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        };
-    }
-
     componentDidMount() {
         const {locatingCity} = this.props;
-        if (locatingCity.length <= 0) {
+        if (!locatingCity || locatingCity.length <= 0) {
             const {currentLocation} = this.props;
             currentLocation && currentLocation();
         }
@@ -32,9 +24,6 @@ class CPALocatingCityPage extends Component{
     _onChooseCity = (city) => {
         const {chooseCity} = this.props;
         chooseCity && chooseCity(city);
-
-        const {goBack} = this.props.navigation;
-        goBack && goBack();
     };
 
     render() {

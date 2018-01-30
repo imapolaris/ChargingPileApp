@@ -3,11 +3,11 @@
 import React from 'react';
 import {TabNavigator} from "react-navigation";
 import colors from "../common/colors";
-import {StationMapIcon, ChargingIcon, MessageIcon, MeIcon} from "../common/icons";
+import {StationMapIcon, ChargingIcon, NewsIcon, MeIcon} from "../common/icons";
 import CPAStationMapPage from "./stationmap";
 import CPAChargingPage from "./chargingpage";
-import CPAMessagePage from "./messagepage";
 import CPAMePage from "./mepage";
+import CPANewsPage from "./newspage";
 
 
 const CPAHomePage = TabNavigator(
@@ -24,25 +24,25 @@ const CPAHomePage = TabNavigator(
         Charging: {
             screen: CPAChargingPage,
             navigationOptions: {
-                title: '扫码',
+                title: '充电',
                 tabBarIcon: ({tintColor, focused}) => {
                     return ChargingIcon(tintColor, focused);
                 }
             }
         },
         Message: {
-            screen: CPAMessagePage,
+            screen: CPANewsPage,
             navigationOptions: {
                 title: '资讯',
                 tabBarIcon: ({tintColor, focused}) => {
-                    return MessageIcon(tintColor, focused);
+                    return NewsIcon(tintColor, focused);
                 }
             }
         },
         Me: {
             screen: CPAMePage,
             navigationOptions: {
-                title: '账户',
+                title: '我的',
                 tabBarIcon: ({tintColor, focused}) => {
                     return MeIcon(tintColor, focused);
                 }

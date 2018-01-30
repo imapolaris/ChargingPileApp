@@ -11,7 +11,8 @@ import {ActiveOpacity, SearchHistoryCount} from "../common/constants";
 import {clearSearchHistoryStations, getSearchHistoryStations, updateSearchHistoryStations} from "../common/appstorage";
 import {getStationsByName} from "../common/webapi";
 import {connect} from "react-redux";
-import {doGeocode} from "../redux/actions";
+import {doGeocode} from "../redux/mapactions";
+import {doBack} from "../redux/navactions";
 
 class CPASearchStationPage extends Component{
     constructor(props) {
@@ -38,9 +39,9 @@ class CPASearchStationPage extends Component{
         }
 
         getStationsByName(text)
-            .then(data=>{
-                if (data !== null && data !== undefined && data.length > 0) {
-                    let data = data.map((item, index)=>{
+            .then(ret=>{
+                if (ret && ret.length>0) {
+                    let data = ret.map((item, index)=>{
                         return Object.assign({}, item, {key: index})
                     });
 
@@ -65,8 +66,8 @@ class CPASearchStationPage extends Component{
             geocode && geocode(station.address);
         }
 
-        const {goBack} = this.props.navigation;
-        goBack && goBack();
+        const {back} = this.props;
+        back && back();
     };
 
     _updateSearchHistoryStations(searchRecord) {
@@ -160,19 +161,20 @@ class CPASearchStationPage extends Component{
         );
     };
 
-    _renderStationItem = ({item})=>{
+    _renderStationItem = ({item})=> {
         return (
-            <TouchableOpacity
-                key={item.key}
-                style={[styles.item, styles.stationItem]}
-                onPress={()=>{
-                    this._chooseStation(item)
-                }}>
-                <View style={[styles.rowData, styles.station]}>
-                    <Text style={styles.rowDataText}>
+            <TouchableOpacity key={item.key}
+                              style={styles.stationItem}
+                              activeOpacity={ActiveOpacity}
+                              onPress={() => {
+                                  this._chooseStation(item)
+                              }}>
+                <Icon type={IconType.MaterialIcon} name="ev-station" size={20} color={colors.grey3} />
+                <View style={styles.station}>
+                    <Text style={styles.rowDataText} numberOfLines={1}>
                         {item.name}
                     </Text>
-                    <Text style={[styles.rowDataText, styles.address]}>
+                    <Text style={[styles.rowDataText, styles.address]} numberOfLines={1}>
                         {item.address}
                     </Text>
                 </View>
@@ -182,7 +184,7 @@ class CPASearchStationPage extends Component{
 
     _renderSearchHistory = () => {
         return (
-            <View style={[styles.searchResultContainer, styles.searchHistoryContainer]}>
+            <View style={[styles.searchHistoryContainer, styles.contentContainer]}>
                 <View style={[styles.item, styles.historyTitle]}>
                     <Text style={[styles.rowDataText]}>
                         搜索历史
@@ -203,9 +205,8 @@ class CPASearchStationPage extends Component{
 
     _renderSearchOptions = () => {
         return (
-            <View style={styles.searchResultContainer}>
-                <FlatList style={styles.searchResult}
-                          data={this.state.searchResult}
+            <View style={styles.contentContainer}>
+                <FlatList data={this.state.searchResult}
                           renderItem={this._renderStationItem} />
             </View>
         );
@@ -256,6 +257,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         geocode: (city) => dispatch(doGeocode(city)),
+        back: () => dispatch(doBack()),
     };
 }
 
@@ -278,17 +280,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginLeft: 5,
     },
-    searchResultContainer: {
-
+    contentContainer: {
+        padding: 5,
     },
     searchHistoryContainer: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
-    },
-    searchOptionsContainer: {
-
-    },
-    searchResult: {
     },
     item: {
         height: ROWHEIGHT,
@@ -307,13 +304,21 @@ const styles = StyleSheet.create({
     },
     rowDataIcon: {
         justifyContent: 'center',
-        marginLeft: 10,
+        marginLeft: 15,
     },
     stationItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingLeft: 12,
+        backgroundColor: colors.white,
         height: ROWHEIGHT + 15,
+        borderBottomColor:'#faf0e6',
+        borderBottomWidth:0.5,
     },
     station: {
         flexDirection: 'column',
+        paddingLeft: 8,
     },
     rowDataText:{
         color:'gray',

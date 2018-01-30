@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import PropTypes from 'prop-types';
 import {Divider, Icon} from 'react-native-elements';
 import colors from "../common/colors";
-import CPAScanButton from "../components/scanbutton";
+import ScanButton from "../components/scanbutton";
 import KeyValPair from "../components/keyvalpair";
-import {ScreenKey, STATUSBAR_HEIGHT} from "../common/constants";
+import {AppStatus, ScreenKey, STATUSBAR_HEIGHT} from "../common/constants";
 import Banner from "../components/banner";
-import ActionButton from "../components/actionbutton";
 import {IconType} from "../common/icons";
 import {connect} from "react-redux";
-import {doNav} from "../redux/actions";
+import {doNav} from "../redux/navactions";
+import {doQueryChargingInfo, doStartScanCharging} from "../redux/chargingactions";
 
 class CPAChargingPage extends Component{
     static propTypes = {
@@ -27,18 +27,14 @@ class CPAChargingPage extends Component{
         totalNumberOfTimes: 0,
     };
 
-    _startCharging = () => {
-        const {nav} = this.props;
-        nav && nav(ScreenKey.Scan);
-    };
-
     _startBatteryTesting = () => {
         const {nav} = this.props;
         nav && nav(ScreenKey.BatteryTesting);
     };
 
     render() {
-        const {totalCostMoney, totalTime, totalElec, totalNumberOfTimes} = this.props;
+        const {totalCostMoney, totalTime, totalElec, totalNumberOfTimes,
+            startScan, appStatus, nav} = this.props;
 
         return (
             <View style={styles.container}>
@@ -64,12 +60,31 @@ class CPAChargingPage extends Component{
                 </View>
 
                 <View style={styles.chargingActionContainer}>
-                    <CPAScanButton onScan={this._startCharging} />
+                    {
+                        appStatus === AppStatus.Normal ?
+                            <ScanButton onAction={()=>{startScan && startScan()}} />
+                            :
+                            appStatus === AppStatus.Charging ?
+                                <ScanButton onAction={()=>{nav && nav(ScreenKey.InCharging)}}
+                                            title="查看充电详情"
+                                            icon={<Icon type={IconType.Ionicon} name="md-battery-charging" size={35} color={colors.white} />}
+                                />
+                                :
+                                <View style={styles.textContainer}>
+                                    <Text style={styles.text}>
+                                        正在进行电池检测
+                                    </Text>
+                                </View>
+                    }
 
-                    <Banner label="去给电池做个检测吧！"
-                            onAction={this._startBatteryTesting}
-                            position={styles.bannerPosition}
-                            btnStyle={styles.bannerBtnStyle} />
+                    {
+                        appStatus === AppStatus.Normal ?
+                            <Banner label="去给电池做个检测吧！"
+                                    onAction={this._startBatteryTesting}
+                                    position={styles.bannerPosition}
+                                    btnStyle={styles.bannerBtnStyle} />
+                            : null
+                    }
                 </View>
             </View>
         );
@@ -77,11 +92,20 @@ class CPAChargingPage extends Component{
 }
 
 export function mapStateToProps(state) {
-    return state;
+    return {
+        balance: state.wallet.balance,
+        totalCostMoney: state.charging.totalCostMoney,
+        totalTime: state.charging.totalTime,
+        totalElec: state.charging.totalElec,
+        totalNumberOfTimes: state.charging.totalNumberOfTimes,
+        appStatus: state.app.status,
+    };
 }
 
 export function mapDispatchToProps(dispatch) {
     return {
+        queryChargingInfo: () => dispatch(doQueryChargingInfo()),
+        startScan: (sn) => dispatch(doStartScanCharging()),
         nav: (screenKey) => dispatch(doNav(screenKey)),
     }
 }
@@ -91,7 +115,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(CPAChargingPage);
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
     chargingInfoContainer: {
         height: 200+STATUSBAR_HEIGHT,
@@ -100,6 +123,7 @@ export const styles = StyleSheet.create({
     },
     chargingInfoTopContainer: {
         flex: 6,
+        justifyContent: 'center',
     },
     chargingInfoBottomContainer: {
         flex: 4,
@@ -107,10 +131,12 @@ export const styles = StyleSheet.create({
     },
     itemContainer: {
         flex: 1,
+        justifyContent: 'center',
     },
     chargingActionContainer: {
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'center',
     },
     titleStyle1: {
         fontSize: 20,
@@ -135,6 +161,14 @@ export const styles = StyleSheet.create({
     bannerBtnStyle: {
         backgroundColor: colors.limegreen,
     },
+    questionPosition: {
+        justifyContent: "flex-start",
+        alignItems: 'flex-start',
+        bottom: 0,
+        left: 10,
+        right: 0,
+        top: 10+STATUSBAR_HEIGHT,
+    },
     closePosition: {
         justifyContent: "flex-start",
         alignItems: 'flex-end',
@@ -143,15 +177,29 @@ export const styles = StyleSheet.create({
         right: 10,
         top: 10+STATUSBAR_HEIGHT,
     },
-    closeContainerStyle: {
+    actionButtonContainerStyle: {
         width: 30,
         height: 30,
     },
-    closeBtnStyle: {
-        backgroundColor: 'rgba(0,0,0,0.25)',
+    actionButtonStyle: {
+        backgroundColor: 'rgba(0,0,0,0.1)',
         borderRadius: 15,
     },
     testingBtnStyle: {
         backgroundColor: colors.limegreen,
     },
+    textContainer: {
+        height: 100,
+        width: 220,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: colors.white,
+        borderRadius: 10,
+        borderWidth: 0.25,
+        borderColor: colors.theme1,
+    },
+    text: {
+        fontSize: 18,
+        color: colors.tintColor,
+    }
 });

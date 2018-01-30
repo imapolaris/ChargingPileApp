@@ -17,6 +17,7 @@
 #import <React/RCTRootView.h>
 
 #import "RCTBaiduMapViewManager.h"
+#import "React/RCTLinkingManager.h"
 
 @implementation AppDelegate
 
@@ -68,5 +69,9 @@ completionHandler();
 }
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
 [[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object:notification.userInfo];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+  return [RCTLinkingManager application:app openURL:url options:options];
 }
 @end

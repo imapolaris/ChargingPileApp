@@ -1,6 +1,6 @@
-import {StyleSheet, Platform} from "react-native";
+import {StyleSheet} from "react-native";
 import colors from "./colors";
-import {IOSPlatform, screenHeight, screenWidth} from "./constants";
+import {screenHeight, screenWidth} from "./constants";
 
 export const shadowStyle = {
     shadowColor: 'black',
@@ -18,13 +18,11 @@ export const textInputStyle = {
     borderRadius: 25,
     paddingLeft: 25,
     backgroundColor: colors.white,
-    paddingTop: Platform.OS === IOSPlatform ? 8 : 0,
-    paddingBottom: Platform.OS === IOSPlatform ? 8 : 0,
+    paddingTop: 8,
+    paddingBottom: 8,
 };
 
 export const maskStyle = {
-    backgroundColor: "#000000",
-    opacity: 0.6,
     position: "absolute",
     width: screenWidth,
     height: screenHeight,

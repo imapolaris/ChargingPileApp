@@ -16,15 +16,17 @@ export const ScreenKey = {
     Scan: 'Scan',
     StationList: 'StationList',
     StationInfo: 'StationInfo',
+
     Login: 'Login',
     Register: 'Register',
-    ResetPwd: 'ResetPwd',
+    ChangePwd: 'ChangePwd',
     PersonalInfo: 'PersonalInfo',
+    ResetPwd: 'ResetPwd',
+
     Wallet: 'Wallet',
     InvoiceInfo: 'InvoiceInfo',
     Collect: 'Collect',
     Subscribe: 'Subscribe',
-    TestingReport: 'TestingReport',
     Setting: 'Setting',
     MyMessage: 'MyMessage',
     UserAgreement: 'UserAgreement',
@@ -35,10 +37,21 @@ export const ScreenKey = {
     LocatingCity: 'LocatingCity',
     SearchStation: 'SearchStation',
     Filter: 'Filter',
+
     BatteryTesting: 'BatteryTesting',
+    TestingReport: 'TestingReport',
+    TestingReportDetail: 'TestingReportDetail',
+
+    VehicleInfo: 'VehicleInfo',
+    AddVehicle: 'AddVehicle',
+    AddAddress: 'AddAddress',
+    InCharging: 'InCharging',
+
+    ChargingBilling: 'ChargingBilling',
+    Notification: 'Notification',
 };
 
-export const ActiveOpacity = 0.8;
+export const ActiveOpacity = 0.6;
 
 export const APPBAR_HEIGHT = Platform.OS === IOSPlatform ? 44 : 56;
 export const STATUSBAR_HEIGHT = Platform.OS === IOSPlatform ? 20 : 0;
@@ -56,3 +69,28 @@ export default StorageKey = {
     RecentVisitCitiesKey: 'recentVisitCities',
     SearchHistoryStationsKey: 'searchHistoryStations',
 }
+
+export const WxAppId = 'wx7310a24d430a6967';
+export const WxAppSecret = 'd8bbddf8af5db6f7a96dd214a37fa813';
+
+export const AppStatus = {
+    Normal: 'normal',
+    Subscribe: 'subscribe',
+    Charging: 'charging',
+    BatteryTesting: 'batterytesting',
+};
+
+export const UserCategory = {
+    Personal: 0, // 个人用户
+    Group: 1, // 集团用户
+};
+
+export const ScanAction = {
+    Charging: 0,
+    BatteryTesting: 1,
+};
+
+export const UserAction = {
+    Register: 0,
+    ResetPwd: 1,
+};

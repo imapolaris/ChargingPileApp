@@ -2,35 +2,39 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Icon} from "react-native-elements";
+import {Divider, Icon} from "react-native-elements";
 import colors from "../common/colors";
 import {IconType} from "../common/icons";
 
-export function SeparatorPlaceHolder(){
-    return (
-        <View style={styles.separator} />
-    );
+export class SeparatorPlaceHolder extends Component{
+    render() {
+        return (
+            <Divider style={styles.separator} />
+        );
+    }
 }
 
-export function EmptyPlaceHolder(refreshing, LoadingGreetings, EmptyDataGreetings) {
+export function EmptyPlaceHolder(EmptyDataGreetings) {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>
-                {refreshing ? LoadingGreetings : EmptyDataGreetings}
+                {EmptyDataGreetings}
             </Text>
-            <Icon type={IconType.Ionicon} name={refreshing ? "md-happy" : "md-sad"} size={20} color={colors.tintColor} />
+            <Icon type={IconType.Ionicon} name="md-sad" size={20} color={colors.tintColor} />
         </View>
     );
 }
 
-export function BottomPlaceHolder(){
-    return (
-        <View style={styles.bottomContainer}>
-            <Text style={styles.bottomText}>
-                我是有底线的...
-            </Text>
-        </View>
-    );
+export class BottomPlaceHolder extends Component{
+    render() {
+        return (
+            <View style={styles.bottomContainer}>
+                <Text style={styles.bottomText}>
+                    我是有底线的...
+                </Text>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -45,7 +49,7 @@ const styles = StyleSheet.create({
         color: colors.grey3,
     },
     separator: {
-        height: 10,
+        height: 5,
     },
     bottomContainer: {
         height: 30,
