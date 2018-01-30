@@ -3,7 +3,7 @@ import {startCharging} from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doChangeAppStatus} from "./appactions";
 import {AppStatus, ScanAction, ScreenKey} from "../common/constants";
-import {doBack, doNav} from "./navactions";
+import {doBack, doLoadInChargingPage, doNav} from "./navactions";
 
 export const QUERY_CHARGING_INFO_ACTION = 'CHARGING_INFO';
 export const START_CHARGING_ACTION = 'START_CHARGING';
@@ -65,8 +65,10 @@ export function doStartCharging(sn) {
                     // app充电中
                     dispatch(doChangeAppStatus(AppStatus.Charging));
 
-                    dispatch(doBack());
-                    dispatch(doNav(ScreenKey.InCharging));
+                    //dispatch(doBack());
+                    //dispatch(doNav(ScreenKey.InCharging));
+
+                    dispatch(doLoadInChargingPage());
                 } else {
                     ToastBS(`启动充电失败：${ret.message}`);
                 }
@@ -74,6 +76,7 @@ export function doStartCharging(sn) {
             .catch(err=>{
                 dispatch(completeRequestWeb());
                 ToastBS(`启动充电失败：${err}`);
+                console.log(err);
             });
     }
 }

@@ -1,11 +1,11 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, Platform} from 'react-native';
 import PropTypes from 'prop-types';
 import {IconType} from "../common/icons";
 import colors from "../common/colors";
-import {ActiveOpacity} from "../common/constants";
+import {ActiveOpacity, AndroidPlatform} from "../common/constants";
 import {Icon} from "react-native-elements";
 
 class RadioButton extends Component{
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         alignItems: 'center',
         borderColor: '#c3c3c3',
-        borderWidth: 0.2,
+        borderWidth: Platform.OS === AndroidPlatform ? 0.2 : 0,
     },
     titleContainer: {
         flex: 1,

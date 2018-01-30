@@ -95,7 +95,6 @@ class CPAScanPage extends Component {
                 Vibration.vibrate();
 
                 let sn = e.data;
-                alert(`充电桩编号：${sn}`);
 
                 // verify the serial number.
                 if (/*validSerialNumber(sn)*/true) {
@@ -268,13 +267,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CPAScanPage);
+export default connect(state=>state, mapDispatchToProps)(CPAScanPage);
 
 const Size = 250;
 const styles = StyleSheet.create({

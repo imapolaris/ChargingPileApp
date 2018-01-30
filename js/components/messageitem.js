@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     },
     messageContainer: {
         backgroundColor: colors.white,
-
     },
     title: {
         fontSize: 16,

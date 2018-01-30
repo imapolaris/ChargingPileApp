@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
         color: colors.theme1,
     },
     containerStyle: {
+        flex: 1,
         marginLeft: 10,
         marginRight: 10,
     },

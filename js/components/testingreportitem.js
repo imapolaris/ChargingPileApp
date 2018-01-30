@@ -1,8 +1,8 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {ImageBackground, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {ActiveOpacity} from "../common/constants";
+import {ImageBackground, StyleSheet, Text, TouchableOpacity, View, Platform} from 'react-native';
+import {ActiveOpacity, AndroidPlatform} from "../common/constants";
 import colors from "../common/colors";
 import KeyValPair from "./keyvalpair";
 
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         backgroundColor: colors.white,
-        borderWidth: 0.25,
+        borderWidth: Platform.OS === AndroidPlatform ? 0.25 : 0,
         borderColor: '#c3c3c3',
         alignItems: 'center',
         padding: 10,
