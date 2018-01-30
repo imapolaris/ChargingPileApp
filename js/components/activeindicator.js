@@ -13,7 +13,7 @@ class CPAActiveIndicator extends Component{
             <View style={[styles.container, containerStyle]}>
                 <ActivityIndicator
                     animating={animating}
-                    size={Platform.OS === IOSPlatform ? 1 : 50}
+                    size={Platform.OS === IOSPlatform ? 'large' : 50}
                     color={colors.white}
                 />
 
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     label: {
-        flex: 1,
+        //flex: 1,
         fontSize: 14,
         color: colors.white,
         marginTop: 10,
