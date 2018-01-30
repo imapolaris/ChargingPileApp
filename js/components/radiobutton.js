@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View, Platform} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, Platform} from 'react-native';
 import PropTypes from 'prop-types';
 import {IconType} from "../common/icons";
 import colors from "../common/colors";

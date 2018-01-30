@@ -3,6 +3,7 @@ import {NavigationActions} from "react-navigation";
 import {ToastBL} from "../common/functions";
 
 export const GO_BACK_ACTION = 'GO_BACK';
+export const START_IN_CHARGING_ACTION = 'START_IN_CHARGING';
 
 let debounce = true;
 export function doNav(screenKey, params) {
@@ -63,5 +64,13 @@ export function doLoadHomePage() {
             ]
         });
         dispatch(resetAction);
+    }
+}
+
+export function doLoadInChargingPage() {
+    return dispatch => {
+        dispatch({
+            type: START_IN_CHARGING_ACTION,
+        });
     }
 }

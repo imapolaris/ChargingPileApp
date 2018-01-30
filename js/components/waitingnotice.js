@@ -18,7 +18,7 @@ class WaitingNotice extends Component{
                 onShow={() => {}}
                 onRequestClose={() => {}}>
 
-                <View style={[styles.container, containerStyle]}>
+                <View style={[styles.container, maskStyle, containerStyle]}>
                     <CPAActiveIndicator {...this.props} />
                 </View>
             </Modal>

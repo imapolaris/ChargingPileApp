@@ -1,6 +1,7 @@
 import Routers from '../components/navigators';
-import {GO_BACK_ACTION} from "./navactions";
+import {GO_BACK_ACTION, START_IN_CHARGING_ACTION} from "./navactions";
 import {StateUtils} from 'react-navigation';
+import {ScreenKey} from "../common/constants";
 
 export function nav(state, action) {
     let nextState = null;
@@ -24,6 +25,11 @@ export function nav(state, action) {
             }
         }
             break;
+        case START_IN_CHARGING_ACTION:
+        {
+            return StateUtils.replaceAtIndex(state, state.index, {routeName: ScreenKey.InCharging});
+        }
+        break;
         default:
             nextState = Routers.router.getStateForAction(action, state);
     }
