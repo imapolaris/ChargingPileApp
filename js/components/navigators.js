@@ -37,6 +37,10 @@ import CPAMyCollectPage from '../pages/mycollect';
 import CPANotificationPage from "../pages/notification";
 import CPAAddVehiclePage from "../pages/addvehicle";
 import CPATestingReportDetailPage from '../pages/testingreportdetail';
+import {Icon} from "react-native-elements";
+import {IconType} from "../common/icons";
+import {doClearCollectStations, doStationCollectStateChanged} from "../redux/stationactions";
+import {prompt2} from "../common/functions";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -66,8 +70,24 @@ const CPAStackNavigator = StackNavigator(
         },
         StationInfo: {
             screen: CPAStationInfoPage,
-            navigationOptions: {
-                title: '电站信息'
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '电站信息',
+                    headerRight:(
+                        <NavButton showLabel={false}
+                                   showIcon={true}
+                                   icon={<Icon name={navigation.state.params.collect ? 'md-star' : 'md-star-outline'}
+                                               type={IconType.Ionicon} color={colors.yellow} size={26} />}
+                                   onNavAction={() => {
+                                       const {dispatch} = navigation;
+                                       const {stationId} = navigation.state.params;
+                                       dispatch(doStationCollectStateChanged(stationId));
+
+                                       navigation.setParams({collect: !navigation.state.params.collect});
+                                   }}
+                        />
+                    ),
+                })
             }
         },
         Login: {
@@ -117,8 +137,21 @@ const CPAStackNavigator = StackNavigator(
         },
         Collect: {
             screen: CPAMyCollectPage,
-            navigationOptions: {
-                title: '收藏列表',
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '收藏列表',
+                    headerRight: (
+                        <NavButton label="清空"
+                                   onNavAction={() => {
+                                       prompt2('提示', '确定要清空收藏列表吗？',
+                                           ()=>{},
+                                           () => {
+                                               const {dispatch} = navigation;
+                                               dispatch(doClearCollectStations());
+                                           });
+                                   }}/>
+                    ),
+                })
             }
         },
         Setting: {

@@ -30,7 +30,8 @@ class StationInfo extends Component{
     };
 
     render() {
-        const {station} = this.state;
+        //const {station} = this.state;
+        let station = {};
         const kvStyle = {titleStyle: styles.label, valueStyle: styles.content};
 
         return (

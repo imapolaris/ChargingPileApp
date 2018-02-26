@@ -160,6 +160,16 @@ export function getCurrentLocation() {
 }
 
 /*
+* the fetch wrapper with timeout.
+* */
+export function myFetch2(url, method, headers, body, timeout) {
+    return Promise.race([
+        myFetch(url, method, headers, body),
+        setTimeout(reject('网络请求超时！'), timeout)
+    ]);
+}
+
+/*
 * the fetch wrapper.
 * */
 export function myFetch(url, method, headers, body) {

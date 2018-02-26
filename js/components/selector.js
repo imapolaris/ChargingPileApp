@@ -274,10 +274,10 @@ export class StationSelector extends Component{
                                             {...kvStyle} />
                                 <View style={{flexDirection: 'row'}}>
                                     <KeyValPair horizontal={true} title="直流：" val={numbers}
-                                                {...kvStyle} />
+                                                {...kvStyle} containerStyle={styles.containerStyle}  />
 
                                     <KeyValPair horizontal={true} title="交流：" val={numbers}
-                                                {...kvStyle} />
+                                                {...kvStyle} containerStyle={styles.containerStyle} />
                                 </View>
                             </View>
                             <Text style={styles.address} numberOfLines={2}>
@@ -417,6 +417,9 @@ const styles = StyleSheet.create({
     navigateBtnText:{
         fontSize: 14,
         color: colors.white,
+    },
+    containerStyle: {
+        flex: 1,
     },
     titleStyle: {
         color: colors.grey3,

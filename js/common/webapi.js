@@ -1,12 +1,13 @@
 import {myFetch} from "./functions";
 
+// product environment
 //const baseUrl = 'http://39.104.66.176/ChargingPileService/api';
+// test environment
 const baseUrl = 'http://192.168.0.201/ChargingPileService/api';
 
 const urls = {
     messages: `${baseUrl}/messages`,
     stations: `${baseUrl}/stations`,
-    stationDetails: `${baseUrl}/stationDetails`,
     chargingPiles: `${baseUrl}/chargingPiles`,
     chargingRecords: `${baseUrl}/chargingRecords`,
     charging: `${baseUrl}/charging`,
@@ -79,10 +80,35 @@ export function getCollectStations(userId) {
 }
 
 /*
+* cancel collect one station.
+* */
+export function stationCollectState(userId, stationId) {
+    let url = `${urls.stations}/collect/state`;
+    let data = {
+        userId,
+        stationId,
+    };
+
+    return myFetch(url, POST, headers, data);
+}
+
+/*
+* clear collect stations by user id.
+* */
+export function clearCollectStations(userId) {
+    let url = `${urls.stations}/collect/clear`;
+    let data = {
+        userId
+    };
+
+    return myFetch(url, POST, headers, data);
+}
+
+/*
 * query the details of the station by id.
 * */
 export function getStationDetails(stationId) {
-    let url = `${urls.stationDetails}/${stationId}`;
+    let url = `${urls.stations}/details/${stationId}`;
     return myFetch(url, GET, headers);
 }
 

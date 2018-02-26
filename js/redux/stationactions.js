@@ -1,4 +1,8 @@
-import {getChargingPiles, getCollectStations, getNearbyStations, getStationDetails} from "../common/webapi";
+import {
+    clearCollectStations, getChargingPiles, getCollectStations,
+    getNearbyStations,
+    getStationDetails, stationCollectState
+} from "../common/webapi";
 import {ToastBS} from "../common/functions";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doNav} from "./navactions";
@@ -85,6 +89,34 @@ export function doQueryCollectStations() {
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());
+                console.log(err);
+                ToastBS(`${err}`);
+            })
+    }
+}
+
+export function doStationCollectStateChanged(stationId){
+    return (dispatch, getState) => {
+        const {userId} = getState().user;
+        stationCollectState(userId, stationId)
+            .then(ret=>{
+                ToastBS('操作成功！');
+            })
+            .catch(err=>{
+                ToastBS(`${err}`);
+                console.log(err);
+            })
+    }
+}
+
+export function doClearCollectStations() {
+    return (dispatch, getState) => {
+        const {userId} = getState().user;
+        clearCollectStations(userId)
+            .then(ret=>{
+                ToastBS('收藏列表已全部清除！');
+            })
+            .catch(err=>{
                 console.log(err);
                 ToastBS(`${err}`);
             })

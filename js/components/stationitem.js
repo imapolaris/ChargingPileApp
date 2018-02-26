@@ -27,7 +27,7 @@ class StationItem extends Component{
                             <Text style={styles.elecprice}>{elecprice}</Text>  元/度
                         </Text>
                         <Text style={[styles.info]}>
-                            直流电桩：{numbers}   交流电桩：{numbers}
+                            直流：{numbers}   交流：{numbers}
                         </Text>
                         <Text style={[styles.info]} numberOfLines={1}>
                             地址：{address}
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
     },
     infoContainer: {
-        paddingTop: 10,
+        paddingTop: 5,
         paddingLeft: 15,
         paddingBottom: 10,
         alignItems: 'center',
