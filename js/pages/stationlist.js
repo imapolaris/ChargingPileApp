@@ -49,7 +49,7 @@ class CPAStationListPage extends Component{
                              name={item.name}
                              numbers={item.numbers}
                              address={item.address}
-                             elecprice={0}
+                             elecprice={item.Detail.elecPrice}
                              destination={{longitude: item.longitude, latitude: item.latitude}}
                              onAction={() => this._onSelectOneStation(item)}
                 />

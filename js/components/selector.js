@@ -243,8 +243,12 @@ export class StationSelector extends Component{
     };
 
     render() {
-        const {visible} = this.state;
-        const {id, name, address, elecPrice, numbers} = this.state.station;
+        const {visible, station} = this.state;
+        const {id, name, address, numbers} = station;
+        let elecPrice = 0;
+        if (station && station.Detail) {
+            elecPrice = station.Detail.elecPrice;
+        }
         const {onAction, containerStyle} = this.props;
         const kvStyle = {titleStyle: styles.titleStyle, valueStyle: styles.valueStyle};
 

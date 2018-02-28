@@ -94,3 +94,21 @@ export const UserAction = {
     Register: 0,
     ResetPwd: 1,
 };
+
+const RuntimeEnvType = {
+    Develop: {
+        ServerUri: 'http://192.168.0.201',
+        Version: 0.1,
+    },
+    Product: {
+        ServerUri: 'http://39.104.66.176',
+        Version: 1.0,
+    },
+};
+/*
+* app runtime environment.
+* */
+export const RuntimeEnv = RuntimeEnvType.Develop;
+
+// station images file path.
+export const ImageBaseUrl = `${RuntimeEnv.ServerUri}/ChargingPileService/Res/StationImgs/`;

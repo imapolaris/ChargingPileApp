@@ -44,14 +44,17 @@ class CPAMyCollectPage extends Component{
 
     _renderItem = ({item}) => {
         return (
-            <StationItem key={item.key}
-                         name={item.name}
-                         numbers={item.numbers}
-                         address={item.address}
-                         elecprice={0}
-                         destination={{longitude: item.longitude, latitude: item.latitude}}
-                         onAction={() => this._onSelectOneStation(item)}
-            />
+            <View style={styles.item}>
+                <StationItem key={item.key}
+                             name={item.name}
+                             numbers={item.numbers}
+                             address={item.address}
+                             elecprice={item.Detail.elecPrice}
+                             destination={{longitude: item.longitude, latitude: item.latitude}}
+                             onAction={() => this._onSelectOneStation(item)}
+                             showNavBtn={false}
+                />
+            </View>
         );
     };
 

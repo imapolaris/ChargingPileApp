@@ -39,8 +39,9 @@ export function doSelectOneStation(station) {
 }
 
 export function doQueryStationDetailInfo(stationId) {
-    return dispatch => {
-        return getStationDetails(stationId)
+    return (dispatch, getState) => {
+        const {userId} = getState().user;
+        return getStationDetails(userId, stationId)
             .then(ret=>{
                 if (ret.result)
                     return ret.data;
@@ -114,7 +115,7 @@ export function doClearCollectStations() {
         const {userId} = getState().user;
         clearCollectStations(userId)
             .then(ret=>{
-                ToastBS('收藏列表已全部清除！');
+                ToastBS('清空成功！');
             })
             .catch(err=>{
                 console.log(err);

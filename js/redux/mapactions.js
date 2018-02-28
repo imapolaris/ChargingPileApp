@@ -111,7 +111,7 @@ export function doRequestStationMarkers(filter) {
         dispatch(startRequestStationMarkers());
         getAllStationsWithBriefInfo(filter)
             .then(data=>{
-                if (data !== null && data !== undefined && data.length > 0){
+                if (data){
                     let stations = [];
                     data.forEach((item)=>{
                         stations.push({
@@ -147,7 +147,6 @@ export function doRequestOneStationInfo(e) {
         return getSingleStation(id)
             .then(data=>{
                 dispatch(completeRequestWeb());
-
                 return data;
             })
             .catch(error=>{

@@ -58,11 +58,9 @@ const CPAStationTabNavigator = TabNavigator(
 
 class CPAStationInfoPage extends Component{
     render() {
-        const {stationId} = this.props.navigation.state.params;
-
         return (
             <View style={styles.container}>
-                <CPAStationTabNavigator screenProps={{stationId}}/>
+                <CPAStationTabNavigator screenProps={{nav: this.props.navigation}}/>
             </View>
         );
     }

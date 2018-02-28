@@ -1,9 +1,7 @@
 import {myFetch} from "./functions";
+import {RuntimeEnv} from './constants';
 
-// product environment
-//const baseUrl = 'http://39.104.66.176/ChargingPileService/api';
-// test environment
-const baseUrl = 'http://192.168.0.201/ChargingPileService/api';
+const baseUrl = `${RuntimeEnv.ServerUri}/ChargingPileService/api`;
 
 const urls = {
     messages: `${baseUrl}/messages`,
@@ -25,6 +23,8 @@ const headers = {
 
 const GET = 'GET';
 const POST = 'POST';
+const PUT = 'PUT';
+const DELETE = 'DELETE';
 
 /*
  * send message, eg. verify code.
@@ -46,7 +46,7 @@ export function getAllStationsWithBriefInfo(filter) {
  * query the station by id.
  */
 export function getSingleStation(id) {
-    let url =  `${urls.stations}/${id}`;
+    let url =  `${urls.stations}?stationId=${id}`;
     return myFetch(url, GET, headers);
 }
 
@@ -62,13 +62,8 @@ export function getStationsByName(text) {
 * query the nearby stations by the position.
 * */
 export function getNearbyStations(position) {
-    let url = `${urls.stations}/nearby`;
-    let data = {
-        longitude: position.longitude,
-        latitude: position.latitude
-    };
-
-    return myFetch(url, POST, headers, data);
+    let url = `${urls.stations}/nearby?lon=${position.longitude}&lat=${position.latitude}`;
+    return myFetch(url, GET, headers);
 }
 
 /*
@@ -107,8 +102,8 @@ export function clearCollectStations(userId) {
 /*
 * query the details of the station by id.
 * */
-export function getStationDetails(stationId) {
-    let url = `${urls.stations}/details/${stationId}`;
+export function getStationDetails(userId, stationId) {
+    let url = `${urls.stations}/details?userId=${userId}&stationId=${stationId}`;
     return myFetch(url, GET, headers);
 }
 
@@ -116,7 +111,7 @@ export function getStationDetails(stationId) {
 * query charging piles of the station by id.
 * */
 export function getChargingPiles(stationId) {
-    let url = `${urls.chargingPiles}/${stationId}`;
+    let url = `${urls.chargingPiles}?stationId=${stationId}`;
     return myFetch(url, GET, headers);
 }
 

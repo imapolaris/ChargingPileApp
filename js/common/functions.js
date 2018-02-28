@@ -55,8 +55,8 @@ export function myAlert2(title='',
 /*
 * 提示信息（2个按钮）
 * */
-export function prompt2(msg, callback1, callback2) {
-    myAlert2('提示', msg, callback1, callback2);
+export function prompt2(title, msg, callback1, callback2) {
+    myAlert2(title, msg, callback1, callback2);
 }
 
 /*
