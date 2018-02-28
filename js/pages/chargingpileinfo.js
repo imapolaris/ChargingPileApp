@@ -21,7 +21,8 @@ class ChargingPileInfo extends Component{
 
     _requestStationChargingPiles = () => {
         const {queryStationChargingPiles} = this.props;
-        const {stationId} = this.props.screenProps;
+        const {nav} = this.props.screenProps;
+        const {stationId} = nav.state.params;
         queryStationChargingPiles(stationId)
             .then(ret=>{
                 this.setState({
@@ -37,7 +38,7 @@ class ChargingPileInfo extends Component{
     _renderItem = ({item}) => {
         return (
             <ChargingPileItem name={item.name}
-                              status={item.status}
+                              status={item.statusname}
                               serialNumber={item.serialNumber}
                               pileType={item.pileType}
                               onSubscribe={() => {}}

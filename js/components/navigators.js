@@ -39,8 +39,7 @@ import CPAAddVehiclePage from "../pages/addvehicle";
 import CPATestingReportDetailPage from '../pages/testingreportdetail';
 import {Icon} from "react-native-elements";
 import {IconType} from "../common/icons";
-import {doClearCollectStations, doStationCollectStateChanged} from "../redux/stationactions";
-import {prompt2} from "../common/functions";
+import {doStationCollectStateChanged} from "../redux/stationactions";
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -143,12 +142,8 @@ const CPAStackNavigator = StackNavigator(
                     headerRight: (
                         <NavButton label="清空"
                                    onNavAction={() => {
-                                       prompt2('提示', '确定要清空收藏列表吗？',
-                                           ()=>{},
-                                           () => {
-                                               const {dispatch} = navigation;
-                                               dispatch(doClearCollectStations());
-                                           });
+                                       const {clearCollect} = navigation.state.params;
+                                       clearCollect && clearCollect();
                                    }}/>
                     ),
                 })

@@ -26,9 +26,14 @@ class StationItem extends Component{
                         <Text style={styles.info}>
                             <Text style={styles.elecprice}>{elecprice}</Text>  元/度
                         </Text>
-                        <Text style={[styles.info]}>
-                            直流：{numbers}   交流：{numbers}
-                        </Text>
+                        <View style={{flexDirection: 'row'}}>
+                            <Text style={[styles.info, {flex: 1}]}>
+                                直流：{numbers}
+                            </Text>
+                            <Text style={[styles.info, {flex: 1}]}>
+                                交流：{numbers}
+                            </Text>
+                        </View>
                         <Text style={[styles.info]} numberOfLines={1}>
                             地址：{address}
                         </Text>

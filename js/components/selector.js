@@ -218,6 +218,7 @@ export class StationSelector extends Component{
                 name:'',
                 address: '',
                 elecPrice: 0,
+                numbers: '1/2'
             },
             callback: null,
         };
@@ -277,10 +278,10 @@ export class StationSelector extends Component{
                                 <KeyValPair horizontal={true} title="电价：" val={`${elecPrice} 元`}
                                             {...kvStyle} />
                                 <View style={{flexDirection: 'row'}}>
-                                    <KeyValPair horizontal={true} title="直流：" val={numbers}
+                                    <KeyValPair horizontal={true} title="直流：" val={'1/2'}
                                                 {...kvStyle} containerStyle={styles.containerStyle}  />
 
-                                    <KeyValPair horizontal={true} title="交流：" val={numbers}
+                                    <KeyValPair horizontal={true} title="交流：" val={'1/2'}
                                                 {...kvStyle} containerStyle={styles.containerStyle} />
                                 </View>
                             </View>

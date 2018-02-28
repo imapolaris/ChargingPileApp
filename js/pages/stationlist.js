@@ -47,7 +47,7 @@ class CPAStationListPage extends Component{
             <View style={styles.item}>
                 <StationItem key={item.key}
                              name={item.name}
-                             numbers={item.numbers}
+                             numbers={'1/2'}
                              address={item.address}
                              elecprice={item.Detail.elecPrice}
                              destination={{longitude: item.longitude, latitude: item.latitude}}

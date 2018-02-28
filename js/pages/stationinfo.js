@@ -71,7 +71,7 @@ class StationInfo extends Component{
                         onAnimateNextPage={(p) => console.log(p)}>
                         {
                             images.length <= 0 ?
-                                <View style={[this.state.size]}>
+                                <View style={[{alignItems: 'center', justifyContent: 'center'}, this.state.size]}>
                                     <Text>电站图片</Text>
                                 </View>
                                 :

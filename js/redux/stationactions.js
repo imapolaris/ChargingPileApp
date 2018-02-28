@@ -65,7 +65,7 @@ export function doQueryStationChargingPiles(stationId) {
                 if (ret && ret.length>0)
                     return ret.map((item, index)=>Object.assign({}, item, {key: index}));
                 else
-                    return ret;
+                    return [];
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());
@@ -101,7 +101,7 @@ export function doStationCollectStateChanged(stationId){
         const {userId} = getState().user;
         stationCollectState(userId, stationId)
             .then(ret=>{
-                ToastBS('操作成功！');
+                ToastBS(ret.message);
             })
             .catch(err=>{
                 ToastBS(`${err}`);
@@ -113,13 +113,14 @@ export function doStationCollectStateChanged(stationId){
 export function doClearCollectStations() {
     return (dispatch, getState) => {
         const {userId} = getState().user;
-        clearCollectStations(userId)
+        return clearCollectStations(userId)
             .then(ret=>{
-                ToastBS('清空成功！');
+                return ret.result;
             })
             .catch(err=>{
                 console.log(err);
                 ToastBS(`${err}`);
+                return false;
             })
     }
 }
