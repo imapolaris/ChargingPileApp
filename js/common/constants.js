@@ -81,8 +81,9 @@ export const AppStatus = {
 };
 
 export const UserCategory = {
-    Personal: 0, // 个人用户
-    Group: 1, // 集团用户
+    Unknown: 0, // 未知用户
+    Personal: 1, // 个人用户
+    Group: 2, // 集团用户
 };
 
 export const ScanAction = {

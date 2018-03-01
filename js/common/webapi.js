@@ -214,9 +214,13 @@ export function getBatteryTestingReportDetail(reportId) {
 /*
 * login the app.
 * */
-export function login(phoneNumber, pwd) {
+export function login(phoneNumber, pwd, cType) {
     let url = `${urls.users}/login`;
-    let data = {phoneNumber: phoneNumber, password: pwd};
+    let data = {
+        telephone: phoneNumber,
+        pwd,
+        cType
+    };
 
     return myFetch(url, POST, headers, data);
 }
@@ -224,12 +228,12 @@ export function login(phoneNumber, pwd) {
 /*
 * register the user.
 * */
-export function register(phoneNumber, vCode, pwd) {
+export function register(phoneNumber, vcode, pwd) {
     let url = `${urls.users}/register`;
     let data = {
-        phoneNumber: phoneNumber,
-        vCode: vCode,
-        password: pwd,
+        telephone: phoneNumber,
+        vcode,
+        pwd,
     };
 
     return myFetch(url, POST, headers, data);
@@ -238,12 +242,12 @@ export function register(phoneNumber, vCode, pwd) {
 /*
 * reset the password.
 * */
-export function resetPwd(phoneNumber, vCode, pwd) {
+export function resetPwd(phoneNumber, vcode, pwd) {
     let url = `${urls.users}/reset`;
     let data = {
-        phoneNumber: phoneNumber,
-        vCode: vCode,
-        password: pwd,
+        telephone: phoneNumber,
+        vcode,
+        pwd,
     };
 
     return myFetch(url, POST, headers, data);
@@ -255,7 +259,7 @@ export function resetPwd(phoneNumber, vCode, pwd) {
 export function getUserProfile(userId) {
     let url = `${urls.users}/info`;
     let data = {
-        Id: userId
+        userId
     };
 
     return myFetch(url, POST, headers, data);

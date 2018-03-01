@@ -1,7 +1,7 @@
 import {changePwd, login, register, resetPwd, sendMessage, updateUserProfile} from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doBack} from "./navactions";
-import {ToastBL, ToastBS} from "../common/functions";
+import {ToastBL, ToastBS, validatePhoneNumber} from "../common/functions";
 import {doQueryChargingInfo} from "./chargingactions";
 
 export const LOGIN_SUCCESS_ACTION = 'LOGIN_SUCCESS'; // 登录成功
@@ -17,7 +17,7 @@ function loginSuccess(data) {
         type: LOGIN_SUCCESS_ACTION,
         id: data.id,
         nickname: data.nickname,
-        phoneNumber: '13269734774',
+        phoneNumber: data.telephone,
         address: 'beijing China',
     }
 }
@@ -26,7 +26,7 @@ export function doLogin(phoneNumber, pwd, userCategory) {
     return dispatch => {
         dispatch(startRequestWeb('正在登录...'));
 
-        login(phoneNumber, pwd)
+        login(phoneNumber, pwd, userCategory)
             .then(ret => {
                 dispatch(completeRequestWeb());
 
@@ -100,15 +100,16 @@ export function doResetPwd(phoneNumber, vcode, pwd) {
                 dispatch(completeRequestWeb());
 
                 if (ret.result === true) {
-                    ToastBS('重置密码成功，请登录！');
+                    ToastBS('重置成功，请登录！');
+                    dispatch(doBack());
                 } else {
-                    ToastBS(`重置密码失败: ${ret.message}`);
+                    ToastBS(`${ret.message}`);
                 }
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());
                 console.log(err);
-                ToastBS(`重置密码失败: ${err}`);
+                ToastBS(`${err}`);
             })
     };
 }
@@ -137,7 +138,7 @@ export function doGetVcode(phoneNumber) {
         return sendMessage(phoneNumber)
             .then(ret=>{
                 if (ret.result){
-                    ToastBS('已获取验证码');
+                    ToastBS('验证码已发送！');
                 } else {
                     ToastBS(`${ret.message}`);
                 }
@@ -145,7 +146,7 @@ export function doGetVcode(phoneNumber) {
                 return ret.result;
             })
             .catch(err=>{
-                ToastBS(`获取验证码失败：${err}`);
+                ToastBS(`${err}`);
                 console.log(err);
                 return false;
             })
@@ -182,7 +183,7 @@ export function doSavePersonalInfo(data) {
     return (dispatch, getState) => {
         dispatch(startRequestWeb('正在保存...'));
         const {userId} = getState().user;
-        const personal = Object.assign({}, data, {id: userId, gender: '男', avatar: JSON.stringify(data.avatar)});
+        const personal = Object.assign({}, data, {id: userId, sex: '男', avatar: JSON.stringify(data.avatar)});
         updateUserProfile(personal)
             .then(ret=>{
                 dispatch(completeRequestWeb());

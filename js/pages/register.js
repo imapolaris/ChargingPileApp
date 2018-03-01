@@ -41,7 +41,10 @@ class CPARegisterPage extends Component {
     _getVcode = ()=>{
         const {phoneNumber} = this.state;
         if (!validatePhoneNumber(phoneNumber))
+        {
+            ToastBS('手机号不正确！');
             return;
+        }
 
         const {getVcode} = this.props;
         getVcode(phoneNumber)

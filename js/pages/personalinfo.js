@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     textInput:{
-        width: 100,
+        width: 220,
         fontSize: 16,
         textAlign:'right',
         color: colors.grey0,
