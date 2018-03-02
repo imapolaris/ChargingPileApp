@@ -13,27 +13,31 @@ class CPATestingReportPage extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            reports: [
-                {key:1, id: '1'},
-                {key:2, id: '2'},
-                {key:3, id: '3'},
-            ],
+            reports: [],
         };
     }
 
     componentDidMount() {
-        /*const {queryBatteryTestingInfo} = this.props;
+        const {queryBatteryTestingInfo} = this.props;
         queryBatteryTestingInfo()
             .then(ret=>{
-                this.setState({reports: ret});
-            })*/
+                this.setState({reports: ret.map((item, index)=>Object.assign({}, item, {key: index}))});
+            })
     }
 
     _renderItem = ({item}) => {
         const {nav} = this.props;
 
+        let vehicle = '';
+        if (item && item.vehicle) {
+            vehicle = item.vehicle.plateno;
+        }
+
         return (
             <TestingReportItem key={item.key}
+                               checkDate={item.checkdatestr}
+                               vehicle={vehicle}
+                               result={item.result}
                                onAction={()=>{nav && nav(ScreenKey.TestingReportDetail, {reportId: item.id})}}/>
         );
     };

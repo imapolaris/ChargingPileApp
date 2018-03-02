@@ -14,6 +14,7 @@ const urls = {
     payRecords: `${baseUrl}/payRecords`,
     wallet: `${baseUrl}/wallet`,
     batterytesting: `${baseUrl}/batterytesting`,
+    system: `${baseUrl}/system`,
 };
 
 const headers = {
@@ -199,7 +200,7 @@ export function startBatteryTesting(serialNumber) {
 * query battery testing records.
 * */
 export function getBatteryTestingRecords(userId) {
-    let url = `${urls.batterytesting}/records/${userId}`;
+    let url = `${urls.batterytesting}?userId=${userId}`;
     return myFetch(url, GET, headers);
 }
 
@@ -207,7 +208,7 @@ export function getBatteryTestingRecords(userId) {
 * query detail of the battery testing report by id.
 * */
 export function getBatteryTestingReportDetail(reportId) {
-    let url = `${urls.batterytesting}/records/detail/${reportId}`;
+    let url = `${urls.batterytesting}?reportId=${reportId}`;
     return myFetch(url, GET, headers);
 }
 
@@ -327,4 +328,18 @@ export function wxPay() {
 export function makeOneCharge(userId, money, payWay) {
     let url = `${urls.wallet}/charge?userId=${userId}&money=${money}&payway=${payWay}`;
     return myFetch(url, GET, headers);
+}
+
+/*
+* submit feedback.
+* */
+export function submitFeedback(userId, content, datetime) {
+    let url = `${urls.system}/feedback`;
+    let data = {
+        customerId: userId,
+        fbContent: content,
+        fbDate: datetime,
+    };
+
+    return myFetch(url, POST, headers, data);
 }

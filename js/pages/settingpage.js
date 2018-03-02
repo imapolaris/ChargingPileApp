@@ -80,7 +80,7 @@ class CPASettingPage extends Component {
                               onSwitch={(e) => {switchMessageNotice && switchMessageNotice(e)}}/>
                 </List>
 
-                <List style={styles.system}>
+                {/*<List style={styles.system}>
                     {
                         system.map((item, index) => (
                             <ListItem key={index}
@@ -90,7 +90,7 @@ class CPASettingPage extends Component {
                                       rightTitle={item.rightTitle} />
                         ))
                     }
-                </List>
+                </List>*/}
 
                 <List style={styles.setting}>
                     {

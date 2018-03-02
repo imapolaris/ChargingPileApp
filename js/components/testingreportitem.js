@@ -10,25 +10,31 @@ class TestingReportItem extends Component{
     render() {
         const {onAction} = this.props;
         const kvStyle = {containerStyle: styles.containerStyle, titleStyle: styles.titleStyle, valueStyle: styles.valStyle};
+        const {checkDate, vehicle, result} = this.props;
 
         return (
             <View style={styles.container}>
-                <ImageBackground style={styles.imageBg}>
-                    <Text style={styles.imageText}>
-                        检测{'\r\n'}报告
-                    </Text>
-                </ImageBackground>
-                <View style={styles.contentContainer}>
-                    <KeyValPair showDivider={false} horizontal={true} title="电池容量" {...kvStyle}/>
-                    <KeyValPair showDivider={false} horizontal={true} title="DCR测试" {...kvStyle}/>
+                <Text style={{margin: 5, color: colors.grey3}}>
+                    检测时间：{checkDate}
+                </Text>
+                <View style={styles.wholeContainer}>
+                    <ImageBackground style={styles.imageBg}>
+                        <Text style={styles.imageText}>
+                            检测{'\r\n'}报告
+                        </Text>
+                    </ImageBackground>
+                    <View style={styles.contentContainer}>
+                        <KeyValPair showDivider={false} horizontal={true} title="检测车辆" val={vehicle} {...kvStyle}/>
+                        <KeyValPair showDivider={false} horizontal={true} title="检测结果" val={result} {...kvStyle}/>
+                    </View>
+                    <TouchableOpacity style={styles.detailBtn}
+                                      activeOpacity={ActiveOpacity}
+                                      onPress={onAction}>
+                        <Text style={styles.detailTxt}>
+                            详情
+                        </Text>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.detailBtn}
-                                  activeOpacity={ActiveOpacity}
-                                  onPress={onAction}>
-                    <Text style={styles.detailTxt}>
-                        详情
-                    </Text>
-                </TouchableOpacity>
             </View>
         );
     }
@@ -38,6 +44,9 @@ export default TestingReportItem;
 
 const styles = StyleSheet.create({
     container: {
+
+    },
+    wholeContainer: {
         flexDirection: 'row',
         backgroundColor: colors.white,
         borderWidth: Platform.OS === AndroidPlatform ? 0.25 : 0,

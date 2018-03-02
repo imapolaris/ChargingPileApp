@@ -117,7 +117,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect((state)=>{return state},mapDispatchToProps)(CPALoginPage);
+export default connect(state=>state,mapDispatchToProps)(CPALoginPage);
 
 
 const styles = StyleSheet.create({
