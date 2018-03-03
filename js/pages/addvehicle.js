@@ -104,7 +104,10 @@ class CPAAddVehiclePage extends Component{
     _onSubmit = () => {
         const {vehicleModel, vehicleNoPre, vehicleNo} = this.state;
         const {addOneVehicle} = this.props;
-        addOneVehicle && addOneVehicle({model: vehicleModel, no: `${vehicleNoPre} ${vehicleNo}`});
+        addOneVehicle && addOneVehicle(
+            vehicleModel,
+            `${vehicleNoPre} ${vehicleNo}`
+        );
     };
 
     render() {
@@ -163,7 +166,7 @@ class CPAAddVehiclePage extends Component{
 
 function mapDispatchToProps(dispatch) {
     return {
-        addOneVehicle: (vehicle) => dispatch(doAddOneVehicle(vehicle)),
+        addOneVehicle: (models, plateno) => dispatch(doAddOneVehicle(models, plateno)),
     }
 }
 

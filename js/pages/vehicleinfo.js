@@ -1,14 +1,12 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
-import PropTypes from 'prop-types';
-import {Button} from 'react-native-elements';
-import {screenWidth} from "../common/constants";
+import {FlatList, StyleSheet, View} from 'react-native';
 import {EmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
 import Vehicle from "../components/vehicle";
 import {connect} from "react-redux";
 import {doDelOneVehicle, doQueryVehicleInfo} from "../redux/vehicleactions";
+import {prompt2} from "../common/functions";
 
 class CPAVehicleInfoPage extends Component{
     componentDidMount() {
@@ -16,33 +14,28 @@ class CPAVehicleInfoPage extends Component{
         queryVehicleInfo && queryVehicleInfo();
     }
 
-    _renderItem = ({item}) => {
-        const {delOneVehicle} = this.props;
+    _delOneVehicle = (id) => {
+        prompt2('提示', '是否要删除该车辆？',
+            ()=>{},
+            ()=>{
+                const {delOneVehicle} = this.props;
+                delOneVehicle && delOneVehicle(id);
+            });
+    };
 
+    _renderItem = ({item}) => {
         return (
-            <Vehicle onTopAction={()=>alert('test')}
-                     onDelAction={()=>delOneVehicle(item.id)}
+            <Vehicle key={item.id}
+                     vehicleModel={item.models}
+                     vehicleNo={item.plateno}
+                     onTopAction={()=>alert('test')}
+                     onDelAction={()=>this._delOneVehicle(item.id)}
                      asDefault={item.default} />
         )
     };
 
     render() {
-        const vehicles = [
-            {
-                key: 1,
-                id: '1',
-                vehicleNo: '123',
-                vehicleModel: '456',
-                default: false,
-            },
-            {
-                key: 2,
-                id: '2',
-                vehicleNo: '123',
-                vehicleModel: '456',
-                default: false,
-            },
-        ];
+        const {vehicles} = this.props;
 
         return (
             <View style={styles.container}>

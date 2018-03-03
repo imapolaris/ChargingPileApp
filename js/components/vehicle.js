@@ -17,12 +17,12 @@ class Vehicle extends Component{
                 <View style={[styles.contentContainer, asDefault ? styles.asDefault : null]}>
                     <View style={styles.infoContainer}>
                         <Text style={styles.vehicleModel}>
-                            {vehicleModel || '车型'}
+                            车型：{vehicleModel || '车型'}
                         </Text>
                         <Text>
                             车牌号：
                             <Text style={styles.vehicleNo}>
-                                {vehicleNo || '京A 66666'}
+                                {vehicleNo || '车牌号'}
                             </Text>
                         </Text>
                     </View>

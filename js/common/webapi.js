@@ -15,6 +15,7 @@ const urls = {
     wallet: `${baseUrl}/wallet`,
     batterytesting: `${baseUrl}/batterytesting`,
     system: `${baseUrl}/system`,
+    vehicle: `${baseUrl}/vehicle`,
 };
 
 const headers = {
@@ -144,7 +145,7 @@ export function getSubscribeRecords(userId) {
 * query all the vehicles of mine.
 * */
 export function getVehicleInfo(userId) {
-    let url = `${urls.users}/vehicle/${userId}`;
+    let url = `${urls.vehicle}?userId=${userId}`;
     return myFetch(url, GET, headers);
 }
 
@@ -152,16 +153,26 @@ export function getVehicleInfo(userId) {
 * delete one vehicle.
 * */
 export function delOneVehicle(vehicleId) {
-    let url = `${urls.users}/vehicle/${vehicleId}`;
-    return myFetch(url, POST, headers);
+    let url = `${urls.vehicle}/delete`;
+    let data = {
+        vehicleId
+    };
+
+    return myFetch(url, DELETE, headers, data);
 }
 
 /*
 * add one vehicle.
 * */
-export function addOneVehicle(vehicle) {
-    let url = `${urls.users}/vehicle`;
-    return myFetch(url, POST, headers, vehicle);
+export function addOneVehicle(userId, models, plateno) {
+    let url = `${urls.vehicle}/submit`;
+    let data = {
+        userId,
+        models,
+        plateno,
+    };
+
+    return myFetch(url, POST, headers, data);
 }
 
 /*

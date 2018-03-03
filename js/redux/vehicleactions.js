@@ -9,6 +9,10 @@ export const ADD_ONE_VEHICLE_ACTION = 'ADD_ONE_VEHICLE';
 
 export function doQueryVehicleInfo() {
     return (dispatch, getState) => {
+        /*const {vehicles} = getState().vehicle;
+        if (vehicles && vehicles.length > 0)
+            return vehicles;*/
+
         const {userId} = getState().user;
         dispatch(startRequestWeb());
         return getVehicleInfo(userId)
@@ -37,7 +41,7 @@ export function doQueryVehicleInfo() {
 export function doDelOneVehicle(vehicleId) {
     return dispatch => {
         dispatch(startRequestWeb('正在删除...'));
-        return delOneVehicle(vehicleId)
+        delOneVehicle(vehicleId)
             .then(ret=>{
                 dispatch(completeRequestWeb());
 
@@ -60,10 +64,12 @@ export function doDelOneVehicle(vehicleId) {
     }
 }
 
-export function doAddOneVehicle(vehicle) {
-    return dispatch => {
+export function doAddOneVehicle(models, plateno) {
+    return (dispatch, getState) => {
         dispatch(startRequestWeb('正在提交...'));
-        return addOneVehicle(vehicle)
+
+        const {userId} = getState().user;
+        addOneVehicle(userId, models, plateno)
             .then(ret=>{
                 dispatch(completeRequestWeb());
 
@@ -72,7 +78,7 @@ export function doAddOneVehicle(vehicle) {
 
                     dispatch({
                         type: ADD_ONE_VEHICLE_ACTION,
-                        vehicle
+                        vehicle : ret.data,
                     });
                     dispatch(doBack());
                 } else {

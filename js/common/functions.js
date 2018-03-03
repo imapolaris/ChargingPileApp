@@ -191,9 +191,9 @@ export function myFetch(url, method, headers, body) {
             .catch(error=>{
                 throw new Error(error);
             });
-    } else if (method.toUpperCase() === 'POST') { // post method
+    } else/* if (method.toUpperCase() === 'POST')*/ { // other methods
         return fetch(url, {
-            method: 'POST',
+            method: method,
             headers: headers,
             timeout: 3000,
             body: JSON.stringify(body),

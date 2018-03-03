@@ -6,11 +6,18 @@ export function vehicle(state={
 }, action) {
     switch (action.type) {
         case QUERY_VEHICLE_INFO_ACTION:
-            return Object.assign({}, state);
+        return Object.assign({}, state, {vehicles: action.data});
         case DEL_ONE_VEHICLE_ACTION:
-            return Object.assign({}, state);
+        {
+            let index = state.vehicles.findIndex((item)=>item.id === action.vehicleId);
+            return Object.assign({}, state, {
+                vehicles: [...state.vehicles.slice(0, index), ...state.vehicles.slice(index+1)],
+            });
+        }
         case ADD_ONE_VEHICLE_ACTION:
-            return Object.assign({}, state);
+            let vehicles = Object.assign([], state.vehicles);
+            vehicles.push(action.vehicle);
+            return Object.assign({}, state, {vehicles: [...vehicles]});
         default:
             return state;
     }
