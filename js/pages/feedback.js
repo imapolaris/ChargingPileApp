@@ -32,7 +32,7 @@ class CPAFeedbackPage extends Component{
                 <TextInput placeholder={'你有什么意见或者好的建议，请告诉我们！'}
                            placeholderTextColor={GPlaceholderTextColor}
                            multiline={true}
-                           maxLength={MaxWordCount}
+                           /*maxLength={MaxWordCount}*/
                            style={styles.content}
                            onChangeText={
                                (text)=>{
@@ -41,9 +41,9 @@ class CPAFeedbackPage extends Component{
                                        message: text,
                                    })
                                }} />
-                <Text style={[styles.text, wordcount >= MaxWordCount-5 ? {color: colors.red} : null]}>
+                {/*<Text style={[styles.text, wordcount >= MaxWordCount-5 ? {color: colors.red} : null]}>
                     {this.state.wordcount} / {MaxWordCount} 字
-                </Text>
+                </Text>*/}
                 <Button title="提交"
                         onPress={this._onSubmit}
                         buttonStyle={styles.button}
@@ -82,6 +82,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     button: {
-        marginTop: 10,
+        marginTop: 30,
     }
 });

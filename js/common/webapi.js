@@ -313,8 +313,28 @@ export function getPayRecords(userId) {
 * query balance of user' wallet
 * */
 export function getWalletBalance(userId) {
-    let url = `${urls.wallet}/balance/${userId}`;
+    let url = `${urls.wallet}/balance?userId=${userId}`;
     return myFetch(url, GET, headers);
+}
+
+/*
+* query recharge records.
+* */
+export function queryRechargeRecords(userId) {
+    let url = `${urls.wallet}/records?userId=${userId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* clear recharge records.
+* */
+export function clearRechargeRecords(userId) {
+    let url = `${urls.wallet}/clear`;
+    let data = {
+        userId
+    };
+
+    return myFetch(url, DELETE, headers, data);
 }
 
 /*

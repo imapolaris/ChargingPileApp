@@ -24,6 +24,7 @@ export const ScreenKey = {
     ResetPwd: 'ResetPwd',
 
     Wallet: 'Wallet',
+    RechargeRecords: 'RechargeRecords',
     InvoiceInfo: 'InvoiceInfo',
     Collect: 'Collect',
     Subscribe: 'Subscribe',

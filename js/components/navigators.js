@@ -40,6 +40,8 @@ import CPATestingReportDetailPage from '../pages/testingreportdetail';
 import {Icon} from "react-native-elements";
 import {IconType} from "../common/icons";
 import {doStationCollectStateChanged} from "../redux/stationactions";
+import RechargeRecords from "../pages/rechargerecords";
+
 
 const CPAStackNavigator = StackNavigator(
     {
@@ -130,8 +132,33 @@ const CPAStackNavigator = StackNavigator(
         },
         Wallet: {
             screen: CPAWalletPage,
-            navigationOptions: {
-                title: '钱包'
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '钱包',
+                    headerRight: (
+                        <NavButton label="明细"
+                                   onNavAction={() => {
+                                       navigation.navigate(ScreenKey.RechargeRecords);
+                                   }}
+                        />
+                    )
+                });
+            }
+        },
+        RechargeRecords: {
+            screen: RechargeRecords,
+            navigationOptions: ({navigation}) => {
+                return ({
+                    title: '充值记录',
+                    headerRight: (
+                        <NavButton label="清空"
+                                   onNavAction={() => {
+                                       const {clearRechargeRecords} = navigation.state.params;
+                                       clearRechargeRecords && clearRechargeRecords();
+                                   }}
+                        />
+                    )
+                })
             }
         },
         Collect: {

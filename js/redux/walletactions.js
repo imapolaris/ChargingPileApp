@@ -1,7 +1,11 @@
-import {aliPay, getWalletBalance, makeOneCharge, wxPay} from "../common/webapi";
+import {
+    aliPay, clearRechargeRecords, getWalletBalance, makeOneCharge, queryRechargeRecords,
+    wxPay
+} from "../common/webapi";
 import * as WeChat from "react-native-wechat";
 import Alipay from "react-native-yunpeng-alipay";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
+import {ToastBS} from "../common/functions";
 
 export const QUERY_WALLET_INFO_COMPLETED_ACTION = 'QUERY_WALLET_INFO_COMPLETED';// 查询钱包信息
 export const PAY_BY_WX_COMPLETED_ACTION = 'PAY_BY_WX_COMPLETED';// 微信充值
@@ -24,13 +28,55 @@ export function doQueryWalletInfo() {
                 if (ret.result === true) {
                     dispatch(queryWalletInfoCompleted(ret.data));
                 } else {
-
+                    ToastBS(ret.message);
                 }
             })
             .catch(error => {
                 console.log(error);
                 dispatch(completeRequestWeb());
             });
+    }
+}
+
+export function doQueryRechargeRecords() {
+    return (dispatch, getState) => {
+        const {userId} = getState().user;
+
+        dispatch(startRequestWeb());
+        return queryRechargeRecords(userId)
+            .then(ret=>{
+                dispatch(completeRequestWeb());
+                return ret;
+            })
+            .catch(err=>{
+                dispatch(completeRequestWeb());
+                ToastBS(`${err}`);
+                console.log(err);
+            })
+    }
+}
+
+export function doClearRechargeRecords() {
+    return (dispatch, getState) => {
+        const {userId} = getState().user;
+
+        dispatch(startRequestWeb('正在删除...'));
+        return clearRechargeRecords(userId)
+            .then(ret=>{
+                dispatch(completeRequestWeb());
+                if (ret.result) {
+                    ToastBS('操作完成！')
+                } else {
+                    ToastBS('操作失败！');
+                }
+
+                return ret.result;
+            })
+            .catch(err=>{
+                dispatch(completeRequestWeb());
+                ToastBS(`${err}`);
+                console.log(err);
+            })
     }
 }
 
