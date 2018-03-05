@@ -340,25 +340,39 @@ export function clearRechargeRecords(userId) {
 /*
  * pay by ali app.
  */
-export function aliPay() {
+export function aliPay(money) {
     let url = `${urls.wallet}/alipay`;
-    return myFetch(url, GET, headers);
+    let data = {
+        money
+    };
+
+    return myFetch(url, POST, headers, data);
 }
 
 /*
 * pay by wechat app.
 * */
-export function wxPay() {
+export function wxPay(money) {
     let url = `${urls.wallet}/wxpay`;
-    return myFetch(url, GET, headers);
+    let data = {
+        money
+    };
+
+    return myFetch(url, POST, headers, data);
 }
 
 /*
 * make one charge.
 * */
-export function makeOneCharge(userId, money, payWay) {
-    let url = `${urls.wallet}/charge?userId=${userId}&money=${money}&payway=${payWay}`;
-    return myFetch(url, GET, headers);
+export function makeOneCharge(userId, money, payway) {
+    let url = `${urls.wallet}/recharge`;
+    let data = {
+        userId,
+        money,
+        payway,
+    };
+
+    return myFetch(url, POST, headers, data);
 }
 
 /*

@@ -74,6 +74,11 @@ export default StorageKey = {
 export const WxAppId = 'wx7310a24d430a6967';
 export const WxAppSecret = 'd8bbddf8af5db6f7a96dd214a37fa813';
 
+export const PayWay = {
+    WxPay: '微信支付',
+    AliPay: '支付宝支付',
+};
+
 export const AppStatus = {
     Normal: 'normal',
     Subscribe: 'subscribe',
