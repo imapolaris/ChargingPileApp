@@ -5,7 +5,7 @@ class CPANewsPage extends Component{
     render() {
         return (
             <View style={styles.container}>
-                <WebView source={{uri: 'https://youpin.mi.com'}}
+                <WebView source={{uri: 'https://www.baidu.com'}}
                          javaScriptEnabled={true}
                          style={styles.wv} />
             </View>

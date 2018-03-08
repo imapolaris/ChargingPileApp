@@ -1,7 +1,10 @@
 import {doBack, doNav} from "./navactions";
 import {AppStatus, ScanAction, ScreenKey} from "../common/constants";
 import {doChangeAppStatus} from "./appactions";
-import {getBatteryTestingRecords, getBatteryTestingReportDetail} from "../common/webapi";
+import {
+    getBatteryTestingRecords, getBatteryTestingReportDetail,
+    queryBatteryTestingBillingRecords
+} from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {ToastBS} from "../common/functions";
 
@@ -83,4 +86,23 @@ function finishBatteryTestingCompleted() {
 
 export function doFinishBatteryTesting() {
 
+}
+
+export function doQueryBatteryTestingBillingRecords() {
+    return (dispatch, getState) => {
+        const {userId} = getState().user;
+
+        dispatch(startRequestWeb());
+        return queryBatteryTestingBillingRecords(userId)
+            .then(ret=>{
+                dispatch(completeRequestWeb());
+
+                return ret;
+            })
+            .catch(err=>{
+                dispatch(completeRequestWeb());
+                ToastBS(`${err}`);
+                console.log(err);
+            })
+    }
 }

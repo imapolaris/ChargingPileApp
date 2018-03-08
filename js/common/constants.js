@@ -119,3 +119,6 @@ export const RuntimeEnv = RuntimeEnvType.Develop;
 
 // station images file path.
 export const ImageBaseUrl = `${RuntimeEnv.ServerUri}/ChargingPileService/Res/StationImgs/`;
+
+// charging pile code' length
+export const SerialNumberLength = 16;

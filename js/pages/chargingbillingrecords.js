@@ -4,6 +4,8 @@ import React, {Component} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {EmptyPlaceHolder} from "../components/placeholder";
 import {ChargingBillingRecord} from "../components/billingrecord";
+import {connect} from "react-redux";
+import {doQueryChargingBillingRecords} from "../redux/chargingactions";
 
 class ChargingBillingRecords extends Component {
     constructor(props) {
@@ -32,8 +34,18 @@ class ChargingBillingRecords extends Component {
         };
     }
 
-    _renderEmpty = () => {
-        return EmptyPlaceHolder('没有找到充电账单...');
+    componentDidMount() {
+        //this._queryChargingBillingRecords();
+    }
+
+    _queryChargingBillingRecords = () => {
+        const {queryChargingBillingRecords} = this.props;
+        queryChargingBillingRecords && queryChargingBillingRecords()
+            .then(ret=>{
+                this.setState({
+                    data: ret
+                })
+            })
     };
 
     _renderItem = ({item}) => {
@@ -54,13 +66,19 @@ class ChargingBillingRecords extends Component {
             <View style={styles.contentContainer}>
                 <FlatList data={data}
                           renderItem={this._renderItem}
-                          ListEmptyComponent={this._renderEmpty} />
+                          ListEmptyComponent={EmptyPlaceHolder('没有找到充电账单...')} />
             </View>
         );
     }
 }
 
-export default ChargingBillingRecords;
+function mapDispatchToProps(dispatch) {
+    return {
+        queryChargingBillingRecords: () => dispatch(doQueryChargingBillingRecords()),
+    }
+}
+
+export default connect(state=>state, mapDispatchToProps)(ChargingBillingRecords);
 
 const styles = StyleSheet.create({
     contentContainer: {

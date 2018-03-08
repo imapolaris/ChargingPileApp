@@ -1,5 +1,5 @@
 import {ToastBS} from "../common/functions";
-import {startCharging} from "../common/webapi";
+import {getChargingStatus, queryChargingBillingRecords, startCharging, stopCharging} from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doChangeAppStatus} from "./appactions";
 import {AppStatus, ScanAction, ScreenKey} from "../common/constants";
@@ -53,24 +53,24 @@ function startChargingCompleted() {
 }
 
 export function doStartCharging(sn) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        //dispatch(doLoadInChargingPage());
+        dispatch(doBack());
         dispatch(startRequestWeb('启动充电中，请稍后！'));
-        startCharging(sn)
+
+        const {userId} = getState().user;
+        startCharging(userId, sn)
             .then(ret=>{
                 dispatch(completeRequestWeb());
 
                 if (ret.result) {
                     dispatch(startChargingCompleted());
+                    dispatch(doNav(ScreenKey.InCharging));
 
                     // app充电中
                     dispatch(doChangeAppStatus(AppStatus.Charging));
-
-                    //dispatch(doBack());
-                    //dispatch(doNav(ScreenKey.InCharging));
-
-                    dispatch(doLoadInChargingPage());
                 } else {
-                    ToastBS(`启动充电失败：${ret.message}`);
+                    ToastBS(ret.message);
                 }
             })
             .catch(err=>{
@@ -87,8 +87,22 @@ function queryChargingRealtimeInfoCompleted() {
     }
 }
 
-export function doQueryChargingRealtimeInfo() {
-
+export function doQueryChargingRealtimeInfo(sn) {
+    return (dispatch) => {
+        return getChargingStatus(sn)
+            .then(ret=>{
+                if (ret.result) {
+                    return true;
+                } else {
+                    ToastBS(ret.message);
+                    console.log(ret.message);
+                }
+            })
+            .catch(err=>{
+                ToastBS(`${err}`);
+                console.log(err);
+            })
+    }
 }
 
 function finishChargingCompleted() {
@@ -97,12 +111,44 @@ function finishChargingCompleted() {
     }
 }
 
-export function doFinishCharging() {
+export function doFinishCharging(sn) {
     return (dispatch, getState) => {
-        //dispatch(startRequestWeb());
-        dispatch(doChangeAppStatus(AppStatus.Normal));
+        dispatch(startRequestWeb('正在停止充电...'));
+        const {userId} = getState().user;
 
-        dispatch(doBack());
-        dispatch(doNav(ScreenKey.ChargingBilling));
+        stopCharging(userId, sn)
+            .then(ret=>{
+                if (ret.result) {
+                    dispatch(completeRequestWeb());
+                    dispatch(doChangeAppStatus(AppStatus.Normal));
+
+                    dispatch(doBack());
+                    dispatch(doNav(ScreenKey.ChargingBilling));
+                } else {
+                    ToastBS(ret.message);
+                }
+            })
+            .catch(err=>{
+                dispatch(completeRequestWeb());
+                ToastBS(`${err}`);
+                console.log(err);
+            })
+    }
+}
+
+export function doQueryChargingBillingRecords() {
+    return (dispatch, getState) => {
+        const {userId} = getState().user;
+        dispatch(startRequestWeb());
+        return queryChargingBillingRecords(userId)
+            .then(ret=>{
+                dispatch(completeRequestWeb());
+                return ret;
+            })
+            .catch(err=>{
+                dispatch(completeRequestWeb());
+                console.log(err);
+                ToastBS(`${err}`);
+            })
     }
 }

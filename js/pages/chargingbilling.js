@@ -9,6 +9,17 @@ import {connect} from "react-redux";
 import {doBack} from "../redux/navactions";
 
 class CPAChargingBillingPage extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        };
+    }
+
+    componentDidMount() {
+
+    }
+
     render() {
         const kvStyle = {containerStyle: styles.kvContainerStyle, titleStyle: styles.titleStyle, valueStyle: styles.valueStyle};
         const {back} = this.props;

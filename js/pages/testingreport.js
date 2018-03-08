@@ -28,15 +28,10 @@ class CPATestingReportPage extends Component{
     _renderItem = ({item}) => {
         const {nav} = this.props;
 
-        let vehicle = '';
-        if (item && item.vehicle) {
-            vehicle = item.vehicle.plateno;
-        }
-
         return (
             <TestingReportItem key={item.key}
                                checkDate={item.checkdatestr}
-                               vehicle={vehicle}
+                               vehicle={item.plateno}
                                result={item.result}
                                onAction={()=>{nav && nav(ScreenKey.TestingReportDetail, {reportId: item.id})}}/>
         );

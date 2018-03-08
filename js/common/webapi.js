@@ -178,24 +178,42 @@ export function addOneVehicle(userId, models, plateno) {
 /*
 * start charging after scan the qrcode or input serial number.
 * */
-export function startCharging(serialNumber) {
-    let url = `${urls.charging}/start/${serialNumber}`;
-    return myFetch(url, GET, headers);
+export function startCharging(userId, sn) {
+    let url = `${urls.charging}/start`;
+    let data = {
+        userId,
+        sn,
+    };
+
+    return myFetch(url, POST, headers, data);
 }
 
 /*
 * stop charging.
 * */
-export function stopCharging(serialNumber) {
-    let url = `${urls.charging}/stop/${serialNumber}`;
-    return myFetch(url, GET, headers);
+export function stopCharging(userId, sn) {
+    let url = `${urls.charging}/stop`;
+    let data = {
+        userId,
+        sn
+    };
+
+    return myFetch(url, POST, headers, data);
 }
 
 /*
 * request charging status.
 * */
-export function getChargingStatus(serialNumber) {
-    let url = `${urls.charging}/status/${serialNumber}`;
+export function getChargingStatus(sn) {
+    let url = `${urls.charging}/status?sn=${sn}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* query charging billing records of the user.
+* */
+export function queryChargingBillingRecords(userId) {
+    let url = `${urls.charging}/records`;
     return myFetch(url, GET, headers);
 }
 
@@ -220,6 +238,14 @@ export function getBatteryTestingRecords(userId) {
 * */
 export function getBatteryTestingReportDetail(reportId) {
     let url = `${urls.batterytesting}?reportId=${reportId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* query battery testing billing records of the user.
+* */
+export function queryBatteryTestingBillingRecords(userId) {
+    let url = `${urls.batterytesting}/records?userId=${userId}`;
     return myFetch(url, GET, headers);
 }
 

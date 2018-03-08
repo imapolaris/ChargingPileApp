@@ -13,7 +13,7 @@ import {doStartCharging} from "../redux/chargingactions";
 import {validSerialNumber} from "../common/functions";
 import {doStartBatteryTesting} from "../redux/batterytestingactions";
 
-const SNCount = 10;
+const SNCount = 16;
 const ScanInterval = 3000; // 扫描成功后，间隔3s允许再次处理
 class CPAScanPage extends Component {
     constructor(props) {
