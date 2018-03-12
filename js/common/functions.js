@@ -248,7 +248,7 @@ export function validNumber(number) {
 * valid serial number of charging pile.
 * */
 export function validSerialNumber(serialNumber) {
-    let reg = /^\d{10}$/;
+    let reg = /^\d{16}$/;
     return reg.test(serialNumber);
 }
 

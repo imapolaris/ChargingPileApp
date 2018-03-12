@@ -29,7 +29,7 @@ export default function configureStore(initialState) {
 
 const config = {
     storage: AsyncStorage,
-    whitelist: ['user', 'system'],
+    whitelist: ['user', 'system', 'app', 'charging'],
 };
 
 persistStore(store, config, ()=>{

@@ -7,12 +7,12 @@ import {Divider, Icon} from 'react-native-elements';
 import colors from "../common/colors";
 import ScanButton from "../components/scanbutton";
 import KeyValPair from "../components/keyvalpair";
-import {AppStatus, ScreenKey, STATUSBAR_HEIGHT} from "../common/constants";
+import {AppStatus, ChargingProcessQueryInterval, ScreenKey, STATUSBAR_HEIGHT} from "../common/constants";
 import Banner from "../components/banner";
 import {IconType} from "../common/icons";
 import {connect} from "react-redux";
 import {doNav} from "../redux/navactions";
-import {doQueryChargingInfo, doStartScanCharging} from "../redux/chargingactions";
+import {doQueryChargingInfo, doStartScanCharging, doQueryChargingRealtimeInfo} from "../redux/chargingactions";
 
 class CPAChargingPage extends Component{
     static propTypes = {
@@ -34,9 +34,31 @@ class CPAChargingPage extends Component{
         nav && nav(ScreenKey.BatteryTesting);
     };
 
+    _startTimer = () => {
+        this._timer = setInterval(()=>{
+            const {queryChargingRealtimeInfo} = this.props;
+            queryChargingRealtimeInfo && queryChargingRealtimeInfo();
+            //console.warn('test charging');
+        }, ChargingProcessQueryInterval);
+    };
+
+    _stopTimer = () => {
+        this._timer && clearInterval(this._timer);
+    };
+
+    componentWillUnmount() {
+        this._stopTimer();
+    }
+
     render() {
         const {totalCostMoney, totalTime, totalElec, totalNumberOfTimes,
             startScan, appStatus, nav} = this.props;
+
+        if (appStatus === AppStatus.Charging) {
+            this._startTimer();
+        } else {
+            this._stopTimer();
+        }
 
         return (
             <View style={styles.container}>
@@ -109,6 +131,7 @@ export function mapDispatchToProps(dispatch) {
         queryChargingInfo: () => dispatch(doQueryChargingInfo()),
         startScan: (sn) => dispatch(doStartScanCharging()),
         nav: (screenKey) => dispatch(doNav(screenKey)),
+        queryChargingRealtimeInfo: () => dispatch(doQueryChargingRealtimeInfo()),
     }
 }
 

@@ -191,11 +191,12 @@ export function startCharging(userId, sn) {
 /*
 * stop charging.
 * */
-export function stopCharging(userId, sn) {
+export function stopCharging(userId, sn, transSn) {
     let url = `${urls.charging}/stop`;
     let data = {
         userId,
-        sn
+        sn,
+        transSn,
     };
 
     return myFetch(url, POST, headers, data);
@@ -204,8 +205,8 @@ export function stopCharging(userId, sn) {
 /*
 * request charging status.
 * */
-export function getChargingStatus(sn) {
-    let url = `${urls.charging}/status?sn=${sn}`;
+export function getChargingStatus(sn, transSn) {
+    let url = `${urls.charging}/status?sn=${sn}&transSn=${transSn}`;
     return myFetch(url, GET, headers);
 }
 

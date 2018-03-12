@@ -51,10 +51,10 @@ class CPAInChargingPage extends Component {
                 </View>
                 <View style={styles.infoContainer}>
                     <KeyValPair horizontal={true} title="充电电量" val={`${chargingElec} 度`} {...kvstyles}/>
-                    <KeyValPair horizontal={true} title="充电时间" val={`${costTime} 分`} {...kvstyles}/>
+                    <KeyValPair horizontal={true} title="充电时间" val={`${costTime} 分钟`} {...kvstyles}/>
                 </View>
                 <View style={styles.infoContainer}>
-                    <KeyValPair horizontal={true} title="剩余时间" val={`${restTime} 分`} {...kvstyles}/>
+                    <KeyValPair horizontal={true} title="剩余时间" val={`${restTime} 分钟`} {...kvstyles}/>
                     <KeyValPair horizontal={true} title="电压" val={`${voltage} V`} {...kvstyles}/>
                 </View>
                 <View style={styles.infoContainer}>

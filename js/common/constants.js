@@ -92,6 +92,10 @@ export const UserCategory = {
     Group: 2, // 集团用户
 };
 
+
+/*
+* app runtime environment.
+* */
 export const ScanAction = {
     Charging: 0,
     BatteryTesting: 1,
@@ -106,15 +110,14 @@ const RuntimeEnvType = {
     Develop: {
         ServerUri: 'http://192.168.0.201',
         Version: 0.1,
+        WxAppId: '',
     },
     Product: {
         ServerUri: 'http://39.104.66.176',
         Version: 1.0,
+        WxAppId: '',
     },
 };
-/*
-* app runtime environment.
-* */
 export const RuntimeEnv = RuntimeEnvType.Develop;
 
 // station images file path.
@@ -122,3 +125,5 @@ export const ImageBaseUrl = `${RuntimeEnv.ServerUri}/ChargingPileService/Res/Sta
 
 // charging pile code' length
 export const SerialNumberLength = 16;
+
+export const ChargingProcessQueryInterval = 5 * 1000;

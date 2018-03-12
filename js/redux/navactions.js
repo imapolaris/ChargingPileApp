@@ -4,6 +4,7 @@ import {ToastBL} from "../common/functions";
 
 export const GO_BACK_ACTION = 'GO_BACK';
 export const START_IN_CHARGING_ACTION = 'START_IN_CHARGING';
+export const SHOW_CHARGING_BILLING_ACTION = 'SHOW_CHARGING_BILLING_ACTION';
 
 let debounce = true;
 export function doNav(screenKey, params) {
@@ -71,6 +72,14 @@ export function doLoadInChargingPage() {
     return dispatch => {
         dispatch({
             type: START_IN_CHARGING_ACTION,
+        });
+    }
+}
+
+export function doShowChargingBillingPage() {
+    return dispatch => {
+        dispatch({
+            type: SHOW_CHARGING_BILLING_ACTION,
         });
     }
 }

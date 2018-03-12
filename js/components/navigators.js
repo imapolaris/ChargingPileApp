@@ -82,9 +82,12 @@ const CPAStackNavigator = StackNavigator(
                                    onNavAction={() => {
                                        const {dispatch} = navigation;
                                        const {stationId} = navigation.state.params;
-                                       dispatch(doStationCollectStateChanged(stationId));
-
-                                       navigation.setParams({collect: !navigation.state.params.collect});
+                                       dispatch(doStationCollectStateChanged(stationId))
+                                           .then(ret=>{
+                                               if (ret) {
+                                                   navigation.setParams({collect: !navigation.state.params.collect});
+                                               }
+                                           });
                                    }}
                         />
                     ),

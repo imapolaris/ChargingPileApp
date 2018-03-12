@@ -3,7 +3,7 @@ import {getChargingStatus, queryChargingBillingRecords, startCharging, stopCharg
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doChangeAppStatus} from "./appactions";
 import {AppStatus, ScanAction, ScreenKey} from "../common/constants";
-import {doBack, doLoadInChargingPage, doNav} from "./navactions";
+import {doBack, doLoadInChargingPage, doNav, doShowChargingBillingPage} from "./navactions";
 
 export const QUERY_CHARGING_INFO_ACTION = 'CHARGING_INFO';
 export const START_CHARGING_ACTION = 'START_CHARGING';
@@ -46,15 +46,15 @@ export function doStartScanCharging() {
     }
 }
 
-function startChargingCompleted() {
+function startChargingCompleted(data) {
     return {
         type: START_CHARGING_ACTION,
+        data
     }
 }
 
 export function doStartCharging(sn) {
     return (dispatch, getState) => {
-        //dispatch(doLoadInChargingPage());
         dispatch(doBack());
         dispatch(startRequestWeb('启动充电中，请稍后！'));
 
@@ -64,8 +64,9 @@ export function doStartCharging(sn) {
                 dispatch(completeRequestWeb());
 
                 if (ret.result) {
-                    dispatch(startChargingCompleted());
-                    dispatch(doNav(ScreenKey.InCharging));
+                    dispatch(startChargingCompleted(ret.data));
+
+                    //dispatch(doLoadInChargingPage());
 
                     // app充电中
                     dispatch(doChangeAppStatus(AppStatus.Charging));
@@ -81,20 +82,22 @@ export function doStartCharging(sn) {
     }
 }
 
-function queryChargingRealtimeInfoCompleted() {
+function queryChargingRealtimeInfoCompleted(data) {
     return {
         type: QUERY_CHARGING_REALTIME_INFO_ACTION,
+        data,
     }
 }
 
-export function doQueryChargingRealtimeInfo(sn) {
-    return (dispatch) => {
-        return getChargingStatus(sn)
+export function doQueryChargingRealtimeInfo() {
+    return (dispatch, getState) => {
+        const {sn, transSn} = getState().charging;
+
+        getChargingStatus(sn, transSn)
             .then(ret=>{
                 if (ret.result) {
-                    return true;
+                    dispatch(queryChargingRealtimeInfoCompleted(JSON.parse(ret.data)));
                 } else {
-                    ToastBS(ret.message);
                     console.log(ret.message);
                 }
             })
@@ -111,22 +114,25 @@ function finishChargingCompleted() {
     }
 }
 
-export function doFinishCharging(sn) {
+export function doFinishCharging() {
     return (dispatch, getState) => {
         dispatch(startRequestWeb('正在停止充电...'));
+        const {sn, transSn} = getState().charging;
         const {userId} = getState().user;
 
-        stopCharging(userId, sn)
+        stopCharging(userId, sn, transSn)
             .then(ret=>{
-                if (ret.result) {
-                    dispatch(completeRequestWeb());
-                    dispatch(doChangeAppStatus(AppStatus.Normal));
+                dispatch(completeRequestWeb());
 
-                    dispatch(doBack());
-                    dispatch(doNav(ScreenKey.ChargingBilling));
+                if (ret.result) {
+                    dispatch(finishChargingCompleted());
+
+                    dispatch(doShowChargingBillingPage());
                 } else {
                     ToastBS(ret.message);
                 }
+
+                dispatch(doChangeAppStatus(AppStatus.Normal));
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());

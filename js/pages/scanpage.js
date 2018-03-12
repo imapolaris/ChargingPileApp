@@ -10,7 +10,7 @@ import {IconType} from "../common/icons";
 import {textInputStyle} from "../common/styles";
 import {connect} from "react-redux";
 import {doStartCharging} from "../redux/chargingactions";
-import {validSerialNumber} from "../common/functions";
+import {ToastBS, validSerialNumber} from "../common/functions";
 import {doStartBatteryTesting} from "../redux/batterytestingactions";
 
 const SNCount = 16;
@@ -97,13 +97,14 @@ class CPAScanPage extends Component {
                 let sn = e.data;
 
                 // verify the serial number.
-                if (/*validSerialNumber(sn)*/true) {
+                if (validSerialNumber(sn)) {
                     this._startAction(sn);
                 } else {
-                    //prompt('编号不正确！');
+                    ToastBS('编号不正确！');
                 }
             } catch (e) {
-                //error('An error occurred', e.message);
+                ToastBS(`${e}`);
+                console.log(e);
             }
 
             this._scanTimer = setTimeout(()=>{

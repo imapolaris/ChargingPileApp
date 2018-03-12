@@ -98,14 +98,25 @@ export function doQueryCollectStations() {
 
 export function doStationCollectStateChanged(stationId){
     return (dispatch, getState) => {
+        const {logined} = getState().user;
+        if (!logined) {
+            ToastBS('请先登录！');
+            dispatch(doNav(ScreenKey.Login));
+            return new Promise((resolve, reject) => {
+                reject(false);
+            });
+        }
+
         const {userId} = getState().user;
-        stationCollectState(userId, stationId)
+        return stationCollectState(userId, stationId)
             .then(ret=>{
                 ToastBS(ret.message);
+                return true;
             })
             .catch(err=>{
                 ToastBS(`${err}`);
                 console.log(err);
+                return false;
             })
     }
 }

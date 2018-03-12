@@ -57,7 +57,9 @@ class StationInfo extends Component{
             elecPrice = station.Detail.elecPrice;
             payWay = station.Detail.payWay;
             openHours = station.Detail.openHours;
-            chargingTimes = station.c_s.ChargingTimes;
+            if (station.c_s) {
+                chargingTimes = station.c_s.ChargingTimes;
+            }
         }
 
         return (
