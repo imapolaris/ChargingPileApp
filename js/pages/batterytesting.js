@@ -12,16 +12,29 @@ import {doQueryBatteryTestingInfo, startScanBatteryTesting} from "../redux/batte
 import {doBack} from "../redux/navactions";
 
 class CPABatteryTestingPage extends Component {
-    static defaultProps = {
-        totalTestingCostMoney: 0,
-        totalTestingTime: 0,
-        totalTestingElec: 0,
-        totalTestingNumberOfTimes: 0,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            totalTestingCostMoney: 0,
+            lastCheckResults: ' ',
+            lastCheckDate: ' ',
+            totalTestingTimes: 0,
+        };
+    }
 
     componentDidMount() {
         const {queryBatteryTestingInfo} = this.props;
-        queryBatteryTestingInfo && queryBatteryTestingInfo();
+        queryBatteryTestingInfo && queryBatteryTestingInfo()
+            .then(ret=>{
+                if (ret) {
+                    this.setState({
+                        totalTestingCostMoney: ret.costMoney,
+                        lastCheckResults: ret.lastCheckResults,
+                        lastCheckDate: ret.lastCheckDate,
+                        totalTestingTimes: ret.batteryTestingTimes,
+                    });
+                }
+            });
     }
 
     _showInfo = () => {
@@ -51,10 +64,11 @@ class CPABatteryTestingPage extends Component {
 
     render() {
         const {
-            totalTestingCostMoney, totalTestingTime,
-            totalTestingElec, totalTestingNumberOfTimes,
-            startScan,
-        } = this.props;
+            totalTestingCostMoney, lastCheckResults,
+            lastCheckDate, totalTestingTimes,
+        } = this.state;
+
+        const {startScan} = this.props;
 
 
         return (
@@ -66,16 +80,16 @@ class CPABatteryTestingPage extends Component {
                                     titleStyle={styles.titleStyle1} valueStyle={styles.valueStyle1}/>
                     </View>
                     <View style={styles.chargingInfoBottomContainer}>
-                        <KeyValPair title='电池寿命(小时)'
-                                    val={totalTestingTime}
+                        <KeyValPair title='最近检测结果'
+                                    val={lastCheckResults}
                                     containerStyle={styles.itemContainer}/>
                         <Divider style={styles.divider}/>
-                        <KeyValPair title='检测问题(个)'
-                                    val={totalTestingElec}
+                        <KeyValPair title='最近检测时间'
+                                    val={lastCheckDate}
                                     containerStyle={styles.itemContainer}/>
                         <Divider style={styles.divider}/>
                         <KeyValPair title='总检测次数(次)'
-                                    val={totalTestingNumberOfTimes}
+                                    val={totalTestingTimes}
                                     containerStyle={styles.itemContainer}/>
                     </View>
                 </View>
@@ -105,11 +119,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-function mapStateToProps(state) {
-    return state;
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CPABatteryTestingPage);
+export default connect(state=>state, mapDispatchToProps)(CPABatteryTestingPage);
 
 const flowStyles = StyleSheet.create({
     infoContainer: {

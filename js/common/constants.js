@@ -46,9 +46,10 @@ export const ScreenKey = {
     VehicleInfo: 'VehicleInfo',
     AddVehicle: 'AddVehicle',
     AddAddress: 'AddAddress',
-    InCharging: 'InCharging',
 
+    InCharging: 'InCharging',
     ChargingBilling: 'ChargingBilling',
+
     Notification: 'Notification',
 };
 
@@ -127,3 +128,5 @@ export const ImageBaseUrl = `${RuntimeEnv.ServerUri}/ChargingPileService/Res/Sta
 export const SerialNumberLength = 16;
 
 export const ChargingProcessQueryInterval = 5 * 1000;
+
+export const BalanceWarningLine = 20;

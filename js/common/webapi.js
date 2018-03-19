@@ -7,7 +7,6 @@ const urls = {
     messages: `${baseUrl}/messages`,
     stations: `${baseUrl}/stations`,
     chargingPiles: `${baseUrl}/chargingPiles`,
-    chargingRecords: `${baseUrl}/chargingRecords`,
     charging: `${baseUrl}/charging`,
     subscribeRecords: `${baseUrl}/subscribeRecords`,
     users: `${baseUrl}/users`,
@@ -126,22 +125,6 @@ export function makeOneSubscribe(userId, sn) {
 }
 
 /*
-* get current logon user' charging records.
-* */
-export function getChargingRecords(userId) {
-    let url = `${urls.chargingRecords}/${userId}`;
-    return myFetch(url, GET, headers);
-}
-
-/*
-* get subscribe records by user id.
-* */
-export function getSubscribeRecords(userId) {
-    let url = `${urls.subscribeRecords}/${userId}`;
-    return myFetch(url, GET, headers);
-}
-
-/*
 * query all the vehicles of mine.
 * */
 export function getVehicleInfo(userId) {
@@ -178,11 +161,12 @@ export function addOneVehicle(userId, models, plateno) {
 /*
 * start charging after scan the qrcode or input serial number.
 * */
-export function startCharging(userId, sn) {
+export function startCharging(userId, sn, cType) {
     let url = `${urls.charging}/start`;
     let data = {
         userId,
         sn,
+        cType,
     };
 
     return myFetch(url, POST, headers, data);
@@ -211,6 +195,14 @@ export function getChargingStatus(sn, transSn) {
 }
 
 /*
+* query charging summary information for the user.
+* */
+export function queryChargingSummary(userId) {
+    let url = `${urls.charging}/summary?userId=${userId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
 * query charging billing records of the user.
 * */
 export function queryChargingBillingRecords(userId) {
@@ -230,7 +222,7 @@ export function startBatteryTesting(serialNumber) {
 * query battery testing records.
 * */
 export function getBatteryTestingRecords(userId) {
-    let url = `${urls.batterytesting}?userId=${userId}`;
+    let url = `${urls.batterytesting}/summary?userId=${userId}`;
     return myFetch(url, GET, headers);
 }
 

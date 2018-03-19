@@ -21,12 +21,19 @@ export function doQueryBatteryTestingInfo() {
         return getBatteryTestingRecords(userId)
             .then(ret=>{
                 dispatch(completeRequestWeb());
-                return ret;
+                if (ret.result){
+                    return ret.data;
+                } else {
+                    ToastBS(ret.message);
+                    console.log(ret.message);
+                    return null;
+                }
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());
                 ToastBS(`${err}`);
                 console.log(err);
+                return null;
             })
     }
 }

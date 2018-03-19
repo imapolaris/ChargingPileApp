@@ -1,8 +1,13 @@
-import {ToastBS} from "../common/functions";
-import {getChargingStatus, queryChargingBillingRecords, startCharging, stopCharging} from "../common/webapi";
+'use strict';
+
+import {prompt, prompt2, ToastBL, ToastBS} from "../common/functions";
+import {
+    getChargingStatus, queryChargingBillingRecords, queryChargingSummary, startCharging,
+    stopCharging
+} from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doChangeAppStatus} from "./appactions";
-import {AppStatus, ScanAction, ScreenKey} from "../common/constants";
+import {AppStatus, BalanceWarningLine, ScanAction, ScreenKey} from "../common/constants";
 import {doBack, doLoadInChargingPage, doNav, doShowChargingBillingPage} from "./navactions";
 
 export const QUERY_CHARGING_INFO_ACTION = 'CHARGING_INFO';
@@ -22,27 +27,38 @@ export function doQueryChargingInfo() {
         const {logined, userId} = getState().user;
         if (!logined) return;
 
-        dispatch({
-            type: QUERY_CHARGING_INFO_ACTION,
-            data
-        });
+        return queryChargingSummary(userId)
+            .then(ret=>{
+                if (ret.result) {
+                    dispatch(queryChargingInfoCompleted(ret.data));
+                } else {
+                    ToastBS(ret.message);
+                    console.log(ret.message);
+                }
+            })
+            .catch(err=>{
+                ToastBS(`${err}`);
+                console.log(err);
+            })
     }
 }
 
 export function doStartScanCharging() {
     return (dispatch, getState) => {
-        /*const {balance} = getState().wallet;
+        const {balance} = getState().wallet;
         if (balance <= 0) {
-            prompt('余额不足，请先充值！');
-            return;
-        }*/
+            prompt2('余额不足，请先充值！',
+                () => {},
+                () => {
+                    dispatch(doNav(ScreenKey.Wallet));
+                });
+        } else {
+            if (balance <= BalanceWarningLine) {
+                ToastBL('余额较低，请注意！');
+            }
 
-        /*if (balance <= 20) {
-            prompt('余额较低，请注意！');
-            return;
-        }*/
-
-        dispatch(doNav(ScreenKey.Scan, {action: ScanAction.Charging}));
+            dispatch(doNav(ScreenKey.Scan, {action: ScanAction.Charging}));
+        }
     }
 }
 
@@ -58,8 +74,8 @@ export function doStartCharging(sn) {
         dispatch(doBack());
         dispatch(startRequestWeb('启动充电中，请稍后！'));
 
-        const {userId} = getState().user;
-        startCharging(userId, sn)
+        const {userId, userCategory} = getState().user;
+        startCharging(userId, sn, userCategory)
             .then(ret=>{
                 dispatch(completeRequestWeb());
 
@@ -96,7 +112,14 @@ export function doQueryChargingRealtimeInfo() {
         getChargingStatus(sn, transSn)
             .then(ret=>{
                 if (ret.result) {
-                    dispatch(queryChargingRealtimeInfoCompleted(JSON.parse(ret.data)));
+                    let data = JSON.parse(ret.data);
+                    dispatch(queryChargingRealtimeInfoCompleted(data));
+
+                    // 判断充电是否已结束
+                    if (true) {
+                        dispatch(doChangeAppStatus(AppStatus.Normal));
+                        dispatch(doNav(ScreenKey.ChargingBilling));
+                    }
                 } else {
                     console.log(ret.message);
                 }

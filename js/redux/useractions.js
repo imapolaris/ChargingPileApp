@@ -3,6 +3,7 @@ import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {doBack} from "./navactions";
 import {ToastBL, ToastBS, validatePhoneNumber} from "../common/functions";
 import {doQueryChargingInfo} from "./chargingactions";
+import {doQueryWalletInfo} from "./walletactions";
 
 export const LOGIN_SUCCESS_ACTION = 'LOGIN_SUCCESS'; // 登录成功
 export const LOGIN_FAILED_ACTION = 'LOGIN_FAILED'; // 登录失败
@@ -19,6 +20,7 @@ function loginSuccess(data) {
         nickname: data.nickname,
         phoneNumber: data.telephone,
         address: 'beijing China',
+        avatar: data.avatar,
     }
 }
 
@@ -33,11 +35,13 @@ export function doLogin(phoneNumber, pwd, userCategory) {
                 if (ret.result === true) {
                     ToastBS(`登录成功！`);
 
-                    dispatch(loginSuccess(ret.data));
+                    dispatch(loginSuccess(Object.assign({}, ret.data, {userCategory, avatar: JSON.parse(ret.data.avatar)})));
                     dispatch(doBack());
 
                     // 查询用户充电统计信息
-                    // dispatch(doQueryChargingInfo());
+                    dispatch(doQueryChargingInfo());
+                    // 查询用户钱包信息
+                    dispatch(doQueryWalletInfo());
                 } else {
                     ToastBS(ret.message);
 
@@ -76,6 +80,7 @@ export function doRegister(phoneNumber, vcode, pwd) {
 
                 if (ret.result === true) {
                     ToastBS('注册成功，请登录！');
+                    dispatch(doBack());
                 } else {
                     ToastBS(`注册失败: ${ret.message}`);
                 }

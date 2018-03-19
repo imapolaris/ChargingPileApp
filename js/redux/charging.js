@@ -25,7 +25,10 @@ export function charging(state={
     switch (action.type) {
         case QUERY_CHARGING_INFO_ACTION:
             return Object.assign({}, state, {
-
+                totalCostMoney: action.data.costMoney,
+                totalCostTime: action.data.costTime,
+                totalChargingElec: action.data.kwhs,
+                totalChargingCount: action.data.chargingTimes,
             });
         case START_CHARGING_ACTION:
             return Object.assign({}, state, {

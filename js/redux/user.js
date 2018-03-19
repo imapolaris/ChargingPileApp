@@ -18,7 +18,7 @@ export function user(state={
                     logined: true,
                     userId: action.id,
                     nickname: action.nickname,
-                    //avatar: action.avatar,
+                    avatar: action.avatar,
                     address: action.address,
                     phoneNumber: action.phoneNumber,
                 });

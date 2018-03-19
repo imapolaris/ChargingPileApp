@@ -72,7 +72,7 @@ class CPATestingReportDetailPage extends Component{
                     <KeyValPair title="DCR测试" val={dcr} {...kvStyle}/>
                     <KeyValPair title="CAN通信" val={can} {...kvStyle}/>
                     <KeyValPair title="绝缘阻抗" val={ir} {...kvStyle}/>
-                    <KeyValPair title="单体温度" val={temp} {...kvStyle}/>
+                    {/*<KeyValPair title="单体温度" val={temp} {...kvStyle}/>*/}
                     <KeyValPair title="单体温升" val={tempup} {...kvStyle}/>
                     <KeyValPair title="总电压最大差值" val={vdiff} {...kvStyle}/>
                     <KeyValPair title="总电流最大差值" val={adiff} {...kvStyle} showDivider={false}/>

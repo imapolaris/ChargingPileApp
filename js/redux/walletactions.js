@@ -21,11 +21,11 @@ function queryWalletInfoCompleted(data) {
 
 export function doQueryWalletInfo() {
     return (dispatch, getState) => {
-        dispatch(startRequestWeb('正在加载钱包信息...'));
+        //dispatch(startRequestWeb('正在加载钱包信息...'));
         const {userId} = getState().user;
         getWalletBalance(userId)
             .then(ret => {
-                dispatch(completeRequestWeb());
+                //dispatch(completeRequestWeb());
                 if (ret.result === true) {
                     dispatch(queryWalletInfoCompleted(ret.data));
                 } else {
@@ -34,7 +34,7 @@ export function doQueryWalletInfo() {
             })
             .catch(error => {
                 console.log(error);
-                dispatch(completeRequestWeb());
+                //dispatch(completeRequestWeb());
             });
     }
 }

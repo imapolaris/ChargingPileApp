@@ -7,12 +7,16 @@ import {Divider, Icon} from 'react-native-elements';
 import colors from "../common/colors";
 import ScanButton from "../components/scanbutton";
 import KeyValPair from "../components/keyvalpair";
-import {AppStatus, ChargingProcessQueryInterval, ScreenKey, STATUSBAR_HEIGHT} from "../common/constants";
+import {
+    AppStatus, BalanceWarningLine, ChargingProcessQueryInterval, ScreenKey,
+    STATUSBAR_HEIGHT
+} from "../common/constants";
 import Banner from "../components/banner";
 import {IconType} from "../common/icons";
 import {connect} from "react-redux";
 import {doNav} from "../redux/navactions";
 import {doQueryChargingInfo, doStartScanCharging, doQueryChargingRealtimeInfo} from "../redux/chargingactions";
+import {doQueryWalletInfo} from "../redux/walletactions";
 
 class CPAChargingPage extends Component{
     static propTypes = {
@@ -29,6 +33,16 @@ class CPAChargingPage extends Component{
         totalNumberOfTimes: 0,
     };
 
+    componentDidMount() {
+        const {queryChargingInfo, queryWalletInfo} = this.props;
+        queryChargingInfo && queryChargingInfo();
+        queryWalletInfo && queryWalletInfo();
+    }
+
+    componentWillUnmount() {
+        this._stopTimer();
+    }
+
     _startBatteryTesting = () => {
         const {nav} = this.props;
         nav && nav(ScreenKey.BatteryTesting);
@@ -38,7 +52,6 @@ class CPAChargingPage extends Component{
         this._timer = setInterval(()=>{
             const {queryChargingRealtimeInfo} = this.props;
             queryChargingRealtimeInfo && queryChargingRealtimeInfo();
-            //console.warn('test charging');
         }, ChargingProcessQueryInterval);
     };
 
@@ -46,13 +59,9 @@ class CPAChargingPage extends Component{
         this._timer && clearInterval(this._timer);
     };
 
-    componentWillUnmount() {
-        this._stopTimer();
-    }
-
     render() {
         const {totalCostMoney, totalTime, totalElec, totalNumberOfTimes,
-            startScan, appStatus, nav} = this.props;
+            startScan, appStatus, nav, logined, balance} = this.props;
 
         if (appStatus === AppStatus.Charging) {
             this._startTimer();
@@ -69,7 +78,7 @@ class CPAChargingPage extends Component{
                                     titleStyle={styles.titleStyle1} valueStyle={styles.valueStyle1} />
                     </View>
                     <View style={styles.chargingInfoBottomContainer}>
-                        <KeyValPair title='总时长(分)'
+                        <KeyValPair title='总时长(分钟)'
                                     val={totalTime}
                                     containerStyle={styles.itemContainer} />
                         <Divider style={styles.divider} />
@@ -109,6 +118,24 @@ class CPAChargingPage extends Component{
                                     btnStyle={styles.bannerBtnStyle} />
                             : null
                     }
+
+                    {
+                        logined ?
+                            <Text style={[styles.bottomTextContainer,
+                                balance > BalanceWarningLine ? {color: colors.theme1} : {color: colors.tintColor2}]}>
+                                当前余额：{balance} 元{'  '}
+                                <Text style={{textDecorationLine: 'underline'}}
+                                      onPress={()=>nav && nav(ScreenKey.Wallet)}>
+                                    充值
+                                </Text>
+                            </Text>
+                            :
+                            <Text style={[styles.bottomTextContainer,
+                                {color: colors.theme1, textDecorationLine: 'underline'}]}
+                                  onPress={()=>nav && nav(ScreenKey.Login)}>
+                                请先登录
+                            </Text>
+                    }
                 </View>
             </View>
         );
@@ -123,6 +150,7 @@ export function mapStateToProps(state) {
         totalElec: state.charging.totalElec,
         totalNumberOfTimes: state.charging.totalNumberOfTimes,
         appStatus: state.app.status,
+        logined: state.user.logined,
     };
 }
 
@@ -132,6 +160,7 @@ export function mapDispatchToProps(dispatch) {
         startScan: (sn) => dispatch(doStartScanCharging()),
         nav: (screenKey) => dispatch(doNav(screenKey)),
         queryChargingRealtimeInfo: () => dispatch(doQueryChargingRealtimeInfo()),
+        queryWalletInfo: () => dispatch(doQueryWalletInfo()),
     }
 }
 
@@ -226,5 +255,8 @@ export const styles = StyleSheet.create({
     text: {
         fontSize: 18,
         color: colors.tintColor,
-    }
+    },
+    bottomTextContainer: {
+        marginBottom: 15,
+    },
 });
