@@ -115,8 +115,11 @@ export function doQueryChargingRealtimeInfo() {
                     let data = JSON.parse(ret.data);
                     dispatch(queryChargingRealtimeInfoCompleted(data));
 
-                    // 判断充电是否已结束
-                    if (true) {
+                    alert(ret.data);
+
+                    const {cpState} = ret.data;
+                    // 判断充电是否已结束 (1-正在进行；2-已结束)
+                    if (cpState === 2) {
                         dispatch(doChangeAppStatus(AppStatus.Normal));
                         dispatch(doNav(ScreenKey.ChargingBilling));
                     }
@@ -172,7 +175,8 @@ export function doQueryChargingBillingRecords() {
         return queryChargingBillingRecords(userId)
             .then(ret=>{
                 dispatch(completeRequestWeb());
-                return ret;
+
+                return ret.map((item, index)=>Object.assign({}, item, {key: index}));
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());

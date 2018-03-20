@@ -2,7 +2,7 @@ import {doBack, doNav} from "./navactions";
 import {AppStatus, ScanAction, ScreenKey} from "../common/constants";
 import {doChangeAppStatus} from "./appactions";
 import {
-    getBatteryTestingRecords, getBatteryTestingReportDetail,
+    queryBatteryTestingSummary, getBatteryTestingReportDetail,
     queryBatteryTestingBillingRecords
 } from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
@@ -18,7 +18,7 @@ export function doQueryBatteryTestingInfo() {
         const {userId} = getState().user;
 
         dispatch(startRequestWeb());
-        return getBatteryTestingRecords(userId)
+        return queryBatteryTestingSummary(userId)
             .then(ret=>{
                 dispatch(completeRequestWeb());
                 if (ret.result){
@@ -99,17 +99,18 @@ export function doQueryBatteryTestingBillingRecords() {
     return (dispatch, getState) => {
         const {userId} = getState().user;
 
-        dispatch(startRequestWeb());
+        //dispatch(startRequestWeb());
         return queryBatteryTestingBillingRecords(userId)
-            .then(ret=>{
-                dispatch(completeRequestWeb());
+            .then(ret=> {
+                //dispatch(completeRequestWeb());
 
-                return ret;
+                return ret.map((item, index) => Object.assign({}, item, {key: index}));
             })
             .catch(err=>{
-                dispatch(completeRequestWeb());
+                //dispatch(completeRequestWeb());
                 ToastBS(`${err}`);
                 console.log(err);
+                return [];
             })
     }
 }

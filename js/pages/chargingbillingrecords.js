@@ -11,31 +11,12 @@ class ChargingBillingRecords extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-                {
-                    key: 1,
-                    title: '充电度数',
-                    subtitle: '日期',
-                    content: '花费',
-                },
-                {
-                    key: 2,
-                    title: '充电度数',
-                    subtitle: '日期',
-                    content: '花费',
-                },
-                {
-                    key: 3,
-                    title: '充电度数',
-                    subtitle: '日期',
-                    content: '花费',
-                },
-            ],
+            data: [],
         };
     }
 
     componentDidMount() {
-        //this._queryChargingBillingRecords();
+        this._queryChargingBillingRecords();
     }
 
     _queryChargingBillingRecords = () => {
@@ -49,13 +30,13 @@ class ChargingBillingRecords extends Component {
     };
 
     _renderItem = ({item}) => {
-        const {key, title, subtitle, content} = item;
+        const {key, kwhs, start, cost} = item;
 
         return (
             <ChargingBillingRecord key={key}
-                                   title={title}
-                                   subtitle={subtitle}
-                                   content={content} />
+                                   title={kwhs}
+                                   subtitle={start}
+                                   content={cost} />
         );
     };
 

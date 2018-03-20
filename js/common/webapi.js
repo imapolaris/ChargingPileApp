@@ -206,7 +206,7 @@ export function queryChargingSummary(userId) {
 * query charging billing records of the user.
 * */
 export function queryChargingBillingRecords(userId) {
-    let url = `${urls.charging}/records`;
+    let url = `${urls.charging}/records?userId=${userId}`;
     return myFetch(url, GET, headers);
 }
 
@@ -221,7 +221,7 @@ export function startBatteryTesting(serialNumber) {
 /*
 * query battery testing records.
 * */
-export function getBatteryTestingRecords(userId) {
+export function queryBatteryTestingSummary(userId) {
     let url = `${urls.batterytesting}/summary?userId=${userId}`;
     return myFetch(url, GET, headers);
 }

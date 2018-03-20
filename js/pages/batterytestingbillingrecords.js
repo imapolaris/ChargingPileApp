@@ -11,51 +11,32 @@ class BatteryTestingBillingRecords extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-                {
-                    key: 1,
-                    title: '充电度数',
-                    subtitle: '日期',
-                    content: '花费',
-                },
-                {
-                    key: 2,
-                    title: '充电度数',
-                    subtitle: '日期',
-                    content: '花费',
-                },
-                {
-                    key: 3,
-                    title: '充电度数',
-                    subtitle: '日期',
-                    content: '花费',
-                },
-            ],
+            data: [],
         };
     }
 
     componentDidMount() {
-        //this._queryBatteryTestingBillingRecords();
+        this._queryBatteryTestingBillingRecords();
     }
 
     _queryBatteryTestingBillingRecords = () => {
         const {queryBatteryTestingBillingRecords} = this.props;
-        queryBatteryTestingBillingRecords && queryBatteryTestingBillingRecords
+        queryBatteryTestingBillingRecords && queryBatteryTestingBillingRecords()
             .then(ret=>{
                 this.setState({
                     data: ret
-                })
+                });
             })
     };
 
     _renderItem = ({item}) => {
-        const {key, title, subtitle, content} = item;
+        const {key, vehicleNo, start, cost} = item;
 
         return (
             <ChargingBillingRecord key={key}
-                                   title={title}
-                                   subtitle={subtitle}
-                                   content={content} />
+                                   title={vehicleNo}
+                                   subtitle={start}
+                                   content={cost} />
         );
     };
 

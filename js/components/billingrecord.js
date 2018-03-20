@@ -10,16 +10,16 @@ export class ChargingBillingRecord extends Component {
             <View style={styles.container}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>
-                        {this.props.title}
+                        {this.props.title} 度
                     </Text>
                     <Text style={styles.subtitle}>
-                        {this.props.subtitle}
+                        {this.props.subtitle || ' '}
                     </Text>
                 </View>
 
                 <View style={styles.contentContainer}>
                     <Text style={styles.content}>
-                        {this.props.content}
+                        {this.props.content} 元
                     </Text>
                 </View>
             </View>
