@@ -383,12 +383,13 @@ export function wxPay(money) {
 /*
 * make one charge.
 * */
-export function makeOneCharge(userId, money, payway) {
+export function makeOneCharge(userId, money, payway, tradeno) {
     let url = `${urls.wallet}/recharge`;
     let data = {
         userId,
         money,
         payway,
+        tradeno,
     };
 
     return myFetch(url, POST, headers, data);

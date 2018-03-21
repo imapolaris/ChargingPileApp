@@ -72,9 +72,6 @@ export default StorageKey = {
     SearchHistoryStationsKey: 'searchHistoryStations',
 }
 
-export const WxAppId = 'wx7310a24d430a6967';
-export const WxAppSecret = 'd8bbddf8af5db6f7a96dd214a37fa813';
-
 export const PayWay = {
     WxPay: '微信支付',
     AliPay: '支付宝支付',
@@ -111,15 +108,20 @@ const RuntimeEnvType = {
     Develop: {
         ServerUri: 'http://192.168.0.201',
         Version: 0.1,
-        WxAppId: '',
+        WxAppId: 'wx7310a24d430a6967',
+        WxAppSecret: 'd8bbddf8af5db6f7a96dd214a37fa813',
     },
     Product: {
         ServerUri: 'http://39.104.66.176',
         Version: 1.0,
-        WxAppId: '',
+        WxAppId: 'wx34361c2f73b68d16',
+        WxAppSecret: '76023de8c0cf8ec55e4e83b38741ad02',
     },
 };
-export const RuntimeEnv = RuntimeEnvType.Develop;
+export const RuntimeEnv = RuntimeEnvType.Product;
+
+export const WxAppId = RuntimeEnv.WxAppId;
+export const WxAppSecret = RuntimeEnv.WxAppSecret;
 
 // station images file path.
 export const ImageBaseUrl = `${RuntimeEnv.ServerUri}/ChargingPileService/Res/StationImgs/`;

@@ -45,19 +45,25 @@ export function doQueryChargingInfo() {
 
 export function doStartScanCharging() {
     return (dispatch, getState) => {
-        const {balance} = getState().wallet;
-        if (balance <= 0) {
-            prompt2('余额不足，请先充值！',
-                () => {},
-                () => {
-                    dispatch(doNav(ScreenKey.Wallet));
-                });
-        } else {
-            if (balance <= BalanceWarningLine) {
-                ToastBL('余额较低，请注意！');
-            }
+        const {logined} = getState().user;
+        if (logined) {
+            const {balance} = getState().wallet;
+            if (balance <= 0) {
+                prompt2('余额不足，请先充值！',
+                    () => {},
+                    () => {
+                        dispatch(doNav(ScreenKey.Wallet));
+                    });
+            } else {
+                if (balance <= BalanceWarningLine) {
+                    ToastBL('余额较低，请注意！');
+                }
 
-            dispatch(doNav(ScreenKey.Scan, {action: ScanAction.Charging}));
+                dispatch(doNav(ScreenKey.Scan, {action: ScanAction.Charging}));
+            }
+        } else {
+            ToastBL('请先登录！');
+            dispatch(doNav(ScreenKey.Login));
         }
     }
 }

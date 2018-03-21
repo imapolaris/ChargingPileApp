@@ -12,6 +12,7 @@ import {AndroidPlatform, IOSPlatform, ScreenKey, WxAppId} from "./common/constan
 import JPushModule from "jpush-react-native";
 import {doNav} from "./redux/navactions";
 import {ToastBS} from "./common/functions";
+import {doPushUnfinishedPayRecords} from "./redux/walletactions";
 
 let lastBackPressed;
 class Root extends Component{
@@ -23,6 +24,10 @@ class Root extends Component{
 
         let d = new Date();
         lastBackPressed = d.setTime(d.getMilliseconds()-2500);
+
+        // 检查是否存在未推送的充值账单
+        const {dispatch} = this.props;
+        dispatch && dispatch(doPushUnfinishedPayRecords());
     }
 
     componentWillUnmount() {
@@ -42,7 +47,7 @@ class Root extends Component{
     };
 
     _payResp = (response) => {
-        alert(JSON.stringify(response));
+        //ToastBS(JSON.stringify(response));
     };
 
     _registerJPushModule = ()=>{

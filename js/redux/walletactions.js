@@ -11,6 +11,7 @@ import {PayWay} from "../common/constants";
 export const QUERY_WALLET_INFO_COMPLETED_ACTION = 'QUERY_WALLET_INFO_COMPLETED';// 查询钱包信息
 export const PAY_BY_WX_COMPLETED_ACTION = 'PAY_BY_WX_COMPLETED';// 微信充值
 export const PAY_BY_ZFB_COMPLETED_ACTION = 'PAY_BY_ZFB_COMPLETED';// 支付宝充值
+export const PUSH_UNFINISHED_PAY_RECORD_ACTION = 'PUSH_UNFINISHED_PAY_RECORD';// 推送未完成的充值账单
 
 function queryWalletInfoCompleted(data) {
     return {
@@ -108,8 +109,9 @@ export function doPayByWx(money) {
                     console.log(`预支付结果：${ret.data}`);
                     WeChat.pay(paydata)
                         .then(res => {
-                            console.log(`调用微信接口返回：${res}`);
-                            makeOneCharge(userId, money, PayWay.WxPay)
+                            console.log(`调用微信接口返回：${JSON.stringify(res)}`);
+                            let tradeno = resp.tradeno;
+                            makeOneCharge(userId, money, PayWay.WxPay, tradeno)
                                 .then(result => {
                                     if (result.result) {
                                         dispatch(payByWxCompleted(result.data));
@@ -120,6 +122,9 @@ export function doPayByWx(money) {
                                 .catch(error => {
                                     console.log(error);
                                     ToastBS(`${error}`);
+
+                                    // 保存充值账单，方便进行重传
+
                                 });
                         }, err => {
                             console.log(`调用微信接口报错：${err}`);
@@ -168,6 +173,8 @@ export function doPayByZfb(money) {
                                         console.log(error);
                                         ToastBS(`${error}`);
                                         //dispatch(completeRequestWeb());
+
+                                        // 保存充值账单，方便进行重传
                                     });
                             },
                             err => {
@@ -188,5 +195,38 @@ export function doPayByZfb(money) {
                 console.log(error);
                 ToastBS(`${error}`);
             });
+    }
+}
+
+function pushUnfinishedPayRecordsCompleted(data) {
+    return {
+        type: PUSH_UNFINISHED_PAY_RECORD_ACTION,
+        data
+    }
+}
+
+export function doPushUnfinishedPayRecords() {
+    return (dispatch, getState) => {
+        const {unfinishedPayRecords} = getState().wallet;
+        if (!unfinishedPayRecords || unfinishedPayRecords.length <= 0)
+            return;
+
+        let succeed = [];
+        for (let i = 0; i < unfinishedPayRecords.length; ++i) {
+            let record = unfinishedPayRecords[i];
+            const {userId, money, payway, tradeno} = record;
+            makeOneCharge(userId, money, payway, tradeno)
+                .then(ret=>{
+                    if (ret.result) {
+                        succeed.push(tradeno);
+                    }
+                })
+                .catch(err=>{
+                    ToastBS(`${err}`);
+                    console.log(err);
+                });
+        }
+
+        dispatch(pushUnfinishedPayRecordsCompleted(succeed));
     }
 }
