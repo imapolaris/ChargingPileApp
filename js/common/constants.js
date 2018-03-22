@@ -118,7 +118,7 @@ const RuntimeEnvType = {
         WxAppSecret: '76023de8c0cf8ec55e4e83b38741ad02',
     },
 };
-export const RuntimeEnv = RuntimeEnvType.Product;
+export const RuntimeEnv = RuntimeEnvType.Develop;
 
 export const WxAppId = RuntimeEnv.WxAppId;
 export const WxAppSecret = RuntimeEnv.WxAppSecret;

@@ -26,7 +26,7 @@ export function doQueryNearbyStations() {
             .catch(err=>{
                 dispatch(completeRequestWeb());
                 console.log(err);
-                ToastBS(`error: ${err}`);
+                ToastBS(`${err}`);
             })
     }
 }
@@ -50,7 +50,7 @@ export function doQueryStationDetailInfo(stationId) {
             })
             .catch(err=>{
                 console.log(err);
-                ToastBS(`error: ${err}`);
+                ToastBS(`${err}`);
             })
     }
 }
@@ -69,7 +69,7 @@ export function doQueryStationChargingPiles(stationId) {
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());
-                ToastBS(`error: ${err}`);
+                ToastBS(`${err}`);
                 console.log(err);
             })
     }

@@ -359,10 +359,11 @@ export function clearRechargeRecords(userId) {
 /*
  * pay by ali app.
  */
-export function aliPay(money) {
+export function aliPay(money, userId) {
     let url = `${urls.wallet}/alipay`;
     let data = {
-        money
+        money,
+        userId
     };
 
     return myFetch(url, POST, headers, data);
@@ -371,10 +372,11 @@ export function aliPay(money) {
 /*
 * pay by wechat app.
 * */
-export function wxPay(money) {
+export function wxPay(money, userId) {
     let url = `${urls.wallet}/wxpay`;
     let data = {
-        money
+        money,
+        userId,
     };
 
     return myFetch(url, POST, headers, data);

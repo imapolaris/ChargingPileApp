@@ -27,7 +27,7 @@ class Root extends Component{
 
         // 检查是否存在未推送的充值账单
         const {dispatch} = this.props;
-        dispatch && dispatch(doPushUnfinishedPayRecords());
+        dispatch && dispatch(doPushUnfinishedPayRecords())
     }
 
     componentWillUnmount() {

@@ -1,4 +1,7 @@
-import {PAY_BY_ZFB_COMPLETED_ACTION, PUSH_UNFINISHED_PAY_RECORD_ACTION} from "./walletactions";
+import {
+    PAY_BY_ZFB_COMPLETED_ACTION, PUSH_UNFINISHED_PAY_RECORD_ACTION,
+    SAVE_UNFINISHED_PAY_RECORD_ACTION
+} from "./walletactions";
 import {PAY_BY_WX_COMPLETED_ACTION, QUERY_WALLET_INFO_COMPLETED_ACTION} from "./walletactions";
 
 export function wallet(state={
@@ -11,6 +14,8 @@ export function wallet(state={
         case PAY_BY_WX_COMPLETED_ACTION:
         case PAY_BY_ZFB_COMPLETED_ACTION:
             return Object.assign({}, state, {balance: action.money.toFixed(2)});
+        case SAVE_UNFINISHED_PAY_RECORD_ACTION:
+            break;
         case PUSH_UNFINISHED_PAY_RECORD_ACTION:
             let failRecords = [];
             let succeedRecords = action.data;

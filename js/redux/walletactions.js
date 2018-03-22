@@ -11,6 +11,7 @@ import {PayWay} from "../common/constants";
 export const QUERY_WALLET_INFO_COMPLETED_ACTION = 'QUERY_WALLET_INFO_COMPLETED';// 查询钱包信息
 export const PAY_BY_WX_COMPLETED_ACTION = 'PAY_BY_WX_COMPLETED';// 微信充值
 export const PAY_BY_ZFB_COMPLETED_ACTION = 'PAY_BY_ZFB_COMPLETED';// 支付宝充值
+export const SAVE_UNFINISHED_PAY_RECORD_ACTION = 'SAVE_UNFINISHED_PAY_RECORD';// 保存未推送成功的充值账单
 export const PUSH_UNFINISHED_PAY_RECORD_ACTION = 'PUSH_UNFINISHED_PAY_RECORD';// 推送未完成的充值账单
 
 function queryWalletInfoCompleted(data) {
@@ -93,7 +94,7 @@ export function doPayByWx(money) {
     return (dispatch, getState) => {
         //dispatch(startRequestWeb());
         const {userId} = getState().user;
-        wxPay(money)
+        wxPay(money, userId)
             .then(ret => {
                 //dispatch(completeRequestWeb());
                 if (ret.result) {
@@ -124,7 +125,7 @@ export function doPayByWx(money) {
                                     ToastBS(`${error}`);
 
                                     // 保存充值账单，方便进行重传
-
+                                    dispatch(saveUnfinishedPayRecord({userId, money, payway: PayWay.WxPay, tradeno}));
                                 });
                         }, err => {
                             console.log(`调用微信接口报错：${err}`);
@@ -153,48 +154,81 @@ function payByZfbCompleted(money) {
 export function doPayByZfb(money) {
     return (dispatch, getState) => {
         //dispatch(startRequestWeb());
-        aliPay(money)
-            .then(data => {
-                if (data.result) {
-                    Alipay.pay(data.data)
-                        .then(ret => {
-                                console.log(JSON.stringify(ret));
-                                const {userId} = getState().user;
-                                makeOneCharge(userId, money, PayWay.AliPay)
-                                    .then(res => {
-                                        //dispatch(completeRequestWeb());
-                                        if (res.result) {
-                                            dispatch(payByZfbCompleted(res.data));
-                                        } else {
-                                            ToastBS(res.message);
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.log(error);
-                                        ToastBS(`${error}`);
-                                        //dispatch(completeRequestWeb());
+        const {userId} = getState().user;
+        aliPay(money, userId)
+            .then(pre => {
+                console.log(`预支付结果：${JSON.stringify(pre)}`);
+                if (pre.result) {
+                    let tradeno = pre.data.OutTradeNo;
+                    Alipay.pay(pre.data.Body)
+                        .then(pay => {
+                            console.log(`支付结果：${pay}`);
+                            let status = JSON.parse(pay);
+                            switch (status.resultStatus) {
+                                case "9000":
+                                    makeOneCharge(userId, money, PayWay.AliPay, tradeno)
+                                        .then(ret => {
+                                            //dispatch(completeRequestWeb());
+                                            if (ret.result) {
+                                                ToastBS('充值成功！');
+                                                dispatch(payByZfbCompleted(ret.data));
+                                            } else {
+                                                ToastBS(ret.message);
+                                                console.log(ret.message);
+                                            }
+                                        })
+                                        .catch(err => {
+                                            console.log(err);
+                                            ToastBS(`${err}`);
+                                            //dispatch(completeRequestWeb());
 
-                                        // 保存充值账单，方便进行重传
-                                    });
-                            },
-                            err => {
-                                console.log(err);
-                                ToastBS(`${err}`);
+                                            // 保存充值账单，方便进行重传
+                                            dispatch(saveUnfinishedPayRecord({userId, money, payway: PayWay.AliPay, tradeno}));
+                                        });
+                                    break;
+                                case "8000":
+                                    ToastBS('支付结果未知,请查询订单状态');
+                                    break;
+                                case "4000":
+                                    ToastBS('订单支付失败');
+                                    break;
+                                case "5000":
+                                    ToastBS('重复请求');
+                                    break;
+                                case "6001":
+                                    ToastBS('用户中途取消');
+                                    break;
+                                case "6002":
+                                    ToastBS('网络连接出错');
+                                    break;
+                                case "6004":
+                                    ToastBS('支付结果未知,请查询订单状态');
+                                    break;
+                                default:
+                                    ToastBS('其他失败原因');
+                                    break;
                             }
-                        )
+                        })
                         .catch(err => {
                             console.log(err);
                             ToastBS(`${err}`);
                         });
                 } else {
-                    ToastBS(`${data.message}`);
+                    ToastBS(`${pre.message}`);
                     console.log(data);
                 }
             })
-            .catch(error => {
-                console.log(error);
-                ToastBS(`${error}`);
+            .catch(err => {
+                console.log(err);
+                ToastBS(`${err}`);
             });
+    }
+}
+
+function saveUnfinishedPayRecord(data) {
+    return {
+        type: SAVE_UNFINISHED_PAY_RECORD_ACTION,
+        data
     }
 }
 

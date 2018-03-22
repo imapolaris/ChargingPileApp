@@ -63,3 +63,4 @@ fastlane/screenshots
 !/node_modules/react-navigation/src/views/Header.js
 !/node_modules/react-native-yunpeng-alipay/android/libs/alipaySdk-20170922.jar
 !/js/
+!/node_modules/react-native-yunpeng-alipay/android/src/main/java/com/yunpeng/alipay/PayResult.java
