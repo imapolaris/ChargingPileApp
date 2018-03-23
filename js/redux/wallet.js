@@ -15,7 +15,13 @@ export function wallet(state={
         case PAY_BY_ZFB_COMPLETED_ACTION:
             return Object.assign({}, state, {balance: action.money.toFixed(2)});
         case SAVE_UNFINISHED_PAY_RECORD_ACTION:
-            break;
+            let records = [];
+            for (let i = 0; i < state.unfinishedPayRecords.length; ++i) {
+                let record = state.unfinishedPayRecords[i];
+                records.push(record);
+            }
+            records.push(action.data);
+            return Object.assign({}, state, {unfinishedPayRecords: records});
         case PUSH_UNFINISHED_PAY_RECORD_ACTION:
             let failRecords = [];
             let succeedRecords = action.data;

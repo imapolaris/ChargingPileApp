@@ -106,7 +106,8 @@ export const UserAction = {
 
 const RuntimeEnvType = {
     Develop: {
-        ServerUri: 'http://192.168.0.201',
+        //ServerUri: 'http://192.168.0.201',
+        ServerUri: 'http://39.104.66.176',
         Version: 0.1,
         WxAppId: 'wx7310a24d430a6967',
         WxAppSecret: 'd8bbddf8af5db6f7a96dd214a37fa813',

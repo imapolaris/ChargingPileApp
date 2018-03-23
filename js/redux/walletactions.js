@@ -118,6 +118,8 @@ export function doPayByWx(money) {
                                         dispatch(payByWxCompleted(result.data));
                                     } else {
                                         ToastBS(result.message);
+                                        // 保存充值账单，方便进行重传
+                                        dispatch(saveUnfinishedPayRecord({userId, money, payway: PayWay.WxPay, tradeno}));
                                     }
                                 })
                                 .catch(error => {
@@ -129,7 +131,8 @@ export function doPayByWx(money) {
                                 });
                         }, err => {
                             console.log(`调用微信接口报错：${err}`);
-                            ToastBS(`${err}`);
+                            //ToastBS(`${err}`);
+                            ToastBS('支付失败！');
                         });
                 } else {
                     console.log(ret.message);
@@ -170,11 +173,14 @@ export function doPayByZfb(money) {
                                         .then(ret => {
                                             //dispatch(completeRequestWeb());
                                             if (ret.result) {
-                                                ToastBS('充值成功！');
+                                                console.log('支付成功！');
                                                 dispatch(payByZfbCompleted(ret.data));
                                             } else {
                                                 ToastBS(ret.message);
                                                 console.log(ret.message);
+
+                                                // 保存充值账单，方便进行重传
+                                                dispatch(saveUnfinishedPayRecord({userId, money, payway: PayWay.AliPay, tradeno}));
                                             }
                                         })
                                         .catch(err => {
@@ -187,25 +193,25 @@ export function doPayByZfb(money) {
                                         });
                                     break;
                                 case "8000":
-                                    ToastBS('支付结果未知,请查询订单状态');
+                                    console.log('支付结果未知,请查询订单状态');
                                     break;
                                 case "4000":
-                                    ToastBS('订单支付失败');
+                                    console.log('订单支付失败');
                                     break;
                                 case "5000":
-                                    ToastBS('重复请求');
+                                    console.log('重复请求');
                                     break;
                                 case "6001":
-                                    ToastBS('用户中途取消');
+                                    console.log('用户中途取消');
                                     break;
                                 case "6002":
-                                    ToastBS('网络连接出错');
+                                    console.log('网络连接出错');
                                     break;
                                 case "6004":
-                                    ToastBS('支付结果未知,请查询订单状态');
+                                    console.log('支付结果未知,请查询订单状态');
                                     break;
                                 default:
-                                    ToastBS('其他失败原因');
+                                    console.log('其他失败原因');
                                     break;
                             }
                         })

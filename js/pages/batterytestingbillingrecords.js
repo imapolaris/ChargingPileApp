@@ -45,7 +45,7 @@ class BatteryTestingBillingRecords extends Component {
             <View style={styles.contentContainer}>
                 <FlatList data={this.state.data}
                           renderItem={this._renderItem}
-                          ListEmptyComponent={EmptyPlaceHolder('没有找到充电账单...')} />
+                          ListEmptyComponent={EmptyPlaceHolder('没有找到检测账单...')} />
             </View>
         );
     }
