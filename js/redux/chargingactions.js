@@ -49,7 +49,7 @@ export function doStartScanCharging() {
         if (logined) {
             const {balance} = getState().wallet;
             if (balance <= 0) {
-                prompt2('余额不足，请先充值！',
+                prompt2('提示', '余额不足，请先充值！',
                     () => {},
                     () => {
                         dispatch(doNav(ScreenKey.Wallet));

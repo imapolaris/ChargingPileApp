@@ -55,20 +55,26 @@ const CPAHomePage = TabNavigator(
         animationEnabled: true,
 
         tabBarOptions: {
-            inactiveBackgroundColor: colors.theme1,
-            activeBackgroundColor: colors.theme1,
-            activeTintColor: colors.tintColor,
-            inactiveTintColor: colors.white,
+            //inactiveBackgroundColor: colors.white,
+            //activeBackgroundColor: colors.white,
+            activeTintColor: colors.theme1,
+            inactiveTintColor: '#1a1a1a',
 
             showIcon: true,
             tabStyle: {
-                height: 50,
+                height: 55,
                 flexDirection: 'column',
+            },
+            style: {
+                backgroundColor: colors.default,
             },
             labelStyle: {
                 fontSize: 12,
                 margin: 2,
-            }
+            },
+            indicatorStyle: {
+                height: 0,
+            },
         }
     }
 );

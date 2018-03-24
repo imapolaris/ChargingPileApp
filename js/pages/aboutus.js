@@ -6,10 +6,10 @@ import {Avatar} from "react-native-elements";
 import colors from "../common/colors";
 import {makeCall, prompt2, sendEmail} from "../common/functions";
 
-const CompanyName = '北京索英电气技术有限公司';
-const CompanyAddress = '北京市海淀区永丰产业基地孵化器1区';
-const ContactNumber = '13269734774';
-const Email = 'service@soaring.com.cn';
+const CompanyName = '盛德大业新能源动力科技有限公司';
+const CompanyAddress = `北京市海淀区王庄路1号清华同方科技大厦${'\r\n'}B座1102室`;
+const ContactNumber = '+86 133 1131 2987';
+const Email = 'service@santa-energy.com';
 class CPAAboutUsPage extends Component{
     _makeOneCall = (phoneNumber) => {
         prompt2('提示', `要呼叫 ${phoneNumber} 吗？`,

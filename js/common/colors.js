@@ -1,9 +1,12 @@
 export default {
     overall:'#1abc9c',
-    theme1:'#4da0ff',
+    //theme1:'#4da0ff', // old-style
+    theme1: '#009fde',
     primary: '#9E9E9E',
-    primary1: '#4d86f7',
-    primary2: '#6296f9',
+    //primary1: '#4d86f7',
+    //primary2: '#6296f9',
+    primary1: '#009fde',
+    primary2: '#009fde',
     secondary: '#8F0CE8',
     secondary2: '#00B233',
     secondary3: '#00FF48',
@@ -32,6 +35,8 @@ export default {
     goldenrod:'#daa520',
     lightgreen: '#90ee90',
     limegreen: '#32cd32',
+    default: '#f4f4f4',
+    test: '#397af8',
 }
 
 /*

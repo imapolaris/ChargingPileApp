@@ -3,6 +3,7 @@ package com.chargingpileapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.beefe.picker.PickerViewPackage;
 import com.rnfs.RNFSPackage;
 import cn.jpush.reactnativejpush.JPushPackage;
@@ -34,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new LinearGradientPackage(),
             new PickerViewPackage(),
             new RNFSPackage(),
             new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG),
