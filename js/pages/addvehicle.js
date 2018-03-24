@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.grey4,
     },
     btnContainer: {
-        paddingTop: 30,
+        paddingTop: 60,
     },
     disabledStyle: {
         backgroundColor: colors.grey3,

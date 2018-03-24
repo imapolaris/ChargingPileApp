@@ -23,7 +23,7 @@ class CPAWelcomePage extends Component{
             <ImageBackground source={require('../assets/images/background.png')} style={styles.container}>
                 <View style={styles.wholeContainer}>
                     <View style={styles.logoContainer}>
-                        <Image source={require('../assets/icons/welcomelogo.png')} style={styles.appLogo} />
+                        <Image source={require('../assets/tabIcons/welcomelogo.png')} style={styles.appLogo} />
                     </View>
                     <View style={{flex:1}} />
                 </View>

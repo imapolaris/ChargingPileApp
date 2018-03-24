@@ -1,12 +1,10 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import PropTypes from 'prop-types';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import colors from "../common/colors";
-import {Divider, Icon} from "react-native-elements";
+import {Divider} from "react-native-elements";
 import {ActiveOpacity} from "../common/constants";
-import {IconType} from "../common/icons";
 
 class Vehicle extends Component{
     render() {
@@ -35,7 +33,8 @@ class Vehicle extends Component{
                     <TouchableOpacity activeOpacity={ActiveOpacity}
                                       style={styles.delBtn}
                                       onPress={onDelAction}>
-                        <Icon type={IconType.Ionicon} name="md-remove-circle" size={25} color={colors.red}/>
+                        {/*<Icon type={IconType.Ionicon} name="md-remove-circle" size={25} color={colors.red}/>*/}
+                        <Image source={require('../assets/icons/del.png')} style={{width:25, height:25}} />
                     </TouchableOpacity>
                 </View>
                 <Divider style={styles.dividerH}/>

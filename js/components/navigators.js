@@ -98,7 +98,7 @@ const CPAStackNavigator = StackNavigator(
             screen: CPALoginPage,
             navigationOptions: ({navigation}) => {
                 return ({
-                    title: '登录',
+                    title: '用户登录',
                     headerRight:(
                         <NavButton label="快速注册"
                                    onNavAction={() => {

@@ -15,7 +15,7 @@ export const shadowStyle = {
 export const textInputStyle = {
     borderWidth: 0.5,
     borderColor: '#C3C3C3',
-    borderRadius: 25,
+    borderRadius: 6,
     paddingLeft: 25,
     backgroundColor: colors.white,
     paddingTop: 8,

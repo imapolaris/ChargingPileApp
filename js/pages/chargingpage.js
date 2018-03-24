@@ -17,6 +17,7 @@ import {connect} from "react-redux";
 import {doNav} from "../redux/navactions";
 import {doQueryChargingInfo, doStartScanCharging, doQueryChargingRealtimeInfo} from "../redux/chargingactions";
 import {doQueryWalletInfo} from "../redux/walletactions";
+import LinearGradient from 'react-native-linear-gradient';
 
 class CPAChargingPage extends Component{
     static propTypes = {
@@ -71,7 +72,7 @@ class CPAChargingPage extends Component{
 
         return (
             <View style={styles.container}>
-                <View style={styles.chargingInfoContainer}>
+                <LinearGradient colors={['#009fde', '#9ce17b']} style={styles.chargingInfoContainer}>
                     <View style={styles.chargingInfoTopContainer}>
                         <KeyValPair title='总充电金额(元)'
                                     val={totalCostMoney}
@@ -90,7 +91,7 @@ class CPAChargingPage extends Component{
                                     val={totalNumberOfTimes}
                                     containerStyle={styles.itemContainer} />
                     </View>
-                </View>
+                </LinearGradient>
 
                 <View style={styles.chargingActionContainer}>
                     {
@@ -173,7 +174,6 @@ export const styles = StyleSheet.create({
     chargingInfoContainer: {
         height: 200+STATUSBAR_HEIGHT,
         paddingTop: STATUSBAR_HEIGHT,
-        backgroundColor: colors.theme1,
     },
     chargingInfoTopContainer: {
         flex: 6,
@@ -213,7 +213,7 @@ export const styles = StyleSheet.create({
         top: 10,
     },
     bannerBtnStyle: {
-        backgroundColor: colors.limegreen,
+        backgroundColor: colors.transparent,
     },
     questionPosition: {
         justifyContent: "flex-start",
@@ -240,7 +240,7 @@ export const styles = StyleSheet.create({
         borderRadius: 15,
     },
     testingBtnStyle: {
-        backgroundColor: colors.limegreen,
+
     },
     textContainer: {
         height: 100,

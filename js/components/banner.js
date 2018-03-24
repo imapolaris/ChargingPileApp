@@ -48,10 +48,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 40,
         width: screenWidth-20,
-        backgroundColor: colors.grey3,
+        backgroundColor: colors.theme1,
         paddingLeft: 10,
         paddingRight: 10,
-        borderRadius: 20,
+        borderRadius: 6,
         elevation: 4,
     },
     leftContainer: {

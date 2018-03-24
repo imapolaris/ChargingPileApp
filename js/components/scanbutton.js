@@ -8,6 +8,7 @@ import {Icon} from 'react-native-elements';
 import {IconType} from "../common/icons";
 import PropTypes from 'prop-types';
 import {shadowStyle} from "../common/styles";
+import LinearGradient from 'react-native-linear-gradient';
 
 class ScanButton extends Component {
     render() {
@@ -15,16 +16,16 @@ class ScanButton extends Component {
 
         return (
             <View style={styles.container}>
-                <View style={[styles.topContainer, shadowStyle, containerStyle]}>
+                <LinearGradient colors={['#009fde', '#9ce17b']} style={[styles.topContainer, shadowStyle, containerStyle]}>
                     <TouchableOpacity onPress={onAction}
                                       onLongPress={onAction}
                                       style={[styles.button, btnStyle]}
                                       activeOpacity={ActiveOpacity}>
-                        {
-                            icon
-                        }
+                            {
+                                icon
+                            }
                     </TouchableOpacity>
-                </View>
+                </LinearGradient>
 
                 <View style={styles.bottomContainer}>
                     <Text style={styles.text}>
@@ -72,14 +73,15 @@ const styles = StyleSheet.create({
         width: Size * 3,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.tintColor2,
+        //backgroundColor: colors.tintColor2,
     },
     bottomContainer: {
         alignItems: 'center',
     },
     text: {
-        fontSize: 15,
+        fontSize: 16,
         alignItems: 'center',
         marginTop: 10,
+        color: '#616161',
     },
 });

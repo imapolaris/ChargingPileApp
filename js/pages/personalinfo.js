@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     buttonContainer: {
-        marginTop: 30,
+        marginTop: 60,
         justifyContent: 'center',
     },
     button: {

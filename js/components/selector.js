@@ -31,6 +31,7 @@ class Selector extends Component{
     static defaultProps = {
         title: '请选择',
         hideOnClickEmpty: false,
+        isBgTransparent: true,
     };
 
     _hide = () => {
@@ -59,7 +60,7 @@ class Selector extends Component{
     }
 
     render() {
-        const {title, entityList, hideOnClickEmpty} = this.props;
+        const {title, entityList, hideOnClickEmpty, isBgTransparent} = this.props;
         const {visible} = this.state;
 
         return (
@@ -69,7 +70,8 @@ class Selector extends Component{
                 onShow={() => {}}
                 onRequestClose={() => {}}>
 
-                <View style={styles.container}>
+                <View style={[styles.container,
+                    isBgTransparent ? {backgroundColor: "rgba(0,0,0,0)"} : {backgroundColor: "rgba(0,0,0,0.5)"}]}>
                     {
                         hideOnClickEmpty ?
                             null :
@@ -145,7 +147,11 @@ export class MapSelector extends Component{
         const selections = [{name:"百度地图"}, {name:"高德地图"}];
 
         return (
-            <Selector ref={self=>this._selector=self} title="选择导航地图" entityList={selections} onAction={this._mapNavigation} />
+            <Selector ref={self=>this._selector=self}
+                      title="选择导航地图"
+                      isBgTransparent={false}
+                      entityList={selections}
+                      onAction={this._mapNavigation} />
         );
     }
 
@@ -200,7 +206,11 @@ export class AvatarSelector extends Component {
         const selections = [{name:"拍照"}, {name:"从手机相册选择"}];
 
         return (
-            <Selector ref={self=>this._selector=self} title="选择头像" entityList={selections} onAction={this._changeAvatar} />
+            <Selector ref={self=>this._selector=self}
+                      title="选择头像"
+                      isBgTransparent={false}
+                      entityList={selections}
+                      onAction={this._changeAvatar} />
         );
     }
 

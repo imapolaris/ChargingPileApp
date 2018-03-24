@@ -14,7 +14,8 @@ class CPAMePage extends Component{
         const list = [
             {
                 title: '钱包',
-                icon: {name:'wallet', type: IconType.SimpleLineIcon, color: 'brown'},
+                icon: require('../assets/icons/wallet.png'),
+                //icon: {name:'wallet', type: IconType.SimpleLineIcon, color: 'brown'},
                 screenKey: ScreenKey.Wallet,
             },
             /*{
@@ -24,12 +25,14 @@ class CPAMePage extends Component{
             },*/
             {
                 title: '我的账单',
-                icon: {name: 'md-reorder', type: IconType.Ionicon, color: colors.lightblue},
+                icon: require('../assets/icons/billing.png'),
+                //icon: {name: 'md-reorder', type: IconType.Ionicon, color: colors.lightblue},
                 screenKey: ScreenKey.BillingRecords,
             },
             {
                 title: '我的收藏',
-                icon: {name:'md-heart', type: IconType.Ionicon, color: colors.red},
+                icon: require('../assets/icons/collect.png'),
+                //icon: {name:'md-heart', type: IconType.Ionicon, color: colors.red},
                 screenKey: ScreenKey.Collect,
             },
             /*{
@@ -39,12 +42,14 @@ class CPAMePage extends Component{
             },*/
             {
                 title: '车辆信息',
-                icon: {name:'md-car', type: IconType.Ionicon, color: colors.goldenrod},
+                icon: require('../assets/icons/vehicle.png'),
+                //icon: {name:'md-car', type: IconType.Ionicon, color: colors.goldenrod},
                 screenKey: ScreenKey.VehicleInfo,
             },
             {
                 title: '检测报告',
-                icon: {name:'md-paper', type: IconType.Ionicon, color: colors.greenyellow},
+                icon: require('../assets/icons/report.png'),
+                //icon: {name:'md-paper', type: IconType.Ionicon, color: colors.greenyellow},
                 screenKey: ScreenKey.TestingReport,
             },
         ];
@@ -52,7 +57,8 @@ class CPAMePage extends Component{
         const settings = [
             {
                 title: '设置',
-                icon: {name:'settings', type: IconType.SimpleLineIcon, color: colors.primary1},
+                icon: require('../assets/icons/setting.png'),
+                //icon: {name:'settings', type: IconType.SimpleLineIcon, color: colors.primary1},
                 screenKey: ScreenKey.Setting,
             }
         ];
@@ -96,9 +102,10 @@ class CPAMePage extends Component{
                         list.map((item, index) => (
                             <ListItem key={index}
                                       title={item.title}
-                                      leftIcon={item.icon}
+                                      avatar={item.icon}
+                                      avatarStyle={{height: 24, width: 24}}
+                                      avatarOverlayContainerStyle={{backgroundColor: 'transparent'}}
                                       containerStyle={styles.itemContainer}
-                                      underlayColor='#F3F3F3'
                                       onPress={() => {nav(item.screenKey)}}
                             />
                         ))
@@ -110,9 +117,10 @@ class CPAMePage extends Component{
                         settings.map((item, index) => (
                             <ListItem key={index}
                                       title={item.title}
-                                      leftIcon={item.icon}
+                                      avatar={item.icon}
+                                      avatarStyle={{height: 24, width: 24}}
+                                      avatarOverlayContainerStyle={{backgroundColor: 'transparent'}}
                                       containerStyle={styles.itemContainer}
-                                      underlayColor='#F3F3F3'
                                       onPress={() => {nav(item.screenKey)}}
                             />
                         ))

@@ -10,6 +10,7 @@ import {CloseButton, QuestionButton} from "../components/circlebutton";
 import colors from "../common/colors";
 import {doQueryBatteryTestingInfo, startScanBatteryTesting} from "../redux/batterytestingactions";
 import {doBack} from "../redux/navactions";
+import LinearGradient from 'react-native-linear-gradient';
 
 class CPABatteryTestingPage extends Component {
     constructor(props) {
@@ -73,7 +74,7 @@ class CPABatteryTestingPage extends Component {
 
         return (
             <View style={styles.container}>
-                <View style={styles.chargingInfoContainer}>
+                <LinearGradient colors={['#009fde', '#9ce17b']} style={styles.chargingInfoContainer}>
                     <View style={styles.chargingInfoTopContainer}>
                         <KeyValPair title='总检测金额(元)'
                                     val={totalTestingCostMoney}
@@ -92,12 +93,12 @@ class CPABatteryTestingPage extends Component {
                                     val={totalTestingTimes}
                                     containerStyle={styles.itemContainer}/>
                     </View>
-                </View>
+                </LinearGradient>
 
                 <View style={styles.chargingActionContainer}>
                     <ScanButton title='扫码检测'
-                                   onAction={()=>startScan && startScan()}
-                                   btnStyle={styles.testingBtnStyle}/>
+                                onAction={() => startScan && startScan()}
+                                btnStyle={styles.testingBtnStyle}/>
                 </View>
 
                 <QuestionButton onAction={this._showInfo} position={styles.questionPosition}/>
