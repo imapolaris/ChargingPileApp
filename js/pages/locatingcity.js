@@ -37,7 +37,7 @@ class CPALocatingCityPage extends Component{
                         <Text style={styles.cityName} adjustsFontSizeToFit={false}>
                             {locatingCity || '正在定位...'}
                         </Text>
-                        <Icon type={IconType.SimpleLineIcon} name="location-pin" color={colors.tintColor2} size={18} />
+                        <Icon type={IconType.SimpleLineIcon} name="location-pin" color={colors.theme1} size={18} />
                     </View>
                 </View>
                 <Divider />

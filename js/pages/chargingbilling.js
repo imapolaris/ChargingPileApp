@@ -7,22 +7,36 @@ import colors from "../common/colors";
 import {Button} from "react-native-elements";
 import {connect} from "react-redux";
 import {doBack} from "../redux/navactions";
+import {doQueryCurrentChargingBilling} from "../redux/chargingactions";
 
 class CPAChargingBillingPage extends Component{
     constructor(props) {
         super(props);
         this.state = {
-
+            elec: 0.0,
+            costTime: '0',
+            costMoney: 0,
         };
     }
 
     componentDidMount() {
-
+        const {queryCurrentChargingBilling} = this.props;
+        queryCurrentChargingBilling && queryCurrentChargingBilling()
+            .then(ret=>{
+                if (ret) {
+                    this.setState({
+                        elec: ret.elec,
+                        costTime: ret.costTime,
+                        costMoney: ret.costMoney,
+                    });
+                }
+            })
     }
 
     render() {
         const kvStyle = {containerStyle: styles.kvContainerStyle, titleStyle: styles.titleStyle, valueStyle: styles.valueStyle};
         const {back} = this.props;
+        const {elec, costTime, costMoney} = this.state;
 
         return (
             <View style={styles.container}>
@@ -31,9 +45,9 @@ class CPAChargingBillingPage extends Component{
                 <Text style={styles.title1}>本次账单</Text>
 
                 <View style={styles.contentContainer}>
-                    <KeyValPair horizontal={true} showDivider={false} title="充电量(A)" val='50.08' {...kvStyle} />
-                    <KeyValPair horizontal={true} showDivider={false} title="充电时长" val='0:20:25' {...kvStyle} />
-                    <KeyValPair horizontal={true} showDivider={false} title="充电费用(元)" val='20.66' {...kvStyle} />
+                    <KeyValPair horizontal={true} showDivider={false} title="充电量(A)" val={elec} {...kvStyle} />
+                    <KeyValPair horizontal={true} showDivider={false} title="充电时长" val={costTime} {...kvStyle} />
+                    <KeyValPair horizontal={true} showDivider={false} title="充电费用(元)" val={costMoney} {...kvStyle} />
                 </View>
 
                 <Button title="确认"
@@ -48,6 +62,7 @@ class CPAChargingBillingPage extends Component{
 function mapDispatchToProps(dispatch) {
     return {
         back: (screenKey) => dispatch(doBack()),
+        queryCurrentChargingBilling: () => dispatch(doQueryCurrentChargingBilling()),
     }
 }
 

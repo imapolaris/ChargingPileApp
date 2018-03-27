@@ -244,7 +244,7 @@ class CPAScanPage extends Component {
                                     <TouchableOpacity onPress={this._onSwitchTorch}
                                                       activeOpacity={ActiveOpacity}
                                                       style={styles.rightContainer}>
-                                        <Icon type={IconType.Ionicon} name="md-flash" size={28}
+                                        <Icon type={IconType.MaterialCommunityIcon} name="flashlight" size={28}
                                               color={torchMode === Camera.constants.TorchMode.off ? colors.white : colors.yellow} />
                                         <Text style={styles.buttonTitle}>
                                             {torchMode === Camera.constants.TorchMode.off ? '打开手电筒' : '关闭手电筒'}
@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
         width: screenWidth,
     },
     text: {
-        color: colors.green,
+        color: colors.white,
         fontSize: 15,
     },
     buttonTitle: {
@@ -340,15 +340,15 @@ const styles = StyleSheet.create({
     },
     strip: {
         width: Size-4,
-        backgroundColor: colors.secondary3,
+        backgroundColor: colors.theme1,
     },
     horizontalDivider: {
-        backgroundColor: colors.secondary3,
+        backgroundColor: colors.theme1,
         width: 20,
         height: 2,
     },
     verticalDivider: {
-        backgroundColor: colors.secondary3,
+        backgroundColor: colors.theme1,
         height: 20,
         width: 2,
     },

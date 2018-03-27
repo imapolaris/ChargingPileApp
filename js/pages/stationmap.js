@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import CPASearchBar from "../components/searchbar";
 import {
     MapView,
@@ -56,12 +56,14 @@ class CPAStationMapPage extends Component{
 
                 <ActionButton icon={<Icon type={IconType.MaterialIcon} name="traffic" size={25} color={trafficEnabled ? colors.limegreen : colors.grey3}/>}
                               onAction={enableTraffic} text="路况" position={styles.trafficButton}/>
-                <ActionButton icon={<Icon type={IconType.Ionicon} name="md-heart" size={25} color={colors.red}/>}
+                <ActionButton icon={<Image source={require('../assets/icons/collect.png')} style={{width:25, height:25}} />}
                               onAction={() => nav && nav(ScreenKey.Collect)} text="收藏" position={styles.collectButton}/>
+                {/*<ActionButton icon={<Icon type={IconType.Ionicon} name="md-heart" size={25} color={colors.red}/>}
+                              onAction={() => nav && nav(ScreenKey.Collect)} text="收藏" position={styles.collectButton}/>*/}
                 {/*<ActionButton icon={<Icon type={IconType.Ionicon} name="md-funnel" size={25} color={colors.primary} />}
                                  onAction={()=>this._navigateTo(ScreenKey.Filter)} text="筛选" position={styles.filterButton} />*/}
 
-                <ActionButton icon={<Icon type={IconType.Ionicon} name="md-locate" size={25} color={colors.grey3}/>}
+                <ActionButton icon={<Icon type={IconType.Ionicon} name="md-locate" size={25} color={colors.theme1}/>}
                               onAction={currentLocation} showText={false} position={styles.locateButton}
                               {...actionButtonStyle}/>
                 {/*<ActionButton icon={<Icon type={IconType.Ionicon} name="md-help" size={25} color={colors.grey3}/>}
@@ -70,7 +72,7 @@ class CPAStationMapPage extends Component{
                 {
                     !isRefreshing && markers.length <= 0 ?
                         <ActionButton
-                            icon={<Icon type={IconType.Ionicon} name="md-refresh" size={25} color={colors.grey3}/>}
+                            icon={<Icon type={IconType.Ionicon} name="md-refresh" size={25} color={colors.theme1}/>}
                             onAction={() => requestStationMarkers()} showText={false} position={styles.refreshButton}
                             {...actionButtonStyle}/>
                         : null

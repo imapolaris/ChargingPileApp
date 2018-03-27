@@ -211,6 +211,14 @@ export function queryChargingBillingRecords(userId) {
 }
 
 /*
+* query current charging billing.
+* */
+export function queryCurrentChargingBilling(sn, transSn) {
+    let url = `${urls.charging}/billing?sn=${sn}&transSn=${transSn}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
 * start battery testing.
 * */
 export function startBatteryTesting(serialNumber) {
@@ -231,6 +239,14 @@ export function queryBatteryTestingSummary(userId) {
 * */
 export function getBatteryTestingReportDetail(reportId) {
     let url = `${urls.batterytesting}?reportId=${reportId}`;
+    return myFetch(url, GET, headers);
+}
+
+/*
+* query battery testing records.
+* */
+export function queryBatteryTestingRecords(userId) {
+    let url = `${urls.batterytesting}?userId=${userId}`;
     return myFetch(url, GET, headers);
 }
 

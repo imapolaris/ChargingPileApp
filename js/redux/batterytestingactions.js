@@ -3,7 +3,7 @@ import {AppStatus, ScanAction, ScreenKey} from "../common/constants";
 import {doChangeAppStatus} from "./appactions";
 import {
     queryBatteryTestingSummary, getBatteryTestingReportDetail,
-    queryBatteryTestingBillingRecords
+    queryBatteryTestingBillingRecords, queryBatteryTestingRecords
 } from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
 import {ToastBS} from "../common/functions";
@@ -18,16 +18,11 @@ export function doQueryBatteryTestingInfo() {
         const {userId} = getState().user;
 
         dispatch(startRequestWeb());
-        return queryBatteryTestingSummary(userId)
+        return queryBatteryTestingRecords(userId)
             .then(ret=>{
                 dispatch(completeRequestWeb());
-                if (ret.result){
-                    return ret.data;
-                } else {
-                    ToastBS(ret.message);
-                    console.log(ret.message);
-                    return null;
-                }
+
+                return ret.map((item, index)=>Object.assign({}, item, {key: index}))
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());

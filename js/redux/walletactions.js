@@ -49,7 +49,7 @@ export function doQueryRechargeRecords() {
         return queryRechargeRecords(userId)
             .then(ret=>{
                 dispatch(completeRequestWeb());
-                return ret;
+                return ret.map((item, index)=>Object.assign({}, item, {key: index}));
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());

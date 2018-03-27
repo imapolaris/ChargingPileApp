@@ -21,8 +21,8 @@ class CPATestingReportPage extends Component{
         const {queryBatteryTestingInfo} = this.props;
         queryBatteryTestingInfo && queryBatteryTestingInfo()
             .then(ret=>{
-                if (ret) {
-                    this.setState({reports: ret.map((item, index)=>Object.assign({}, item, {key: index}))});
+                if (ret && ret.length > 0) {
+                    this.setState({reports: ret});
                 }
             })
     }

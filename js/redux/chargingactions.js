@@ -2,7 +2,7 @@
 
 import {prompt, prompt2, ToastBL, ToastBS} from "../common/functions";
 import {
-    getChargingStatus, queryChargingBillingRecords, queryChargingSummary, startCharging,
+    getChargingStatus, queryChargingBillingRecords, queryChargingSummary, queryCurrentChargingBilling, startCharging,
     stopCharging
 } from "../common/webapi";
 import {completeRequestWeb, startRequestWeb} from "./webactions";
@@ -189,5 +189,32 @@ export function doQueryChargingBillingRecords() {
                 console.log(err);
                 ToastBS(`${err}`);
             })
+    }
+}
+
+export function doQueryCurrentChargingBilling() {
+    return (dispatch, getState) => {
+        const {sn, transSn} = getState().charging;
+        dispatch(startRequestWeb('正在计算本次充电账单，请稍等...'));
+        return dispatch(queryCurrentChargingBilling(sn, transSn))
+            .then(ret=>{
+                dispatch(completeRequestWeb());
+
+                if (ret.result) {
+                    ToastBS('查询账单完成！');
+                    //dispatch(queryCurrentChargingBillingCompleted(ret.data));
+                    return JSON.parse(ret.data);
+                } else {
+                    ToastBS(`查询账单失败，可到账单页面查看`);
+                    console.log(ret.message);
+                    return null;
+                }
+            })
+            .catch(err=>{
+                dispatch(completeRequestWeb());
+                console.log(err);
+                ToastBS(`${err}`);
+                return null;
+            });
     }
 }
