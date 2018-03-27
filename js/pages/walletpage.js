@@ -10,6 +10,7 @@ import KeyValPair from "../components/keyvalpair";
 import {connect} from "react-redux";
 import {doPayByZfb} from "../redux/walletactions";
 import {doPayByWx, doQueryWalletInfo} from "../redux/walletactions";
+import LinearGradient from 'react-native-linear-gradient';
 
 const Moneys1 = [{key: 0, val:500}, {key: 1, val:200}, {key: 2, val:100}];
 const Moneys2 = [{key: 3, val:50}, {key: 4, val:20}, {key: 5, val:10}];
@@ -81,11 +82,11 @@ class CPAWalletPage extends Component{
 
         return (
             <View style={styles.container}>
-                <View style={styles.balanceContainer}>
-                    <KeyValPair title="余额(元)" val={balance}
+                <LinearGradient style={styles.balanceContainer} colors={['#009fde', '#9ce17b']}>
+                    <KeyValPair title="余额（元）" val={balance}
                                 titleStyle={styles.label}
                                 valueStyle={styles.money} />
-                </View>
+                </LinearGradient>
 
                 <View style={styles.payContainer}>
                     <View style={styles.moneyContainer}>
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     balanceContainer:{
-        height: 100,
+        height: 120,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
@@ -161,11 +162,11 @@ const styles = StyleSheet.create({
     },
     label:{
         fontSize:  16,
-        color: colors.grey0,
+        color: colors.white,
     },
     money:{
-        fontSize: 40,
-        color: '#FF0000',
+        fontSize: 30,
+        color: colors.white,
         fontWeight: 'bold',
         marginLeft: 5,
         marginRight: 5,

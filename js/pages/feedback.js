@@ -82,6 +82,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     button: {
-        marginTop: 30,
+        marginTop: 60,
     }
 });

@@ -92,7 +92,7 @@ class CPAMePage extends Component{
                         <TouchableOpacity style={styles.bellContainer}
                                           activeOpacity={ActiveOpacity}
                                           onPress={()=>nav(ScreenKey.MyMessage)}>
-                            <Icon type={IconType.SimpleLineIcon} name="bell" color={colors.tintColor2} size={20} />
+                            <Icon type={IconType.SimpleLineIcon} name="bell" color={colors.white} size={20} />
                         </TouchableOpacity>
                     </View>
                 </View>

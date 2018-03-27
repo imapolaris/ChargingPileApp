@@ -52,7 +52,7 @@ export function doLogin(phoneNumber, pwd, userCategory) {
             })
             .catch(error => {
                 console.log(error);
-                ToastBS('登录失败:' + error);
+                ToastBS(`${error}`);
 
                 dispatch(completeRequestWeb());
             });
@@ -82,13 +82,13 @@ export function doRegister(phoneNumber, vcode, pwd) {
                     ToastBS('注册成功，请登录！');
                     dispatch(doBack());
                 } else {
-                    ToastBS(`注册失败: ${ret.message}`);
+                    ToastBS(`${ret.message}`);
                 }
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());
                 console.log(err);
-                ToastBS(`注册失败: ${err}`);
+                ToastBS(`${err}`);
             })
     };
 }

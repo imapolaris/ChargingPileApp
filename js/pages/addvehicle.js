@@ -55,8 +55,8 @@ class CPAAddVehiclePage extends Component{
 
         Picker.init({
             pickerData: modelData,
-            pickerConfirmBtnColor: [77, 160, 255, 1],
-            pickerCancelBtnColor: [77, 160, 255, 1],
+            pickerConfirmBtnColor: [0, 159, 222, 1],
+            pickerCancelBtnColor: [0, 159, 222, 1],
             pickerConfirmBtnText: '完成',
             pickerCancelBtnText: '取消',
             pickerTitleText: '车型',
@@ -80,8 +80,8 @@ class CPAAddVehiclePage extends Component{
 
         Picker.init({
             pickerData: noData,
-            pickerConfirmBtnColor: [77, 160, 255, 1],
-            pickerCancelBtnColor: [77, 160, 255, 1],
+            pickerConfirmBtnColor: [0, 159, 222, 1],
+            pickerCancelBtnColor: [0, 159, 222, 1],
             pickerConfirmBtnText: '完成',
             pickerCancelBtnText: '取消',
             pickerTitleText: '车牌号',

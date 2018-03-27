@@ -217,18 +217,18 @@ export const styles = StyleSheet.create({
     },
     questionPosition: {
         justifyContent: "flex-start",
-        alignItems: 'flex-start',
-        bottom: 0,
-        left: 10,
-        right: 0,
-        top: 10+STATUSBAR_HEIGHT,
-    },
-    closePosition: {
-        justifyContent: "flex-start",
         alignItems: 'flex-end',
         bottom: 0,
         left: 0,
         right: 10,
+        top: 10+STATUSBAR_HEIGHT,
+    },
+    closePosition: {
+        justifyContent: "flex-start",
+        alignItems: 'flex-start',
+        bottom: 0,
+        left: 10,
+        right: 0,
         top: 10+STATUSBAR_HEIGHT,
     },
     actionButtonContainerStyle: {

@@ -1,14 +1,12 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import PropTypes from 'prop-types';
+import {FlatList, StyleSheet, View} from 'react-native';
 import MessageItem from "../components/messageitem";
 import {connect} from "react-redux";
 import {doQueryMyMessages} from "../redux/messageactions";
-import {EmptyPlaceHolder} from "../components/placeholder";
+import {CommonEmptyPlaceHolder} from "../components/placeholder";
 
-const EmptyDataGreetings = '当前还没有消息！';
 class CPAMyMessagePage extends Component{
     constructor(props) {
         super(props);
@@ -41,7 +39,7 @@ class CPAMyMessagePage extends Component{
             <View style={styles.container}>
                 <FlatList data={messages}
                           renderItem={this._renderItem}
-                          ListEmptyComponent={EmptyPlaceHolder(EmptyDataGreetings)} />
+                          ListEmptyComponent={CommonEmptyPlaceHolder(require('../assets/images/mymessage.png'), '当前还没有消息')} />
             </View>
         );
     }
@@ -60,5 +58,17 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingLeft: 8,
         paddingRight: 8,
+    },
+    emptyContainer: {
+        height: 300,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    image: {
+        width: 80,
+        height: 80,
+    },
+    text: {
+        fontSize: 16,
     },
 });

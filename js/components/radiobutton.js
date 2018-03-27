@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View, Platform} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, Platform, Image} from 'react-native';
 import PropTypes from 'prop-types';
 import {IconType} from "../common/icons";
 import colors from "../common/colors";
@@ -15,7 +15,7 @@ class RadioButton extends Component{
         return (
             <TouchableOpacity style={[styles.container, {...style}]}
                               onPress={this.props.onChecked}
-                              activeOpacity={ActiveOpacity}>
+                              activeOpacity={1}>
                 <View style={styles.titleContainer}>
                     {image}
                     <Text style={styles.text}>
@@ -23,11 +23,15 @@ class RadioButton extends Component{
                     </Text>
                 </View>
 
-                <Icon type={IconType.Ionicon}
+                {/*<Icon type={IconType.Ionicon}
                       name={this.props.checked ? 'md-radio-button-on' : 'md-radio-button-off'}
                       size={30}
                       color={colors.grey3}
-                      style={styles.icon}/>
+                      style={styles.icon}/>*/}
+
+                <Image style={styles.icon}
+                       source={this.props.checked ?
+                           require('../assets/icons/check.png') : require('../assets/icons/uncheck.png')} />
             </TouchableOpacity>
         );
     }
@@ -67,5 +71,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         marginRight: 15,
+        width: 30,
+        height: 30,
     }
 });

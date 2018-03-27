@@ -5,11 +5,10 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import colors from "../common/colors";
 import {ToastBS} from "../common/functions";
 import StationItem from "../components/stationitem";
-import {EmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
+import {CommonEmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
 import {connect} from "react-redux";
 import {doQueryNearbyStations, doSelectOneStation} from "../redux/stationactions";
 
-const EmptyDataGreetings = '客官，方圆50公里的范围内都没有找到充电站啊！';
 class CPAStationListPage extends Component{
     constructor(props) {
         super(props);
@@ -63,7 +62,7 @@ class CPAStationListPage extends Component{
                 <FlatList data={this.state.stations}
                           renderItem={this._renderItem}
                           style={styles.content}
-                          ListEmptyComponent={EmptyPlaceHolder(EmptyDataGreetings)}
+                          ListEmptyComponent={CommonEmptyPlaceHolder(require('../assets/images/nearby.png'), `客官，方圆50公里的范围内${'\r\n'}都没有找到充电站啊！`)}
                           ItemSeparatorComponent={SeparatorPlaceHolder} />
             </View>
         );
@@ -93,5 +92,17 @@ const styles = StyleSheet.create({
     },
     item: {
         backgroundColor: colors.white,
+    },
+    emptyContainer: {
+        height: 300,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    image: {
+        width: 80,
+        height: 80,
+    },
+    text: {
+        fontSize: 16,
     },
 });

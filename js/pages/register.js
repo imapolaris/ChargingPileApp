@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
-        borderColor: colors.tintColor,
+        borderColor: colors.theme1,
         paddingTop: 5,
         paddingBottom: 5,
         paddingLeft: 5,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     vcodeText: {
-        color: colors.tintColor,
+        color: colors.theme1,
     },
     vcodeTextSent: {
         color: colors.grey3,

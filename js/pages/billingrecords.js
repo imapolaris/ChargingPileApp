@@ -28,19 +28,23 @@ const CPABillingTabNavigator = TabNavigator(
         animationEnabled: true,
 
         tabBarOptions:{
-            activeTintColor: colors.tintColor,
-            inactiveTintColor: colors.grey2,
+            activeTintColor: 'rgba(255, 255, 255, 1)',
+            inactiveTintColor: 'rgba(255, 255, 255, 0.6)',
             showIcon:false,
             tabStyle:{
                 flexDirection:'row',
                 marginBottom: 1,
-                height: 40,
+                height: 45,
             },
             style: {
-                backgroundColor: colors.white,
+                backgroundColor: colors.theme1,
             },
             labelStyle: {
                 fontSize: 16,
+            },
+            indicatorStyle: {
+                height: 2,
+                backgroundColor: colors.white,
             },
         },
         navigationOptions:{

@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {Divider, Icon} from "react-native-elements";
 import colors from "../common/colors";
 import {IconType} from "../common/icons";
@@ -21,6 +21,17 @@ export function EmptyPlaceHolder(EmptyDataGreetings) {
                 {EmptyDataGreetings}
             </Text>
             <Icon type={IconType.Ionicon} name="md-sad" size={20} color={colors.tintColor} />
+        </View>
+    );
+}
+
+export function CommonEmptyPlaceHolder(image, text){
+    return (
+        <View style={styles.emptyContainer}>
+            <Image source={image} style={styles.image} />
+            <Text style={styles.eText}>
+                {text}
+            </Text>
         </View>
     );
 }
@@ -59,5 +70,19 @@ const styles = StyleSheet.create({
     bottomText: {
         fontSize: 12,
         color: colors.grey3,
+    },
+    emptyContainer: {
+        height: 300,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    image: {
+        width: 80,
+        height: 80,
+    },
+    eText: {
+        marginTop: 10,
+        fontSize: 16,
+        textAlign: 'center',
     },
 });
