@@ -72,7 +72,7 @@ class CPAMePage extends Component{
                             height={60}
                             rounded
                             activeOpacity={ActiveOpacity}
-                            icon={{name: 'user-o', type: IconType.FAIcon, color: colors.yellow, size: 45}}
+                            icon={{name: 'user-o', type: IconType.FAIcon, color: colors.theme1, size: 45}}
                             source={avatar}
                     />
 

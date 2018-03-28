@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {ChargingBillingRecord} from "../components/billingrecord";
-import {EmptyPlaceHolder} from "../components/placeholder";
+import {CommonEmptyPlaceHolder} from "../components/placeholder";
 import {doQueryBatteryTestingBillingRecords} from "../redux/batterytestingactions";
 import {connect} from "react-redux";
 
@@ -45,7 +45,7 @@ class BatteryTestingBillingRecords extends Component {
             <View style={styles.contentContainer}>
                 <FlatList data={this.state.data}
                           renderItem={this._renderItem}
-                          ListEmptyComponent={EmptyPlaceHolder('没有找到检测账单...')} />
+                          ListEmptyComponent={CommonEmptyPlaceHolder(require('../assets/images/billing.png'), '没有找到检测账单')} />
             </View>
         );
     }

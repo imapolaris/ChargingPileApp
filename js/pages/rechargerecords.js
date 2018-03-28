@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import RechargeItem from "../components/rechargeitem";
-import {EmptyPlaceHolder} from "../components/placeholder";
+import {CommonEmptyPlaceHolder} from "../components/placeholder";
 import {prompt2} from "../common/functions";
 import {doClearRechargeRecords, doQueryRechargeRecords} from "../redux/walletactions";
 import {connect} from "react-redux";
@@ -62,7 +62,7 @@ class RechargeRecords extends Component{
             <View style={styles.container}>
                 <FlatList data={records}
                           renderItem={this._renderItem}
-                          ListEmptyComponent={EmptyPlaceHolder('还没有充值记录！')}/>
+                          ListEmptyComponent={CommonEmptyPlaceHolder(require('../assets/images/recharge.png'),'还没有充值记录')}/>
             </View>
         );
     }

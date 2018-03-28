@@ -5,11 +5,10 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import colors from "../common/colors";
 import {prompt2, ToastBS} from "../common/functions";
 import StationItem from "../components/stationitem";
-import {EmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
+import {CommonEmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
 import {connect} from "react-redux";
 import {doClearCollectStations, doQueryCollectStations, doSelectOneStation} from "../redux/stationactions";
 
-const EmptyDataGreetings = '目前还没有收藏电站，赶紧去收藏一个吧！';
 class CPAMyCollectPage extends Component{
     constructor(props) {
         super(props);
@@ -87,7 +86,7 @@ class CPAMyCollectPage extends Component{
                 <FlatList data={stations}
                           renderItem={this._renderItem}
                           style={styles.content}
-                          ListEmptyComponent={EmptyPlaceHolder(EmptyDataGreetings)}
+                          ListEmptyComponent={CommonEmptyPlaceHolder(require('../assets/images/collect.png'), `目前还没有收藏电站${'\r\n'}赶紧去收藏一个吧！`)}
                           ItemSeparatorComponent={SeparatorPlaceHolder} />
             </View>
         );

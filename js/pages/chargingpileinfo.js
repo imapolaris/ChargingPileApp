@@ -1,12 +1,13 @@
+'use strict';
+
 import React, {Component} from 'react';
-import {EmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
+import {CommonEmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
 import ChargingPileItem from "../components/chargingpileitem";
 import {FlatList, ScrollView, StyleSheet} from "react-native";
 import {Divider} from "react-native-elements";
 import {connect} from "react-redux";
 import {doQueryStationChargingPiles} from "../redux/stationactions";
 
-const EmptyDataGreetings = '客官，没有找到电桩啊！';
 class ChargingPileInfo extends Component{
     constructor(props) {
         super(props);
@@ -31,10 +32,6 @@ class ChargingPileInfo extends Component{
             })
     };
 
-    _renderEmpty = () => {
-        return EmptyPlaceHolder(EmptyDataGreetings);
-    };
-
     _renderItem = ({item}) => {
         return (
             <ChargingPileItem name={item.name}
@@ -52,7 +49,7 @@ class ChargingPileInfo extends Component{
                 <Divider />
                 <FlatList data={this.state.chargingPiles}
                           renderItem={this._renderItem}
-                          ListEmptyComponent={this._renderEmpty()}
+                          ListEmptyComponent={CommonEmptyPlaceHolder(require('../assets/images/billing.png'), '客官，没有找到电桩啊！')}
                           ItemSeparatorComponent={SeparatorPlaceHolder} />
             </ScrollView>
         );

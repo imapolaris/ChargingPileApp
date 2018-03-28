@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import TestingReportItem from "../components/testingreportitem";
 import {connect} from "react-redux";
-import {EmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
+import {CommonEmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
 import {doQueryBatteryTestingInfo} from "../redux/batterytestingactions";
 import {ScreenKey} from "../common/constants";
 import {doNav} from "../redux/navactions";
@@ -46,7 +46,7 @@ class CPATestingReportPage extends Component{
             <View style={styles.container}>
                 <FlatList data={reports}
                           renderItem={this._renderItem}
-                          ListEmptyComponent={EmptyPlaceHolder('没有发现检测报告！')}
+                          ListEmptyComponent={CommonEmptyPlaceHolder(require('../assets/images/report.png'), '没有发现检测报告！')}
                           ItemSeparatorComponent={SeparatorPlaceHolder} />
             </View>
         );

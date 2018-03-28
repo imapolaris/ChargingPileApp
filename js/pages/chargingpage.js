@@ -123,9 +123,9 @@ class CPAChargingPage extends Component{
                     {
                         logined ?
                             <Text style={[styles.bottomTextContainer,
-                                balance > BalanceWarningLine ? {color: colors.theme1} : {color: colors.tintColor2}]}>
+                                balance > BalanceWarningLine ? {color: colors.theme1} : {color: colors.red}]}>
                                 当前余额：{balance} 元{'  '}
-                                <Text style={{textDecorationLine: 'underline'}}
+                                <Text style={{textDecorationLine: 'underline', color: colors.theme1}}
                                       onPress={()=>nav && nav(ScreenKey.Wallet)}>
                                     充值
                                 </Text>

@@ -131,4 +131,4 @@ export const SerialNumberLength = 16;
 
 export const ChargingProcessQueryInterval = 5 * 1000;
 
-export const BalanceWarningLine = 20;
+export const BalanceWarningLine = 10;

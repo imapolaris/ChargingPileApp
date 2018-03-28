@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {EmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
+import {CommonEmptyPlaceHolder, SeparatorPlaceHolder} from "../components/placeholder";
 import Vehicle from "../components/vehicle";
 import {connect} from "react-redux";
 import {doDelOneVehicle, doQueryVehicleInfo} from "../redux/vehicleactions";
@@ -41,7 +41,7 @@ class CPAVehicleInfoPage extends Component{
             <View style={styles.container}>
                 <FlatList data={vehicles}
                           renderItem={this._renderItem}
-                          ListEmptyComponent={EmptyPlaceHolder('快添加一辆汽车信息吧！')}
+                          ListEmptyComponent={CommonEmptyPlaceHolder(require('../assets/images/car.png'), '快添加一条车辆信息吧！')}
                           ItemSeparatorComponent={SeparatorPlaceHolder} />
             </View>
         );
