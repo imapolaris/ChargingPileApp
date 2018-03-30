@@ -17,7 +17,7 @@ class CPAMyMessagePage extends Component{
 
     componentDidMount() {
         const {queryMyMessages} = this.props;
-        queryMyMessages()
+        queryMyMessages && queryMyMessages()
             .then(ret=>{
                 this.setState({messages: ret});
             });

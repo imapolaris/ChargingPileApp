@@ -121,7 +121,7 @@ export function doQueryChargingRealtimeInfo() {
                     let data = JSON.parse(ret.data);
                     dispatch(queryChargingRealtimeInfoCompleted(data));
 
-                    alert(ret.data);
+                    //alert(ret.data);
 
                     const {cpState} = ret.data;
                     // 判断充电是否已结束 (1-正在进行；2-已结束)
