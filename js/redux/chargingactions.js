@@ -31,6 +31,9 @@ export function doQueryChargingInfo() {
             .then(ret=>{
                 if (ret.result) {
                     dispatch(queryChargingInfoCompleted(ret.data));
+
+                    // 充电是否已结束？
+
                 } else {
                     ToastBS(ret.message);
                     console.log(ret.message);
