@@ -202,7 +202,7 @@ export function doQueryCurrentChargingBilling() {
     return (dispatch, getState) => {
         const {sn, transSn} = getState().charging;
         dispatch(startRequestWeb('正在计算本次充电账单，请稍等...'));
-        return dispatch(queryCurrentChargingBilling(sn, transSn))
+        return queryCurrentChargingBilling(sn, transSn)
             .then(ret=>{
                 dispatch(completeRequestWeb());
 

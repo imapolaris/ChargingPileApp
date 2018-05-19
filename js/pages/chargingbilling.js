@@ -9,6 +9,7 @@ import {connect} from "react-redux";
 import {doBack} from "../redux/navactions";
 import {doQueryCurrentChargingBilling} from "../redux/chargingactions";
 import {doChangeAppStatus} from "../redux/appactions";
+import {AppStatus} from '../common/constants';
 
 class CPAChargingBillingPage extends Component{
     constructor(props) {
