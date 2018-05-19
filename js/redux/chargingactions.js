@@ -78,6 +78,7 @@ function startChargingCompleted(data) {
     }
 }
 
+// 启动充电
 export function doStartCharging(sn) {
     return (dispatch, getState) => {
         dispatch(doBack());
@@ -114,6 +115,7 @@ function queryChargingRealtimeInfoCompleted(data) {
     }
 }
 
+// 请求实时充电信息
 export function doQueryChargingRealtimeInfo() {
     return (dispatch, getState) => {
         const {sn, transSn} = getState().charging;
@@ -129,8 +131,8 @@ export function doQueryChargingRealtimeInfo() {
                     const {cpState} = ret.data;
                     // 判断充电是否已结束 (1-正在进行；2-已结束)
                     if (cpState === 2) {
-                        dispatch(doChangeAppStatus(AppStatus.Normal));
                         dispatch(doNav(ScreenKey.ChargingBilling));
+                        //dispatch(doChangeAppStatus(AppStatus.Normal));
                     }
                 } else {
                     console.log(ret.message);
@@ -149,6 +151,7 @@ function finishChargingCompleted() {
     }
 }
 
+// 结束充电
 export function doFinishCharging() {
     return (dispatch, getState) => {
         dispatch(startRequestWeb('正在停止充电...'));
@@ -167,7 +170,7 @@ export function doFinishCharging() {
                     ToastBS(ret.message);
                 }
 
-                dispatch(doChangeAppStatus(AppStatus.Normal));
+                //dispatch(doChangeAppStatus(AppStatus.Normal));
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());

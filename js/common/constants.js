@@ -112,13 +112,13 @@ const RuntimeEnvType = {
         WxAppSecret: 'd8bbddf8af5db6f7a96dd214a37fa813',
     },
     Product: {
-        ServerUri: 'http://39.104.66.176',
+        ServerUri: 'http://www.mayew.com',
         Version: 1.0,
         WxAppId: 'wx34361c2f73b68d16',
         WxAppSecret: '76023de8c0cf8ec55e4e83b38741ad02',
     },
 };
-export const RuntimeEnv = RuntimeEnvType.Develop;
+export const RuntimeEnv = RuntimeEnvType.Product;
 
 export const WxAppId = RuntimeEnv.WxAppId;
 export const WxAppSecret = RuntimeEnv.WxAppSecret;

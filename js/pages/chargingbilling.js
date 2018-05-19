@@ -8,6 +8,7 @@ import {Button} from "react-native-elements";
 import {connect} from "react-redux";
 import {doBack} from "../redux/navactions";
 import {doQueryCurrentChargingBilling} from "../redux/chargingactions";
+import {doChangeAppStatus} from "../redux/appactions";
 
 class CPAChargingBillingPage extends Component{
     constructor(props) {
@@ -33,13 +34,18 @@ class CPAChargingBillingPage extends Component{
             })
     }
 
+    componentWillUnmount() {
+        const {changeAppStatus} = this.props;
+        changeAppStatus && changeAppStatus(AppStatus.Normal);
+    }
+
     render() {
         const kvStyle = {containerStyle: styles.kvContainerStyle, titleStyle: styles.titleStyle, valueStyle: styles.valueStyle};
         const {back} = this.props;
         const {elec, costTime, costMoney} = this.state;
 
         return (
-            <View style={styles.container}>
+        <View style={styles.container}>
                 <Text style={styles.title}>你已结束充电</Text>
 
                 <Text style={styles.title1}>本次账单</Text>
@@ -63,6 +69,7 @@ function mapDispatchToProps(dispatch) {
     return {
         back: (screenKey) => dispatch(doBack()),
         queryCurrentChargingBilling: () => dispatch(doQueryCurrentChargingBilling()),
+        changeAppStatus: (status) => dispatch(doChangeAppStatus(status)),
     }
 }
 
