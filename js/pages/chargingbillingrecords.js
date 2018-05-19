@@ -30,13 +30,13 @@ class ChargingBillingRecords extends Component {
     };
 
     _renderItem = ({item}) => {
-        const {key, kwhs, start, cost} = item;
+        const {key, elec, start, costMoney} = item;
 
         return (
             <ChargingBillingRecord key={key}
-                                   title={kwhs}
+                                   title={elec}
                                    subtitle={start}
-                                   content={cost} />
+                                   content={costMoney} />
         );
     };
 
