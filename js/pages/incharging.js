@@ -20,6 +20,9 @@ class CPAInChargingPage extends Component {
             valueStyle: styles.valStyle
         };
 
+
+
+
         return (
             <View style={styles.container}>
                 <CircularProgress size={180}
@@ -45,6 +48,7 @@ class CPAInChargingPage extends Component {
                     }
                 </CircularProgress>
 
+
                 <View style={styles.infoContainer}>
                     <KeyValPair horizontal={true} title="当前SOC" val={`${soc} %`} {...kvstyles} />
                     <KeyValPair horizontal={true} title="充电金额" val={`${costMoney} 元`} {...kvstyles}/>
@@ -54,13 +58,10 @@ class CPAInChargingPage extends Component {
                     <KeyValPair horizontal={true} title="充电时间" val={`${costTime} 分钟`} {...kvstyles}/>
                 </View>
                 <View style={styles.infoContainer}>
-                    <KeyValPair horizontal={true} title="剩余时间" val={`${restTime} 分钟`} {...kvstyles}/>
+                    <KeyValPair horizontal={true} title="电流" val={`${electric} A`} {...kvstyles}/>
                     <KeyValPair horizontal={true} title="电压" val={`${voltage} V`} {...kvstyles}/>
                 </View>
-                <View style={styles.infoContainer}>
-                    <KeyValPair horizontal={true} title="电流" val={`${electric} A`} {...kvstyles}/>
-                    <KeyValPair horizontal={true} title=" " val=" " {...kvstyles}/>
-                </View>
+
 
 
                 <View style={styles.buttonContainer}>
@@ -73,16 +74,28 @@ class CPAInChargingPage extends Component {
     }
 }
 
+
+
 function mapStateToProps(state) {
+    console.log("待处理的costMoney:"+state.charging.costMoney)
+    console.log("待处理的chargingElec:"+state.charging.chargingElec)
+    console.log("待处理的costTime:"+state.charging.costTime)
+    console.log("待处理的electric:"+state.charging.electric)
+
+    let costMoney=(state.charging.costMoney/100).toFixed(2);
+    let chargingElec=(state.charging.chargingElec/1000).toFixed(2);
+    let costTime=(state.charging.costTime/60).toFixed(0);
+    let electric=(state.charging.electric/10).toFixed(1);
+
     return {
         progress: state.charging.progress,
         soc: state.charging.soc,
-        costMoney: state.charging.costMoney,
-        chargingElec: state.charging.chargingElec,
-        costTime: state.charging.costTime,
+        costMoney: costMoney,
+        chargingElec: chargingElec,
+        costTime: costTime,
         restTime: state.charging.restTime,
         voltage: state.charging.voltage,
-        electric: state.charging.electric,
+        electric: electric,
     }
 }
 
