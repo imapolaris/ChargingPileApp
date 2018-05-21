@@ -24,11 +24,16 @@ function queryWalletInfoCompleted(data) {
 export function doQueryWalletInfo() {
     return (dispatch, getState) => {
         //dispatch(startRequestWeb('正在加载钱包信息...'));
-        const {userId} = getState().user;
-        getWalletBalance(userId)
+        const {logined, userId} = getState().user;
+        if (!logined) return;
+
+        return getWalletBalance(userId)
             .then(ret => {
                 //dispatch(completeRequestWeb());
-                if (ret.result === true) {
+
+                console.log(userId);
+                console.log(ret);
+                if (ret.result) {
                     dispatch(queryWalletInfoCompleted(ret.data));
                 } else {
                     ToastBS(ret.message);

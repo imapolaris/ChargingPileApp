@@ -20,9 +20,6 @@ class CPAInChargingPage extends Component {
             valueStyle: styles.valStyle
         };
 
-
-
-
         return (
             <View style={styles.container}>
                 <CircularProgress size={180}

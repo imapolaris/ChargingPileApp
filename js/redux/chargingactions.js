@@ -22,6 +22,7 @@ function queryChargingInfoCompleted(data) {
     }
 }
 
+// 查询充电汇总数据
 export function doQueryChargingInfo() {
     return (dispatch, getState) => {
         const {logined, userId} = getState().user;
@@ -31,9 +32,6 @@ export function doQueryChargingInfo() {
             .then(ret=>{
                 if (ret.result) {
                     dispatch(queryChargingInfoCompleted(ret.data));
-
-                    // 充电是否已结束？
-
                 } else {
                     ToastBS(ret.message);
                     console.log(ret.message);
@@ -124,16 +122,15 @@ export function doQueryChargingRealtimeInfo() {
             .then(ret=>{
                 if (ret.result) {
                     let data = JSON.parse(ret.data);
-                    dispatch(queryChargingRealtimeInfoCompleted(data));
-
-                    //alert(ret.data);
-
-                    const {cpState} = ret.data;
+                    const {cpState} = data;
                     // 判断充电是否已结束 (1-正在进行；2-已结束)
                     if (cpState === 2) {
                         dispatch(doNav(ScreenKey.ChargingBilling));
                         //dispatch(doChangeAppStatus(AppStatus.Normal));
+                        return;
                     }
+
+                    dispatch(queryChargingRealtimeInfoCompleted(data));
                 } else {
                     console.log(ret.message);
                 }
@@ -201,7 +198,7 @@ export function doQueryChargingBillingRecords() {
 export function doQueryCurrentChargingBilling() {
     return (dispatch, getState) => {
         const {sn, transSn} = getState().charging;
-        dispatch(startRequestWeb('正在计算本次充电账单，请稍等...'));
+        dispatch(startRequestWeb('正在计算充电账单...'));
         return queryCurrentChargingBilling(sn, transSn)
             .then(ret=>{
                 dispatch(completeRequestWeb());
