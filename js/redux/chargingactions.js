@@ -122,11 +122,12 @@ export function doQueryChargingRealtimeInfo() {
             .then(ret=>{
                 if (ret.result) {
                     let data = JSON.parse(ret.data);
+                    console.log(data);
                     const {cpState} = data;
                     // 判断充电是否已结束 (1-正在进行；2-已结束)
-                    if (cpState === 2) {
+                    if (cpState === "2") {
                         dispatch(doNav(ScreenKey.ChargingBilling));
-                        //dispatch(doChangeAppStatus(AppStatus.Normal));
+                        dispatch(doChangeAppStatus(AppStatus.Normal));
                         return;
                     }
 
@@ -161,13 +162,12 @@ export function doFinishCharging() {
 
                 if (ret.result) {
                     dispatch(finishChargingCompleted());
-
                     dispatch(doShowChargingBillingPage());
+
+                    dispatch(doChangeAppStatus(AppStatus.Normal));
                 } else {
                     ToastBS(ret.message);
                 }
-
-                //dispatch(doChangeAppStatus(AppStatus.Normal));
             })
             .catch(err=>{
                 dispatch(completeRequestWeb());

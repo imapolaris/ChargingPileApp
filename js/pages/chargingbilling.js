@@ -36,8 +36,8 @@ class CPAChargingBillingPage extends Component{
     }
 
     componentWillUnmount() {
-        const {changeAppStatus} = this.props;
-        changeAppStatus && changeAppStatus(AppStatus.Normal);
+        //const {changeAppStatus} = this.props;
+        //changeAppStatus && changeAppStatus(AppStatus.Normal);
     }
 
     render() {
